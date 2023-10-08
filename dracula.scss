@@ -1,0 +1,122 @@
+// This file is based on dracula.scss in revealjs:
+//
+// https://github.com/hakimel/reveal.js/blob/master/dist/theme/dracula.css
+
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&family=Noto+Sans+JP:wght@400;900&display=swap');
+
+// Include theme-specific fonts
+$systemFontsSansSerif: -apple-system,
+					   BlinkMacSystemFont,
+					   avenir next,
+					   avenir,
+					   segoe ui,
+					   helvetica neue,
+					   helvetica,
+					   Cantarell,
+					   Ubuntu,
+					   roboto,
+					   noto,
+					   arial,
+					   sans-serif;
+$systemFontsMono: Menlo,
+				  Consolas,
+				  Monaco,
+				  Liberation Mono,
+				  Lucida Console,
+				  monospace;
+
+/**
+ * Dracula colors by Zeno Rocha
+ * https://draculatheme.com/contribute
+ */
+html * {
+	color-profile: sRGB;
+	rendering-intent: auto;
+}
+
+$background: #ffffff;
+$foreground: #282A36;
+$selection: #44475A;
+$comment: #6272A4;
+$red: #FF5555;
+$orange: #f96ebd;
+$yellow: #bcc933;
+$green: #3ad361;
+$purple: #a067f0;
+$cyan: #3ac3e2;
+$pink: #FF79C6;
+
+// $background: #282A36;
+// $foreground: #F8F8F2;
+// $selection: #44475A;
+// $comment: #6272A4;
+// $red: #FF5555;
+// $orange: #FFB86C;
+// $yellow: #F1FA8C;
+// $green: #50FA7B;
+// $purple: #BD93F9;
+// $cyan: #8BE9FD;
+// $pink: #FF79C6;
+
+
+
+// Override theme settings (see ../template/settings.scss)
+$mainColor: $foreground;
+$headingColor: $purple;
+$headingTextShadow: none;
+$headingTextTransform: none;
+$backgroundColor: $background;
+$linkColor: $pink;
+$linkColorHover: $cyan;
+$selectionBackgroundColor: $selection;
+$inlineCodeColor: $green;
+$listBulletColor: $cyan;
+
+$mainFont: "Noto Sans JP", $systemFontsSansSerif;
+$codeFont: "Fira Code", $systemFontsMono;
+
+
+// Define additional color effects based on Dracula spec
+// https://spec.draculatheme.com/
+:root {
+	--r-bold-color: #{$orange};
+	--r-italic-color: #{$yellow};
+	--r-inline-code-color: #{$inlineCodeColor};
+	--r-list-bullet-color: #{$listBulletColor};
+}
+
+.reveal {
+	strong, b {
+		color: var(--r-bold-color);
+	}
+	em, i, blockquote {
+		color: var(--r-italic-color);
+	}
+	code {
+		color: var(--r-inline-code-color);
+	}
+	// Dracula colored list bullets and numbers
+	ul, ol {
+		li::marker {
+			color: var(--r-list-bullet-color);
+		}
+	}
+}
+
+
+// Tweak
+//
+$presentation-heading-font: "Noto Sans JP";
+$presentation-heading-font-weight: 900;
+
+$code-block-font-size: 0.8em;
+
+// code line highlight はしたいが、line number は欲しくないので CSS で消す
+.reveal pre code {
+  margin-left: -1.5em;
+}
+.reveal pre code span a {
+  color: transparent;
+}
