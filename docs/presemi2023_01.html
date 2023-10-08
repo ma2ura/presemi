@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>プレゼミ講義ノート – presemi2023_01</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "一致なし",
+    "search-matching-documents-text": "一致した文書",
+    "search-copy-link-title": "検索へのリンクをコピー",
+    "search-hide-matches-text": "追加の検索結果を非表示",
+    "search-more-match-text": "追加の検索結果",
+    "search-more-matches-text": "追加の検索結果",
+    "search-clear-button-title": "消去",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "検索",
+    "search-label": "サーチ"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">プレゼミ講義ノート</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="サーチ"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="dropdown-header">
+ <span class="menu-text">講義内容</span></li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-">    
+        <li>
+    <a class="dropdown-item" href="./index.html" rel="" target="">
+ <span class="dropdown-text">はじめに</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_01.html" rel="" target="">
+ <span class="dropdown-text">第1回 講義ガイダンス</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_02.html" rel="" target="">
+ <span class="dropdown-text">第2回 実証研究</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_03.html" rel="" target="">
+ <span class="dropdown-text">第3回 Rの使い方</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
+ <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
+ <span class="dropdown-text">第5回 記述統計と可視化</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
+ <span class="dropdown-text">第6回 統計的推定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
+ <span class="dropdown-text">第7回 統計的仮説検定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
+ <span class="dropdown-text">第8回 変数間の関連性</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
+ <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/uribo/230827ism_ws" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text">GitHub</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目次</h2>
+   
+  <ul>
+  <li><a href="#プレゼミとは" id="toc-プレゼミとは" class="nav-link active" data-scroll-target="#プレゼミとは">プレゼミとは</a>
+  <ul class="collapse">
+  <li><a href="#教科書参考書について" id="toc-教科書参考書について" class="nav-link" data-scroll-target="#教科書参考書について">教科書・参考書について</a></li>
+  <li><a href="#教科書選定の理由" id="toc-教科書選定の理由" class="nav-link" data-scroll-target="#教科書選定の理由">教科書選定の理由</a></li>
+  <li><a href="#プレゼミの運営方法について" id="toc-プレゼミの運営方法について" class="nav-link" data-scroll-target="#プレゼミの運営方法について">プレゼミの運営方法について</a></li>
+  <li><a href="#プレゼミのスケジュール" id="toc-プレゼミのスケジュール" class="nav-link" data-scroll-target="#プレゼミのスケジュール">プレゼミのスケジュール</a></li>
+  <li><a href="#プレゼミでの使用ソフトウェアについて" id="toc-プレゼミでの使用ソフトウェアについて" class="nav-link" data-scroll-target="#プレゼミでの使用ソフトウェアについて">プレゼミでの使用ソフトウェアについて</a></li>
+  <li><a href="#プレゼミの準備" id="toc-プレゼミの準備" class="nav-link" data-scroll-target="#プレゼミの準備">プレゼミの準備</a>
+  <ul class="collapse">
+  <li><a href="#パターン1自分のpcにrなどをインストールする人向け" id="toc-パターン1自分のpcにrなどをインストールする人向け" class="nav-link" data-scroll-target="#パターン1自分のpcにrなどをインストールする人向け">パターン1：自分のPCにRなどをインストールする人向け</a></li>
+  <li><a href="#パターン2ブラウザ上でrを使う人向け" id="toc-パターン2ブラウザ上でrを使う人向け" class="nav-link" data-scroll-target="#パターン2ブラウザ上でrを使う人向け">パターン2：ブラウザ上でRを使う人向け</a></li>
+  </ul></li>
+  <li><a href="#事前課題" id="toc-事前課題" class="nav-link" data-scroll-target="#事前課題">事前課題</a></li>
+  <li><a href="#自己紹介タイム" id="toc-自己紹介タイム" class="nav-link" data-scroll-target="#自己紹介タイム">自己紹介タイム</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="プレゼミとは" class="level1">
+<h1>プレゼミとは</h1>
+<p>2023年度から新たに開講される「プレゼミ」とは、3年次から始まる「専門演習」(以下、ゼミ)で専門性を深める前に、広い知識を獲得し、ゼミでの研究に深みを持たせるための小集団科目です。 松浦プレゼミでは，経営学分野で実証研究を行うために必要な統計学・計量経済学の基礎とそれを実装するプログラミング言語Rについて学習することで、組織論やマーケティング、ファイナンスや会計で活発に行われている「実証研究」を行う基礎知識を手に入れることを目指します。 この資料は、そのための教材として、以下の教科書をベースに作成されています。</p>
+<ul>
+<li>Rによる計量政治学 (中級)</li>
+<li>Rによるマーケティング・データ分析 (上級)</li>
+<li>経営学のための統計学・データ分析 (初級)</li>
+</ul>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/text01.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Rによる計量政治学</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/text_02.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Rによるマーケティング・データ分析</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/text_03.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">経営学のための統計学・データ分析</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>松浦のプレゼミでは、25名の学生が集まって静かに教員の講義を聴く、といったようなことはしません。 むしろ、授業を受ける前に学生が自分で教科書や資料を読んで宿題をやり、そして教室で発表をして議論をする、という形式をとります。 いわゆる「<strong>反転授業</strong>」というやつです。 反転授業を効果的に行うためには、授業を受ける前の準備が重要です。 授業を受ける前に、このウェブ資料と教科書の該当箇所を読んで、練習問題に取り組む、ということをしておいてください。</p>
+<section id="教科書参考書について" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="教科書参考書について">教科書・参考書について</h2>
+<p>プレゼミのメインテキストは浅野・矢内 (2020)「<strong>Rによる計量政治学</strong>」オーム社です。 このウェブ資料も、このテキストをベースに作成されています。 サブテキストであるウィラワン・勝又 (2023)「<strong>Rによるマーケティング・データ分析</strong>」新世社、の一部の内容も含まれています。 重要参考図書として、久保克行 (2021)「<strong>経営学のための統計学・データ分析</strong>」東洋経済、もオススメです。 この資料は基本的に松浦が自分の勉強用に作成したノートのため、誤りや不備が含まれている可能性が高いです。ミスなどを見つけ次第、松浦まで報告してくれると助かります。 またこのノートは、浅野・矢内 (2020)やウィラワン・勝又 (2023)の内容を網羅しているわけではないので、このノートを使う場合は教科書を手元において、学習することをおすすめします。</p>
+</section>
+<section id="教科書選定の理由" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="教科書選定の理由">教科書選定の理由</h2>
+<p>なぜ会計学を専門とする松浦のプレゼミで、メインの教科書が「Rによる計量政治学」なのかというと、このテキストが社会科学の一分野である政治学という経営学部生にとっても関連のある興味深い題材を用いて、計量経済学の基礎から応用までをRで実装するための知識を習得できるものだからです。 とりわけ第1部の第2章「<strong>研究テーマの選び方</strong>」と第3章「<strong>理論と仮説</strong>」は、卒業論文を書く際にも非常に重要となる内容ですので、全経営学部生によんでもらいたい内容です。</p>
+<p>第4章「Rの使い方」と第5章「Rによるデータ操作」は、本書の学習に必要な必要最小限の内容ですので、他の教科書やウェブサイトを参考にして、より詳細な内容を学習したほうが良いですが、この内容を理解し、使えるようになれば、MS Excelを使わずにRだけで分析できるようになるでしょう。</p>
+<p>第6章から第15章までが、統計学から計量経済学の内容となります。 おおよそ、代表的な統計量の計算や、グラフを使ったデータの理解、標本(sample)を用いた母集団(population)の推定や仮説検定、複数の統計量の関係性の理解、因果関係を分析する手法の1つである回帰分析の基礎と応用、2値選択の問題を推定するためのロジスティック関数の使い方などを学習します。</p>
+<p>ここまでの内容の学習にプレゼミ15回のうち、第2回目から第11回目のおおよそ10回分を使います。 12回〜14回の3回は多変量解析手法として因子分析やクラスター分析、機械学習を用いた判別モデルとして決定木分析を学習します。 最後の講義となる第15回目では、今まで修得した知識を使って、データ分析を行った結果を発表してもらいます。</p>
+<p>2年生終了時点で、これらの内容を修得していれば、卒業論文の分析に必要な知識はほぼ習得できていると考えて良いでしょう。あとは関心のある研究テーマを選ぶために、面白そうな専門演習(ゼミ)に入って、Rと統計学・計量経済学を使った実証研究を楽しんでくれれば、プレゼミの目標が達成されます。</p>
+</section>
+<section id="プレゼミの運営方法について" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="プレゼミの運営方法について">プレゼミの運営方法について</h2>
+<p>最初に触れたように、基本的にこのプレゼミは<strong>反転授業</strong>の形式をとります。 つまり、<strong>授業は家で受けて</strong>、<strong>宿題を大学でやる</strong>、という形式です。</p>
+<p>具体的には、<strong>講義を受ける前に自宅で行う準備</strong>として、このウェブサイトと教科書・参考書の該当箇所を読んでおきます。そこで「<strong>ここは分かったけど、ここは分からなかった</strong>」というところをメモしておきます。 「分からなかった」という点について、具体的にどこが分からなかったのかを明確にすることが重要です。</p>
+<p>その上で、大学にでは、分からなかったところを全員で共有し、分からなかった論点を潰していきます。 そのうえで<strong>宿題をやります</strong>。授業中に与えられるデータを使って、具体的に分析をやってみて、その結果を講義で発表してもらいます。 宿題の内容は、講義中に指示します。</p>
+</section>
+<section id="プレゼミのスケジュール" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="プレゼミのスケジュール">プレゼミのスケジュール</h2>
+<p>プレゼミのスケジュールはおおよそ以下の通りです。</p>
+<ul>
+<li>第1回 プレゼミの概要とメンバー紹介</li>
+<li>第2回 実証会計学、研究テーマの選び方・理論と仮説</li>
+<li>第3回 Rの使い方とRによるデータ操作</li>
+<li>第5回 記述統計とデータの可視化・視覚化</li>
+<li>第6回 統計的推定と統計的仮説検定</li>
+<li>第7回 変数間の関連性</li>
+<li>第8回 回帰分析の基礎と統計的推定</li>
+<li>第9回 回帰分析の応用</li>
+<li>第10回 交差項の使い方</li>
+<li>第11回 ロジスティック関数</li>
+<li>第12回 質問紙の作成と測定尺度</li>
+<li>第13回 因子分析</li>
+<li>第14回 クラスター分析・決定木(時間があれば)</li>
+<li>第15回 成果報告会 (報告者は6名程度を想定)</li>
+</ul>
+</section>
+<section id="プレゼミでの使用ソフトウェアについて" class="level2">
+<h2 class="anchored" data-anchor-id="プレゼミでの使用ソフトウェアについて">プレゼミでの使用ソフトウェアについて</h2>
+<p>このウェブ資料は、Posit社(以前はRstudio社)が開発した<strong>Quarto</strong>というソフトウェアを使って作成されています。Quartoとは、<code>RMarkdown</code>の記法で書かれたテキストファイルを、<code>knitr</code>というソフトウェアを介して、HTMLやPDF、MS Word、EPUBなどのファイルを作成するためのソフトウェアです。</p>
+<p>最大の特徴は、MS ExcelとMS Wordのようにデータを分析する場所と文章を書く場所が別々ではなく、一つの画面の中でデータ分析とレポート・論文執筆を同時に行える、というものです。</p>
+<p>また、<code>R</code>だけでなく、<code>Python</code>や<code>Julia</code>といった他のプログラミング言語も文章内に埋め込むことができるため、データ分析と文章執筆を統合させる環境として非常に優れています。</p>
+<p>プレゼミでも、<code>Quarto</code>を使って最終レポートの作成を行う予定です。 <code>Quarto</code>は今も開発が進んでいる新しいレポート作成ソフトウェアなので、情報が少ないことが難点ですが、<a href="https://quarto.org/">公式サイト</a>と<a href="https://www.jaysong.net/RBook/">私たちのR</a>を見れば大抵のことは分かります。</p>
+</section>
+<section id="プレゼミの準備" class="level2">
+<h2 class="anchored" data-anchor-id="プレゼミの準備">プレゼミの準備</h2>
+<p>プレゼミが始まるまでに準備しておいてほしいことは、プログラミング言語<strong>R</strong>のセットアップです。 具体的には、<strong>R</strong>と<strong>Rstudio</strong>が使えるようにしておくことが必要です。</p>
+<p>RとRstudioを使う方法は2つあります。</p>
+<ul>
+<li>パターン1：自分のPCにRなどをインストールする</li>
+<li>パターン2：ブラウザ上でR/Rstudioを使う</li>
+</ul>
+<section id="パターン1自分のpcにrなどをインストールする人向け" class="level3">
+<h3 class="anchored" data-anchor-id="パターン1自分のpcにrなどをインストールする人向け">パターン1：自分のPCにRなどをインストールする人向け</h3>
+<p>自分のPCにRをセットアップするメリットには、</p>
+<ul>
+<li>インターネットに接続していなくてもRを使える</li>
+<li>処理速度が速い</li>
+<li>データの保存場所が自分のPCになるので、データの管理がしやすい</li>
+</ul>
+<p>といったものがあります。逆にデメリットとして、</p>
+<ul>
+<li>インストールに時間と手間がかかる</li>
+<li>自分のPCにインストールするので、PCの容量を圧迫する</li>
+<li>ディレクトリの管理が必要になる</li>
+</ul>
+<p>といったものがあります。 ただ、今後もRを使っていくことを考えると、自分のPCにRをインストールしておくことをおすすめしますが、やはり学生が持っているコンピュータの環境が様々なので、トラブルも起こりやすいです。 ただ、以下の手順に従ってインストールすれば、大抵の場合は問題なくインストールできると思います。</p>
+<section id="rとrstudio" class="level4">
+<h4 class="anchored" data-anchor-id="rとrstudio">RとRstudio</h4>
+<p>RとRstduioを自分PCにインストールする際に、以下のウェブサイトが超参考になります。 自分のPCのOS(だいたいWindowsかMacOSか)に応じて、次の矢内先生の資料を見ながらインストールしてください。</p>
+<p><a href="https://yukiyanai.github.io/jp/resources/">矢内先生のウェブサイト</a></p>
+</section>
+<section id="visual-studio-codeの使い方" class="level4">
+<h4 class="anchored" data-anchor-id="visual-studio-codeの使い方">Visual Studio Codeの使い方</h4>
+<p>教科書では、<strong>Rstudio</strong>の説明をしていますが、RstudioはR専用のIDE（統合開発環境）で、R以外の言語を書くことはできませんし、少々重たいです。 そこでここでは、Microsoft社の<strong>Visual Studio Code</strong>を使ってRを書く方法を説明します。これは完全に趣味の世界なので、興味が無ければRstudioを使ってください。</p>
+<p>マイクロソフト社のウェブサイトから、自分のPCのOSに合わせて、Visual Studio Codeをインストールしてください。</p>
+<p>まずGoogle等で「Visual Studio Code」と検索して、オフィシャルサイトにアクセスします。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/vscode01.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Visual Studio Codeのオフィシャルサイト</figcaption>
+</figure>
+</div>
+<p>そして、「Visual Studio Codeをダウンロードする」をクリックすると、次のページにいきます。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/vscode02.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Visual Studio Codeのダウンロードページ</figcaption>
+</figure>
+</div>
+<p>ここから自分に合ったOSを選んで、ダウンロードしてください。 詳しい人なら、下の小さな項目から、適切なものをえらんでください。 MacBookでM2チップを使っている人は、<code>Mac</code>の<code>Apple silicon</code>のzipをダウンロードして、Zipファイルを展開してインストールしてください。</p>
+</section>
+<section id="quarto" class="level4">
+<h4 class="anchored" data-anchor-id="quarto">Quarto</h4>
+<p>次に、RstudioやVisual Studio Codeで、レポートや論文を書くためのパッケージである<code>Quarto</code>をインストールします。 <code>Quarto</code>はRstudioを作ったPosit社が開発している文書作成システムなので、Rとの相性もばっちりです。</p>
+<p>まずGoogle等で「Quarto」と検索して、オフィシャルサイトにアクセスします。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/quarto01.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Quartoのオフィシャルサイト</figcaption>
+</figure>
+</div>
+<p>そして、「Get Started」をクリックすると、次のページにいきます。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/quarto02.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Quartoのダウンロードページ</figcaption>
+</figure>
+</div>
+<p>ここから自分に合ったOSを選んで、ダウンロードしてください。 インストールが完了すれば、RstudioやVisual Studio Codeで、レポートや論文を書くことができるようになります。</p>
+<p>ここまでで、</p>
+<ul>
+<li>R (本体)</li>
+<li>Rstudio (R用IDE)</li>
+<li>Visual Studio Code (R以外の言語も書けるIDE)</li>
+<li>Quarto (レポートや論文を書くためのパッケージ)</li>
+</ul>
+<p>のインストールが完了しました。</p>
+</section>
+<section id="vs-codeの準備" class="level4">
+<h4 class="anchored" data-anchor-id="vs-codeの準備">VS Codeの準備</h4>
+<p>次に、Visual Studio Code(以下、VS Code)でRのソースコードを書くための準備をします。 VS Codeを開くと、次のような画面が表示されます。 VS Codeは、機能を拡張するために、拡張パッケージをインストールすることができます。 VS Codeを起動して、左のメニューの中の、四角が4つ並んだアイコンをクリックしてください。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/vscode03.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">VS Codeの初期画面</figcaption>
+</figure>
+</div>
+<p>VS Codeの左のメニュー上部に拡張パッケージの検索画面が表示されます。 そこに拡張パッケージの名前を入れて、必要なものをインストールしていきます。 以下の拡張パッケージは、Rの分析をするために必要あるいは推奨されるものです。</p>
+<ul>
+<li><code>Japanese Language Pack for Visual Studio Code</code> : VS Codeの日本語化</li>
+<li><code>R</code> : とりあえず入れておく</li>
+<li><code>Quarto</code> : Quartoを使うために必要</li>
+</ul>
+<p>とりあえずこの3つを入れておけば、このプレゼミでは十分です。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./img/vscode04.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">VS Codeの拡張パッケージ</figcaption>
+</figure>
+</div>
+</section>
+<section id="フォルダを開く" class="level4">
+<h4 class="anchored" data-anchor-id="フォルダを開く">フォルダを開く</h4>
+<p>VS Codeでは、分析に使うCSVファイルや、分析のためのRファイル、レポートや論文を書くためのQuartoファイルを、一つのフォルダにまとめておくと便利です。 分かりやすい場所にフォルダを作成し、好きな名前をつけてください。</p>
+<p>VS Codeの上部メニューの中の「ファイル」をクリックして、「フォルダーを開く」をクリックして、先ほど作成したフォルダを選択してください。 すると、左のメニューにフォルダの中身が表示されます。まだ何も入っていなければ、何も表示されません。</p>
+<p>VS Codeではフォルダを指定して開いておくと、そこが作業フォルダとなり、Rは常にそのフォルダの中を参照するようになります。</p>
+</section>
+</section>
+<section id="パターン2ブラウザ上でrを使う人向け" class="level3">
+<h3 class="anchored" data-anchor-id="パターン2ブラウザ上でrを使う人向け">パターン2：ブラウザ上でRを使う人向け</h3>
+<p>自分のPCにいろいろインストールしなくてもR/Rstudioをブラウザで利用することもできます。 <strong>Posit Cloud</strong>を使ってウェブ上でRstudioを使えるようにしてください。 Posit Cloudは、Rstudioを作ったPosit社が運営している無料のサービスです。安心してアカウントを作成してください。</p>
+<p><a href="https://cloud.posit.jp/">Posit Cloud</a></p>
+<p>アカウントを作成し、ログインすれば、Rstudioをブラウザ上で使うことができます。</p>
+</section>
+</section>
+<section id="事前課題" class="level2">
+<h2 class="anchored" data-anchor-id="事前課題">事前課題</h2>
+<ul>
+<li>R/Rstudioをインストールする、あるいはPosit Cloudにアカウントを作成してログインする</li>
+<li>教科書「Rによる計量政治学」を入手しておく</li>
+</ul>
+</section>
+<section id="自己紹介タイム" class="level2">
+<h2 class="anchored" data-anchor-id="自己紹介タイム">自己紹介タイム</h2>
+<p>総勢25名の松浦プレゼミ1期生による自己紹介を行います。 1人1分で，自分の名前と出身都道府県，好きなもの(何でもOK)を発表してください。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "コピーしました");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "コピーしました");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Soichi Matsuura</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ma2ura">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/matsuura_rits">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
