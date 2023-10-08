@@ -1,0 +1,122 @@
+project:
+  type: website
+  output-dir: docs
+
+lang: ja
+
+website:
+  title: "プレゼミ講義ノート"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      # - href: license.qmd
+      #   text: License
+      - icon: github
+        href: https://github.com/uribo/230827ism_ws
+        text: GitHub
+    left:
+      - text: "講義内容"
+      - menu:
+        - text: "はじめに"
+          file: index.qmd
+        - text: "第1回 講義ガイダンス"
+          file: presemi2023_01.qmd
+        - text: "第2回 実証研究"
+          file: presemi2023_02.qmd
+        - text: "第3回 Rの使い方"
+          file: presemi2023_03.qmd
+        - text: "第4回 Rによるデータ操作"
+          file: presemi2023_04.qmd
+        - text: "第5回 記述統計と可視化"
+          file: presemi2023_05.qmd
+        - text: "第6回 統計的推定"
+          file: presemi2023_06.qmd
+        - text: "第7回 統計的仮説検定"
+          file: presemi2023_07.qmd
+        - text: "第8回 変数間の関連性"
+          file: presemi2023_08.qmd
+        - text: "第9回 回帰分析の基礎"
+          file: presemi2023_09.qmd
+      # - text: "第10回 回帰分析の統計的推定"
+      #   file: presemi2023_10.qmd
+      # - text: "第11回 ロジスティック回帰分析"
+      #   file: presemi2023_11.qmd
+
+  page-navigation: true
+
+  page-footer:
+    border: true
+    background: "#a10000"
+    left: "Copyright 2023, Soichi Matsuura"
+    right:
+      - icon: github
+        href: https://github.com/ma2ura
+      - icon: twitter
+        href: https://twitter.com/matsuura_rits
+        aria-label: Twitter
+
+
+  # cover-image: "img/rits_logo.png"
+  favicon: favicon.ico
+
+
+format:
+  # epub:
+  #   title: プレゼミ講義ノート
+  #   subtitle: 2023年度秋学期
+  #   date: "2023年8月16日改訂"
+  #   author: 松浦総一
+  #   toc: true
+  #   html-math-method: katex
+  html:
+    theme:
+      light:
+       - cerulean
+       - theme.scss
+      dark: darkly
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    code-link: true
+    link-external-icon: true
+    df-print: kable
+    grid:
+      sidebar-width: 200px
+      body-width: 1200px
+
+  # pdf:
+  #   pdf-engine: lualatex
+  #   toc: true
+  #   number-sections: true
+  #   colorlinks: true
+  #   include-in-header:
+  #     - text: |
+  #         \usepackage{luatexja}
+  #         \usepackage{float}
+  #         \usepackage{xcolor}
+  #         \usepackage{tabularx}
+  #         \usepackage{amsmath}
+  #         \usepackage{engrec}
+  #         \usepackage{fontspec}
+
+
+code-block-bg: "#F6F6F6"
+
+execute:
+  message : false
+  warning: false
+  fig-width: 14
+  fig-height: 8
+  freeze: auto
+  cache: refresh
+
+# knitr:
+#   opts_chunk:
+#     dev: cairo_pdf
+monofontoptions:
+  - Scale = .6
+
+
