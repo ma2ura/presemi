@@ -49,7 +49,7 @@ website:
 
   page-footer:
     border: true
-    background: "#a10000"
+    # background: "#a10000"
     left: "Copyright 2023, Soichi Matsuura"
     right:
       - icon: github
@@ -103,7 +103,7 @@ format:
   #         \usepackage{fontspec}
 
 
-code-block-bg: "#F6F6F6"
+# code-block-bg: "#F6F6F6"
 
 execute:
   message : false
