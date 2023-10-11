@@ -10,8 +10,8 @@ website:
     right:
       - href: index.qmd
         text: Home
-      - href: about.qmd
-        text: About
+      # - href: about.qmd
+      #   text: About
       # - href: license.qmd
       #   text: License
       - icon: github

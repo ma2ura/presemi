@@ -135,6 +135,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
  <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
+ <span class="dropdown-text">第5回 記述統計と可視化</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
+ <span class="dropdown-text">第6回 統計的推定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
+ <span class="dropdown-text">第7回 統計的仮説検定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
+ <span class="dropdown-text">第8回 変数間の関連性</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
+ <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
+  </li>  
     </ul>
 </li>
 </ul>
@@ -185,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   </ul>
 </li>
-  </ul><div class="quarto-alternate-formats"><h2>その他のフォーマット</h2><ul><li><a href="presemi2023_06.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="presemi2023_06.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><section id="統計的推定" class="level1"><h1>統計的推定</h1>
@@ -272,17 +292,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>標本から母数を推定するためには，適切な方法で標本を集めなければなりません。 1限の講義に出席している学生にアンケートをとっても，学生全体の推定には適切とはいえない標本があつまるでしょう。</p>
 <p>母集団から標本を選ぶ標本抽出方法として代表的なものが，<strong>単純無作為抽出</strong>(simple randome sampling)です。 単純無作為抽出で選ばれた標本は、母集団の偏りのない標本といえます。 たとえば，平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-1_a9dc2f03e429b1df08de1c2ae0b9b7f1">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-1_afb37a7ede903bac99ee5d78b3811964">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># 標本抽出</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 標本平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.886017</code></pre>
+<pre><code>[1] 9.960697</code></pre>
 </div>
 </div>
-<p>平均値は9.8860172となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">\(10\)</span>と標本平均9.8860172の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
+<p>平均値は9.9606967となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">\(10\)</span>と標本平均9.9606967の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
 <p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という試行(trial)を10000回繰り返します。 すると標本サイズ100の標本が10000個できるので、その各標本ごとに標本平均を計算して、10000個の標本平均を得ます。 その10000個の標本平均をヒストグラムで表示してたものが、以下のグラフとなります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-2_25e5434e21c9be8531f966ef389cdcb3">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-2_9069e3cbbd1e9b158f700460454020a5">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">trial</span> <span class="op">=</span> <span class="fl">10000</span> <span class="co"># 標本数</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="co"># 結果を入れる空の変数</span></span>
@@ -292,14 +312,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 基本関数histでヒストグラム作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-2-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>この図をみると、キレイな左右対称の釣り鐘型の分布になっていることが分かります。 この10000個の平均値の平均は，</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-3_8e98c69a9cfa189e3d80f041f00835c4">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-3_9a36ab2c6532a91101cd575262d96c1f">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00008</code></pre>
+<pre><code>[1] 10.00174</code></pre>
 </div>
 </div>
 <p>とほぼ10と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
@@ -323,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \text{標本分散} &amp;= \frac 1n \sum_{i=1}^n \left (x_i - \bar{x} \right )^2
 \end{aligned}
 \]</span> 標本平均と標本分散を計算する関数を作ります。 関数の作り方については，また後で勉強する予定ですので，ここでは関数の使い方だけを覚えておいてください。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-4_866dc796ea5a356028ca6eff6b17de04">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-4_3c98068461cccc53601c8c3570c1fea3">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">meanp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 合計をデータの個数で割る</span></span>
 <span><span class="op">}</span></span>
@@ -332,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">}</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>これで平均と分散を計算する関数ができました。 これを使って，標本平均と標本分散を計算してみましょう。 まず5のサイズをもつ母集団から標本サイズ3の標本を10通り作成します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-5_4c9bf877397925da9ad998cfa300bde1">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-5_2d060838b77f7169468be84d83b30b05">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">9</span><span class="op">)</span></span>
 <span><span class="fu">meanp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母平均 5.6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -348,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>これですべての組み合わせを作り出せましたので，それぞれの標本から標本平均と標本分散を計算します。 各列に，先ほど作った<code>meanp()</code>関数を<code>apply</code>関数で適用し，10の標本平均を作り，<code>sample_mean</code>という変数に代入し，その平均を計算します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-6_8bbadbe377d467e2e036b23e85a264c6">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-6_8e941e2bc51735cb40f8612c53982362">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">meanp</span><span class="op">)</span></span>
 <span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_mean</span><span class="op">)</span> <span class="co"># 標本平均の平均は5.6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -357,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>標本平均の平均5.6が母平均5.6に一致したので，標本平均は不偏推定量であることが分かります。</p>
 <p>次に分散を計算してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-7_34acf459a5e3299fac5466a7f4bf6fbd">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-7_e0004c0408f6b8ca660d6cce3a407370">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">varp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.84</code></pre>
@@ -372,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \text{標本不偏分散} = \frac{1}{n-1} \sum_{i=1}^n \left (x_i - \bar{x} \right )^2
 \]</span></p>
 <p>Rの基本関数である<code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>は標本分散ではなく標本不偏分散を計算するので，これを使って先ほどの計算を再現してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-8_54ce8eab965221ab3c00538b32a38135">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-8_51bf42b4dd8fb9feaa6464c85379859c">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.3</code></pre>
@@ -396,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ul>
 <p>という母数をもつ正規分布に従っている，としましょう。 グラフにする前に，必要なパッケージの読み出しと，グラフのスタイルを設定します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-9_0906fad2c1c9c7eb3ccfbd0c1ac50916">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-9_b25a8cea76ec08204ba55c83457338f9">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span></span>
 <span><span class="va">mystyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span> <span class="op">(</span><span class="co">#  ggplotのテーマ</span></span>
@@ -410,20 +430,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>グラフにすると次のようになります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-10_0c70f5d92e5f4c0de9475fd9e59ab3bd">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-10_be88b7e05721f655c256f6e48d211ec7">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>,<span class="fl">77</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
 <span>  fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
 <span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">62</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-10-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>ここから，標本サイズ10の標本を取り出し，標本平均を計算する，という試行を1000回繰り返し，1000個の標本平均を作りましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-11_6c091d9eaf13f99613a205ddd12d9b2c">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-11_b447b9fc6c2ce97ac160877252bcbf08">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">10</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">trial</span> <span class="op">=</span> <span class="fl">1000</span> <span class="co"># 試行回数</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="co"># 結果を入れる空の箱</span></span>
@@ -433,12 +453,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 標本平均の平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.0685</code></pre>
+<pre><code>[1] 62.03523</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.068495となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0352337となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-12_4388edf246c21aa56f31d15b388a09d4">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-12_79a0ad6c549d3dce175f2ad709e67fb7">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="co"># 軸の設定</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span> <span class="co"># ヒストグラム</span></span>
@@ -449,20 +469,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">47</span>,<span class="fl">77</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span> <span class="co"># x軸の範囲を指定</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-12-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>と母平均と標本平均のヒストグラムの中心が一致していることが分かります。 ただ，母分散と比べて標本分散が非常に小さいことが一目瞭然です。</p>
 <p>標本サイズを先ほどの100倍の1000として，同じ試行を1000回繰り返してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-13_431bf5ca1f2d330f9b88f867f4e512fd">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-13_ac4c7410068cc42fb39e8334353d7eb5">
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-13-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>どんどん標本サイズを増やして，100000として，同じ試行を1000回繰り返してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-14_3eebcd285d47618ab3df43b865d0e842">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-14_1adec91c9994d08d6931bb6f7c8362ef">
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-14-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>このように，標本平均の分散は，標本サイズが大きくなるにつれて，どんどん小さくなっていくことが分かります。 たとえば30から150の間の値をとり，母平均62，母分散25の正規分布にしたがう母集団から標本を採ったとしましょう。 母集団が30から150の値をとるのに対して，標本サイズが大きいとき，標本平均が30とか150の値をとることはあり得ません。</p>
@@ -495,7 +515,7 @@ SE = \frac{u}{\sqrt{n}}
 <p>この標準誤差を標本平均の標準誤差の代わりに使います。</p>
 </section><section id="t分布" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="t分布">t分布</h4>
 <p>さて，とうとう統計学の真骨頂であるt分布の登場です。 <span class="math inline">\(t\)</span>分布(t-distribution)は，母集団が正規分布にしたがうとき，標本平均の分布が従う確率分布です。 絵で描くとこんな感じです。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-15_51cce75acb87e9bad1b9b40131daaa8d">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-15_76b5d6c1089bc262fb0a8a70634c74cc">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -513,12 +533,12 @@ SE = \frac{u}{\sqrt{n}}
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"自由度が異なるt分布のプロット"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"t値"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"確率密度"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-15-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>標本平均<span class="math inline">\(\bar x\)</span>から母平均を引いて，それを標準誤差<span class="math inline">\(SE\)</span>で割った値を<strong>t値</strong>(t-value)といい，この<span class="math inline">\(t\)</span>値は<span class="math inline">\(t\)</span>分布にしたがうことが知られていますが，ここでは詳細に触れません。</p>
 <p>自由度99の<span class="math inline">\(t\)</span>分布の場合，95%の確率で<span class="math inline">\(t\)</span>値は-1.98から1.98の間に入ります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-16_80d991413205b3dcc839c41885b13790">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-16_9aa488ccd16fb2c8b2a0e6ba6dd89d4b">
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 自由度を設定</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fl">99</span></span>
 <span></span>
@@ -552,7 +572,7 @@ SE = \frac{u}{\sqrt{n}}
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-16-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p><span class="math inline">\(t\)</span>分布は確率分布ですので，面積は1となります。 青い領域が95％の確率で<span class="math inline">\(t\)</span>値が入る範囲です。 ということは両側の白い領域は，片方が2.5％と面積となっています。 これを次のように書きます。</p>
@@ -560,7 +580,7 @@ SE = \frac{u}{\sqrt{n}}
 [ -t _{100-1, 0.025}, \ t_{100-1, 0.025}]
 \]</span></p>
 <p><span class="math inline">\(t\)</span>分布表を使って，自由度99のときの<span class="math inline">\(t\)</span>値を調べると，<span class="math inline">\(t_{100-1, 0.025} = 1.98\)</span>となります。 Rだと<code><a href="https://rdrr.io/r/stats/TDist.html">qt()</a></code>関数を使って計算できます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-17_09744cbd81a905bd16f5c949627bbb7b">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-17_0398624ef979a9fdc7fecb67a45e5614">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.025</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>,digits <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.98</code></pre>
@@ -584,7 +604,7 @@ t = \frac{\bar x - \mu}{SE}
 </section></section><section id="信頼区間の解釈" class="level3"><h3 class="anchored" data-anchor-id="信頼区間の解釈">信頼区間の解釈</h3>
 <p>信頼区間とは、観察できない真の値である母数が存在し、その母集団から標本を抽出し、標本平均を計算するということを繰り返したときに、95%の標本平均の信頼区間の中に真の値である母平均が入っている、ということです。</p>
 <p>先の例を使って、信頼区間を表現してみます。 いま、<strong>母集団が平均62，標準偏差5の正規分布にしたがう</strong>とします。 この母集団から<strong>標本サイズ50</strong>の標本を<strong>100個抽出</strong>して，標本平均と標本標準偏差を計算します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-18_6720fb32052c04b4159dcb10d21ac466">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-18_8945c8071340c03da44380a2811d6c6c">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trial</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># 標本数</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">62</span> <span class="co"># 母平均</span></span>
@@ -644,21 +664,21 @@ t = \frac{\bar x - \mu}{SE}
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span> <span class="co"># グラフを並べるためのパッケージ</span></span>
 <span><span class="va">p</span> <span class="op">/</span> <span class="va">g_ci</span> <span class="co"># グラフを縦に並べる</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-18-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>本当は未知である母平均62，母標準偏差5の母集団から標本を100個取り出し，100個の標本平均と95%信頼区間を計算し，グラフにしています。 この100個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，7つの95％信頼区間に母平均が含まれていないことが分かります。<span class="math inline">\(7/100\)</span>の割合で信頼区間に母平均が含まれていないので，信頼水準は<span class="math inline">\(1-7/100=0.93\)</span>となります。</p>
 <p>信頼区間を50%にするとどうなるでしょうか？ こうなります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-19_31ca87646cb6cb3077fefa6b6a2db752">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-19_48113194ddd6d66e54a0e6e576f1fd68">
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-19-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。</p>
 <p>標本サイズを大きくすればどうでしょうか。 先ほどまでは標本サイズ50の標本でしたが、標本サイズを500にして、95%信頼区間を計算してみます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-20_5ac2a25bbf18b87dd75b650f1a018aeb">
+<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-20_823aa811934a6cf4b66d7c1504b553ba">
 <div class="cell-output-display">
-<p><embed src="presemi2023_06_files/figure-html/unnamed-chunk-20-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>標本サイズ<span class="math inline">\(n\)</span>が大きくなると、信頼区間の上限と下限を計算するさいの<span class="math inline">\(\sqrt{n}\)</span>が大きくなるため、信頼区間が短くなっていることがわかります。</p>

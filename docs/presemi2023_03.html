@@ -135,6 +135,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
  <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
+ <span class="dropdown-text">第5回 記述統計と可視化</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
+ <span class="dropdown-text">第6回 統計的推定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
+ <span class="dropdown-text">第7回 統計的仮説検定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
+ <span class="dropdown-text">第8回 変数間の関連性</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
+ <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
+  </li>  
     </ul>
 </li>
 </ul>
@@ -189,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" id="toc-まとめ" class="nav-link" data-scroll-target="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
   </ul>
 </li>
-  </ul><div class="quarto-alternate-formats"><h2>その他のフォーマット</h2><ul><li><a href="presemi2023_03.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="presemi2023_03.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><section id="rの使い方" class="level1"><h1>Rの使い方</h1>
@@ -278,11 +298,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>するとメニューが表示されその中に「R Document」を選ぶと、Rのソースコードを書くためのファイルが作成されます。 Rのソースコードは拡張子が<code>.r</code>というファイルになります。 拡張子が何か分からないひとは、ググっておいてください。 WindowsやMacOSでもファイルの拡張子が表示されるように設定しておいてください。</p>
 </section></section><section id="rの基本操作" class="level2"><h2 class="anchored" data-anchor-id="rの基本操作">Rの基本操作</h2>
 <p>ここまでの準備が出来ていれば、画面にRのソースコードを書くためのファイルが表示されているはずです。 何も書かれていないので、まずは何か書いてみましょう。 まずは、<code>1+2</code>を計算してみます。</p>
-<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-1_d98d3ed1638dfd9967d6e627106a455e">
+<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-1_d0dc856128d90af5d3613e0b5baedc51">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>と書いて、その行にカーソルがある状態で、<code>Ctrl + Enter</code>を押すと、その行の計算結果が表示されます。</p>
-<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-2_6582f3c967de1ad3ccb6fab7c753f01d">
+<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-2_70fdc7f33cd25ac9c6b30c91192de681">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
@@ -308,15 +328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>拡張した機能を使えるようになります。 教科書やこの資料で使う関数はたくさんあるので、その都度説明しますが、ほぼ必ずつかうのが、<code>tidyverse</code>というパッケージ群です。</p>
 <p>以下のコードを実行して、<code>tidyverse</code>をインストールしてください。</p>
-<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-3_1981562b3c3ecc11ffe7d88c39a9874c">
+<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-3_3196f78b194781f9fe15b21cb2208794">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span> <span class="co"># 最初の一回だけ実行</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>そして、ほぼ毎回以下のコードを実行して、<code>tidyverse</code>を読み込みます。</p>
-<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-4_65145c3bd2cfb9fb7fb64cfa61809ade">
+<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-4_20884321a1ecd84fd91c398cc6698fe0">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>ついでに、今後使うであろう次のパッケージもインストールしておいてください。</p>
-<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-5_6513a9ee206ebbe9da1c44ec159498a6">
+<div class="cell" data-hash="presemi2023_03_cache/html/unnamed-chunk-5_cbfbcb71ac93159e42023537de8aa494">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"bloom"</span><span class="op">)</span> <span class="co"># 結果の整形</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"ggthemes"</span><span class="op">)</span> <span class="co"># グラフの見た目</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"modelsummary"</span><span class="op">)</span> <span class="co"># 回帰結果の作表</span></span>

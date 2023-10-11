@@ -135,6 +135,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
  <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
+ <span class="dropdown-text">第5回 記述統計と可視化</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
+ <span class="dropdown-text">第6回 統計的推定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
+ <span class="dropdown-text">第7回 統計的仮説検定</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
+ <span class="dropdown-text">第8回 変数間の関連性</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
+ <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
+  </li>  
     </ul>
 </li>
 </ul>
@@ -185,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
   </ul>
 </li>
-  </ul><div class="quarto-alternate-formats"><h2>その他のフォーマット</h2><ul><li><a href="presemi2023_07.epub"><i class="bi bi-file"></i>ePub</a></li><li><a href="presemi2023_07.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><section id="統計的仮説検定" class="level1"><h1>統計的仮説検定</h1>
@@ -230,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[
 t = \frac{\bar{x} - \mu}{s/\sqrt{n}}
 \]</span> となり，今<span class="math inline">\(\bar{x} = \mu\)</span>という帰無仮説を仮定しているので、<span class="math inline">\(t = 0\)</span>となります。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-2_e85a209a0f55a1a1837345f92e7bcf12">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-2_7517e2aa6a8132e7eb2155e5ff3e4fbb">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 自由度を設定</span></span>
 <span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">n</span><span class="op">-</span><span class="fl">1</span></span>
@@ -264,7 +284,7 @@ t = \frac{\bar{x} - \mu}{s/\sqrt{n}}
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-2-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 </section><section id="検定統計量の計算" class="level3"><h3 class="anchored" data-anchor-id="検定統計量の計算">検定統計量の計算 <!-- 8.1.3 --->
@@ -276,16 +296,16 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 \]</span> を検定統計量</p>
 </section><section id="rでやってみる" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="rでやってみる">Rでやってみる</h3>
 <p>母平均<span class="math inline">\(62\)</span>、母標準偏差<span class="math inline">\(5\)</span>の正規分布にしたがう変数<span class="math inline">\(X\)</span>を考えます。 母集団のサイズは10000とします。 この母集団の分布は次のようになっています。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-3_1f24b3ce1404f212887da77004a4718c">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-3_4f9a3c43a755a84daae4acb291dd428a">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
 <span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">N</span>, <span class="fl">62</span>, <span class="fl">5</span><span class="op">)</span> <span class="co"># 母集団</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu">aes</span><span class="op">(</span><span class="va">X</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"母集団"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">62</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-3-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>この母集団から標本サイズ100の標本を100個とりだし、平均を100個計算します。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-4_7bd2d0ee1a73a454d0222831ed31df62">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-4_24f1b83d9a3b0708e7fdbf750520d7c7">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">sample_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="co"># 空の箱を用意</span></span>
 <span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">{</span></span>
@@ -296,17 +316,17 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 </div>
 <p>たとえば、ある標本の平均値は62.75はこうなります。</p>
 <p>この平均値がどのように分布しているのかを調べるために、ヒストグラムを作成してみます。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-5_479279b8d52161d81049072318040b34">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-5_e2c4d27ab3663cf33332e66bd3c8d432">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g_mean</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">df_mean</span><span class="op">)</span> <span class="op">+</span> <span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">sample_mean</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"標本平均"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ylab</span><span class="op">(</span><span class="st">"度数"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sample_mean</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">62</span>, color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g_mean</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-5-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-6_15f1511bfc2af2815e14b1ef5db8fb81">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-6_6419fa11286faadd50fc44d6df794422">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g_m</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">df_mean</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">sample_mean</span><span class="op">)</span>, <span class="va">sample_mean</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">sample_mean</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_bar</span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">62</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -314,11 +334,11 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">"標本平均"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"標本ID"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"標本平均の分布"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g_m</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-6-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>おおよそ母平均<span class="math inline">\(\mu = 62\)</span>の周りに分布していることがわかりますが，かなり離れた標本平均をもつ標本もあるようです。 たとえば，100個の標本で最小の標本平均となった標本の平均は60.59です。 このように母平均62，母標準偏差5の母集団から抽出した1つの標本サイズ100の標本平均が，60.59という値になる確率はどのくらいでしょうか。 標本平均から<span class="math inline">\(t\)</span>値を計算し，その<span class="math inline">\(t\)</span>値が自由度99の<span class="math inline">\(t\)</span>分布にしたがう確率を求めることで，この確率を求めることができます。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-7_44c314c79ceac3d5c9c8afeb15d48c1a">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-7_ff338f3aed72ad4efa054cabae66f0dc">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_mean</span><span class="op">$</span><span class="va">sample_mean</span><span class="op">)</span> <span class="op">-</span> <span class="fl">62</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">5</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -326,14 +346,14 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 </div>
 </div>
 <p>自由度99の<span class="math inline">\(t\)</span>分布の下で，となる確率は求めると，</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-8_0c043e65d8f2832d59fa3ffa858d977d">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-8_72ba1cb44f4dde2ede81b27a7a969577">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span><span class="va">t</span>, df <span class="op">=</span> <span class="va">n</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.00291464</code></pre>
 </div>
 </div>
 <p>となり，この確率は非常に小さい値となります。 つまり100個の標本をとってくると，いくつかの標本から計算された標本平均は，母平均62からかなり離れた値となることがわかります。 それぞれの標本平均から計算された<span class="math inline">\(t\)</span>値の分布を調べると，次のようになります。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-9_e3111c1d88f04ab9079fae6b63e818d6">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-9_f86f4e960fe54d08155ebcddc8a7070a">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_mean</span> <span class="op">&lt;-</span> <span class="va">df_mean</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">mutate</span><span class="op">(</span></span>
 <span>    t_value <span class="op">=</span> <span class="op">(</span><span class="va">sample_mean</span> <span class="op">-</span> <span class="fl">62</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">5</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -346,7 +366,7 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 <span>    <span class="fu">geom_hline</span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0.05</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># 有意水準0.05</span></span>
 <span>    <span class="fu">ylab</span><span class="op">(</span><span class="st">"p値"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"標本ID"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"p値の分布"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span> <span class="co"># 軸の設定</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-9-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>となり，<span class="math inline">\(t\)</span>値が生じる確率が5%未満となる標本がいくつかあることがわかった。 自分が集めた標本の1つから計算した標本平均、そして<span class="math inline">\(t\)</span>値が、帰無仮説が正しいと仮定した場合に、その標本平均がどのくらいの確率で生じるかを調べ、それが5%未満や1%未満であったならば、帰無仮説が正しいと考えるよりも、帰無仮説とは異なる母平均をもつ母集団から標本を集めたから、そのような標本平均が生じたと考えるほうが<strong>もっともらしい</strong>と考えることができます。 これが<strong>統計的仮説検定</strong>の考え方です。</p>
@@ -360,7 +380,7 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 <p>第1種の過誤(えん罪)を小さくしたいとします。 この確率を$$で表し，実はこれが有意水準の大きさとなります。 有意水準5％というのは，ある検定統計量の標本分布の平均から離れた5％の面積に入る統計量を<strong>かけ離れた値</strong>とするかを(研究者が勝手に)決めたものです。 両側検定なら，標本平均から離れた左右の2.5％の面積に入る統計量をかけ離れた値とし，ここに計算した統計量が含まれるとき，帰無仮説を棄却します。</p>
 <p>第1種の過誤と減らすために有意水準を小さくすると，だい2種の過誤が大きくなります。 当然ですが，えん罪を減らそうとしてほとんどのケースを無罪とすると，犯罪者を逃がすことになる，というロジックと同じです。</p>
 <p>帰無仮説が正しいとした場合の正規分布を青色で，真の分布を赤色で示し，有意水準が両側で5％，つまり片側が2.5％となる図を書くとこんな感じです。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-10_b919268104c1a5ef4584fe0a5c806771">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-10_e9a54dfc0690e66580f3911ca4f988ec">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 正規分布の確率密度関数</span></span>
 <span><span class="va">dnorm_with_mean_sd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">mean</span> <span class="op">=</span> <span class="fl">0</span>, <span class="va">sd</span> <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">pi</span><span class="op">*</span><span class="va">sd</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="va">mean</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="va">sd</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
@@ -410,19 +430,19 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 <span>           label <span class="op">=</span> <span class="st">"真の分布"</span>, color <span class="op">=</span> <span class="st">"red"</span>, family <span class="op">=</span> <span class="st">"HiraKakuProN-W3"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-10-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤<span class="math inline">\(\alpha\)</span>を小さくすると，こうなります。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-11_4bd4c7aec0ba537a6f378f7f7e4e1e1a">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-11_69524e9ea807612660cc53f81e9cc6c7">
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-11-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 <p>片側検定の場合なら，こんな感じです。</p>
-<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-12_b294198ce1baab2a2a29f6aadd6f17b9">
+<div class="cell" data-hash="presemi2023_07_cache/html/unnamed-chunk-12_abd9537423d7105cc53473d9942e7e57">
 <div class="cell-output-display">
-<p><embed src="presemi2023_07_files/figure-html/unnamed-chunk-12-1.pdf" class="img-fluid" width="1344"></p>
+<p><img src="presemi2023_07_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1344"></p>
 </div>
 </div>
 
