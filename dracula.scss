@@ -39,14 +39,16 @@ html * {
 $background: #ffffff;
 $foreground: #282A36;
 $selection: #44475A;
-$comment: #6272A4;
-$red: #FF5555;
-$orange: #f96ebd;
-$yellow: #bcc933;
-$green: #3ad361;
-$purple: #a067f0;
+$comment: #879dde;
+$red: #9f3535;
+$orange: #b74f8a;
+$yellow: #808923;
+$green: #0c2f15;
+$purple: #8556c7;
 $cyan: #3ac3e2;
 $pink: #FF79C6;
+$lightgray: #e7e2e2;
+$black: #000000;
 
 // $background: #282A36;
 // $foreground: #F8F8F2;
@@ -73,7 +75,9 @@ $linkColorHover: $cyan;
 $selectionBackgroundColor: $selection;
 $inlineCodeColor: $green;
 $listBulletColor: $cyan;
-
+$code-block-bg: $lightgray;
+$code-block-border-color: $black;
+$code-block-color: $foreground;
 $mainFont: "Noto Sans JP", $systemFontsSansSerif;
 $codeFont: "Fira Code", $systemFontsMono;
 
