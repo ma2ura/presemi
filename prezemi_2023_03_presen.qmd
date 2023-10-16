@@ -8,6 +8,7 @@ format:
     theme: ["default", "dracula.scss"]
     transition: convex
     slide-number: true
+    chalkboard: true
 # highlight-style: "dracula"
 highlight-style: github
 execute:
