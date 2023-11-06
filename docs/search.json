@@ -1671,5 +1671,488 @@
     "title": "プレゼミ2023  第4回 記述統計とデータの可視化・視覚化",
     "section": "plotlyパッケージ",
     "text": "plotlyパッケージ"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#おまけの分析事例",
+    "href": "prezemi_2023_05_omake.html#おまけの分析事例",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "おまけの分析事例",
+    "text": "おまけの分析事例\n必要なパッケージを読み込む。 いつものtidyverseとグラフの見た目を変えるggthemesとキレイな表を作るknitrとkableExtraを読み込む。\n\nlibrary(tidyverse) # データ操作全般\nlibrary(ggthemes) # グラフのスタイル拡張\nlibrary(knitr) # 表を作る\nlibrary(kableExtra) # 表を作る"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#作業ディレクトリの場所",
+    "href": "prezemi_2023_05_omake.html#作業ディレクトリの場所",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "作業ディレクトリの場所",
+    "text": "作業ディレクトリの場所\nまずは作業ディレクトリの場所にファイルがあることを確認しましょう。 いまRが使っている作業ディレクトリの場所はgetwd()で確認できます。\n\ngetwd()\n\n[1] \"/Users/soichi/Library/CloudStorage/Dropbox/R/presemi\""
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#データの読み込み",
+    "href": "prezemi_2023_05_omake.html#データの読み込み",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "データの読み込み",
+    "text": "データの読み込み\nここでは、作業ディレクトリの中にdataというフォルダがあり、 その中にotomasa04.csvを保存してある、という前提で話を進めます。\n\ndf &lt;- read_csv(\"data/otomasa_04.csv\")\n\nこれで財務データが入ったデータフレームdfができました。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#グラフのスタイルを保存",
+    "href": "prezemi_2023_05_omake.html#グラフのスタイルを保存",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "グラフのスタイルを保存",
+    "text": "グラフのスタイルを保存\nmystyleというオブジェクトに保存しておく。 listで設定をまとめる。\n\nmystyle &lt;- list( # mystyleとして設定を保存\n  theme_economist(), # ggthemesが必要\n  theme(text = element_text(\n    size = 18,  #  フォントサイズ\n    family = \"HiraKakuProN-W3\" # mac用フォント\n    )))\n\nwindowsの人は family = “HiraKakuProN-W3” は消してください。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#データの確認",
+    "href": "prezemi_2023_05_omake.html#データの確認",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "データの確認",
+    "text": "データの確認\nデータの中身を確認するなら、おなじみのglimpse()を使う。\n\nglimpse(df)\n\nRows: 83,637\nColumns: 35\n$ 日経会社コード                   &lt;chr&gt; \"0000001\", \"0000001\", \"0000001\", \"000…\n$ 企業名称                         &lt;chr&gt; \"極洋\", \"極洋\", \"極洋\", \"極洋\", \"極洋…\n$ 決算期                           &lt;chr&gt; \"1995/03\", \"1996/03\", \"1997/03\", \"199…\n$ 決算種別                         &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 1…\n$ 連結基準                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ 決算月数                         &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 1…\n$ 日経業種コード                   &lt;dbl&gt; 235341, 235341, 235341, 235341, 23534…\n$ 売上高                           &lt;dbl&gt; 173803, 175202, 183640, 176022, 17194…\n$ 特別利益                         &lt;dbl&gt; 778, 903, 186, 287, 79, 1429, 282, NA…\n$ 特別損失                         &lt;dbl&gt; 778, 708, 783, 852, 1271, 2936, 478, …\n$ 売上総利益                       &lt;dbl&gt; 14314, 12327, 14222, 14225, 15206, 15…\n$ 営業利益                         &lt;dbl&gt; 1059, -148, 1362, 739, 2069, 2842, 23…\n$ 経常利益                         &lt;dbl&gt; 1049, -82, 1058, 535, 1600, 2299, 194…\n$ 当期純利益                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 親会社株主当期純利益             &lt;dbl&gt; 797, -64, 236, -377, -251, 327, 927, …\n$ `支払利息・割引料`               &lt;dbl&gt; 1394, 1011, 830, 884, 736, 683, 661, …\n$ `法人税・住民税及び事業税合計`   &lt;dbl&gt; 271, 159, 213, 341, 620, 606, 908, 85…\n$ 法人税等調整額                   &lt;dbl&gt; NA, NA, NA, NA, NA, -178, -114, 44, -…\n$ 減価償却費                       &lt;dbl&gt; NA, NA, NA, 42, 34, 84, 92, 85, 81, 8…\n$ のれん償却額                     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 1, NA, NA…\n$ `受取利息・配当金`               &lt;dbl&gt; 317, 219, 169, 195, 187, 145, 131, 97…\n$ 持分法を適用した場合の投資損益   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 支払利息                         &lt;dbl&gt; NA, NA, NA, NA, NA, 683, 661, 536, 50…\n$ 税金等調整前当期純利益           &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 税金等調整前当期利益             &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 販売費及び一般管理費             &lt;dbl&gt; 13254, 12476, 12859, 13486, 13136, 12…\n$ 売上原価                         &lt;dbl&gt; 159489, 162875, 169418, 161796, 15673…\n$ 資産合計                         &lt;dbl&gt; 61692, 63287, 65883, 62766, 62109, 60…\n$ `受取利息・割引料・有価証券利息` &lt;dbl&gt; 134, 68, 49, 69, 72, 59, 47, 59, 30, …\n$ `短期借入金・社債合計`           &lt;dbl&gt; 29693, 29887, 33371, 30942, 30937, 27…\n$ `長期借入金・社債・転換社債`     &lt;dbl&gt; 5543, 5020, 5635, 5080, 4798, 5816, 4…\n$ `1年内返済の長期借入金`          &lt;dbl&gt; NA, NA, NA, NA, NA, 1109, 1267, 1449,…\n$ コマーシャルペーパー             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ リース債務                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#カテゴリー変数",
+    "href": "prezemi_2023_05_omake.html#カテゴリー変数",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "カテゴリー変数",
+    "text": "カテゴリー変数\nデータフレームdfの中には、文字列(character)として、\n\n日経会社コード\n企業名称\n決算期\n\nが入っているので、適切な型に変換する。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#ファクター型に変換",
+    "href": "prezemi_2023_05_omake.html#ファクター型に変換",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "ファクター型に変換",
+    "text": "ファクター型に変換\n文字列をファクター型に変換するにはas.factor()を使う。 決算期から年度データを取り出すためにsubstr()を使う。 substr()は文字列の一部を取り出す関数である。\n\ndf &lt;- df |&gt;\n    mutate( # 変数の型をファクター型に変換\n        日経会社コード = as.factor(日経会社コード),\n        企業名称 = as.factor(企業名称),\n        年度 = factor(substr(決算期, 1, 4), ordered = TRUE)\n    )"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#欠損値の処理",
+    "href": "prezemi_2023_05_omake.html#欠損値の処理",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "欠損値の処理",
+    "text": "欠損値の処理\nオリジナルの財務データの値が欠損値の場合、それは財務諸表上に個別項目で載せられないほど額が小さいことを意味する。 そこで、欠損値にゼロを代入する。\n\ndf[is.na(df)] &lt;- 0\n\nis.na()は欠損値をTRUE、欠損値でない値をFALSEとして返す関数で、TRUEにゼロを代入している。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#異常な観測値の処理",
+    "href": "prezemi_2023_05_omake.html#異常な観測値の処理",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "異常な観測値の処理",
+    "text": "異常な観測値の処理\n決算期を変更した会社を除外するため，決算月数が12の会社のみを抽出する。 ついでに売上高が1億円未満の企業や販管費がゼロの会社も除外する。\n\ndf &lt;- df |&gt;\n    filter(\n        決算月数 == 12, # 決算月数が12の会社 \n        売上高 &gt;= 100, # 売上高1億以上\n        販売費及び一般管理費 &gt; 0) # 販管費が0超"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#変な企業を除外",
+    "href": "prezemi_2023_05_omake.html#変な企業を除外",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "変な企業を除外",
+    "text": "変な企業を除外\nなぜか同じ年度に2つデータがある会社があるので、除外する。\n\ndf &lt;- df |&gt;\n  group_by(年度, 企業名称) |&gt; # 年度と企業ごとに\n  mutate(N = n()) |&gt; # なぜか同じ年度に2コ以上データがある会社があるのでカウント\n  filter(N != 2) |&gt; # 重複データを削除\n  select(-N) # 上で作ったけどもういらないのでNを削除\n\nこれで整然データ(tidy data)が完成した(はず)。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#売上高のヒストグラム",
+    "href": "prezemi_2023_05_omake.html#売上高のヒストグラム",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\n簡単にチェックするだけなら基本関数hist()\n\n\nRコードはここ\nhist(df$売上高)"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#売上高のヒストグラム-1",
+    "href": "prezemi_2023_05_omake.html#売上高のヒストグラム-1",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\nキレイなグラフを作るならggplot2\n\n\nRコードはここ\ndf |&gt;\n    ggplot() + aes(x = 売上高/1000000) + # 売上高を100万で割って単位を兆\n    geom_histogram() + # ヒストグラム\n    xlab(\"売上高（兆円）\") + ylab(\"度数\") + # x軸のラベル\n    mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#分布の計上を確認",
+    "href": "prezemi_2023_05_omake.html#分布の計上を確認",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "分布の計上を確認",
+    "text": "分布の計上を確認\n分布が左に固まっており、ばらつきが分からないので、分位点を確認\n\nfivenum(df$売上高)\n\n[1]      100.0     9002.0    27911.5    94322.0 37154298.0\n\nmean(df$売上高)\n\n[1] 188132.3\n\n\n\n\n\n最小 1億円\nQ1 135億3750万円,\nQ3 941億6700万円\n最大 37兆1542億9800万円\n\n\n\n中央値 278億8450万円\n平均 1879億8710万円"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#異常値の影響",
+    "href": "prezemi_2023_05_omake.html#異常値の影響",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "異常値の影響",
+    "text": "異常値の影響\n売上高の最大値が大きすぎる。 売上高の分布を正規分布に近づけるために対数を取る。\n\n\nRコードはここ\nhist(log(df$売上高))"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#対数をとって散布図を書く",
+    "href": "prezemi_2023_05_omake.html#対数をとって散布図を書く",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "対数をとって散布図を書く",
+    "text": "対数をとって散布図を書く\nggplot2パッケージのgeom_point()を使って、売上高と販売費及び一般管理費の散布図を書いてみる。\n\n\nRコードはここ\ndf |&gt;\n  filter(販売費及び一般管理費 &gt; 0) |&gt;\n  ggplot() + aes(x = log(売上高), y = log(販売費及び一般管理費)) +\n  geom_point() + # ヒストグラム\n  xlab(\"売上高の対数\") + ylab(\"販管費の対数\") + # x軸のラベル\n  mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均を計算",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均を計算",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\n# 年度別の売上高平均を計算\ndf_year_sale &lt;- df |&gt;\n    group_by(年度) |&gt;\n    summarise(\n      売上高平均 = mean(売上高) # 平均売上高を計算\n    )\n# 折れ線グラフ\ndf_year_sale |&gt;\n# 年度がファクターなので、group = 1として1つのグループにまとめる\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100, group = 1) +\n  geom_line() + geom_point() +# ヒストグラム\n  ylim(0, 3000) + mystyle # 軸の範囲とスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均棒グラフ",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均棒グラフ",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "年度別の売上高平均棒グラフ",
+    "text": "年度別の売上高平均棒グラフ\n横軸が年度なので，棒グラフもOK\n\n\nRコードはここ\ndf_year_sale |&gt;\n  # 売上高平均を100で割って単位を億に\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100) +\n  geom_col() +# ヒストグラム\n  ylim(0, 3000) + mystyle # Y軸の範囲とスタイル"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#グラフの読み取り",
+    "href": "prezemi_2023_05_omake.html#グラフの読み取り",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "グラフの読み取り",
+    "text": "グラフの読み取り\n\nなんか2023年度の売上が以上に増加している\n2023年度に売上高が急増した企業があるのかもしれない\n2023年度売上高ランク上位10社の2022年度と2023年度の売上高を比較しなきゃ"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均を計算-1",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均を計算-1",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2022\", \"2023\")) |&gt; # 2022年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高, names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2022, # 変化額\n    変化率 = round(差額 / 年度2022, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) |&gt; # 上位10社のみを抽出\n  kable( booktabs = TRUE) |&gt; \n  kable_styling(font_size = 20)  # 作表\n\n\n\n\n\n企業名称\n年度2022\n年度2023\n差額\n変化率\n\n\n\n\nトヨタ自動車\n313795\n371543\n57748\n0.18\n\n\n三菱商事\n172648\n215720\n43072\n0.25\n\n\n本田技研工業\n145527\n169077\n23550\n0.16\n\n\nＥＮＥＯＳホールディングス\n109218\n150166\n40948\n0.37\n\n\n三井物産\n117576\n143064\n25488\n0.22\n\n\n伊藤忠商事\n122933\n139456\n16523\n0.13\n\n\nセブン＆アイ・ホールディングス\n87498\n118113\n30615\n0.35\n\n\nソニーグループ\n99215\n115398\n16183\n0.16\n\n\n日立製作所\n102646\n108812\n6166\n0.06\n\n\n日産自動車\n84246\n105967\n21721\n0.26"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#特殊な3時点比較",
+    "href": "prezemi_2023_05_omake.html#特殊な3時点比較",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "特殊な3時点比較",
+    "text": "特殊な3時点比較\nリーマンショック2009年、コロナ禍2021年、2023年の売上高を比較する\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2009\", \"2021\", \"2023\")) |&gt; # 2000年と2010年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高,  names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2021, # 変化額\n    変化率 = round(差額 / 年度2021, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) |&gt; # 上位10社のみを抽出\n  kable( booktabs = TRUE) |&gt; \n  kable_styling(font_size = 20)  # 作表\n\n\n\n\n\n企業名称\n年度2009\n年度2021\n年度2023\n差額\n変化率\n\n\n\n\nトヨタ自動車\n205296\n272146\n371543\n99397\n0.37\n\n\n三菱商事\n61464\n128845\n215720\n86875\n0.67\n\n\n本田技研工業\n100112\n131705\n169077\n37372\n0.28\n\n\nＥＮＥＯＳホールディングス\nNA\n76580\n150166\n73586\n0.96\n\n\n三井物産\n55048\n80102\n143064\n62962\n0.79\n\n\n伊藤忠商事\n34191\n103626\n139456\n35830\n0.35\n\n\nセブン＆アイ・ホールディングス\n56499\n57667\n118113\n60446\n1.05\n\n\nソニーグループ\n77300\n89987\n115398\n25411\n0.28\n\n\n日立製作所\n100004\n87292\n108812\n21520\n0.25\n\n\n日産自動車\n84370\n78626\n105967\n27341\n0.35"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#兆円売上高企業",
+    "href": "prezemi_2023_05_omake.html#兆円売上高企業",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "10兆円売上高企業",
+    "text": "10兆円売上高企業\n2023年度の売上高が10兆円以上の会社の売上高の推移をみてみる。 まず2023年度の売上高が10兆円以上の企業名を抽出する。\n\n\nRコードはここ\ndf_name &lt;- df |&gt;\n  filter(売上高 &gt;= 10^7 & 年度 == 2023)\nname &lt;- df_name$企業名称\n# 作図\ng &lt;- df |&gt;\n  filter(企業名称 %in% name) |&gt; # 企業名がnameに含まれるものを抽出\n  ggplot() + aes(x = 年度, y = 売上高 / 10^6, group = 企業名称, color = 企業名称) + # 企業ごとに色分け\n  geom_line() + geom_point() + # 折れ線グラフと散布図を組み合わせる\n  xlab(\"年度\") + ylab(\"売上高(兆円)\") + mystyle + # スタイルを適用\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 16)) # x軸のラベルを90度回転\nprint(g) # 出力"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#動くグラフ",
+    "href": "prezemi_2023_05_omake.html#動くグラフ",
+    "title": "プレゼミ2023  第5回 【おまけ】収益データを可視化",
+    "section": "動くグラフ",
+    "text": "動くグラフ\n\n# install.packages(\"plotly\")\nlibrary(plotly)\nggplotly(g)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#用語の意味",
+    "href": "prezemi_2023_06_presen.html#用語の意味",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "用語の意味",
+    "text": "用語の意味\n\n\n\n母集団：研究対象となるすべての集合\n標本：母集団から抽出されたデータ\n標本サイズ：標本に含まれるデータの個数\n標本数・サンプル数：標本の数のことで標本サイズのことじゃないよ\n\n\n\n母数：母集団を特徴付ける値、母平均や母分散など\n統計量：標本を特徴付ける値、標本平均や標本分散など\n推定量：母数の推定に使われる統計量\n統計的推定：推定量から母数を予想すること"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#母集団と標本",
+    "href": "prezemi_2023_06_presen.html#母集団と標本",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "母集団と標本",
+    "text": "母集団と標本\n\n母集団(population)とは、研究問題(research question)に基づいて選定された対象全体の集まりのこと。\n標本(sample)とは、母集団から一部を抜き出したものであり、標本を通じて母集団の特性を推定する。\n統計学とは、限られた標本から母集団の特性（母数またはパラメータ）をどのように探求するかについて研究する学問"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#統計的推定統計量推定量",
+    "href": "prezemi_2023_06_presen.html#統計的推定統計量推定量",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "統計的推定・統計量・推定量",
+    "text": "統計的推定・統計量・推定量\n\n標本の特徴を調べることで，観察できない母集団の母数(parameter)を推定することを，統計的推定(statistical estimation)\n統計的推定には，標本から計算される統計量(statistic)を用いる。\n母数の推定のために利用される統計量を推定量(estimator)という。\n母数は定数だが、標本が変われば値が変わるので推定量は確率変数である。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#数学記号の使い方",
+    "href": "prezemi_2023_06_presen.html#数学記号の使い方",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "数学記号の使い方",
+    "text": "数学記号の使い方\n母数を推定するために用いられる統計量と一般的な数式記号\n\n\n\n母数\n記号\n統計量\n記号\n\n\n\n\n母平均\n\\(\\mu\\)\n標本平均\n\\(\\bar x\\)\n\n\n母比率\n\\(\\pi\\)\n標本比率\n\\(p\\)\n\n\n母分散\n\\(\\sigma^2\\)\n標本分散\n\\(s^2\\)\n\n\n母標準偏差\n\\(\\sigma\\)\n標本標準偏差\n\\(s\\)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出の方法",
+    "href": "prezemi_2023_06_presen.html#標本抽出の方法",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出の方法",
+    "text": "標本抽出の方法\n\n母集団から標本を選ぶ標本抽出方法として代表的なものが，単純無作為抽出(simple randome sampling)\n単純無作為抽出で選ばれた標本は、母集団の偏りのない標本となる。\nこのような標本を無作為標本(random sample)といい、この標本から計算される統計量は優れた特徴をもつ。\n\nシミュレーションで確認してみる。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーション準備",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーション準備",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出のシミュレーション準備",
+    "text": "標本抽出のシミュレーション準備\n平均10，標準偏差1の正規分布に従う確率変数\\(X \\sim N(10,1)\\)を考える。 この確率変数\\(X\\)の実現値100個を標本として抽出し、平均値を計算する。 rnorm()関数は正規分布に従う乱数を発生させる関数であり、引数として\n\nn：発生させる乱数の個数\nmean：平均\nsd：標準偏差\n\nの3つをとる。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出のシミュレーションの実践",
+    "text": "標本抽出のシミュレーションの実践\nrnorm(100,10,1)と書いてもよいが、後で変更するかもしれない変数は外で定義しておく。\n\nn = 100 # 標本サイズ\npmean = 10 # 母平均\npsd = 1 # 母標準偏差\nx &lt;- rnorm(n, pmean, psd) # 標本抽出\nmean(x) # 標本平均\n\n[1] 9.83942\n\n\n平均値は9.8394196で、母平均\\(10\\)と一致していない。 この差を誤差といい、母集団と標本のズレを意味する。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出のシミュレーションの実践",
+    "text": "標本抽出のシミュレーションの実践\n\ntrial = 100 # 標本数\nresult &lt;- numeric(trial) # 結果を入れる空の変数\nfor (i in 1:trial) { # 以下の処理をtrial回繰り返す\n  x &lt;- rnorm(n, pmean, psd) # 標本抽出\n  result[i] &lt;- mean(x) # 標本平均\n}\nmean(result)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-2",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-2",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出のシミュレーションの実践",
+    "text": "標本抽出のシミュレーションの実践\n標本サイズ\\(n\\)を増やす\n\n\nRコード\nn = 10000 # 標本サイズ\nresult &lt;- numeric(trial) # 結果を入れる空の変数\nfor (i in 1:trial) { # 以下の処理をtrial回繰り返す\n  x &lt;- rnorm(n, pmean, psd) # 標本抽出\n  result[i] &lt;- mean(x) # 標本平均\n}\nhist(result) # 基本関数histでヒストグラム作成"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-2-output",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-2-output",
+    "title": "プレゼミ2023  第5回 記述統計とデータの可視化・視覚化",
+    "section": "標本抽出のシミュレーションの実践",
+    "text": "標本抽出のシミュレーションの実践"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#大数の法則",
+    "href": "prezemi_2023_06_presen.html#大数の法則",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "大数の法則",
+    "text": "大数の法則\nキレイな左右対称の釣り鐘型の分布になっている。 この標本平均の分布の平均値を計算してみる。\n\nmean(result)\n\n[1] 9.999017\n\n\nとほぼ10と等しい。\nこのように，標本サイズを増やしていくと，標本平均の平均値は母平均に近づく，という法則を大数の法則(law of large numbers)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本数が増えると母平均に近づく",
+    "href": "prezemi_2023_06_presen.html#標本数が増えると母平均に近づく",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本数が増えると母平均に近づく",
+    "text": "標本数が増えると母平均に近づく\n本当に標本サイズが増えると標本平均の平均が母平均に近づくのかシミュレーションで確認してみる。\n\nn = 1000 # 標本サイズ\npmean = 10 # 母平均\npsd = 4 # 母標準偏差\ntrial = 10000 # 標本数\nresult &lt;- numeric(n) # 結果を入れる空の変数\nfor (i in 2:n) { # 以下の処理をtrial回繰り返す\n    x &lt;- rnorm(i, pmean, psd) # 標本抽出\n    result[i] &lt;- mean(x) # 標本平均\n}\nplot(result, type=\"l\") # 基本関数plotで折れ線グラフ作成\nabline(h=pmean, col=\"red\") # 母平均を赤線で表示"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本数が増えると母平均に近づく-output",
+    "href": "prezemi_2023_06_presen.html#標本数が増えると母平均に近づく-output",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本数が増えると母平均に近づく",
+    "text": "標本数が増えると母平均に近づく"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1-output",
+    "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1-output",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本抽出のシミュレーションの実践",
+    "text": "標本抽出のシミュレーションの実践\n\n[1] 9.994554\n\nhist(result) # 基本関数histでヒストグラム作成"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#a",
+    "href": "prezemi_2023_06_presen.html#a",
+    "title": "プレゼミ2023  第5回 記述統計とデータの可視化・視覚化",
+    "section": "a",
+    "text": "a\n先の例は標本1つだけの場合だったが、次は標本を増やし、次のシミュレーションを行う。\n\n平均10，標準偏差1の正規分布からランダムに100個のデータを取り出し標本とする。\nその標本の平均値を計算する\n\nという試行(trial)を10,000回繰り返す。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本分布",
+    "href": "prezemi_2023_06_presen.html#標本分布",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本分布",
+    "text": "標本分布\nプレゼミのメンバー25名から5名の標本を抽出する場合でも，\n\\[\n{}_{25} \\mathrm{C}_5 = \\binom{25}{5} = \\frac{25!}{5!(25-5)!} = 53130\n\\]\nの組み合わせがある。 標本から計算した統計量は標本ごとに異なる値となる。 このような統計量の分布を標本分布(sampling distribution)という。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#不偏推定量",
+    "href": "prezemi_2023_06_presen.html#不偏推定量",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "不偏推定量",
+    "text": "不偏推定量\n\n「偏りのない」(unbiased)標本をたくさん集めることができれば，標本分布は母集団の分布に近づく\n多くの標本から計算される統計量の平均が母数に一致する性質を不偏性(unbiasedness)\n普遍性をもつ推定量を不偏推定量(unbiased estimator)という\n\n不偏推定量を計算することが非常に重要"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題",
+    "href": "prezemi_2023_06_presen.html#例題",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n5個のデータ(2,4,6,7,9)から3つ取り出して標本を作成する場合の組み合わせ \\[\n{}_{5} \\mathrm{C}_3 = \\binom{5}{3} = \\frac{5!}{3!(5-3)!} = 10\n\\]\nこの10個の標本から計算される標本分散と標本平均を計算する。 定義は次のとおりである。\n\\[\n\\begin{aligned}\n\\text{標本平均} &= \\frac 1n \\sum_{i=1}^n x_i & \\text{標本分散} &= \\frac 1n \\sum_{i=1}^n \\left (x_i - \\bar{x} \\right )^2\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-1",
+    "href": "prezemi_2023_06_presen.html#例題-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n標本平均と標本分散を計算する関数を作る。 自作関数を作るには，function()関数を使う。\n\nmeanp &lt;- function(x){\n  sum(x) / length(x) # 合計をデータの個数で割る\n}\nvarp &lt;- function(x){\n  sum((x - meanp(x))^2) / length(x) # 分散の計算式\n}\n\n実務的には分母が0になるケースを考慮する必要があるが省略"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-2",
+    "href": "prezemi_2023_06_presen.html#例題-2",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n\nx &lt;- c(2,4,6,7,9) # 母集団とする。\nmeanp(x) # 母平均\n\n[1] 5.6\n\nres &lt;- combn(x,3) # 3つのデータを取り出す組み合わせ\nprint(res)\n\n     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]\n[1,]    2    2    2    2    2    2    4    4    4     6\n[2,]    4    4    4    6    6    7    6    6    7     7\n[3,]    6    7    9    7    9    9    7    9    9     9\n\n\n5個のデータから3つのデータを取り出して標本を作り，それぞれの標本から標本平均と標本分散を計算"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-3",
+    "href": "prezemi_2023_06_presen.html#例題-3",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n自作のmeanp()関数をapply関数で適用して10の標本平均を作り，sample_meanという変数に代入し，その平均を計算する。\n\nsample_mean &lt;- apply(res, 2, meanp) # apply関数でmeanp関数をresに適用\nmeanp(sample_mean) # 標本平均の平均は5.6\n\n[1] 5.6\n\n\n標本平均の平均5.6が母平均5.6に一致したので，標本平均は不偏推定量である。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-4",
+    "href": "prezemi_2023_06_presen.html#例題-4",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n次に分散を計算してみましょう。\n\nvarp(x) # 母分散 5.84\n\n[1] 5.84\n\nsample_var &lt;- apply(res, 2, varp)\nmeanp(sample_var) #\n\n[1] 4.866667\n\n\n標本分散の平均4.8666667は母分散5.84より小さな値になった。つまり標本分散は不偏推定量ではない，ということ。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-5",
+    "href": "prezemi_2023_06_presen.html#例題-5",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\n\n自由度という概念が関係\n自由度とは，標本から計算される統計量の値を決めるのに使える情報の数のこと\n標本分散ではなく標本不偏分散を計算する。違いは，分母が\\(n\\)ではなく\\(n-1\\)になっていること。 \\[\n\\text{標本不偏分散} = \\frac{1}{n-1} \\sum_{i=1}^n \\left (x_i - \\bar{x} \\right )^2\n\\]"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#一致推定量",
+    "href": "prezemi_2023_06_presen.html#一致推定量",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "一致推定量",
+    "text": "一致推定量\n標本数が増えると，標本分布は母集団の分布に近づく，という特徴をもつ推定量を一致推定量(consistent estimator)という。\n例えば，関心のある母集団が\n\n母平均\\(\\mu = 62\\)\n母分散\\(\\sigma^2 = 25\\)\n\nという母数をもつ正規分布に従っているとする。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#グラフ",
+    "href": "prezemi_2023_06_presen.html#グラフ",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "グラフ",
+    "text": "グラフ\n\n\nRコード\nresult &lt;- as.tibble(result)\ng &lt;- ggplot(result) + aes(value) # 軸の設定\ng &lt;- g + geom_histogram( # ヒストグラム\n  aes(y = ..density..), bins = 60, # y軸を密度に\n  fill = \"white\", color = \"black\") # ヒストグラムの色\ng &lt;- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))　# 母集団の分布\ng &lt;- g + geom_vline(xintercept = 62, color = \"red\") # 母平均の縦線\ng &lt;- g + xlim(47,77) # x軸の範囲を指定\nprint(g)\n\n\n\n母平均と標本平均の中心がほぼ一致している。 母分散と比べて標本分散が非常に小さい。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本平均を計算",
+    "href": "prezemi_2023_06_presen.html#標本平均を計算",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本平均を計算",
+    "text": "標本平均を計算\n\nn = 10 # 標本サイズ\ntrial = 1000 # 試行回数\nresult &lt;- numeric(trial) # 結果を入れる空の箱\nfor (i in 1:trial) { # 以下をtrial回繰り返す\n  x &lt;- rnorm(n, 62, 5) # 標本を生成\n  result[i] &lt;- mean(x) # 標本平均を計算\n}\nmean(result) # 標本平均の平均\n\n[1] 62.00398\n\n\nヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0039834となりますが，これは母平均62に近い値になっています。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#グラフ-1",
+    "href": "prezemi_2023_06_presen.html#グラフ-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "グラフ",
+    "text": "グラフ\nグラフで確認すると，\n\nresult &lt;- as.tibble(result)\ng &lt;- ggplot(result) + aes(value) # 軸の設定\ng &lt;- g + geom_histogram( # ヒストグラム\n  aes(y = ..density..), bins = 60, # y軸を密度に\n  fill = \"white\", color = \"black\") # ヒストグラムの色\ng &lt;- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))　# 母集団の分布\ng &lt;- g + geom_vline(xintercept = 62, color = \"red\") # 母平均の縦線\ng &lt;- g + xlim(47,77) + mystyle # x軸の範囲を指定\nprint(g)\n\n\nと母平均と標本平均のヒストグラムの中心が一致していることが分かります。 ただ，母分散と比べて標本分散が非常に小さいことが一目瞭然です。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#シミュレーション",
+    "href": "prezemi_2023_06_presen.html#シミュレーション",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "シミュレーション",
+    "text": "シミュレーション\n標本サイズを先ほどの100倍の1000として，同じ試行を1000回繰り返す。\n\n\nRコード\nn = 100 # 標本サイズ\ntrial = 1000 # 試行回数\nresult &lt;- numeric(trial)\nfor (i in 1:trial) {\n  x &lt;- rnorm(n, 62, 5)\n  result[i] &lt;- mean(x)\n}\nresult &lt;- as.tibble(result)\ng &lt;- ggplot(result) + aes(value) + geom_histogram(aes(y=..density..), bins=60, fill=\"white\", color=\"black\")\ng &lt;- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))\ng &lt;- g + xlim(47,77) + geom_vline(xintercept = 62, color=\"red\")\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#シミュレーション-1",
+    "href": "prezemi_2023_06_presen.html#シミュレーション-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "シミュレーション",
+    "text": "シミュレーション\nどんどん標本サイズを増やして，100000として，同じ試行を1000回繰り返してみましょう。\n\n\nRコード\nn = 100000 # 標本サイズ\ntrial = 1000 # 試行回数\nresult &lt;- numeric(trial)\nfor (i in 1:trial) {\n  x &lt;- rnorm(n, 62, 5)\n  result[i] &lt;- mean(x)\n}\nresult &lt;- as.tibble(result)\ng &lt;- ggplot(result) + aes(value) + geom_histogram(aes(y=..density..), bins=60, fill=\"white\", color=\"black\")\ng &lt;- g + stat_function(fun=dnorm, args=list(mean = 62, sd = 5))\ng &lt;- g + xlim(47,77) + geom_vline(xintercept = 62, color=\"red\")\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#一致推定量-1",
+    "href": "prezemi_2023_06_presen.html#一致推定量-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "一致推定量",
+    "text": "一致推定量\n標本平均の標準偏差\\(SD(\\bar x)\\)は，\n\\[\nSD(\\bar x) = \\frac{\\sigma}{\\sqrt{n}}\n\\]\n標本サイズを大きくすると，標本平均が母平均の近くの値をとる確率が大きくなる，という性質を一致性(consistency)と呼び， 一致性をもつ推定量を一致推定量(consistent estimator)という。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#例題-6",
+    "href": "prezemi_2023_06_presen.html#例題-6",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "例題",
+    "text": "例題\nRの基本関数であるvar()は標本分散ではなく標本不偏分散を計算する。\n\nvar(x) # 母分散 5.84\n\n[1] 7.3\n\nres &lt;- combn(x,3) # 3つのデータを取り出す組み合わせ\nsample_var &lt;- apply(res, 2, var)\nmeanp(sample_var) # 標本平均の平均は5.6\n\n[1] 7.3\n\n\n母分散と標本不偏分散の平均は一致した。 つまり母数である母分散を推定するためには，標本不偏分散を使う必要がある。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#準備",
+    "href": "prezemi_2023_06_presen.html#準備",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "準備",
+    "text": "準備\n\n# 文字化け防止のおまじない、R 4.1.0以降\nknitr::opts_chunk$set(dev = \"ragg_png\")\n\nlibrary(tidyverse) # とりあえずこれ\nlibrary(ggthemes) # ggplot2のテーマ\nlibrary(knitr)\nlibrary(kableExtra)\nlibrary(gghighlight)\n\n# テーマを設定\ntheme_set(theme_few(base_size = 12))\n# 以下、ggplot2のデフォルトを変更\nupdate_geom_defaults(\"point\", list(size = 3))"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#作図",
+    "href": "prezemi_2023_06_presen.html#作図",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "作図",
+    "text": "作図\n正規分布の作図\n\n\nRコード\np &lt;- ggplot(data = data.frame(X = c(47,77))) # データの作成\np &lt;- p + aes(x = X)\np &lt;- p + stat_function(\n  fun = dnorm,\n  args = list(mean = 62, sd = 5)\n  )\nprint(p)\n\n\n\n母集団から標本サイズ10の標本を取り出し，標本平均を計算する，という試行を1000回繰り返し，1000個の標本平均を作る。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#母平均の推定と信頼区間",
+    "href": "prezemi_2023_06_presen.html#母平均の推定と信頼区間",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "母平均の推定と信頼区間 ",
+    "text": "母平均の推定と信頼区間 \n標本から得た統計量をつかって母数である母平均を予想したいとき，手元にある1つの標本から計算した標本平均は，どの程度の精度をもつのか？ これを測る尺度を信頼区間(confidence interval)という。\n\n母数である母平均は観察できないが，確率変数ではなく定数\nこの母平均が計算した信頼区間に含まれるか，含まれないか，のどちらか\n信頼区間の正しい解釈は，母集団から標本を取ってきて、その標本平均から95%信頼区間を求める、という作業を100回やったときに、95回はその区間の中に母平均が含まれる"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本平均の標準偏差を推定する-標準誤差",
+    "href": "prezemi_2023_06_presen.html#標本平均の標準偏差を推定する-標準誤差",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本平均の標準偏差を推定する– 標準誤差",
+    "text": "標本平均の標準偏差を推定する– 標準誤差\n標本の統計量は確率変数なので，統計量は分布する。 標本平均の標準偏差は，\n\\[\nSD(\\bar x) = \\frac{\\sigma }{\\sqrt{n}}\n\\]\nと定義される。 ここで\\(n\\)は標本サイズなので既知だが，$\\(は母標準偏差なので未知である。 そこでまず\\)$の推定のために，不偏標準偏差\n\\[\nu = \\sqrt{\\frac{1}{n-1} \\sum_{i=1}^n \\left (x_i - \\bar{x} \\right )^2}\n\\]\nを計算します。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標準誤差",
+    "href": "prezemi_2023_06_presen.html#標準誤差",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標準誤差",
+    "text": "標準誤差\n定義した\\(SD(\\bar x)\\)の分子\\(\\sigma\\)の代わりに推定量\\(u\\)を使ったものを標準誤差(standard error: SE)と呼ぶ。 \\[\nSE = \\frac{u}{\\sqrt{n}}\n\\]\nこの標準誤差を標本平均の標準誤差の代わりに利用する。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#t分布",
+    "href": "prezemi_2023_06_presen.html#t分布",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "t分布",
+    "text": "t分布\n\\(t\\)分布(t-distribution)は，母集団が正規分布にしたがうとき，標本平均の分布が従う確率分布です。\n\n\nRコード\nx &lt;- seq(-4, 4, length.out = 100)\n\ndf1 &lt;- dt(x, df = 1)\ndf5 &lt;- dt(x, df = 5)\ndf100 &lt;- dt(x, df = 100)\n\n# データフレームに変換\ndf &lt;- data.frame(x = rep(x, 3),\n                 y = c(df1, df5, df100),\n                 freedom = factor(rep(c(\"df = 1\", \"df = 5\", \"df = 100\"), each = length(x)), ordered = TRUE)\n                 )\n# プロット\nggplot(df, aes(x = x, y = y, color = freedom)) +\n  geom_line() +\n  scale_color_manual(values = c(\"red\", \"blue\", \"green\")) +\n  labs(title = \"自由度が異なるt分布のプロット\") + xlab(\"t値\") + ylab(\"確率密度\")"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#t分布-1",
+    "href": "prezemi_2023_06_presen.html#t分布-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "t分布",
+    "text": "t分布\n標本平均\\(\\bar x\\)から母平均を引いて，それを標準誤差\\(SE\\)で割った値をt値(t-value)という。 自由度99の\\(t\\)分布の場合，95%の確率で\\(t\\)値は-1.98から1.98の間に入ります。\n\n\nRコード\n# 自由度を設定\ndf &lt;- 99\n\n# データを生成\ndata &lt;- data.frame(x = seq(-5, 5, by = 0.01))\ndata$y &lt;- dt(data$x, df)\n\n# 90%の領域の上限と下限をqt()で計算\nql &lt;- qt(0.025, df)\nqu &lt;- qt(0.975, df)\n\n# t分布を書く\ng &lt;- ggplot(data) + aes(x=x, y=y) + geom_line()\ng &lt;- g + geom_area(data = data %&gt;% filter(x &gt; ql & x &lt; qu), fill = \"blue\", alpha = 0.3)\ng &lt;- g + xlab(\"t値\") + ylab(\"確率密度\") + labs(title = \"90%の確率で起こるt値の範囲\") + xlim(-3,3)\ng &lt;- g + annotate(geom = \"text\", x = qu, y = 0.12,\n  label = \"1.98\", size = 6) +\n  annotate(# 始点や終点などを指定して矢印を追加\n  geom = \"segment\", x = qu, xend = qu,\n  y = 0.1, yend = 0.07, color = \"black\", size = 0.3,\n  arrow = arrow(length = unit(0.3, \"cm\"))\n  )\ng &lt;- g + annotate(geom = \"text\", x = 0, y = 0.15,\n  label = \"95%\", size = 8)\ng &lt;- g + annotate(geom = \"text\", x = ql, y = 0.12,\n  label = \"-1.98\", size = 6) +\n  annotate(# 始点や終点などを指定して矢印を追加\n  geom = \"segment\", x = ql, xend = ql,\n  y = 0.1, yend = 0.07, color = \"black\", size = 0.3,\n  arrow = arrow(length = unit(0.3, \"cm\"))\n  )\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#t分布-2",
+    "href": "prezemi_2023_06_presen.html#t分布-2",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "t分布",
+    "text": "t分布\n\\(t\\)分布は確率分布ですので，面積は1となります。 青い領域が95％の確率で\\(t\\)値が入る範囲です。\n\\[\n[ -t _{100-1, 0.025}, \\ t_{100-1, 0.025}]\n\\]\n\\(t\\)分布表を使って，自由度99のときの\\(t\\)値を調べると，\\(t_{100-1, 0.025} = 1.98\\)となります。 Rだとqt()関数を使って計算できます。\n\nround(qt(0.025, df = 99),digits =2)\n\n[1] -1.98\n\nround(qt(0.975, df = 99),digits =2)\n\n[1] 1.98"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間を求める",
+    "href": "prezemi_2023_06_presen.html#信頼区間を求める",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間を求める",
+    "text": "信頼区間を求める\n標本サイズ\\(n\\)の標本から計算される標本平均\\(\\bar x\\)から計算される次の\\(t\\)値 \\[\nt = \\frac{\\bar x - \\mu}{SE}\n\\] が自由度\\(n-1\\)の\\(t\\)分布にしたがうことが知られている。\nつまり，標本の95％の\\(t\\)値は，\\(t_{n-1, 0.025}\\)から\\(t_{n-1, 0.975}\\)の間に入る。 よって，\n\\[\n-t _{n-1, 0.025} \\leq \\frac{\\bar x - \\mu}{SE} \\leq  t_{n-1, 0.025}\n\\] 両辺に\\(SE\\)をかけると， \\[\n-t _{n-1, 0.025} \\times SE \\leq \\bar{x} - \\mu \\leq  t_{n-1, 0.025}\\times SE\n\\]\nこの区間を95％信頼区間といいます。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間の解釈",
+    "href": "prezemi_2023_06_presen.html#信頼区間の解釈",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間の解釈",
+    "text": "信頼区間の解釈\n信頼区間とは、観察できない真の値である母数が存在し、その母集団から標本を抽出し、標本平均を計算するということを繰り返したときに、95%の標本平均の信頼区間の中に真の値である母平均が入っている、ということです。\n先の例を使って、信頼区間を表現してみます。\n\n母集団が平均62，標準偏差5の正規分布にしたがうとする。\nこの母集団から標本サイズ50の標本を100個抽出して，標本平均と標本標準偏差を計算する。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間の解釈-1",
+    "href": "prezemi_2023_06_presen.html#信頼区間の解釈-1",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間の解釈",
+    "text": "信頼区間の解釈\n\n\nRコード\ntrial &lt;- 100 # 標本数\nn &lt;- 50 # 標本サイズ\nmu &lt;- 62 # 母平均\nsigma &lt;- 5 # 母標準偏差\n\nset.seed(1234) # 乱数を準備\n\n# 標本ごとの統計量を収納する空のベクトルを作成\nsample_mean &lt;- numeric(trial) # 標本平均の入れ物\nsample_sd   &lt;- numeric(trial) # 標本標準偏差の入れ物\nuplimit     &lt;- numeric(trial) # 信頼区間の上限の入れ物\nlowlimit    &lt;- numeric(trial) # 信頼区間の下限の入れ物\n\n# 標本の数だけ，以下の計算を繰り返す\nfor (i in 1:trial) {\n  temp_sample    &lt;- rnorm(n, mu, sigma) # 標本を抽出\n  sample_mean[i] &lt;- mean(temp_sample) # 標本平均を計算\n  sample_sd[i]   &lt;- sd(temp_sample) # 標本標準偏差を計算\n}\n\n# 信頼区間の計算\np &lt;- .95 # 信頼水準の設定 (95%信頼区間)\nalpha &lt;- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算\n\n# 信頼区間の上限と下限の計算\nuplimit  &lt;- sample_mean + alpha * sample_sd/sqrt(n) # 信頼区間上限\nlowlimit &lt;- sample_mean - alpha * sample_sd/sqrt(n) # 信頼区間下限\n\n# 信頼区間の計算結果をデータフレームにまとめる\nconfidence_interval &lt;- data.frame(\n  標本平均 = sample_mean,\n  上限 = uplimit,\n  下限 = lowlimit,\n  標本番号 = 1:trial\n)\n\n# Plot using ggplot2\ng_ci &lt;- ggplot(confidence_interval) +\n  aes(x = 標本番号, y = 標本平均)\n  # aes(x = reorder(標本番号, 標本平均), y = 標本平均)\ng_ci &lt;- g_ci + geom_errorbar( # 信頼区間を表す線を描く\n  aes(ymin = 下限, ymax = 上限,\n      color = (下限 &lt;= 62 & 上限 &gt;= 62)\n      ), width = 0.2)\ng_ci &lt;- g_ci + scale_color_manual( # 色の設定\n  values = c(\"magenta\", \"black\"),\n  guide = FALSE)\ng_ci &lt;- g_ci + geom_point(aes(y = 標本平均)) # 標本平均を点で表す\ng_ci &lt;- g_ci + geom_hline(yintercept = 62, color = \"red\") # 母平均を赤い線で表す\ng_ci &lt;- g_ci + xlab(\"標本ID\") + ylab(\"95%信頼区間\") # 軸ラベルの設定\ng_ci &lt;- g_ci + ylim(47,77) + coord_flip()  # 軸の範囲と向きの設定\n\np &lt;- ggplot(data.frame(X = c(47,77))) + aes(x = X) # 母集団を描く範囲\np &lt;- p + stat_function(fun = dnorm, args = list(mean = 62, sd = 5)) # 正規分布を描く\np &lt;- p + geom_vline(xintercept = 62, color=\"red\") 　# 母平均を赤い線で表す\n\nlibrary(patchwork) # グラフを並べるためのパッケージ\np / g_ci # グラフを縦に並べる"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間の解釈-2",
+    "href": "prezemi_2023_06_presen.html#信頼区間の解釈-2",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間の解釈",
+    "text": "信頼区間の解釈\n本当は未知である母平均62，母標準偏差5の母集団から標本を100個取り出し，100個の標本平均と95%信頼区間を計算し，グラフにしています。 この100個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，7つの95％信頼区間に母平均が含まれていないことが分かります。\\(7/100\\)の割合で信頼区間に母平均が含まれていないので，信頼水準は\\(1-7/100=0.93\\)となります。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#section",
+    "href": "prezemi_2023_06_presen.html#section",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "",
+    "text": "信頼区間を50%にするとどうなるでしょうか？ こうなります。\n\n\nRコード\n# 信頼区間の計算\np &lt;- .5 # 信頼水準の設定 (95%信頼区間)\nalpha &lt;- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算\n\n# 信頼区間の上限と下限の計算\nuplimit  &lt;- sample_mean + alpha * sample_sd/sqrt(n)\nlowlimit &lt;- sample_mean - alpha * sample_sd/sqrt(n)\n\n\nconfidence_interval &lt;- data.frame(\n  標本平均 = sample_mean,\n  上限 = uplimit,\n  下限 = lowlimit,\n  標本番号 = 1:trial\n)\n\n# Plot using ggplot2\ng_ci2 &lt;- ggplot(confidence_interval) +\n aes(x = 標本番号, y = 標本平均) +\n  geom_errorbar(aes(ymin = 下限, ymax = 上限,\n                    color = (下限 &lt;= 62 & 上限 &gt;= 62)), width = 0.2) +\n  scale_color_manual(values = c(\"magenta\", \"black\"), guide = FALSE) +\n  geom_point(aes(y = 標本平均)) + ylim(47,77) +\n  geom_hline(yintercept = 62, color = \"red\") + xlab(\"標本ID\") + ylab(\"50%信頼区間\") + coord_flip()\nprint(g_ci2)\n\n\n\n信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間の解釈-3",
+    "href": "prezemi_2023_06_presen.html#信頼区間の解釈-3",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間の解釈",
+    "text": "信頼区間の解釈\n信頼区間を50%にするとどうなるでしょうか？ こうなります。\n\n\nRコード\n# 信頼区間の計算\np &lt;- .5 # 信頼水準の設定 (95%信頼区間)\nalpha &lt;- qt( (1 - p) / 2, df = n - 1, lower.tail=FALSE) # 限界値の計算\n\n# 信頼区間の上限と下限の計算\nuplimit  &lt;- sample_mean + alpha * sample_sd/sqrt(n)\nlowlimit &lt;- sample_mean - alpha * sample_sd/sqrt(n)\n\n\nconfidence_interval &lt;- data.frame(\n  標本平均 = sample_mean,\n  上限 = uplimit,\n  下限 = lowlimit,\n  標本番号 = 1:trial\n)\n\n# Plot using ggplot2\ng_ci2 &lt;- ggplot(confidence_interval) +\n aes(x = 標本番号, y = 標本平均) +\n  geom_errorbar(aes(ymin = 下限, ymax = 上限,\n                    color = (下限 &lt;= 62 & 上限 &gt;= 62)), width = 0.2) +\n  scale_color_manual(values = c(\"magenta\", \"black\"), guide = FALSE) +\n  geom_point(aes(y = 標本平均)) + ylim(47,77) +\n  geom_hline(yintercept = 62, color = \"red\") + xlab(\"標本ID\") + ylab(\"50%信頼区間\") + coord_flip()\nprint(g_ci2)\n\n\n\n信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#標本平均の標準偏差を推定",
+    "href": "prezemi_2023_06_presen.html#標本平均の標準偏差を推定",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "標本平均の標準偏差を推定",
+    "text": "標本平均の標準偏差を推定\n標本の統計量は分布し，標本平均の標準偏差は，\n\\[\nSD(\\bar x) = \\frac{\\sigma }{\\sqrt{n}}\n\\]\nとなる。標本サイズ\\(n\\)は既知だが，$$は母標準偏差なので未知である。 \\(\\sigma\\)の推定のために，不偏標準偏差\n\\[\nu = \\sqrt{\\frac{1}{n-1} \\sum_{i=1}^n \\left (x_i - \\bar{x} \\right )^2}\n\\]\nを計算する。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#信頼区間の解釈-4",
+    "href": "prezemi_2023_06_presen.html#信頼区間の解釈-4",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "信頼区間の解釈",
+    "text": "信頼区間の解釈\n標本サイズを大きくすればどうでしょうか。 \n\n標本サイズ\\(n\\)が大きくなると、信頼区間の上限と下限を計算するさいの\\(\\sqrt{n}\\)が大きくなるため、信頼区間が短くなっていることがわかります。"
   }
 ]
