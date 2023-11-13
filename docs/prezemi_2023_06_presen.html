@@ -550,10 +550,10 @@ Soichi Matsuura
 <span id="cb2-4"><a href="#cb2-4"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, pmean, psd) <span class="co"># 標本抽出</span></span>
 <span id="cb2-5"><a href="#cb2-5"></a><span class="fu">mean</span>(x) <span class="co"># 標本平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.83942</code></pre>
+<pre><code>[1] 10.15124</code></pre>
 </div>
 </div>
-<p>平均値は9.8394196で、母平均<span class="math inline">\(10\)</span>と一致していない。 この差を<strong>誤差</strong>といい、母集団と標本のズレを意味する。</p>
+<p>平均値は10.1512389で、母平均<span class="math inline">\(10\)</span>と一致していない。 この差を<strong>誤差</strong>といい、母集団と標本のズレを意味する。</p>
 </section>
 <section id="標本抽出のシミュレーションの実践-1" class="slide level2">
 <h2>標本抽出のシミュレーションの実践</h2>
@@ -570,7 +570,7 @@ Soichi Matsuura
 </section>
 <section id="標本抽出のシミュレーションの実践-1-output" class="slide level2 output-location-slide"><h2>標本抽出のシミュレーションの実践</h2><div class="cell output-location-slide" data-hash="prezemi_2023_06_presen_cache/revealjs/unnamed-chunk-3_ab15f15e59d6e179b2e8ceee2a4021b0">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.994554</code></pre>
+<pre><code>[1] 10.00172</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">hist</span>(result) <span class="co"># 基本関数histでヒストグラム作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -599,7 +599,7 @@ Soichi Matsuura
 <div class="cell" data-hash="prezemi_2023_06_presen_cache/revealjs/unnamed-chunk-5_e52c98ed9a5d16a686c7fd6695dbe419">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">mean</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.999017</code></pre>
+<pre><code>[1] 9.999944</code></pre>
 </div>
 </div>
 <p>とほぼ10と等しい。</p>
@@ -783,10 +783,10 @@ Soichi Matsuura
 <span id="cb27-7"><a href="#cb27-7"></a>}</span>
 <span id="cb27-8"><a href="#cb27-8"></a><span class="fu">mean</span>(result) <span class="co"># 標本平均の平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.00398</code></pre>
+<pre><code>[1] 61.99138</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0039834となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は61.9913766となりますが，これは母平均62に近い値になっています。</p>
 </section>
 <section id="グラフ" class="slide level2">
 <h2>グラフ</h2>
@@ -1107,11 +1107,66 @@ t = \frac{\bar x - \mu}{SE}
 <p>標本サイズを大きくすればどうでしょうか。 <!-- 先ほどまでは標本サイズ50の標本でしたが、標本サイズを500にして、95%信頼区間を計算してみます。 --></p>
 
 <img data-src="prezemi_2023_06_presen_files/figure-revealjs/unnamed-chunk-22-1.png" width="1344" class="r-stretch"><p>標本サイズ<span class="math inline">\(n\)</span>が大きくなると、信頼区間の上限と下限を計算するさいの<span class="math inline">\(\sqrt{n}\)</span>が大きくなるため、信頼区間が短くなっていることがわかります。</p>
+</section>
+<section id="練習問題" class="slide level2">
+<h2>練習問題</h2>
+<ol type="1">
+<li>サイコロを作ってください。</li>
+<li>サイコロを10回降って，出た結果の平均を計算してください。</li>
+<li>2の作業を100回繰り返して，100個の標本平均を計算してください。</li>
+<li>100個の標本平均のヒストグラムを作成してください。</li>
+</ol>
+</section>
+<section id="解答" class="slide level2">
+<h2>解答</h2>
+<p><code>replicate()</code>関数と<code>sample()</code>関数を使って標本平均を複数作成し，<code>mean()</code>で平均を計算する。</p>
+<div class="cell" data-hash="prezemi_2023_06_presen_cache/revealjs/unnamed-chunk-23_db5f5a746f24327e4dd4950201b85623">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># 自作関数 simulate_dice_toss</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>simulate_dice_toss <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">toss =</span> <span class="dv">10</span>, <span class="at">trial =</span> <span class="dv">100</span>) {<span class="co">#引数はnで試行回数</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a>  <span class="co"># 初期設定</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a>  dice <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span> <span class="co"># 1〜6の数値をdiceに代入</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a></span>
+<span id="cb40-6"><a href="#cb40-6"></a>  <span class="co"># replicateを使用してサイコロを投げ、平均を取得</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a>  result <span class="ot">&lt;-</span> <span class="fu">replicate</span>(trial, <span class="fu">mean</span>(<span class="fu">sample</span>(dice, toss, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb40-8"><a href="#cb40-8"></a></span>
+<span id="cb40-9"><a href="#cb40-9"></a>  <span class="co"># 結果のヒストグラムをプロット</span></span>
+<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">hist</span>(result, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">6</span>,<span class="fl">0.05</span>))</span>
+<span id="cb40-11"><a href="#cb40-11"></a></span>
+<span id="cb40-12"><a href="#cb40-12"></a>  <span class="co"># サンプル平均と真の平均の垂直線をプロット</span></span>
+<span id="cb40-13"><a href="#cb40-13"></a>  sample_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(result)</span>
+<span id="cb40-14"><a href="#cb40-14"></a>  true_mean <span class="ot">&lt;-</span> <span class="fu">sum</span>(dice) <span class="sc">/</span> <span class="fu">length</span>(dice)</span>
+<span id="cb40-15"><a href="#cb40-15"></a>  <span class="fu">abline</span>(<span class="at">v =</span> sample_mean, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb40-16"><a href="#cb40-16"></a>  <span class="fu">abline</span>(<span class="at">v =</span> true_mean, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb40-17"><a href="#cb40-17"></a></span>
+<span id="cb40-18"><a href="#cb40-18"></a>  <span class="co"># 標本平均の平均と母平均の差を表示（指数表記を避ける）</span></span>
+<span id="cb40-19"><a href="#cb40-19"></a>  mean_difference <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> true_mean</span>
+<span id="cb40-20"><a href="#cb40-20"></a>  <span class="fu">cat</span>(<span class="st">"標本平均の平均と母平均の差は"</span>, <span class="fu">format</span>(mean_difference, <span class="at">scientific =</span> <span class="cn">FALSE</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb40-21"><a href="#cb40-21"></a></span>
+<span id="cb40-22"><a href="#cb40-22"></a>  <span class="co"># 元の出力オプションに戻す</span></span>
+<span id="cb40-23"><a href="#cb40-23"></a>  <span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">0</span>)</span>
+<span id="cb40-24"><a href="#cb40-24"></a>}</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>関数を使ってみる。</p>
+<div class="cell" data-hash="prezemi_2023_06_presen_cache/revealjs/unnamed-chunk-24_c36cf45ff4b3887ae045ca6c7fd57205">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># 例として100回の試行で関数を実行</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="fu">simulate_dice_toss</span>(<span class="dv">100</span>, <span class="dv">1000</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
 
 <div class="footer footer-default">
 
 </div>
-</section></section>
+</section><section id="解答-output" class="slide level2 output-location-slide"><h2>解答</h2><div class="cell output-location-slide" data-hash="prezemi_2023_06_presen_cache/revealjs/unnamed-chunk-24_c36cf45ff4b3887ae045ca6c7fd57205">
+<div class="cell-output-display">
+<p><img data-src="prezemi_2023_06_presen_files/figure-revealjs/unnamed-chunk-24-1.png" width="1344"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>標本平均の平均と母平均の差は 0.0015 </code></pre>
+</div>
+</div></section></section>
     </div>
   </div>
 

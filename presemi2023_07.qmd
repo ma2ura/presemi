@@ -7,25 +7,29 @@
 - 第1種の過誤と第2種の過誤を理解し，説明することができる。
 
 
-第6回講義の**到達度検証のための課題**は、以下の通りです。
+第7回講義の**到達度検証のための課題**は、以下の通りです。
 
-- 標本を構築し，記述統計量を計算する。
-- シミュレーションを利用して，統計量を作る事が出来る。
-- 信頼区間を計算することができる
+- 統計的仮説を立てることができる。
+- 第1種の過誤と第2種の過誤を解釈する
+
+## 準備
 
 ```{r}
-#| echo: FALSE
-library(tidyverse)
-library(ggthemes)
-mystyle <- list (#  ggplotのテーマ
-  theme_few(), # ggthemesパッケージ
-  theme(
-    text = element_text(
-      size=18,
-      family = "HiraKakuProN-W3" # ヒラギノフォント
-    )))
-set.seed(123)
+# 文字化け防止のおまじない、R 4.1.0以降
+knitr::opts_chunk$set(dev = "ragg_png")
+
+library(tidyverse) # とりあえずこれ
+library(ggthemes) # ggplot2のテーマ
+library(knitr)
+library(kableExtra)
+library(gghighlight)
+
+# テーマを設定
+theme_set(theme_few(base_size = 12))
+# 以下、ggplot2のデフォルトを変更
+update_geom_defaults("point", list(size = 3))
 ```
+
 
 第8章「統計的仮説検定」は統計学における最重要学習内容の「検定」について学びます。
 検定は、母集団の母数(パラメータ)に関する仮説を立てて、その仮説が正しいかどうかを検証する方法です。

@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.361">
+
+  <meta name="author" content="Soichi Matsuura">
+  <title>プレゼミ講義ノート - プレゼミ2023  第7回 統計的仮説検定</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #24292e;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #24292e; } /* Normal */
+    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
+    code span.an { color: #6a737d; } /* Annotation */
+    code span.at { color: #d73a49; } /* Attribute */
+    code span.bn { color: #005cc5; } /* BaseN */
+    code span.bu { color: #d73a49; } /* BuiltIn */
+    code span.cf { color: #d73a49; } /* ControlFlow */
+    code span.ch { color: #032f62; } /* Char */
+    code span.cn { color: #005cc5; } /* Constant */
+    code span.co { color: #6a737d; } /* Comment */
+    code span.cv { color: #6a737d; } /* CommentVar */
+    code span.do { color: #6a737d; } /* Documentation */
+    code span.dt { color: #d73a49; } /* DataType */
+    code span.dv { color: #005cc5; } /* DecVal */
+    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
+    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
+    code span.fl { color: #005cc5; } /* Float */
+    code span.fu { color: #6f42c1; } /* Function */
+    code span.im { color: #032f62; } /* Import */
+    code span.in { color: #6a737d; } /* Information */
+    code span.kw { color: #d73a49; } /* Keyword */
+    code span.op { color: #24292e; } /* Operator */
+    code span.ot { color: #6f42c1; } /* Other */
+    code span.pp { color: #d73a49; } /* Preprocessor */
+    code span.re { color: #6a737d; } /* RegionMarker */
+    code span.sc { color: #005cc5; } /* SpecialChar */
+    code span.ss { color: #032f62; } /* SpecialString */
+    code span.st { color: #032f62; } /* String */
+    code span.va { color: #e36209; } /* Variable */
+    code span.vs { color: #032f62; } /* VerbatimString */
+    code span.wa { color: #ff5555; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  
+  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title"><p><b>プレゼミ2023</b> <br> <span style="color: #282A36; ">第7回 統計的仮説検定</span></p></h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Soichi Matsuura 
+</div>
+</div>
+</div>
+
+</section>
+<section id="統計的仮説検定" class="title-slide slide level1 center">
+<h1>統計的仮説検定</h1>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>第7回講義の<strong>到達目標</strong></p>
+<ul>
+<li>統計的検定の基礎を理解し，説明することができる。</li>
+<li>帰無仮説と対立仮説を理解し，説明することができる。</li>
+<li>第1種の過誤と第2種の過誤を理解し，説明することができる。</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>第7回講義の<strong>到達度検証のための課題</strong></p>
+<ul>
+<li>統計的仮説を立てることができる。</li>
+<li>第1種の過誤と第2種の過誤を解釈する</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="たとえ" class="title-slide slide level1 center">
+<h1>たとえ</h1>
+
+</section>
+<section id="パン屋さんの代替わり" class="slide level2">
+<h2>パン屋さんの代替わり</h2>
+<ul>
+<li>とあるパン屋さんがある。</li>
+<li>先代経営者の麦田はじめさんは，半年前に息子にパン屋の経営を譲った。</li>
+<li>息子の代になってから，先代の頃に比べてパンの重量が減っているという噂が流れた。</li>
+<li>そこで，パンの重量が減っているかどうかを調べることにした。</li>
+</ul>
+</section>
+<section id="パンの重量の調査" class="slide level2">
+<h2>パンの重量の調査</h2>
+<ul>
+<li>まず，パン屋さんに行って，400gと表記されている食パンを1斤買い，その重量を量ると403gだった。</li>
+<li>それから30日間，食パンを1斤購入して重さを量り，表を作ったところ次のようになった。</li>
+</ul>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-1_3860e1488a69c9875d235b2a6861ac98">
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 22px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">date</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2023/1/7</td>
+<td style="text-align: right;">386.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/1/9</td>
+<td style="text-align: right;">396.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/1/10</td>
+<td style="text-align: right;">409.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/1/12</td>
+<td style="text-align: right;">384.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/1/14</td>
+<td style="text-align: right;">394.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/1/16</td>
+<td style="text-align: right;">396.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/1/18</td>
+<td style="text-align: right;">401.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/1/20</td>
+<td style="text-align: right;">392.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/1/22</td>
+<td style="text-align: right;">413.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/1/25</td>
+<td style="text-align: right;">393.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/2/3</td>
+<td style="text-align: right;">398.9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/2/5</td>
+<td style="text-align: right;">404.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/2/7</td>
+<td style="text-align: right;">391.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/2/11</td>
+<td style="text-align: right;">385.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/2/14</td>
+<td style="text-align: right;">411.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/2/16</td>
+<td style="text-align: right;">373.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/2/18</td>
+<td style="text-align: right;">403.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/2/22</td>
+<td style="text-align: right;">395.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/2/24</td>
+<td style="text-align: right;">404.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/2/26</td>
+<td style="text-align: right;">399.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/3/3</td>
+<td style="text-align: right;">414.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/3/5</td>
+<td style="text-align: right;">383.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/3/7</td>
+<td style="text-align: right;">409.8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/3/11</td>
+<td style="text-align: right;">413.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/3/14</td>
+<td style="text-align: right;">395.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/3/18</td>
+<td style="text-align: right;">372.2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/3/22</td>
+<td style="text-align: right;">399.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/3/25</td>
+<td style="text-align: right;">389.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2023/3/27</td>
+<td style="text-align: right;">402.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2023/3/29</td>
+<td style="text-align: right;">397.7</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="パンの重量の調査-1" class="slide level2">
+<h2>パンの重量の調査</h2>
+<ul>
+<li>30日間のパンの重要の平均は，397.13gだった。</li>
+<li>30日間購入した30個のパンは表記の400グラムより小さい。</li>
+<li>この事実を持って，<strong>パンの重量が減っている</strong>と主張してもよいのか？</li>
+</ul>
+<p>これが統計的仮説検定の考え方です。</p>
+</section>
+<section id="パンの重量の記述統計量" class="slide level2">
+<h2>パンの重量の記述統計量</h2>
+<ul>
+<li>パンの重量の平均値は397.13g</li>
+<li>パンの重量の標準偏差は10.92g</li>
+</ul>
+<p>ヒストグラムを描いてみると次のようになる。</p>
+
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-2-1.png" width="1344" class="r-stretch"></section>
+<section id="仮説検定" class="slide level2">
+<h2>仮説検定</h2>
+<ul>
+<li><strong>帰無仮説</strong>：標本の平均値と母集団の平均値との差は誤差の範囲内である。</li>
+<li><strong>対立仮説</strong>：標本の平均値と母集団の平均値との差は誤差の範囲を超えている。</li>
+</ul>
+<p>つまり，どれだけ標本平均が母平均から離れていると，たまたまでた差ではなく，本来異なる母集団であることを意味する。</p>
+</section>
+<section id="仮説検定パンのケース" class="slide level2">
+<h2>仮説検定：パンのケース</h2>
+<ul>
+<li>帰無仮説：<span class="math inline">\(\mu = 400\)</span>，パンの重量は400gである。</li>
+<li>対立仮説：<span class="math inline">\(\mu \not = 400\)</span>, パンの重量は400gではない。</li>
+</ul>
+<p>帰無仮説が正しく，母平均が400gであると仮定したとき，標本平均397.13gが生じる確率はどのくらいか？を考える。</p>
+</section>
+<section id="準備" class="slide level2">
+<h2>準備</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-3_24f98d31296ce1520a4e59c09165fb98">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># 文字化け防止のおまじない、R 4.1.0以降</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse) <span class="co"># とりあえずこれ</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(ggthemes) <span class="co"># ggplot2のテーマ</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(gghighlight)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># テーマを設定</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># 以下、ggplot2のデフォルトを変更</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="統計的仮説検定-1" class="slide level2">
+<h2>統計的仮説検定</h2>
+<ul>
+<li><strong>検定</strong>(test)は、母集団の母数(パラメータ)に関する仮説を立てて、その仮説が正しいかどうかを検証する方法</li>
+<li>統計学は、観察できない未知の母数をもつ母集団から標本を抽出し、標本の特徴をもとに母集団の母数を推定することが目的</li>
+<li>自分の手元にある標本が母集団の母数を推定するための有効な情報をもっているかどうかを検証することが必要</li>
+</ul>
+</section>
+<section id="統計的仮説検定の基礎" class="slide level2">
+<h2>統計的仮説検定の基礎</h2>
+<p>母集団の母数(母平均とか)を知りたいけれど観察できないので、母集団から標本(sample)を抽出して、標本の特徴をつかって母集団の母数を予想しようとすることを、<strong>統計的推定</strong>(statistical estimation)という。</p>
+<ol type="1">
+<li>仮説をたてる</li>
+<li>有意水準を設定する</li>
+<li>検定統計量を計算する</li>
+<li>検定統計量の確率分布を求めて有意水準で棄却域を決める</li>
+<li>検定統計量が棄却域に入るかどうかを確認する</li>
+</ol>
+</section>
+<section id="仮説の立て方帰無仮説と対立仮説" class="slide level2">
+<h2>仮説の立て方：帰無仮説と対立仮説</h2>
+<p>仮説の立て方は、</p>
+<ul>
+<li><strong>帰無仮説</strong>(null hypothesis)と</li>
+<li><strong>対立仮説</strong>(alternative hypothesis)</li>
+</ul>
+<p>の2つに分けられる。</p>
+<p>本当に示したい仮説(対立仮説)ではなく、その<strong>排反事象である帰無仮説</strong>を立てて、帰無仮説が棄却されることで、対立仮説が採択されるという考え方</p>
+</section>
+<section id="仮説の立て方の例" class="slide level2">
+<h2>仮説の立て方の例</h2>
+<ul>
+<li>帰無仮説<span class="math inline">\(H_0\)</span> : 利益反応係数<span class="math inline">\(ERC\)</span>はゼロである。　<span class="math inline">\(ERC =0\)</span></li>
+<li>対立仮説<span class="math inline">\(H_A\)</span> : 利益反応係数$<span class="math inline">\(ERC\)</span>はゼロではない。 <span class="math inline">\(ERC \not = 0\)</span></li>
+</ul>
+<p>「母数がある特定の値をとる」という帰無仮説を<em>否定するためには</em>、その値以外の取りうることを示せばよいだけだが， 対立仮説が<span class="math inline">\(ERC=0\)</span>であったなら、これを示すためには、<span class="math inline">\(ERC \not = 0\)</span>を示す必要があるが，これは不可能</p>
+</section>
+<section id="有意水準の設定" class="slide level2">
+<h2>有意水準の設定</h2>
+<p>どんなときに帰無仮説を棄却するのかを決める。</p>
+<ul>
+<li><strong>帰無仮説として仮定した母数の値から標本から計算した値が大きく異なる場合</strong>には、<strong>帰無仮説を棄却</strong>する、とする。</li>
+<li><strong>どのくらい</strong>帰無仮説として仮定した母数の値から離れたら帰無仮説を棄却するのかを決めるのが<strong>有意水準</strong>(significance level)</li>
+<li>有意水準は、<span class="math inline">\(\alpha\)</span>で表され、会計研究では<span class="math inline">\(0.01\)</span>、<span class="math inline">\(0.05\)</span>、<span class="math inline">\(0.10\)</span>が使われることが多い</li>
+</ul>
+</section>
+<section id="有意水準の例" class="slide level2">
+<h2>有意水準の例</h2>
+<p>母集団の平均<span class="math inline">\(\mu\)</span>が<span class="math inline">\(0\)</span>である、という帰無仮説を考える。</p>
+<ul>
+<li>対立仮説は母集団の平均<span class="math inline">\(\mu\)</span>は<span class="math inline">\(0\)</span>ではない，となる。</li>
+<li>標本サイズ100の標本から計算した標本平均の分布から計算した<span class="math inline">\(t\)</span>値が自由度<span class="math inline">\(100-1\)</span>の<span class="math inline">\(t\)</span>分布にしたがうとき、</li>
+</ul>
+<p><span class="math display">\[
+t = \frac{\bar{x} - \mu}{s/\sqrt{n}}
+\]</span></p>
+<p>となり，今<span class="math inline">\(\bar{x} = \mu\)</span>という帰無仮説を仮定しているので、<span class="math inline">\(t = 0\)</span>となる。</p>
+</section>
+<section id="有意水準の計算" class="slide level2">
+<h2>有意水準の計算</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-4_2482936300df5a0f1ed3eb611bde70bb">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># 自由度を設定</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>df <span class="ot">&lt;-</span> n<span class="dv">-1</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># データを生成</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
+<span id="cb2-7"><a href="#cb2-7"></a>data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">dt</span>(data<span class="sc">$</span>x, df) <span class="co"># 変数yを作成</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># 90%の領域の上限と下限をqt()で計算</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>ql <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, df)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>qu <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, df)</span>
+<span id="cb2-13"><a href="#cb2-13"></a></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># t分布を書く</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb2-16"><a href="#cb2-16"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> ql), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;=</span> qu), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb2-17"><a href="#cb2-17"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"t値"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"確率密度"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"90%の確率で起こるt値の範囲"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span>
+<span id="cb2-20"><a href="#cb2-20"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb2-21"><a href="#cb2-21"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">xend =</span> <span class="fl">2.2</span>,</span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-24"><a href="#cb2-24"></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
+<span id="cb2-25"><a href="#cb2-25"></a>  )</span>
+<span id="cb2-26"><a href="#cb2-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>  <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">xend =</span> <span class="sc">-</span><span class="fl">2.2</span>,</span>
+<span id="cb2-29"><a href="#cb2-29"></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb2-30"><a href="#cb2-30"></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
+<span id="cb2-31"><a href="#cb2-31"></a>  )</span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-4-1.png" width="1344" class="r-stretch"></section>
+<section id="検定統計量の計算" class="slide level2">
+<h2>検定統計量の計算 <!-- 8.1.3 ---></h2>
+<p>標本から平均などの統計量を計算し，その統計量は確率変数なので分布をもつ。</p>
+<p><span class="math display">\[
+\begin{aligned}
+t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt{n}}}
+\end{aligned}
+\]</span> を検定統計量</p>
+</section>
+<section id="rでやってみる" class="slide level2">
+<h2>Rでやってみる</h2>
+<ul>
+<li>母平均<span class="math inline">\(62\)</span>，母標準偏差<span class="math inline">\(5\)</span>の正規分布にしたがう変数<span class="math inline">\(X\)</span>を考える。</li>
+<li>母集団のサイズは10000</li>
+</ul>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-5_5fbb832ef90a9589828552ef3faad927">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>true_mean <span class="ot">&lt;-</span> <span class="dv">62</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>true_sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, true_mean, true_sd) <span class="co"># 母集団</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># 作図</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(X)) <span class="sc">+</span> <span class="fu">aes</span>(X) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"母集団"</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> true_mean, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344" class="r-stretch"></section>
+<section id="サンプリング" class="slide level2">
+<h2>サンプリング</h2>
+<p>この母集団から標本サイズ100の標本を100個とりだし、平均を100個計算</p>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-6_c85f5836618582da1445a8b66b104d33">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>trial <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">replicate</span>(trial, <span class="fu">mean</span>(<span class="fu">sample</span>(X,n)))</span>
+<span id="cb4-4"><a href="#cb4-4"></a>df_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sample_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>たとえば、ある標本の平均値は62.44となる。</p>
+<p>この平均値がどのように分布しているのかを調べるために、ヒストグラムを作成してみます。</p>
+</section>
+<section id="標本平均のヒストグラム" class="slide level2">
+<h2>標本平均のヒストグラム</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-7_750a0f3c9470f4e12b27fd5400df4995">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>g_mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>sample_mean) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"度数"</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(sample_mean), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">print</span>(g_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-7-1.png" width="1344" class="r-stretch"></section>
+<section id="標本平均のヒストグラム-1" class="slide level2">
+<h2>標本平均のヒストグラム</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-8_7bc681b363a4b85dc8daf012704ac003">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>g_m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(sample_mean), sample_mean), <span class="at">y =</span> sample_mean) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>   <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">64</span>)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    <span class="fu">ylab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"標本平均の分布"</span>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">print</span>(g_m)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"></section>
+<section id="標本平均の平均" class="slide level2">
+<h2>標本平均の平均</h2>
+<ul>
+<li>おおよそ母平均<span class="math inline">\(\mu = 62\)</span>の周りに分布していることがわかりますが，かなり離れた標本平均をもつ標本もある</li>
+<li>100個の標本で最小の標本平均となった標本の平均は60.59</li>
+<li>このように母平均62，母標準偏差5の母集団から抽出した1つの標本サイズ100の標本平均が，60.59という値になる確率を知りたい。</li>
+<li>標本平均から<span class="math inline">\(t\)</span>値を計算し，その<span class="math inline">\(t\)</span>値が自由度99の<span class="math inline">\(t\)</span>分布にしたがう確率を求めることで，この確率を求める</li>
+</ul>
+</section>
+<section id="標本平均のt値" class="slide level2">
+<h2>標本平均の<span class="math inline">\(t\)</span>値</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-9_446d2231180d223ec0a3ffc2424982da">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>t <span class="ot">&lt;-</span> (<span class="fu">min</span>(df_mean<span class="sc">$</span>sample_mean) <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">print</span>(t)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.814472</code></pre>
+</div>
+</div>
+<p>自由度99の<span class="math inline">\(t\)</span>分布の下で，となる確率は求めると，</p>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-10_642c4e72912b48636f30ffd2526d356c">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> n<span class="dv">-1</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002947437</code></pre>
+</div>
+</div>
+<p>となり，この確率は非常に小さい値となる。</p>
+</section>
+<section id="例" class="slide level2">
+<h2>例</h2>
+<p>100個の標本から計算された標本平均は母平均62からかなり離れた値となる。 それぞれの標本平均から計算された<span class="math inline">\(t\)</span>値の分布を調べる。</p>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-11_90a2119decf55bbaf72b5ba6f1dde3de">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>df_mean <span class="ot">&lt;-</span> df_mean <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">t_value =</span> (sample_mean <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n)),</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">p_value =</span> <span class="fu">pt</span>(t_value, <span class="at">df =</span> n<span class="dv">-1</span>)</span>
+<span id="cb11-5"><a href="#cb11-5"></a>  )</span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(p_value), p_value), <span class="at">y =</span> p_value) <span class="sc">+</span> <span class="co"># グラフの設定</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">fill =</span> <span class="fu">ifelse</span>(df_mean<span class="sc">$</span>p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"red"</span>, <span class="st">"black"</span>)) <span class="sc">+</span> <span class="co">#</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># 有意水準0.05</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="fu">ylab</span>(<span class="st">"p値"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"p値の分布"</span>) <span class="co"># 軸の設定</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p>となり，<span class="math inline">\(t\)</span>値が生じる確率が5%未満となる標本がいくつかあることがわかった。</p>
+</section>
+<section id="例-output" class="slide level2 output-location-slide"><h2>例</h2><div class="cell output-location-slide" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-11_90a2119decf55bbaf72b5ba6f1dde3de">
+<div class="cell-output-display">
+<p><img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344"></p>
+</div>
+</div></section><section id="統計的検定" class="slide level2">
+<h2>統計的検定</h2>
+<p>自分が集めた標本の1つから計算した標本平均、そして<span class="math inline">\(t\)</span>値が、帰無仮説が正しいと仮定した場合に、その標本平均がどのくらいの確率で生じるかを調べ、それが5%未満や1%未満であったならば、帰無仮説が正しいと考えるよりも、帰無仮説とは異なる母平均をもつ母集団から標本を集めたから、そのような標本平均が生じたと考えるほうが<strong>もっともらしい</strong>と考える。</p>
+<p>これが<strong>統計的仮説検定</strong>の考え方</p>
+</section></section>
+<section>
+<section id="統計的検定の諸問題" class="title-slide slide level1 center">
+<h1>統計的検定の諸問題</h1>
+
+</section>
+<section id="仮説検定における2種類の誤りと検出力" class="slide level2">
+<h2>仮説検定における2種類の「誤り」と検出力</h2>
+<ul>
+<li><strong>第1種の過誤</strong>(type 1 error) : 帰無仮説が正しいのに，帰無仮説を棄却してしまう誤り。 <strong>偽陽性(False Positive)ともいう。</strong></li><strong>
+</strong><li><strong><strong>第2種の過誤</strong>(type 2 error) : 帰無仮説が正しくないのに，帰無仮説を棄却しない誤り。 <stron>偽陰性</stron></strong>（False Negative）ともいう。</li>
+</ul>
+<p>容疑者が無実なのに容疑者を有罪としてしまう(えん罪)誤りを第1種の過誤といい，容疑者が犯罪者なのに，容疑者を無罪としてしまう誤りを第2種の過誤という。</p>
+</section>
+<section id="第1種の過誤" class="slide level2">
+<h2>第1種の過誤</h2>
+<ul>
+<li>第1種の過誤(えん罪)を小さくしたい。</li>
+<li>第1種の過誤の確率を$$で表し，有意水準の大きさとなる。</li>
+<li>有意水準5％というのは，ある検定統計量の標本分布の平均から離れた5％の面積に入る統計量を<strong>かけ離れた値</strong>とするかを(研究者が勝手に)決めたもの。</li>
+<li>両側検定なら，標本平均から離れた左右の2.5％の面積に入る統計量をかけ離れた値とし，ここに計算した統計量が含まれるとき，帰無仮説を棄却</li>
+</ul>
+</section>
+<section id="第1種の過誤と第2種の過誤" class="slide level2">
+<h2>第1種の過誤と第2種の過誤</h2>
+<ul>
+<li>第1種の過誤を減らすために有意水準を小さくすると，第2種の過誤が大きくなる。</li>
+<li>えん罪を減らそうとしてほとんどのケースを無罪とすると，犯罪者を逃がすことになる、ということ。</li>
+<li><strong>帰無仮説が正しいとした場合の正規分布を青色</strong>で，<strong>真の分布を赤色</strong>で示し，有意水準が両側で5％，つまり片側が2.5％となる図を書くと次のようになる。</li>
+</ul>
+</section>
+<section id="つの過誤" class="slide level2">
+<h2>2つの過誤</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-12_4db82251db4edd9a5f9bad63890b0bac">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># 正規分布の確率密度関数</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb12-4"><a href="#cb12-4"></a>}</span>
+<span id="cb12-5"><a href="#cb12-5"></a></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># パラメータの設定</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>mu2 <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="co"># 対立仮説の平均</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>alpha <span class="ot">=</span> <span class="fl">0.025</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb12-15"><a href="#cb12-15"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb12-16"><a href="#cb12-16"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb12-17"><a href="#cb12-17"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb12-23"><a href="#cb12-23"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb12-24"><a href="#cb12-24"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb12-25"><a href="#cb12-25"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb12-26"><a href="#cb12-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb12-27"><a href="#cb12-27"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
+<span id="cb12-28"><a href="#cb12-28"></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb12-29"><a href="#cb12-29"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb12-30"><a href="#cb12-30"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb12-31"><a href="#cb12-31"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb12-34"><a href="#cb12-34"></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
+<span id="cb12-35"><a href="#cb12-35"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
+<span id="cb12-36"><a href="#cb12-36"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb12-37"><a href="#cb12-37"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb12-38"><a href="#cb12-38"></a></span>
+<span id="cb12-39"><a href="#cb12-39"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb12-40"><a href="#cb12-40"></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb12-42"><a href="#cb12-42"></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb12-43"><a href="#cb12-43"></a></span>
+<span id="cb12-44"><a href="#cb12-44"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb12-45"><a href="#cb12-45"></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
+<span id="cb12-46"><a href="#cb12-46"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb12-47"><a href="#cb12-47"></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb12-48"><a href="#cb12-48"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344" class="r-stretch"></section>
+<section id="有意水準を小さくする" class="slide level2">
+<h2>有意水準を小さくする</h2>
+<p>帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤<span class="math inline">\(\alpha\)</span>を小さくする。</p>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-13_356115f0f646086c96f47c10b3bbed81">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>alpha <span class="ot">=</span> <span class="fl">0.005</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb13-5"><a href="#cb13-5"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb13-15"><a href="#cb13-15"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb13-16"><a href="#cb13-16"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb13-17"><a href="#cb13-17"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
+<span id="cb13-18"><a href="#cb13-18"></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb13-19"><a href="#cb13-19"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb13-20"><a href="#cb13-20"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb13-21"><a href="#cb13-21"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb13-24"><a href="#cb13-24"></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
+<span id="cb13-25"><a href="#cb13-25"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
+<span id="cb13-26"><a href="#cb13-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb13-27"><a href="#cb13-27"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb13-28"><a href="#cb13-28"></a></span>
+<span id="cb13-29"><a href="#cb13-29"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb13-30"><a href="#cb13-30"></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb13-32"><a href="#cb13-32"></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb13-33"><a href="#cb13-33"></a></span>
+<span id="cb13-34"><a href="#cb13-34"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb13-35"><a href="#cb13-35"></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb13-37"><a href="#cb13-37"></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-13-1.png" width="1344" class="r-stretch"></section>
+<section id="片側検定の場合" class="slide level2">
+<h2>片側検定の場合</h2>
+<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-14_137f44424b4cfe9a855c1669ce8c83d3">
+<details>
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># 正規分布の確率密度関数</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb14-4"><a href="#cb14-4"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co"># パラメータの設定</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>mu2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># 対立仮説の平均</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb14-14"><a href="#cb14-14"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb14-15"><a href="#cb14-15"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb14-16"><a href="#cb14-16"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb14-17"><a href="#cb14-17"></a></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
+<span id="cb14-23"><a href="#cb14-23"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
+<span id="cb14-25"><a href="#cb14-25"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb14-28"><a href="#cb14-28"></a>       <span class="at">title =</span> <span class="st">"Visualization of Type I and Type II Errors"</span>) <span class="sc">+</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb14-30"><a href="#cb14-30"></a>           <span class="at">label =</span> <span class="st">"Type I Error"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb14-32"><a href="#cb14-32"></a>           <span class="at">label =</span> <span class="st">"Type II Error"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb14-33"><a href="#cb14-33"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb14-34"><a href="#cb14-34"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344" class="r-stretch"><div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "コピーしました");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "コピーしました");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

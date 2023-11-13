@@ -766,3 +766,55 @@ print(g_ci2)
 ```
 標本サイズ$n$が大きくなると、信頼区間の上限と下限を計算するさいの$\sqrt{n}$が大きくなるため、信頼区間が短くなっていることがわかります。
 
+
+## 練習問題
+
+1. サイコロを作ってください。
+2. サイコロを10回降って，出た結果の平均を計算してください。
+3. 2の作業を100回繰り返して，100個の標本平均を計算してください。
+4. 100個の標本平均のヒストグラムを作成してください。
+
+
+## 解答
+
+`replicate()`関数と`sample()`関数を使って標本平均を複数作成し，`mean()`で平均を計算する。
+
+```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
+
+# 自作関数 simulate_dice_toss
+simulate_dice_toss <- function(toss = 10, trial = 100) {#引数はnで試行回数
+  # 初期設定
+  dice <- 1:6 # 1〜6の数値をdiceに代入
+
+  # replicateを使用してサイコロを投げ、平均を取得
+  result <- replicate(trial, mean(sample(dice, toss, replace = TRUE)))
+
+  # 結果のヒストグラムをプロット
+  hist(result, breaks = seq(1,6,0.10))
+
+  # サンプル平均と真の平均の垂直線をプロット
+  sample_mean <- mean(result)
+  true_mean <- sum(dice) / length(dice)
+  abline(v = sample_mean, col = "red", lwd = 2)
+  abline(v = true_mean, col = "blue", lwd = 2)
+
+  # 標本平均の平均と母平均の差を表示（指数表記を避ける）
+  mean_difference <- sample_mean - true_mean
+  cat("標本平均の平均と母平均の差は", format(mean_difference, scientific = FALSE), "\n")
+
+  # 元の出力オプションに戻す
+  options(scipen = 0)
+}
+```
+
+関数を使ってみる。
+
+```{r}
+#| output-location: slide
+
+# 例として100回の試行で関数を実行
+simulate_dice_toss(10, 100)
+```
+

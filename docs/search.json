@@ -1873,7 +1873,7 @@
     "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践",
     "title": "プレゼミ2023  第6回 統計的推定",
     "section": "標本抽出のシミュレーションの実践",
-    "text": "標本抽出のシミュレーションの実践\nrnorm(100,10,1)と書いてもよいが、後で変更するかもしれない変数は外で定義しておく。\n\nn = 100 # 標本サイズ\npmean = 10 # 母平均\npsd = 1 # 母標準偏差\nx &lt;- rnorm(n, pmean, psd) # 標本抽出\nmean(x) # 標本平均\n\n[1] 9.83942\n\n\n平均値は9.8394196で、母平均\\(10\\)と一致していない。 この差を誤差といい、母集団と標本のズレを意味する。"
+    "text": "標本抽出のシミュレーションの実践\nrnorm(100,10,1)と書いてもよいが、後で変更するかもしれない変数は外で定義しておく。\n\nn = 100 # 標本サイズ\npmean = 10 # 母平均\npsd = 1 # 母標準偏差\nx &lt;- rnorm(n, pmean, psd) # 標本抽出\nmean(x) # 標本平均\n\n[1] 10.15124\n\n\n平均値は10.1512389で、母平均\\(10\\)と一致していない。 この差を誤差といい、母集団と標本のズレを意味する。"
   },
   {
     "objectID": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1",
@@ -1901,7 +1901,7 @@
     "href": "prezemi_2023_06_presen.html#大数の法則",
     "title": "プレゼミ2023  第6回 統計的推定",
     "section": "大数の法則",
-    "text": "大数の法則\nキレイな左右対称の釣り鐘型の分布になっている。 この標本平均の分布の平均値を計算してみる。\n\nmean(result)\n\n[1] 9.999017\n\n\nとほぼ10と等しい。\nこのように，標本サイズを増やしていくと，標本平均の平均値は母平均に近づく，という法則を大数の法則(law of large numbers)"
+    "text": "大数の法則\nキレイな左右対称の釣り鐘型の分布になっている。 この標本平均の分布の平均値を計算してみる。\n\nmean(result)\n\n[1] 9.999944\n\n\nとほぼ10と等しい。\nこのように，標本サイズを増やしていくと，標本平均の平均値は母平均に近づく，という法則を大数の法則(law of large numbers)"
   },
   {
     "objectID": "prezemi_2023_06_presen.html#標本数が増えると母平均に近づく",
@@ -1922,7 +1922,7 @@
     "href": "prezemi_2023_06_presen.html#標本抽出のシミュレーションの実践-1-output",
     "title": "プレゼミ2023  第6回 統計的推定",
     "section": "標本抽出のシミュレーションの実践",
-    "text": "標本抽出のシミュレーションの実践\n\n[1] 9.994554\n\nhist(result) # 基本関数histでヒストグラム作成"
+    "text": "標本抽出のシミュレーションの実践\n\n[1] 10.00172\n\nhist(result) # 基本関数histでヒストグラム作成"
   },
   {
     "objectID": "prezemi_2023_06_presen.html#a",
@@ -2006,7 +2006,7 @@
     "href": "prezemi_2023_06_presen.html#標本平均を計算",
     "title": "プレゼミ2023  第6回 統計的推定",
     "section": "標本平均を計算",
-    "text": "標本平均を計算\n\nn = 10 # 標本サイズ\ntrial = 1000 # 試行回数\nresult &lt;- numeric(trial) # 結果を入れる空の箱\nfor (i in 1:trial) { # 以下をtrial回繰り返す\n  x &lt;- rnorm(n, 62, 5) # 標本を生成\n  result[i] &lt;- mean(x) # 標本平均を計算\n}\nmean(result) # 標本平均の平均\n\n[1] 62.00398\n\n\nヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0039834となりますが，これは母平均62に近い値になっています。"
+    "text": "標本平均を計算\n\nn = 10 # 標本サイズ\ntrial = 1000 # 試行回数\nresult &lt;- numeric(trial) # 結果を入れる空の箱\nfor (i in 1:trial) { # 以下をtrial回繰り返す\n  x &lt;- rnorm(n, 62, 5) # 標本を生成\n  result[i] &lt;- mean(x) # 標本平均を計算\n}\nmean(result) # 標本平均の平均\n\n[1] 61.99138\n\n\nヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は61.9913766となりますが，これは母平均62に近い値になっています。"
   },
   {
     "objectID": "prezemi_2023_06_presen.html#グラフ-1",
@@ -2154,5 +2154,243 @@
     "title": "プレゼミ2023  第6回 統計的推定",
     "section": "信頼区間の解釈",
     "text": "信頼区間の解釈\n標本サイズを大きくすればどうでしょうか。 \n\n標本サイズ\\(n\\)が大きくなると、信頼区間の上限と下限を計算するさいの\\(\\sqrt{n}\\)が大きくなるため、信頼区間が短くなっていることがわかります。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#練習問題",
+    "href": "prezemi_2023_06_presen.html#練習問題",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "練習問題",
+    "text": "練習問題\n\nサイコロを作ってください。\nサイコロを10回降って，出た結果の平均を計算してください。\n2の作業を100回繰り返して，100個の標本平均を計算してください。\n100個の標本平均のヒストグラムを作成してください。"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#解答",
+    "href": "prezemi_2023_06_presen.html#解答",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "解答",
+    "text": "解答\nreplicate()関数とsample()関数を使って標本平均を複数作成し，mean()で平均を計算する。\n\n\nRコード\n# 自作関数 simulate_dice_toss\nsimulate_dice_toss &lt;- function(toss = 10, trial = 100) {#引数はnで試行回数\n  # 初期設定\n  dice &lt;- 1:6 # 1〜6の数値をdiceに代入\n\n  # replicateを使用してサイコロを投げ、平均を取得\n  result &lt;- replicate(trial, mean(sample(dice, toss, replace = TRUE)))\n\n  # 結果のヒストグラムをプロット\n  hist(result, breaks = seq(1,6,0.05))\n\n  # サンプル平均と真の平均の垂直線をプロット\n  sample_mean &lt;- mean(result)\n  true_mean &lt;- sum(dice) / length(dice)\n  abline(v = sample_mean, col = \"red\", lwd = 2)\n  abline(v = true_mean, col = \"blue\", lwd = 2)\n\n  # 標本平均の平均と母平均の差を表示（指数表記を避ける）\n  mean_difference &lt;- sample_mean - true_mean\n  cat(\"標本平均の平均と母平均の差は\", format(mean_difference, scientific = FALSE), \"\\n\")\n\n  # 元の出力オプションに戻す\n  options(scipen = 0)\n}\n\n\n関数を使ってみる。\n\n# 例として100回の試行で関数を実行\nsimulate_dice_toss(100, 1000)"
+  },
+  {
+    "objectID": "prezemi_2023_06_presen.html#解答-output",
+    "href": "prezemi_2023_06_presen.html#解答-output",
+    "title": "プレゼミ2023  第6回 統計的推定",
+    "section": "解答",
+    "text": "解答\n\n\n\n\n標本平均の平均と母平均の差は 0.0015"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#準備",
+    "href": "prezemi_2023_07_presen.html#準備",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "準備",
+    "text": "準備\n\n# 文字化け防止のおまじない、R 4.1.0以降\nknitr::opts_chunk$set(dev = \"ragg_png\")\n\nlibrary(tidyverse) # とりあえずこれ\nlibrary(ggthemes) # ggplot2のテーマ\nlibrary(knitr)\nlibrary(kableExtra)\nlibrary(gghighlight)\n\n# テーマを設定\ntheme_set(theme_few(base_size = 12))\n# 以下、ggplot2のデフォルトを変更\nupdate_geom_defaults(\"point\", list(size = 3))"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#統計的仮説検定-1",
+    "href": "prezemi_2023_07_presen.html#統計的仮説検定-1",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "統計的仮説検定",
+    "text": "統計的仮説検定\n\n検定(test)は、母集団の母数(パラメータ)に関する仮説を立てて、その仮説が正しいかどうかを検証する方法\n統計学は、観察できない未知の母数をもつ母集団から標本を抽出し、標本の特徴をもとに母集団の母数を推定することが目的\n自分の手元にある標本が母集団の母数を推定するための有効な情報をもっているかどうかを検証することが必要"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#統計的仮説検定の基礎",
+    "href": "prezemi_2023_07_presen.html#統計的仮説検定の基礎",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "統計的仮説検定の基礎",
+    "text": "統計的仮説検定の基礎\n母集団の母数(母平均とか)を知りたいけれど観察できないので、母集団から標本(sample)を抽出して、標本の特徴をつかって母集団の母数を予想しようとすることを、統計的推定(statistical estimation)という。\n\n仮説をたてる\n有意水準を設定する\n検定統計量を計算する\n検定統計量の確率分布を求めて有意水準で棄却域を決める\n検定統計量が棄却域に入るかどうかを確認する"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#仮説の立て方帰無仮説と対立仮説",
+    "href": "prezemi_2023_07_presen.html#仮説の立て方帰無仮説と対立仮説",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "仮説の立て方：帰無仮説と対立仮説",
+    "text": "仮説の立て方：帰無仮説と対立仮説\n仮説の立て方は、\n\n帰無仮説(null hypothesis)と\n対立仮説(alternative hypothesis)\n\nの2つに分けられる。\n本当に示したい仮説(対立仮説)ではなく、その排反事象である帰無仮説を立てて、帰無仮説が棄却されることで、対立仮説が採択されるという考え方"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#仮説の立て方の例",
+    "href": "prezemi_2023_07_presen.html#仮説の立て方の例",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "仮説の立て方の例",
+    "text": "仮説の立て方の例\n\n帰無仮説\\(H_0\\) : 利益反応係数\\(ERC\\)はゼロである。　\\(ERC =0\\)\n対立仮説\\(H_A\\) : 利益反応係数$\\(ERC\\)はゼロではない。 \\(ERC \\not = 0\\)\n\n「母数がある特定の値をとる」という帰無仮説を否定するためには、その値以外の取りうることを示せばよいだけだが， 対立仮説が\\(ERC=0\\)であったなら、これを示すためには、\\(ERC \\not = 0\\)を示す必要があるが，これは不可能"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#統計的検定の諸問題",
+    "href": "prezemi_2023_07_presen.html#統計的検定の諸問題",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "統計的検定の諸問題",
+    "text": "統計的検定の諸問題\n仮説検定における2種類の「誤り」と検出力\n\n第1種の過誤(type 1 error) : 帰無仮説が正しいのに，帰無仮説を棄却してしまう誤り。偽陽性(False Positive)とも呼ばれる。\n第2種の過誤(type 2 error) : 帰無仮説が正しくないのに，帰無仮説を棄却しない誤り。偽陰性（False Negative）とも呼ばれる。\n\n第1種の過誤の例として，よく挙げられる犯罪容疑者の例で説明すると，容疑者が無実なのに，容疑者を有罪としてしまう(えん罪)誤りを第1種の過誤といい，容疑者が犯罪者なのに，容疑者を無罪としてしまう誤りを第2種の過誤といいます。\n第1種の過誤(えん罪)を小さくしたいとします。 この確率を$$で表し，実はこれが有意水準の大きさとなります。 有意水準5％というのは，ある検定統計量の標本分布の平均から離れた5％の面積に入る統計量をかけ離れた値とするかを(研究者が勝手に)決めたものです。 両側検定なら，標本平均から離れた左右の2.5％の面積に入る統計量をかけ離れた値とし，ここに計算した統計量が含まれるとき，帰無仮説を棄却します。\n第1種の過誤と減らすために有意水準を小さくすると，だい2種の過誤が大きくなります。 当然ですが，えん罪を減らそうとしてほとんどのケースを無罪とすると，犯罪者を逃がすことになる，というロジックと同じです。\n帰無仮説が正しいとした場合の正規分布を青色で，真の分布を赤色で示し，有意水準が両側で5％，つまり片側が2.5％となる図を書くとこんな感じです。\n\n# 正規分布の確率密度関数\ndnorm_with_mean_sd &lt;- function(x, mean = 0, sd = 1) {\n  sqrt(1/(2*pi*sd^2))*exp(-((x - mean)^2)/(2*sd^2))\n}\n\n# パラメータの設定\nmu1 &lt;- 0   # 帰無仮説の平均\nsd1 &lt;- 1   # 帰無仮説の標準偏差\nmu2 &lt;- 1.5 # 対立仮説の平均\nsd2 &lt;- 1   # 対立仮説の標準偏差\nalpha = 0.025\n\n# サンプルデータを生成\nx &lt;- seq(-5, 5, by = 0.01)\ndf &lt;- data.frame(x = x,\n                 dnorm1 = dnorm_with_mean_sd(x, mean = mu1, sd = sd1),\n                 dnorm2 = dnorm_with_mean_sd(x, mean = mu2, sd = sd2))\n\n# ggplotを使って描画\ng &lt;- ggplot(df, aes(x = x)) +\n  geom_line(aes(y = dnorm1), color = \"blue\") +\n  geom_line(aes(y = dnorm2), color = \"red\")\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &lt; qnorm(alpha, mu1, sd1)),\n  aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(alpha, mu1, sd1) & x &lt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm2), fill = \"red\", alpha = 0.2) +\n  theme_minimal() +\n  labs(x = \"Value\", y = \"Density\",\n       title = \"両側検定における第1種の過誤と第2種の過誤\")\ng &lt;- g + geom_vline(xintercept = qnorm(1-alpha), linetype=\"dotted\")\ng &lt;- g + geom_vline(xintercept = mu1, color = \"darkblue\")\ng &lt;- g + geom_vline(xintercept = mu2, color = \"darkred\")\n\ng &lt;- g + annotate(\"text\", x = mu1 + 2.5, y = max(df$dnorm1) / 6,\n           label = \"第1種の過誤\", color = \"darkblue\", family = \"HiraKakuProN-W3\") +\n  annotate(\"text\", x = mu2 - 0.5, y = max(df$dnorm2) / 6,\n           label = \"第2種の過誤\", color = \"darkred\", family = \"HiraKakuProN-W3\")\n\ng &lt;- g + annotate(\"text\", x = mu1 - 2, y = max(df$dnorm1)-0.1,\n                  label = \"帰無仮説下の分布\", color = \"blue\", family = \"HiraKakuProN-W3\" ) +\n  annotate(\"text\", x = mu2 + 1.5, y = max(df$dnorm2) - 0.1,\n           label = \"真の分布\", color = \"red\", family = \"HiraKakuProN-W3\")\nprint(g)\n\n\n\n\n帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤\\(\\alpha\\)を小さくすると，こうなります。\n\n\n\n\n\n片側検定の場合なら，こんな感じです。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#有意水準の設定",
+    "href": "prezemi_2023_07_presen.html#有意水準の設定",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "有意水準の設定",
+    "text": "有意水準の設定\nどんなときに帰無仮説を棄却するのかを決める。\n\n帰無仮説として仮定した母数の値から標本から計算した値が大きく異なる場合には、帰無仮説を棄却する、とする。\nどのくらい帰無仮説として仮定した母数の値から離れたら帰無仮説を棄却するのかを決めるのが有意水準(significance level)\n有意水準は、\\(\\alpha\\)で表され、会計研究では\\(0.01\\)、\\(0.05\\)、\\(0.10\\)が使われることが多い"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#有意水準の例",
+    "href": "prezemi_2023_07_presen.html#有意水準の例",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "有意水準の例",
+    "text": "有意水準の例\n母集団の平均\\(\\mu\\)が\\(0\\)である、という帰無仮説を考える。\n\n対立仮説は母集団の平均\\(\\mu\\)は\\(0\\)ではない，となる。\n標本サイズ100の標本から計算した標本平均の分布から計算した\\(t\\)値が自由度\\(100-1\\)の\\(t\\)分布にしたがうとき、\n\n\\[\nt = \\frac{\\bar{x} - \\mu}{s/\\sqrt{n}}\n\\]\nとなり，今\\(\\bar{x} = \\mu\\)という帰無仮説を仮定しているので、\\(t = 0\\)となる。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#有意水準の計算",
+    "href": "prezemi_2023_07_presen.html#有意水準の計算",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "有意水準の計算",
+    "text": "有意水準の計算\n\n\nRコード\n# 自由度を設定\nn = 100\ndf &lt;- n-1\n\n# データを生成\ndata &lt;- data.frame(x = seq(-5, 5, by = 0.01))\ndata$y &lt;- dt(data$x, df) # 変数yを作成\n\n\n# 90%の領域の上限と下限をqt()で計算\nql &lt;- qt(0.025, df)\nqu &lt;- qt(0.975, df)\n\n# t分布を書く\ng &lt;- ggplot(data) + aes(x = x, y = y) + geom_line()\ng &lt;- g + geom_area(data = data %&gt;% filter(x &lt;= ql), fill = \"blue\", alpha = 0.3) + geom_area(data = data %&gt;% filter(x &gt;= qu), fill = \"blue\", alpha = 0.3)\ng &lt;- g + geom_vline(xintercept = 0, color = \"red\")\ng &lt;- g + xlab(\"t値\") + ylab(\"確率密度\") + labs(title = \"90%の確率で起こるt値の範囲\")\ng &lt;- g + geom_hline(yintercept = 0)\ng &lt;- g + annotate(geom = \"text\", x = 2.4, y = 0.08, label = \"α/2\", size = 10)\ng &lt;- g + annotate(# 始点や終点などを指定して矢印を追加\n  geom = \"segment\", x = 2.4, xend = 2.2,\n  y = 0.07, yend = 0.04, color = \"black\", size = 0.5,\n  arrow = arrow(length = unit(0.3, \"cm\"))\n  )\ng &lt;- g + annotate(geom = \"text\", x = -2.4, y = 0.08, label = \"α/2\", size = 10) +\n  annotate(# 始点や終点などを指定して矢印を追加\n  geom = \"segment\", x = -2.4, xend = -2.2,\n  y = 0.07, yend = 0.04, color = \"black\", size = 0.5,\n  arrow = arrow(length = unit(0.3, \"cm\"))\n  )\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#検定統計量の計算",
+    "href": "prezemi_2023_07_presen.html#検定統計量の計算",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "検定統計量の計算 ",
+    "text": "検定統計量の計算 \n標本から平均などの統計量を計算し，その統計量は確率変数なので分布をもつ。\n\\[\n\\begin{aligned}\nt = \\frac{\\bar{x} - \\mu}{SE} = \\displaystyle \\frac{\\bar{x} - \\mu}{\\frac{u}{\\sqrt{n}}}\n\\end{aligned}\n\\] を検定統計量"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#rでやってみる",
+    "href": "prezemi_2023_07_presen.html#rでやってみる",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "Rでやってみる",
+    "text": "Rでやってみる\n\n母平均\\(62\\)，母標準偏差\\(5\\)の正規分布にしたがう変数\\(X\\)を考える。\n母集団のサイズは10000\n\n\n\nRコード\nN &lt;- 10000\ntrue_mean &lt;- 62\ntrue_sd &lt;- 5\nX &lt;- rnorm(N, true_mean, true_sd) # 母集団\n# 作図\nggplot(data.frame(X)) + aes(X) +\n  geom_histogram() + ggtitle(\"母集団\") +\n  geom_vline(xintercept = true_mean, color = \"red\")"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#サンプリング",
+    "href": "prezemi_2023_07_presen.html#サンプリング",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "サンプリング",
+    "text": "サンプリング\nこの母集団から標本サイズ100の標本を100個とりだし、平均を100個計算\n\nn &lt;- 100 # 標本サイズ\ntrial &lt;- 100\nsample_mean &lt;- replicate(trial, mean(sample(X,n)))\ndf_mean &lt;- data.frame(sample_mean)\n\nたとえば、ある標本の平均値は62.44となる。\nこの平均値がどのように分布しているのかを調べるために、ヒストグラムを作成してみます。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#標本平均のヒストグラム",
+    "href": "prezemi_2023_07_presen.html#標本平均のヒストグラム",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "標本平均のヒストグラム",
+    "text": "標本平均のヒストグラム\n\n\nRコード\ng_mean &lt;- ggplot(df_mean) + aes(x=sample_mean) +\n  geom_histogram() + xlab(\"標本平均\") + ylab(\"度数\") +\n  geom_vline(xintercept = mean(sample_mean), color = \"blue\") +\n  geom_vline(xintercept = 62, color=\"red\")\nprint(g_mean)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#標本平均のヒストグラム-1",
+    "href": "prezemi_2023_07_presen.html#標本平均のヒストグラム-1",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "標本平均のヒストグラム",
+    "text": "標本平均のヒストグラム\n\n\nRコード\ng_m &lt;- ggplot(df_mean) +\n    aes(x = reorder(seq_along(sample_mean), sample_mean), y = sample_mean) +\n    geom_bar(stat=\"identity\") + geom_hline(yintercept = 62, color = \"red\") +\n   coord_cartesian(ylim = c(60, 64)) +\n    ylab(\"標本平均\") + xlab(\"標本ID\") + ggtitle(\"標本平均の分布\")\nprint(g_m)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#標本平均の平均",
+    "href": "prezemi_2023_07_presen.html#標本平均の平均",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "標本平均の平均",
+    "text": "標本平均の平均\n\nおおよそ母平均\\(\\mu = 62\\)の周りに分布していることがわかりますが，かなり離れた標本平均をもつ標本もある\n100個の標本で最小の標本平均となった標本の平均は60.59\nこのように母平均62，母標準偏差5の母集団から抽出した1つの標本サイズ100の標本平均が，60.59という値になる確率を知りたい。\n標本平均から\\(t\\)値を計算し，その\\(t\\)値が自由度99の\\(t\\)分布にしたがう確率を求めることで，この確率を求める"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#仮説検定における2種類の誤りと検出力",
+    "href": "prezemi_2023_07_presen.html#仮説検定における2種類の誤りと検出力",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "仮説検定における2種類の「誤り」と検出力",
+    "text": "仮説検定における2種類の「誤り」と検出力\n\n第1種の過誤(type 1 error) : 帰無仮説が正しいのに，帰無仮説を棄却してしまう誤り。 偽陽性(False Positive)ともいう。\n第2種の過誤(type 2 error) : 帰無仮説が正しくないのに，帰無仮説を棄却しない誤り。 偽陰性（False Negative）ともいう。\n\n容疑者が無実なのに容疑者を有罪としてしまう(えん罪)誤りを第1種の過誤といい，容疑者が犯罪者なのに，容疑者を無罪としてしまう誤りを第2種の過誤という。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#第1種の過誤",
+    "href": "prezemi_2023_07_presen.html#第1種の過誤",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "第1種の過誤",
+    "text": "第1種の過誤\n\n第1種の過誤(えん罪)を小さくしたい。\n第1種の過誤の確率を$$で表し，有意水準の大きさとなる。\n有意水準5％というのは，ある検定統計量の標本分布の平均から離れた5％の面積に入る統計量をかけ離れた値とするかを(研究者が勝手に)決めたもの。\n両側検定なら，標本平均から離れた左右の2.5％の面積に入る統計量をかけ離れた値とし，ここに計算した統計量が含まれるとき，帰無仮説を棄却"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#第1種の過誤と第2種の過誤",
+    "href": "prezemi_2023_07_presen.html#第1種の過誤と第2種の過誤",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "第1種の過誤と第2種の過誤",
+    "text": "第1種の過誤と第2種の過誤\n\n第1種の過誤を減らすために有意水準を小さくすると，第2種の過誤が大きくなる。\nえん罪を減らそうとしてほとんどのケースを無罪とすると，犯罪者を逃がすことになる、ということ。\n帰無仮説が正しいとした場合の正規分布を青色で，真の分布を赤色で示し，有意水準が両側で5％，つまり片側が2.5％となる図を書くと次のようになる。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#つの過誤",
+    "href": "prezemi_2023_07_presen.html#つの過誤",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "2つの過誤",
+    "text": "2つの過誤\n\n\nRコード\n# 正規分布の確率密度関数\ndnorm_with_mean_sd &lt;- function(x, mean = 0, sd = 1) {\n  sqrt(1/(2*pi*sd^2))*exp(-((x - mean)^2)/(2*sd^2))\n}\n\n# パラメータの設定\nmu1 &lt;- 0   # 帰無仮説の平均\nsd1 &lt;- 1   # 帰無仮説の標準偏差\nmu2 &lt;- 1.5 # 対立仮説の平均\nsd2 &lt;- 1   # 対立仮説の標準偏差\nalpha = 0.025\n\n# サンプルデータを生成\nx &lt;- seq(-5, 5, by = 0.01)\ndf &lt;- data.frame(x = x,\n                 dnorm1 = dnorm_with_mean_sd(x, mean = mu1, sd = sd1),\n                 dnorm2 = dnorm_with_mean_sd(x, mean = mu2, sd = sd2))\n\n# ggplotを使って描画\ng &lt;- ggplot(df, aes(x = x)) +\n  geom_line(aes(y = dnorm1), color = \"blue\") +\n  geom_line(aes(y = dnorm2), color = \"red\")\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &lt; qnorm(alpha, mu1, sd1)),\n  aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(alpha, mu1, sd1) & x &lt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm2), fill = \"red\", alpha = 0.2) +\n  theme_minimal() +\n  labs(x = \"Value\", y = \"Density\",\n       title = \"両側検定における第1種の過誤と第2種の過誤\")\ng &lt;- g + geom_vline(xintercept = qnorm(1-alpha), linetype=\"dotted\")\ng &lt;- g + geom_vline(xintercept = mu1, color = \"darkblue\")\ng &lt;- g + geom_vline(xintercept = mu2, color = \"darkred\")\n\ng &lt;- g + annotate(\"text\", x = mu1 + 2.5, y = max(df$dnorm1) / 6,\n           label = \"第1種の過誤\", color = \"darkblue\", family = \"HiraKakuProN-W3\") +\n  annotate(\"text\", x = mu2 - 0.5, y = max(df$dnorm2) / 6,\n           label = \"第2種の過誤\", color = \"darkred\", family = \"HiraKakuProN-W3\")\n\ng &lt;- g + annotate(\"text\", x = mu1 - 2, y = max(df$dnorm1)-0.1,\n                  label = \"帰無仮説下の分布\", color = \"blue\", family = \"HiraKakuProN-W3\" ) +\n  annotate(\"text\", x = mu2 + 1.5, y = max(df$dnorm2) - 0.1,\n           label = \"真の分布\", color = \"red\", family = \"HiraKakuProN-W3\")\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#有意水準を小さくする",
+    "href": "prezemi_2023_07_presen.html#有意水準を小さくする",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "有意水準を小さくする",
+    "text": "有意水準を小さくする\n帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤\\(\\alpha\\)を小さくする。\n\n\nRコード\nalpha = 0.005\n\n# サンプルデータを生成\nx &lt;- seq(-5, 5, by = 0.01)\ndf &lt;- data.frame(x = x,\n                 dnorm1 = dnorm_with_mean_sd(x, mean = mu1, sd = sd1),\n                 dnorm2 = dnorm_with_mean_sd(x, mean = mu2, sd = sd2))\n\n# ggplotを使って描画\ng &lt;- ggplot(df, aes(x = x)) +\n  geom_line(aes(y = dnorm1), color = \"blue\") +\n  geom_line(aes(y = dnorm2), color = \"red\")\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &lt; qnorm(alpha, mu1, sd1)),\n  aes(y = dnorm1), fill = \"blue\", alpha = 0.2)\ng &lt;- g + geom_area(\n  data = subset(df, x &gt; qnorm(alpha, mu1, sd1) & x &lt; qnorm(1-alpha, mu1, sd1)),\n            aes(y = dnorm2), fill = \"red\", alpha = 0.2) +\n  theme_minimal() +\n  labs(x = \"Value\", y = \"Density\",\n       title = \"両側検定における第1種の過誤と第2種の過誤\")\ng &lt;- g + geom_vline(xintercept = qnorm(1-alpha), linetype=\"dotted\")\ng &lt;- g + geom_vline(xintercept = mu1, color = \"darkblue\")\ng &lt;- g + geom_vline(xintercept = mu2, color = \"darkred\")\n\ng &lt;- g + annotate(\"text\", x = mu1 + 2.5, y = max(df$dnorm1) / 6,\n           label = \"第1種の過誤\", color = \"darkblue\", family = \"HiraKakuProN-W3\") +\n  annotate(\"text\", x = mu2 - 0.5, y = max(df$dnorm2) / 6,\n           label = \"第2種の過誤\", color = \"darkred\", family = \"HiraKakuProN-W3\")\n\ng &lt;- g + annotate(\"text\", x = mu1 - 2, y = max(df$dnorm1)-0.1,\n                  label = \"帰無仮説下の分布\", color = \"blue\", family = \"HiraKakuProN-W3\" ) +\n  annotate(\"text\", x = mu2 + 1.5, y = max(df$dnorm2) - 0.1,\n           label = \"真の分布\", color = \"red\", family = \"HiraKakuProN-W3\")\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#片側検定の場合",
+    "href": "prezemi_2023_07_presen.html#片側検定の場合",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "片側検定の場合",
+    "text": "片側検定の場合\n\n\nRコード\n# 正規分布の確率密度関数\ndnorm_with_mean_sd &lt;- function(x, mean = 0, sd = 1) {\n  sqrt(1/(2*pi*sd^2))*exp(-((x - mean)^2)/(2*sd^2))\n}\n\n# パラメータの設定\nmu1 &lt;- 0   # 帰無仮説の平均\nsd1 &lt;- 1   # 帰無仮説の標準偏差\nmu2 &lt;- 1 # 対立仮説の平均\nsd2 &lt;- 1   # 対立仮説の標準偏差\n\n# サンプルデータを生成\nx &lt;- seq(-5, 5, by = 0.01)\ndf &lt;- data.frame(x = x,\n                 dnorm1 = dnorm_with_mean_sd(x, mean = mu1, sd = sd1),\n                 dnorm2 = dnorm_with_mean_sd(x, mean = mu2, sd = sd2))\n\n# ggplotを使って描画\ng &lt;- ggplot(df, aes(x = x)) +\n  geom_line(aes(y = dnorm1), color = \"blue\") +\n  geom_line(aes(y = dnorm2), color = \"red\") +\n  geom_area(data = subset(df, x &lt; qnorm(0.05, mean = mu1, sd = sd1)),\n            aes(y = dnorm1), fill = \"blue\", alpha = 0.2) +\n  geom_area(data = subset(df, x &gt; qnorm(0.05, mean = mu1, sd = sd1)),\n            aes(y = dnorm2), fill = \"red\", alpha = 0.2) +\n  theme_minimal() +\n  labs(x = \"Value\", y = \"Density\",\n       title = \"Visualization of Type I and Type II Errors\") +\n  annotate(\"text\", x = mu1 - 2.5, y = max(df$dnorm1) / 3,\n           label = \"Type I Error\", color = \"blue\") +\n  annotate(\"text\", x = mu2 + 2.5, y = max(df$dnorm2) / 3,\n           label = \"Type II Error\", color = \"red\")\ng &lt;- g + geom_vline(xintercept = mu1, color = \"darkblue\")\ng &lt;- g + geom_vline(xintercept = mu2, color = \"darkred\")\nprint(g)"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#パン屋さんの代替わり",
+    "href": "prezemi_2023_07_presen.html#パン屋さんの代替わり",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "パン屋さんの代替わり",
+    "text": "パン屋さんの代替わり\n\nとあるパン屋さんがある。\n先代経営者の麦田はじめさんは，半年前に息子にパン屋の経営を譲った。\n息子の代になってから，先代の頃に比べてパンの重量が減っているという噂が流れた。\nそこで，パンの重量が減っているかどうかを調べることにした。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#パンの重量の調査",
+    "href": "prezemi_2023_07_presen.html#パンの重量の調査",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "パンの重量の調査",
+    "text": "パンの重量の調査\n\nまず，パン屋さんに行って，400gと表記されている食パンを1斤買い，その重量を量ると403gだった。\nそれから30日間，食パンを1斤購入して重さを量り，表を作ったところ次のようになった。\n\n\n\n\n\n\ndate\nweight\n\n\n\n\n2023/1/7\n386.7\n\n\n2023/1/9\n396.7\n\n\n2023/1/10\n409.8\n\n\n2023/1/12\n384.5\n\n\n2023/1/14\n394.3\n\n\n2023/1/16\n396.2\n\n\n2023/1/18\n401.6\n\n\n2023/1/20\n392.8\n\n\n2023/1/22\n413.5\n\n\n2023/1/25\n393.7\n\n\n2023/2/3\n398.9\n\n\n2023/2/5\n404.1\n\n\n2023/2/7\n391.3\n\n\n2023/2/11\n385.3\n\n\n2023/2/14\n411.6\n\n\n2023/2/16\n373.5\n\n\n2023/2/18\n403.2\n\n\n2023/2/22\n395.3\n\n\n2023/2/24\n404.4\n\n\n2023/2/26\n399.0\n\n\n2023/3/3\n414.4\n\n\n2023/3/5\n383.8\n\n\n2023/3/7\n409.8\n\n\n2023/3/11\n413.2\n\n\n2023/3/14\n395.0\n\n\n2023/3/18\n372.2\n\n\n2023/3/22\n399.4\n\n\n2023/3/25\n389.5\n\n\n2023/3/27\n402.4\n\n\n2023/3/29\n397.7"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#パンの重量の調査-1",
+    "href": "prezemi_2023_07_presen.html#パンの重量の調査-1",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "パンの重量の調査",
+    "text": "パンの重量の調査\n\n30日間のパンの重要の平均は，397.13gだった。\n30日間購入した30個のパンは表記の400グラムより小さい。\nこの事実を持って，パンの重量が減っていると主張してもよいのか？\n\nこれが統計的仮説検定の考え方です。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#パンの重量の記述統計量",
+    "href": "prezemi_2023_07_presen.html#パンの重量の記述統計量",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "パンの重量の記述統計量",
+    "text": "パンの重量の記述統計量\n\nパンの重量の平均値は397.13g\nパンの重量の標準偏差は10.92g\n\nヒストグラムを描いてみると次のようになる。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#仮説検定",
+    "href": "prezemi_2023_07_presen.html#仮説検定",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "仮説検定",
+    "text": "仮説検定\n\n帰無仮説：標本の平均値と母集団の平均値との差は誤差の範囲内である。\n対立仮説：標本の平均値と母集団の平均値との差は誤差の範囲を超えている。\n\nつまり，どれだけ標本平均が母平均から離れていると，たまたまでた差ではなく，本来異なる母集団であることを意味する。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#仮説検定パンのケース",
+    "href": "prezemi_2023_07_presen.html#仮説検定パンのケース",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "仮説検定：パンのケース",
+    "text": "仮説検定：パンのケース\n\n帰無仮説：\\(\\mu = 400\\)，パンの重量は400gである。\n対立仮説：\\(\\mu \\not = 400\\), パンの重量は400gではない。\n\n帰無仮説が正しく，母平均が400gであると仮定したとき，標本平均397.13gが生じる確率はどのくらいか？を考える。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#標本平均のt値",
+    "href": "prezemi_2023_07_presen.html#標本平均のt値",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "標本平均の\\(t\\)値",
+    "text": "標本平均の\\(t\\)値\n\nt &lt;- (min(df_mean$sample_mean) - 62) / (5 / sqrt(n))\nprint(t)\n\n[1] -2.814472\n\n\n自由度99の\\(t\\)分布の下で，となる確率は求めると，\n\npt(t, df = n-1)\n\n[1] 0.002947437\n\n\nとなり，この確率は非常に小さい値となる。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#例",
+    "href": "prezemi_2023_07_presen.html#例",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "例",
+    "text": "例\n100個の標本から計算された標本平均は母平均62からかなり離れた値となる。 それぞれの標本平均から計算された\\(t\\)値の分布を調べる。\n\ndf_mean &lt;- df_mean %&gt;%\n  mutate(\n    t_value = (sample_mean - 62) / (5 / sqrt(n)),\n    p_value = pt(t_value, df = n-1)\n  )\nggplot(df_mean) +\n    aes(x = reorder(seq_along(p_value), p_value), y = p_value) + # グラフの設定\n    geom_bar(stat=\"identity\", fill = ifelse(df_mean$p_value &lt; 0.05, \"red\", \"black\")) + #\n    geom_hline(yintercept = 0.05, color = \"red\") + # 有意水準0.05\n    ylab(\"p値\") + xlab(\"標本ID\") + ggtitle(\"p値の分布\") # 軸の設定\n\n\nとなり，\\(t\\)値が生じる確率が5%未満となる標本がいくつかあることがわかった。"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#統計的検定",
+    "href": "prezemi_2023_07_presen.html#統計的検定",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "統計的検定",
+    "text": "統計的検定\n自分が集めた標本の1つから計算した標本平均、そして\\(t\\)値が、帰無仮説が正しいと仮定した場合に、その標本平均がどのくらいの確率で生じるかを調べ、それが5%未満や1%未満であったならば、帰無仮説が正しいと考えるよりも、帰無仮説とは異なる母平均をもつ母集団から標本を集めたから、そのような標本平均が生じたと考えるほうがもっともらしいと考える。\nこれが統計的仮説検定の考え方"
+  },
+  {
+    "objectID": "prezemi_2023_07_presen.html#例-output",
+    "href": "prezemi_2023_07_presen.html#例-output",
+    "title": "プレゼミ2023  第7回 統計的仮説検定",
+    "section": "例",
+    "text": "例"
   }
 ]
