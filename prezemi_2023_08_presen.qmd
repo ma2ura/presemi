@@ -1,0 +1,291 @@
+---
+title: |
+  <b>プレゼミ2023</b> </br>
+  <span style="color: #282A36; ">第8回 分析をしてみよう</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    chalkboard: true
+    df_print: paged
+# highlight-style: "dracula"
+highlight-style: github
+execute:
+  echo: true
+  warning: false
+---
+
+
+# データを調理する
+
+::: columns
+:::{.column width="50%"}
+
+第8回講義の**到達目標**
+
+- データを読み込むことができる。
+- データを操作し，分析しやすい形にすることができる。
+- 分析をするための関数を作成することができる。
+
+:::
+:::{.column width="50%"}
+
+第7回講義の**到達度検証のための課題**
+
+- 製造業と非製造業で利益率が違うかどうかの検定を行う。
+- 広告宣伝費と売上高の相関関係を分析する。
+- 一番ROEが高い会社を探す。
+
+:::
+:::
+
+## 準備
+
+```{r}
+# 文字化け防止のおまじない、R 4.1.0以降
+knitr::opts_chunk$set(dev = "ragg_png")
+
+library(tidyverse) # とりあえずこれ
+library(ggthemes) # ggplot2のテーマ
+library(knitr) # 作表
+library(kableExtra) # 作表の拡張
+library(scales)
+# テーマを設定
+theme_set(theme_few(base_size = 12))
+# 以下、ggplot2のデフォルトを変更
+update_geom_defaults("point", list(size = 3))
+```
+
+
+## データの読み込み
+
+作業ディレクトリを確認・設定する。
+```{r eval = FALSE}
+getwd()
+setwd("hoge")
+```
+
+
+## データの読み込み
+
+```{r}
+df <- read_csv("https://so-ichi.com/presemi08_2018.csv")
+glimpse(df)
+```
+
+
+## 自作関数を作ってみる。
+
+関数を作るには，`function()`を使う。
+例えば，変数`y`と`x`を足す，という関数を作るとする。
+
+```{r}
+add <- function(y, x){
+  y + x
+}
+
+add(1,4)
+```
+
+## 平均と分散を計算する関数
+
+- データの個数は，ベクトルなら`length()`，データフレームなら`nrow()`
+- 合計は`sum()`，`sum()`を使わないなら`for()`
+- `function()`を使って関数を作る。
+
+```{r}
+#| eval: FALSE
+# 書き方
+
+myfunc <- function(x){
+  # 何かしらの処理
+  # y = f(x)
+  return(y)
+}
+```
+
+## 合計を計算
+
+```{r}
+x <- c(1:10) # 1〜10までの整数
+sum(x) # 合計
+```
+
+`for`ループを使うなら，
+
+```{r}
+s <- 0 # 初期値
+for(i in 1:length(x)){ # ループ
+    s <- s + x[i] # 合計
+  }
+print(s) # 結果
+```
+
+## 平均を計算
+
+```{r}
+s <- 0 # 初期値
+for(i in 1:length(x)){ # ループ
+    s <- s + x[i] # 合計
+  }
+sumx <- s / length(x)
+print(sumx)
+```
+
+基本関数`mean()`を使えば，
+
+```{r}
+mean(x) # 一撃
+```
+
+## 自作関数を作ってみる。
+
+関数を使うには，`関数名(引数)`とする。引数は複数でも良い。
+ある産業のある項目の平均，分散，標準偏差を求める関数を作る。
+
+```{r}
+mystat <- function(chu, item) {
+  df |>
+    filter(中分類 == chu) |>
+    summarise(
+      平均 = mean(!!sym(item), na.rm = TRUE),
+      分散 = var(!!sym(item), na.rm = TRUE),
+      標準偏差 = sd(!!sym(item), na.rm = TRUE)
+    ) |>
+    kable() |> kable_styling(font_size = 30)
+}
+```
+
+## 自作関数を使う。
+
+```{r}
+mystat("精密機器", "売上高") # ""で囲まないとエラー
+```
+
+## 折れ線グラフを作る関数
+
+特定企業の，特定項目のデータから折れ線グラフを作る関数`myline()`を作る。
+
+```{r}
+myline <- function(name, item) {
+  df |>
+    filter(企業名称 == name) |>
+    select(年度, !!sym(item)) |>
+    ggplot(aes(x = 年度, y = !!sym(item), group = 1)) +
+    geom_line() + geom_point() +
+    labs(title = paste(name, item, sep = " "), x = "年度", y = item) +
+    scale_y_continuous(labels = label_number(scale = 1/100, suffix = '億')) + # 単位
+    theme_economist(base_family = "HiraKakuProN-W3") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
+}
+```
+
+
+## 折れ線グラフを作る関数
+
+```{r}
+myline("トヨタ自動車", "売上高")
+```
+
+## 日産も作ってみる。
+
+```{r}
+myline("日産自動車", "売上高")
+```
+
+## 並べてみる
+
+```{r}
+g1 <- myline("トヨタ自動車", "売上高")
+g2 <- myline("日産自動車", "売上高")
+library(patchwork)
+g1/g2
+```
+
+## ヒストグラムを作る関数
+
+```{r}
+myhist <- function(df, chu, item) {
+  df |>
+    filter(中分類 == chu) |>
+    ggplot(aes(x = !!sym(item))) +
+    geom_histogram(bins = 20) +
+    labs(title = paste(chu, item, sep = " "), x = item, y = "頻度") +
+    theme_economist(base_family = "HiraKakuProN-W3")
+}
+```
+
+## ヒストグラムを作る関数
+
+```{r}
+myhist(df, "精密機器", "売上高")
+```
+
+# 検定してみる。
+
+## 製造業 vs 非製造業
+
+製造業と非製造業で売上高利益率が違うかどうかの検定を行う。
+いきなり計算するのではなく，まずはデータを見てみる。
+
+```{r}
+summary(df$売上高)
+```
+売上高ゼロはまずいので，あとで除外する。
+
+## 製造業 vs 非製造業
+
+```{r}
+summary(df$親会社利益)
+```
+赤字企業も利益率を計算する上で邪魔なので，除外する。
+
+
+
+## 製造業 vs 非製造業
+
+```{r}
+df <- df |>
+  filter(売上高 > 0, 親会社利益 > 0) |>
+  mutate(
+    売上高利益率 = 親会社利益 / 売上高
+  )
+df_mean <- df |>
+  group_by(大分類) |>
+  summarise(
+    平均利益率 = round(mean(売上高利益率, na.rm = TRUE),digits = 3),
+  )
+df_mean |> kable() |> kable_styling(font_size = 30)
+```
+
+## 比較
+
+大分類`1`は製造業で，利益率が`r df_mean[2,1]`，非製造業は`r df_mean[2,2]`であることから，サービス業の方が売上高利益率が高いことがわかる。
+
+この差は，
+
+- 同じ母集団から，偶然の差？
+- 違う母集団から，当然の差？
+
+t検定してみる。
+
+## 製造業 vs 非製造業
+
+```{r}
+t.test(df$売上高利益率[df$大分類 == 1], df$売上高利益率[df$大分類 == 2])
+```
+
+## ヒストグラムを重ねてみる。
+
+```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
+
+df |>
+  ggplot(aes(x = 売上高利益率,y = ..density.., group = 大分類, fill = 大分類)) +
+  geom_histogram(binwidth = 0.01, alpha = 0.5) + xlim(0,0.5) +
+  labs(title = "売上高利益率のヒストグラム", x = "売上高利益率", y = "頻度") +
+  theme_economist(base_family = "HiraKakuProN-W3")
+```
