@@ -118,12 +118,12 @@ $presentation-heading-font-weight: 900;
 $code-block-font-size: 0.8em;
 
 // code line highlight はしたいが、line number は欲しくないので CSS で消す
-.reveal pre code {
-  margin-left: -1.5em;
-}
-.reveal pre code span a {
-  color: transparent;
-}
+// .reveal pre code {
+//   margin-left: -1.5em;
+// }
+// .reveal pre code span a {
+//   color: transparent;
+// }
 
 bold {
 	font-style: normal;

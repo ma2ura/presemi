@@ -1,7 +1,7 @@
 ---
 title: |
   <b>プレゼミ2023</b> </br>
-  <span style="color: #282A36; ">第8回 分析をしてみよう</span>
+  <span style="color: #282A36; ">第8回 分析してみよう</span>
 author: "Soichi Matsuura"
 format:
   revealjs:
@@ -10,6 +10,7 @@ format:
     slide-number: true
     chalkboard: true
     df_print: paged
+    code-line-numbers: false
 # highlight-style: "dracula"
 highlight-style: github
 execute:
@@ -43,15 +44,16 @@ execute:
 
 ## 準備
 
+必要なパッケージと設定。無ければインストールする。
+
 ```{r}
 # 文字化け防止のおまじない、R 4.1.0以降
 knitr::opts_chunk$set(dev = "ragg_png")
-
 library(tidyverse) # とりあえずこれ
 library(ggthemes) # ggplot2のテーマ
 library(knitr) # 作表
 library(kableExtra) # 作表の拡張
-library(scales)
+library(scales) # 軸の単位を制御
 # テーマを設定
 theme_set(theme_few(base_size = 12))
 # 以下、ggplot2のデフォルトを変更
@@ -67,94 +69,133 @@ getwd()
 setwd("hoge")
 ```
 
+任意のフォルダを作業ディレクトリとして指定しておく。
+
 
 ## データの読み込み
 
+今回は松浦のウェブサイトからデータを読み込ませる。
+
 ```{r}
-df <- read_csv("https://so-ichi.com/presemi08_2018.csv")
-glimpse(df)
+df <- read_csv("https://so-ichi.com/presemi08_full.csv")
+rmarkdown::paged_table(df, options = list(rows.print = 5, cols.print = 3))
 ```
 
+小さなデータを読み込むときは、`presemi08_full.csv`のところを`presemi08_2018.csv`に変える。
 
-## 自作関数を作ってみる。
+# 独自の関数
+
+## 自作関数を作る練習
 
 関数を作るには，`function()`を使う。
-例えば，変数`y`と`x`を足す，という関数を作るとする。
+引数は，`function(引数1, 引数2, ...)`とする。
+
+```{r}
+#| eval: FALSE
+myfunc <- function(x){ # 関数名
+  # 何かしらの処理
+  # y = f(x)
+  return(y) # 返り値
+}
+```
+
+## 足し算をする関数
+
+変数`y`と`x`を足す，という関数`add`を作るとする。
 
 ```{r}
 add <- function(y, x){
   y + x
 }
+```
 
+使ってみる。
+
+```{r}
+#| output-location: column
 add(1,4)
 ```
 
-## 平均と分散を計算する関数
+## 分散を計算する関数
 
 - データの個数は，ベクトルなら`length()`，データフレームなら`nrow()`
-- 合計は`sum()`，`sum()`を使わないなら`for()`
-- `function()`を使って関数を作る。
+- 合計は`sum()`，あるいは`for()`で力尽くで計算
 
 ```{r}
-#| eval: FALSE
-# 書き方
-
-myfunc <- function(x){
-  # 何かしらの処理
-  # y = f(x)
-  return(y)
+myvar <- function(x) { # 自作関数 myvar
+  n = length(x) # データの個数
+  m = mean(x) # 平均
+  v = (sum((x - m)^2)) / n # 分散の定義
+  return(v) # 返り値
 }
 ```
-
-## 合計を計算
-
+使ってみる。
 ```{r}
+#| output-location: column
+myvar(c(1,2,3,4,5))
+```
+
+## 合計を計算する方法
+
+1から10までの整数の合計を計算する。
+`sum()`関数を使えば簡単。
+```{r}
+#| output-location: column
 x <- c(1:10) # 1〜10までの整数
 sum(x) # 合計
 ```
 
-`for`ループを使うなら，
+でもあえて`for`ループをとすると、
 
 ```{r}
 s <- 0 # 初期値
 for(i in 1:length(x)){ # ループ
     s <- s + x[i] # 合計
-  }
+}
 print(s) # 結果
 ```
 
-## 平均を計算
+## 平均を計算する関数
 
 ```{r}
-s <- 0 # 初期値
-for(i in 1:length(x)){ # ループ
-    s <- s + x[i] # 合計
+mymean <- function(x){
+  n = length(x) # データの個数
+  s = 0 # 初期値
+  for(i in 1:length(x)){ # ループ
+    s <- s + x[i] # 合計をsに足していく
   }
-sumx <- s / length(x)
-print(sumx)
+  sumx <- s / n # 平均
+  return(sumx) # 返り値
+}
 ```
-
-基本関数`mean()`を使えば，
+使ってみる。
 
 ```{r}
+#| output-location: column
+mymean(x)
+```
+基本関数`mean()`を使えば簡単に計算できる。
+
+```{r}
+#| output-location: column
 mean(x) # 一撃
 ```
 
-## 自作関数を作ってみる。
+## tidyverseで自作関数
 
-関数を使うには，`関数名(引数)`とする。引数は複数でも良い。
-ある産業のある項目の平均，分散，標準偏差を求める関数を作る。
+`tidyverse`で自作関数を作る場合、注意が必要である。
+例として、平均、分散、標準偏差を計算する関数`mystat()`を作る。
 
 ```{r}
-mystat <- function(chu, item) {
-  df |>
-    filter(中分類 == chu) |>
-    summarise(
-      平均 = mean(!!sym(item), na.rm = TRUE),
-      分散 = var(!!sym(item), na.rm = TRUE),
-      標準偏差 = sd(!!sym(item), na.rm = TRUE)
+mystat <- function(chu, item) { # 引数をchuとitem
+  df |> # データフレーム
+    filter(中分類 == chu) |> # 指定した中分類を抽出
+    summarise( # 統計量を計算
+      平均     = mean(!!sym(item)), # 平均
+      中央値   = median(!!sym(item)), # 分散
+      標準偏差 = sd(!!sym(item)) # 標準偏差
     ) |>
-    kable() |> kable_styling(font_size = 30)
+    kable() |> kable_styling(font_size = 30) # 作表
 }
 ```
 
@@ -163,6 +204,43 @@ mystat <- function(chu, item) {
 ```{r}
 mystat("精密機器", "売上高") # ""で囲まないとエラー
 ```
+
+平均値が中央値よりかなり大きいため，大きな値のため分布が右に歪んでいることが分かる。
+
+## 注意点
+
+`!!sym()`は何をしているのか？
+
+- `sym()`は、**文字列をシンボル（変数名）に変換すること**
+- プログラム的に変数名を操作し、データフレームにおける列の操作を動的に実行可能
+- `!!`は非標準評価(NSE)によりシンボルを実際の列として評価させている。
+
+まぁ細かいことなので，今は理解できなくてもよいです。
+
+## 例1
+
+たとえば，`tidyverse`の各種パッケージで，外からの文字列を使う場合
+
+```{r}
+seimitsu <- "精密機器"
+df |> filter(中分類 == seimitsu) |>
+rmarkdown::paged_table(options = list(rows.print = 4, cols.print = 4))
+```
+
+これはOK
+
+## 例2
+
+```{r}
+#| eval: false
+sales <- "売上高"
+df |>
+  ggplot() + aes(x = sales) +
+  geom_histogram()
+```
+
+これはエラーがでる。
+`sales`に"売上高"を代入する際にエラーになるため，`ggplot()`に渡すことができない。
 
 ## 折れ線グラフを作る関数
 
@@ -198,29 +276,33 @@ myline("日産自動車", "売上高")
 ## 並べてみる
 
 ```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
 g1 <- myline("トヨタ自動車", "売上高")
 g2 <- myline("日産自動車", "売上高")
 library(patchwork)
-g1/g2
+# y軸をそろえる
+(g1 + g2) * ylim(0, 40000000)
 ```
 
 ## ヒストグラムを作る関数
 
 ```{r}
-myhist <- function(df, chu, item) {
-  df |>
-    filter(中分類 == chu) |>
-    ggplot(aes(x = !!sym(item))) +
-    geom_histogram(bins = 20) +
-    labs(title = paste(chu, item, sep = " "), x = item, y = "頻度") +
-    theme_economist(base_family = "HiraKakuProN-W3")
+myhist <- function(chu, item) { # 産業と項目を指定
+df_chu <- df |>
+    filter(中分類 == chu) # 中分類を指定
+df_chu |> ggplot() + aes(x = !!sym(item)) + # ggplot
+      geom_histogram(bins = 20) + # ヒストグラム
+      labs(
+        title = paste(chu, item, sep = " "), # タイトル
+        x = item, y = "頻度") # 軸ラベル
 }
 ```
 
 ## ヒストグラムを作る関数
 
 ```{r}
-myhist(df, "精密機器", "売上高")
+myhist("精密機器", "売上高")
 ```
 
 # 検定してみる。
@@ -240,6 +322,7 @@ summary(df$売上高)
 ```{r}
 summary(df$親会社利益)
 ```
+
 赤字企業も利益率を計算する上で邪魔なので，除外する。
 
 
@@ -247,16 +330,14 @@ summary(df$親会社利益)
 ## 製造業 vs 非製造業
 
 ```{r}
-df <- df |>
-  filter(売上高 > 0, 親会社利益 > 0) |>
-  mutate(
-    売上高利益率 = 親会社利益 / 売上高
-  )
-df_mean <- df |>
+df_test <- df |>
+  filter(売上高 > 0, 親会社利益 > 0) |> # 異常値を除外
+  mutate( 売上高利益率 = 親会社利益 / 売上高 ) # 利益率計算
+df_mean <- df_test |>
   group_by(大分類) |>
   summarise(
-    平均利益率 = round(mean(売上高利益率, na.rm = TRUE),digits = 3),
-  )
+    平均利益率 = round(mean(売上高利益率, na.rm = TRUE), digits = 3)
+    )
 df_mean |> kable() |> kable_styling(font_size = 30)
 ```
 
@@ -269,12 +350,15 @@ df_mean |> kable() |> kable_styling(font_size = 30)
 - 同じ母集団から，偶然の差？
 - 違う母集団から，当然の差？
 
-t検定してみる。
+$t$検定してみる。
 
 ## 製造業 vs 非製造業
 
 ```{r}
-t.test(df$売上高利益率[df$大分類 == 1], df$売上高利益率[df$大分類 == 2])
+t.test(#
+  df_test$売上高利益率[df_test$大分類 == 1], # var1
+  df_test$売上高利益率[df_test$大分類 == 2], # var2
+  )
 ```
 
 ## ヒストグラムを重ねてみる。
@@ -282,10 +366,86 @@ t.test(df$売上高利益率[df$大分類 == 1], df$売上高利益率[df$大分
 ```{r}
 #| code-fold: true
 #| code-summary: "Rコード"
+seizou <- mean(df_test$売上高利益率[df_test$大分類 == 1])
+hisei <- mean(df_test$売上高利益率[df_test$大分類 == 2])
+df_test |>
+  ggplot(aes(x = 売上高利益率,y = ..density.., # 軸
+  group = factor(大分類), fill = factor(大分類))) + # グループ
+  geom_histogram(binwidth = 0.01, alpha = 0.5) + # ヒストグラム
+  xlim(0, 0.5) + # x軸の範囲
+  geom_vline( # 平均値の直線を引く
+    xintercept = c(seizou, hisei), # 平均値
+    linetype = "dashed",
+    color = c("red", "blue")) +
+  scale_y_continuous(expand = c(0,0)) + # 余白を削除
+  labs(title = "売上高利益率のヒストグラム", x = "売上高利益率", y = "頻度")
+```
 
-df |>
-  ggplot(aes(x = 売上高利益率,y = ..density.., group = 大分類, fill = 大分類)) +
-  geom_histogram(binwidth = 0.01, alpha = 0.5) + xlim(0,0.5) +
-  labs(title = "売上高利益率のヒストグラム", x = "売上高利益率", y = "頻度") +
-  theme_economist(base_family = "HiraKakuProN-W3")
+# 2変数の分析
+
+## 相関係数
+
+2つの連続変数の**線形関係**を示す指標として，**相関係数**(correlation coefficient)がある。
+$x$と$y$の2変数の(ピアソンの積率)相関係数は以下のように定義される。
+$$
+r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}} = \frac{\mathrm{cov}(x,y)}{\sigma_x \times \sigma _y}
+$$
+
+## 相関係数の種類
+
+相関係数にはいくつか種類があり，代表的なものとして，
+
+- **ピアソンの積率相関係数** : パラメトリック
+- **スピアマンの順位相関係数** : ノンパラメトリック
+
+通常「相関係数」というとピアソンの積率相関係数を意味する。
+Rで計算するなら，`cor()`を用いる。
+引数として連続変数を2つとる。
+
+## 相関係数の計算
+
+```{r}
+#| output-location: column
+df_test |> with(cor(売上高, 広告宣伝費))
+```
+
+散布図も書いてみる。
+
+```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
+
+df_test |>
+  filter(広告宣伝費 > 0) |>
+  ggplot() + aes(x = 広告宣伝費, y = 売上高) +
+  geom_point()
+```
+
+## 変数変換
+
+右下にデータが集まりすぎているので，対数変換してみる。
+
+```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
+df_test |>
+  filter(広告宣伝費 > 0) |>
+  ggplot() + aes(x = log(広告宣伝費), y = log(売上高)) +
+  geom_point()
+```
+
+右肩上がりの関係が見えてきます。
+
+## 前期の値
+
+当期の広告宣伝費より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかも。
+
+```{r}
+#| code-fold: true
+#| code-summary: "Rコード"
+df_test |>
+  filter(広告宣伝費 > 0) |>
+  ggplot() + aes(x = log(lag(広告宣伝費)), y = log(売上高)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
 ```

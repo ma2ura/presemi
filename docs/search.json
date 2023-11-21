@@ -2396,30 +2396,30 @@
   {
     "objectID": "prezemi_2023_08_presen.html#準備",
     "href": "prezemi_2023_08_presen.html#準備",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "準備",
-    "text": "準備\n\n# 文字化け防止のおまじない、R 4.1.0以降\nknitr::opts_chunk$set(dev = \"ragg_png\")\n\nlibrary(tidyverse) # とりあえずこれ\nlibrary(ggthemes) # ggplot2のテーマ\nlibrary(knitr) # 作表\nlibrary(kableExtra) # 作表の拡張\nlibrary(scales)\n# テーマを設定\ntheme_set(theme_few(base_size = 12))\n# 以下、ggplot2のデフォルトを変更\nupdate_geom_defaults(\"point\", list(size = 3))"
+    "text": "準備\n必要なパッケージと設定。無ければインストールする。\n\n# 文字化け防止のおまじない、R 4.1.0以降\nknitr::opts_chunk$set(dev = \"ragg_png\")\nlibrary(tidyverse) # とりあえずこれ\nlibrary(ggthemes) # ggplot2のテーマ\nlibrary(knitr) # 作表\nlibrary(kableExtra) # 作表の拡張\nlibrary(scales) # 軸の単位を制御\n# テーマを設定\ntheme_set(theme_few(base_size = 12))\n# 以下、ggplot2のデフォルトを変更\nupdate_geom_defaults(\"point\", list(size = 3))"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#データの読み込み",
     "href": "prezemi_2023_08_presen.html#データの読み込み",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "データの読み込み",
-    "text": "データの読み込み\n作業ディレクトリを確認・設定する。\n\ngetwd()\nsetwd(\"hoge\")"
+    "text": "データの読み込み\n作業ディレクトリを確認・設定する。\n\ngetwd()\nsetwd(\"hoge\")\n\n任意のフォルダを作業ディレクトリとして指定しておく。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#データの読み込み-1",
     "href": "prezemi_2023_08_presen.html#データの読み込み-1",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "データの読み込み",
-    "text": "データの読み込み\n\ndf &lt;- read_csv(\"https://so-ichi.com/presemi08_2018.csv\")\nglimpse(df)\n\nRows: 21,427\nColumns: 30\n$ 日経会社コード                 &lt;chr&gt; \"0000191\", \"0000191\", \"0000191\", \"00001…\n$ 企業名称                       &lt;chr&gt; \"ニップン\", \"ニップン\", \"ニップン\", \"ニ…\n$ 決算種別                       &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…\n$ 連結基準                       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ 決算月数                       &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,…\n$ 上場コード                     &lt;dbl&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,…\n$ 連結子会社数                   &lt;dbl&gt; 47, 47, 48, 49, 45, 42, 47, 48, 72, 73,…\n$ 流動資産                       &lt;dbl&gt; 105143, 118330, 114534, 117693, 130768,…\n$ 資産合計                       &lt;dbl&gt; 272166, 293392, 290428, 307813, 325869,…\n$ 流動負債                       &lt;dbl&gt; 77675, 76100, 74078, 69544, 74842, 7861…\n$ 負債合計                       &lt;dbl&gt; 115261, 138405, 131847, 138749, 147171,…\n$ 純資産                         &lt;dbl&gt; 156905, 154986, 158581, 169063, 178697,…\n$ 売上高                         &lt;dbl&gt; 323495, 335399, 344839, 288324, 321317,…\n$ 売上原価                       &lt;dbl&gt; 234823, 243017, 247264, 218660, 246390,…\n$ 販管費                         &lt;dbl&gt; 78611, 81159, 86473, 59293, 63644, 6778…\n$ 親会社利益                     &lt;dbl&gt; 7651, 8455, 8941, 8636, 9327, 10260, 21…\n$ 税金等調整前当期純利益         &lt;dbl&gt; 11486, 12305, 13386, 13049, 13568, 1471…\n$ 営業活動によるキャッシュフロー &lt;dbl&gt; 15217, 17063, 15532, 14804, 11975, 1505…\n$ 投資活動によるキャッシュフロー &lt;dbl&gt; -11941, -14614, -14130, -12585, -10103,…\n$ 財務活動によるキャッシュフロー &lt;dbl&gt; 2824, 7135, -759, 2553, -4278, -8402, -…\n$ 現金及び現金同等物の期末残高   &lt;dbl&gt; 20556, 30085, 31012, 35320, 31215, 3315…\n$ 広告宣伝費                     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …\n$ 従業員数                       &lt;dbl&gt; 19571, 19943, 20700, 20960, 22263, 2293…\n$ 期末従業員数                   &lt;dbl&gt; 3696, 3687, 3737, 3880, 3775, 3848, 654…\n$ 発行済株式数                   &lt;dbl&gt; 82524009, 78824009, 78824009, 78824009,…\n$ 年度                           &lt;dbl&gt; 2018, 2019, 2020, 2021, 2022, 2023, 201…\n$ 決算月                         &lt;chr&gt; \"03\", \"03\", \"03\", \"03\", \"03\", \"03\", \"03…\n$ 大分類                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ 中分類                         &lt;chr&gt; \"食品\", \"食品\", \"食品\", \"食品\", \"食品\",…\n$ 小分類                         &lt;chr&gt; \"003\", \"003\", \"003\", \"003\", \"003\", \"003…"
+    "text": "データの読み込み\n今回は松浦のウェブサイトからデータを読み込ませる。\n\ndf &lt;- read_csv(\"https://so-ichi.com/presemi08_full.csv\")\nrmarkdown::paged_table(df, options = list(rows.print = 5, cols.print = 3))\n\n\n\n  \n\n\n\n小さなデータを読み込むときは、presemi08_full.csvのところをpresemi08_2018.csvに変える。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#自作関数を作ってみる",
     "href": "prezemi_2023_08_presen.html#自作関数を作ってみる",
     "title": "プレゼミ2023  第8回 分析をしてみよう",
     "section": "自作関数を作ってみる。",
-    "text": "自作関数を作ってみる。\n関数を作るには，function()を使う。 例えば，変数yとxを足す，という関数を作るとする。\n\nadd &lt;- function(y, x){\n  y + x\n}\n\nadd(1,4)\n\n[1] 5"
+    "text": "自作関数を作ってみる。\n関数を使うには，関数名(引数)とする。引数は複数でも良い。 ある産業のある項目の平均，分散，標準偏差を求める関数を作る。\n\nmystat &lt;- function(chu, item) {\n  df |&gt;\n    filter(中分類 == chu) |&gt;\n    summarise(\n      平均 = mean(!!sym(item), na.rm = TRUE),\n      分散 = var(!!sym(item), na.rm = TRUE),\n      標準偏差 = sd(!!sym(item), na.rm = TRUE)\n    ) |&gt;\n    kable() |&gt; kable_styling(font_size = 30)\n}"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#自作関数を作ってみる-1",
@@ -2431,37 +2431,37 @@
   {
     "objectID": "prezemi_2023_08_presen.html#自作関数を使う",
     "href": "prezemi_2023_08_presen.html#自作関数を使う",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "自作関数を使う。",
-    "text": "自作関数を使う。\n\nmystat(\"精密機器\", \"売上高\") # \"\"で囲まないとエラー\n\n\n\n\n平均\n分散\n標準偏差\n\n\n\n\n136743\n54112659167\n232621.3"
+    "text": "自作関数を使う。\n\nmystat(\"精密機器\", \"売上高\") # \"\"で囲まないとエラー\n\n\n\n\n平均\n中央値\n標準偏差\n\n\n\n\n115180.1\n22468.5\n216197.7\n\n\n\n\n\n\n\n平均値が中央値よりかなり大きいため，大きな値のため分布が右に歪んでいることが分かる。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#折れ線グラフを作る関数",
     "href": "prezemi_2023_08_presen.html#折れ線グラフを作る関数",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "折れ線グラフを作る関数",
     "text": "折れ線グラフを作る関数\n特定企業の，特定項目のデータから折れ線グラフを作る関数myline()を作る。\n\nmyline &lt;- function(name, item) {\n  df |&gt;\n    filter(企業名称 == name) |&gt;\n    select(年度, !!sym(item)) |&gt;\n    ggplot(aes(x = 年度, y = !!sym(item), group = 1)) +\n    geom_line() + geom_point() +\n    labs(title = paste(name, item, sep = \" \"), x = \"年度\", y = item) +\n    scale_y_continuous(labels = label_number(scale = 1/100, suffix = '億')) + # 単位\n    theme_economist(base_family = \"HiraKakuProN-W3\") +\n    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))\n}"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#折れ線グラフを作る関数-1",
     "href": "prezemi_2023_08_presen.html#折れ線グラフを作る関数-1",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "折れ線グラフを作る関数",
     "text": "折れ線グラフを作る関数\n\nmyline(\"トヨタ自動車\", \"売上高\")"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#ヒストグラムを作る関数",
     "href": "prezemi_2023_08_presen.html#ヒストグラムを作る関数",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "ヒストグラムを作る関数",
-    "text": "ヒストグラムを作る関数\n\nmyhist &lt;- function(df, chu, item) {\n  df |&gt;\n    filter(中分類 == chu) |&gt;\n    ggplot(aes(x = !!sym(item))) +\n    geom_histogram(bins = 20) +\n    labs(title = paste(chu, item, sep = \" \"), x = item, y = \"頻度\") +\n    theme_economist(base_family = \"HiraKakuProN-W3\")\n}"
+    "text": "ヒストグラムを作る関数\n\nmyhist &lt;- function(chu, item) { # 産業と項目を指定\ndf_chu &lt;- df |&gt;\n    filter(中分類 == chu) # 中分類を指定\ndf_chu |&gt; ggplot() + aes(x = !!sym(item)) + # ggplot\n      geom_histogram(bins = 20) + # ヒストグラム\n      labs(\n        title = paste(chu, item, sep = \" \"), # タイトル\n        x = item, y = \"頻度\") # 軸ラベル\n}"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#ヒストグラムを作る関数-1",
     "href": "prezemi_2023_08_presen.html#ヒストグラムを作る関数-1",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "ヒストグラムを作る関数",
-    "text": "ヒストグラムを作る関数\n\nmyhist(df, \"精密機器\", \"売上高\")"
+    "text": "ヒストグラムを作る関数\n\nmyhist(\"精密機器\", \"売上高\")"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#すべての産業でヒストグラムを作る",
@@ -2501,64 +2501,169 @@
   {
     "objectID": "prezemi_2023_08_presen.html#日産も作ってみる",
     "href": "prezemi_2023_08_presen.html#日産も作ってみる",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "日産も作ってみる。",
     "text": "日産も作ってみる。\n\nmyline(\"日産自動車\", \"売上高\")"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#並べてみる",
     "href": "prezemi_2023_08_presen.html#並べてみる",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "並べてみる",
-    "text": "並べてみる\n\ng1 &lt;- myline(\"トヨタ自動車\", \"売上高\")\ng2 &lt;- myline(\"日産自動車\", \"売上高\")\nlibrary(patchwork)\ng1/g2"
+    "text": "並べてみる\n\n\nRコード\ng1 &lt;- myline(\"トヨタ自動車\", \"売上高\")\ng2 &lt;- myline(\"日産自動車\", \"売上高\")\nlibrary(patchwork)\n# y軸をそろえる\n(g1 + g2) * ylim(0, 40000000)"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#製造業-vs-非製造業",
     "href": "prezemi_2023_08_presen.html#製造業-vs-非製造業",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "製造業 vs 非製造業",
-    "text": "製造業 vs 非製造業\n製造業と非製造業で売上高利益率が違うかどうかの検定を行う。 いきなり計算するのではなく，まずはデータを見てみる。\n\nsummary(df$売上高)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n       0     7290    24356   209424    93960 37154298 \n\n\n売上高ゼロはまずいので，あとで除外する。"
+    "text": "製造業 vs 非製造業\n製造業と非製造業で売上高利益率が違うかどうかの検定を行う。 いきなり計算するのではなく，まずはデータを見てみる。\n\nsummary(df$売上高)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n       0     8134    25930   190128    91764 37154298 \n\n\n売上高ゼロはまずいので，あとで除外する。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#製造業-vs-非製造業-1",
     "href": "prezemi_2023_08_presen.html#製造業-vs-非製造業-1",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "製造業 vs 非製造業",
-    "text": "製造業 vs 非製造業\n\nsummary(df$親会社利益)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n-1708029      172      877    10059     3835  4987962 \n\n\n赤字企業も利益率を計算する上で邪魔なので，除外する。"
+    "text": "製造業 vs 非製造業\n\nsummary(df$親会社利益)\n\n    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. \n-2008074      117      618     6485     2677  4987962 \n\n\n赤字企業も利益率を計算する上で邪魔なので，除外する。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#製造業-vs-非製造業-2",
     "href": "prezemi_2023_08_presen.html#製造業-vs-非製造業-2",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "製造業 vs 非製造業",
-    "text": "製造業 vs 非製造業\n\ndf &lt;- df |&gt;\n  filter(売上高 &gt; 0, 親会社利益 &gt; 0) |&gt;\n  mutate(\n    売上高利益率 = 親会社利益 / 売上高\n  )\ndf_mean &lt;- df |&gt;\n  group_by(大分類) |&gt;\n  summarise(\n    平均利益率 = round(mean(売上高利益率, na.rm = TRUE),digits = 3),\n  )\ndf_mean |&gt; kable() |&gt; kable_styling(font_size = 30)\n\n\n\n\n大分類\n平均利益率\n\n\n\n\n1\n0.060\n\n\n2\n0.086"
+    "text": "製造業 vs 非製造業\n\ndf_test &lt;- df |&gt;\n  filter(売上高 &gt; 0, 親会社利益 &gt; 0) |&gt; # 異常値を除外\n  mutate( 売上高利益率 = 親会社利益 / 売上高 ) # 利益率計算\ndf_mean &lt;- df_test |&gt;\n  group_by(大分類) |&gt;\n  summarise(\n    平均利益率 = round(mean(売上高利益率, na.rm = TRUE), digits = 3)\n    )\ndf_mean |&gt; kable() |&gt; kable_styling(font_size = 30)\n\n\n\n\n大分類\n平均利益率\n\n\n\n\n1\n0.053\n\n\n2\n0.068"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#製造業-vs-非製造業-3",
     "href": "prezemi_2023_08_presen.html#製造業-vs-非製造業-3",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "製造業 vs 非製造業",
-    "text": "製造業 vs 非製造業\n\nt.test(df$売上高利益率[df$大分類 == 1], df$売上高利益率[df$大分類 == 2])\n\n\n    Welch Two Sample t-test\n\ndata:  df$売上高利益率[df$大分類 == 1] and df$売上高利益率[df$大分類 == 2]\nt = -19.215, df = 16723, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.02933700 -0.02390572\nsample estimates:\n mean of x  mean of y \n0.05957743 0.08619879"
+    "text": "製造業 vs 非製造業\n\nt.test(#\n  df_test$売上高利益率[df_test$大分類 == 1], # var1\n  df_test$売上高利益率[df_test$大分類 == 2], # var2\n  )\n\n\n    Welch Two Sample t-test\n\ndata:  df_test$売上高利益率[df_test$大分類 == 1] and df_test$売上高利益率[df_test$大分類 == 2]\nt = -6.8123, df = 32435, p-value = 9.769e-12\nalternative hypothesis: true difference in means is not equal to 0\n95 percent confidence interval:\n -0.01916433 -0.01060046\nsample estimates:\n mean of x  mean of y \n0.05290615 0.06778855"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#比較",
     "href": "prezemi_2023_08_presen.html#比較",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "比較",
-    "text": "比較\n大分類1は製造業で，利益率が2，非製造業は0.086であることから，サービス業の方が売上高利益率が高いことがわかる。\nこの差は，\n\n同じ母集団から，偶然の差？\n違う母集団から，当然の差？\n\nt検定してみる。"
+    "text": "比較\n大分類1は製造業で，利益率が2，非製造業は0.068であることから，サービス業の方が売上高利益率が高いことがわかる。\nこの差は，\n\n同じ母集団から，偶然の差？\n違う母集団から，当然の差？\n\n\\(t\\)検定してみる。"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#ヒストグラムを重ねてみる",
     "href": "prezemi_2023_08_presen.html#ヒストグラムを重ねてみる",
-    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "title": "プレゼミ2023  第8回 分析してみよう",
     "section": "ヒストグラムを重ねてみる。",
-    "text": "ヒストグラムを重ねてみる。\n\n\nRコード\ndf |&gt;\n  ggplot(aes(x = 売上高利益率,y = ..density.., group = 大分類, fill = 大分類)) +\n  geom_histogram(binwidth = 0.01, alpha = 0.5) + xlim(0,0.5) +\n  labs(title = \"売上高利益率のヒストグラム\", x = \"売上高利益率\", y = \"頻度\") +\n  theme_economist(base_family = \"HiraKakuProN-W3\")"
+    "text": "ヒストグラムを重ねてみる。\n\n\nRコード\nseizou &lt;- mean(df_test$売上高利益率[df_test$大分類 == 1])\nhisei &lt;- mean(df_test$売上高利益率[df_test$大分類 == 2])\ndf_test |&gt;\n  ggplot(aes(x = 売上高利益率,y = ..density.., # 軸\n  group = factor(大分類), fill = factor(大分類))) + # グループ\n  geom_histogram(binwidth = 0.01, alpha = 0.5) + # ヒストグラム\n  xlim(0, 0.5) + # x軸の範囲\n  geom_vline( # 平均値の直線を引く\n    xintercept = c(seizou, hisei), # 平均値\n    linetype = \"dashed\",\n    color = c(\"red\", \"blue\")) +\n  scale_y_continuous(expand = c(0,0)) + # 余白を削除\n  labs(title = \"売上高利益率のヒストグラム\", x = \"売上高利益率\", y = \"頻度\")"
   },
   {
     "objectID": "prezemi_2023_08_presen.html#平均と分散を計算する関数",
     "href": "prezemi_2023_08_presen.html#平均と分散を計算する関数",
     "title": "プレゼミ2023  第8回 分析をしてみよう",
     "section": "平均と分散を計算する関数",
-    "text": "平均と分散を計算する関数\n\nデータの個数は，ベクトルならlength()，データフレームならnrow()\n合計はsum()，sum()を使わないならfor()\nfunction()を使って関数を作る。\n\n\n# 書き方\n\nmyfunc &lt;- function(x){\n  # 何かしらの処理\n  # y = f(x)\n  return(y)\n}"
+    "text": "平均と分散を計算する関数\n\nデータの個数は，ベクトルならlength()，データフレームならnrow()\n合計はsum()，sum()を使わないならfor()\nfunction()を使って関数を作る。"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#自作関数を作る練習",
+    "href": "prezemi_2023_08_presen.html#自作関数を作る練習",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "自作関数を作る練習",
+    "text": "自作関数を作る練習\n関数を作るには，function()を使う。 引数は，function(引数1, 引数2, ...)とする。\n\nmyfunc &lt;- function(x){ # 関数名\n  # 何かしらの処理\n  # y = f(x)\n  return(y) # 返り値\n}"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#足し算をする関数",
+    "href": "prezemi_2023_08_presen.html#足し算をする関数",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "足し算をする関数",
+    "text": "足し算をする関数\n変数yとxを足す，という関数addを作るとする。\n\nadd &lt;- function(y, x){\n  y + x\n}\n\n使ってみる。\n\n\nadd(1,4)\n\n\n[1] 5"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#分散を計算する関数",
+    "href": "prezemi_2023_08_presen.html#分散を計算する関数",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "分散を計算する関数",
+    "text": "分散を計算する関数\n\nデータの個数は，ベクトルならlength()，データフレームならnrow()\n合計はsum()，あるいはfor()で力尽くで計算\n\n\nmyvar &lt;- function(x) { # 自作関数 myvar\n  n = length(x) # データの個数\n  m = mean(x) # 平均\n  v = (sum((x - m)^2)) / n # 分散の定義\n  return(v) # 返り値\n}\n\n使ってみる。\n\n\nmyvar(c(1,2,3,4,5))\n\n\n[1] 2"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#合計を計算する方法",
+    "href": "prezemi_2023_08_presen.html#合計を計算する方法",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "合計を計算する方法",
+    "text": "合計を計算する方法\n1から10までの整数の合計を計算する。 sum()関数を使えば簡単。\n\n\nx &lt;- c(1:10) # 1〜10までの整数\nsum(x) # 合計\n\n\n[1] 55\n\n\n\nでもあえてforループをとすると、\n\ns &lt;- 0 # 初期値\nfor(i in 1:length(x)){ # ループ\n    s &lt;- s + x[i] # 合計\n}\nprint(s) # 結果\n\n[1] 55"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#平均を計算する関数",
+    "href": "prezemi_2023_08_presen.html#平均を計算する関数",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "平均を計算する関数",
+    "text": "平均を計算する関数\n\nmymean &lt;- function(x){\n  n = length(x) # データの個数\n  s = 0 # 初期値\n  for(i in 1:length(x)){ # ループ\n    s &lt;- s + x[i] # 合計をsに足していく\n  }\n  sumx &lt;- s / n # 平均\n  return(sumx) # 返り値\n}\n\n使ってみる。\n\n\nmymean(x)\n\n\n[1] 5.5\n\n\n\n基本関数mean()を使えば簡単に計算できる。\n\n\nmean(x) # 一撃\n\n\n[1] 5.5"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#tidyverseで自作関数",
+    "href": "prezemi_2023_08_presen.html#tidyverseで自作関数",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "tidyverseで自作関数",
+    "text": "tidyverseで自作関数\ntidyverseで自作関数を作る場合、注意が必要である。 例として、平均、分散、標準偏差を計算する関数mystat()を作る。\n\nmystat &lt;- function(chu, item) { # 引数をchuとitem\n  df |&gt; # データフレーム\n    filter(中分類 == chu) |&gt; # 指定した中分類を抽出\n    summarise( # 統計量を計算\n      平均     = mean(!!sym(item)), # 平均\n      中央値   = median(!!sym(item)), # 分散\n      標準偏差 = sd(!!sym(item)) # 標準偏差\n    ) |&gt;\n    kable() |&gt; kable_styling(font_size = 30) # 作表\n}"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#注意点",
+    "href": "prezemi_2023_08_presen.html#注意点",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "注意点",
+    "text": "注意点\n!!sym()は何をしているのか？\n\nsym()は、文字列をシンボル（変数名）に変換すること\nプログラム的に変数名を操作し、データフレームにおける列の操作を動的に実行可能\n!!は非標準評価(NSE)によりシンボルを実際の列として評価させている。\n\nまぁ細かいことなので，今は理解できなくてもよいです。"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#例",
+    "href": "prezemi_2023_08_presen.html#例",
+    "title": "プレゼミ2023  第8回 分析をしてみよう",
+    "section": "例",
+    "text": "例\nたとえば，tidyverseの各種パッケージで，外からの文字列を使う場合\n\nseimitsu &lt;- \"精密機器\"\ndf |&gt; filter(中分類 == seimitsu)\n\n# A tibble: 1,124 × 30\n   日経会社コード 企業名称    決算種別 連結基準 決算月数 上場コード 連結子会社数\n   &lt;chr&gt;          &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;\n 1 0000639        コニカミノ…       10        1       12         11           61\n 2 0000639        コニカミノ…       10        1       12         11           61\n 3 0000639        コニカミノ…       10        1       12         11           71\n 4 0000639        コニカミノ…       10        1       12         11           75\n 5 0000639        コニカミノ…       10        1       12         11          122\n 6 0000639        コニカミノ…       10        1       12         11          122\n 7 0000639        コニカミノ…       10        1       12         11          124\n 8 0000639        コニカミノ…       10        1       12         11          120\n 9 0000639        コニカミノ…       10        1       12         11          108\n10 0000639        コニカミノ…       10        1       12         11          105\n# ℹ 1,114 more rows\n# ℹ 23 more variables: 流動資産 &lt;dbl&gt;, 資産合計 &lt;dbl&gt;, 流動負債 &lt;dbl&gt;,\n#   負債合計 &lt;dbl&gt;, 純資産 &lt;dbl&gt;, 売上高 &lt;dbl&gt;, 売上原価 &lt;dbl&gt;, 販管費 &lt;dbl&gt;,\n#   親会社利益 &lt;dbl&gt;, 税金等調整前当期純利益 &lt;dbl&gt;,\n#   営業活動によるキャッシュフロー &lt;dbl&gt;, 投資活動によるキャッシュフロー &lt;dbl&gt;,\n#   財務活動によるキャッシュフロー &lt;dbl&gt;, 現金及び現金同等物の期末残高 &lt;dbl&gt;,\n#   広告宣伝費 &lt;dbl&gt;, 従業員数 &lt;dbl&gt;, 期末従業員数 &lt;dbl&gt;, 発行済株式数 &lt;dbl&gt;, …"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#例1",
+    "href": "prezemi_2023_08_presen.html#例1",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "例1",
+    "text": "例1\nたとえば，tidyverseの各種パッケージで，外からの文字列を使う場合\n\nseimitsu &lt;- \"精密機器\"\ndf |&gt; filter(中分類 == seimitsu) |&gt;\nrmarkdown::paged_table(options = list(rows.print = 4, cols.print = 4))\n\n\n\n  \n\n\n\nこれはOK"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#例2",
+    "href": "prezemi_2023_08_presen.html#例2",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "例2",
+    "text": "例2\n\nsales &lt;- \"売上高\"\ndf |&gt;\n  ggplot() + aes(x = sales) +\n  geom_histogram()\n\nこれはエラーがでる。 salesに”売上高”を代入する際にエラーになるため，ggplot()に渡すことができない。"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#相関係数",
+    "href": "prezemi_2023_08_presen.html#相関係数",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "相関係数",
+    "text": "相関係数\n2つの連続変数の線形関係を示す指標として，相関係数(correlation coefficient)がある。 \\(x\\)と\\(y\\)の2変数の(ピアソンの積率)相関係数は以下のように定義される。 \\[\nr = \\frac{\\sum_{i=1}^{n}(x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum_{i=1}^{n}(x_i - \\bar{x})^2}\\sqrt{\\sum_{i=1}^{n}(y_i - \\bar{y})^2}} = \\frac{\\mathrm{cov}(x,y)}{\\sigma_x \\times \\sigma _y}\n\\]"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#相関係数の種類",
+    "href": "prezemi_2023_08_presen.html#相関係数の種類",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "相関係数の種類",
+    "text": "相関係数の種類\n相関係数にはいくつか種類があり，代表的なものとして，\n\nピアソンの積率相関係数 : パラメトリック\nスピアマンの順位相関係数 : ノンパラメトリック\n\n通常「相関係数」というとピアソンの積率相関係数を意味する。 Rで計算するなら，cor()を用いる。 引数として連続変数を2つとる。"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#相関係数の計算",
+    "href": "prezemi_2023_08_presen.html#相関係数の計算",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "相関係数の計算",
+    "text": "相関係数の計算\n\n\ndf_test |&gt; with(cor(売上高, 広告宣伝費))\n\n\n[1] 0.5848697\n\n\n\n散布図も書いてみる。\n\n\nRコード\ndf_test |&gt;\n  filter(広告宣伝費 &gt; 0) |&gt;\n  ggplot() + aes(x = 広告宣伝費, y = 売上高) +\n  geom_point()"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#変数変換",
+    "href": "prezemi_2023_08_presen.html#変数変換",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "変数変換",
+    "text": "変数変換\n右下にデータが集まりすぎているので，対数変換してみる。\n\n\nRコード\ndf_test |&gt;\n  filter(広告宣伝費 &gt; 0) |&gt;\n  ggplot() + aes(x = log(広告宣伝費), y = log(売上高)) +\n  geom_point()\n\n\n\n右肩上がりの関係が見えてきます。"
+  },
+  {
+    "objectID": "prezemi_2023_08_presen.html#前期の値",
+    "href": "prezemi_2023_08_presen.html#前期の値",
+    "title": "プレゼミ2023  第8回 分析してみよう",
+    "section": "前期の値",
+    "text": "前期の値\n当期の広告宣伝費より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかも。\n\n\nRコード\ndf_test |&gt;\n  filter(広告宣伝費 &gt; 0) |&gt;\n  ggplot() + aes(x = log(lag(広告宣伝費)), y = log(売上高)) +\n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE)"
   }
 ]
