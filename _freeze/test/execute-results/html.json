@@ -1,0 +1,18 @@
+{
+  "hash": "b42ab6dcb9d9ccb994e009f66fca07be",
+  "result": {
+    "markdown": "---\ntitle: \"プレゼミレポート\"\nauthor: \"松浦総一\"\nformat: html\neditor: visual\n---\n\n\n## はじめに\n\nはじめに\n\n## 回帰分析\n\n### データの読み込み\n\n\n::: {.cell hash='test_cache/html/unnamed-chunk-1_25d3f2d7d909ae1759d596633ea259dd'}\n\n```{.r .cell-code}\nlibrary(tidyverse)\ndf <- read_csv(\"https://so-ichi.com/adv_2023.csv\")\n```\n:::\n\n\n## 分析\n\n\n::: {.cell hash='test_cache/html/unnamed-chunk-2_2469a6548e8f86045a13dbaa80d53e85'}\n\n```{.r .cell-code}\nres <- lm(売上高 ~ lag(研究開発費) + lag(広告宣伝費), data = df)\ncoef(res)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n    (Intercept) lag(研究開発費) lag(広告宣伝費) \n   1.004955e+05    1.716521e+01    6.913074e+00 \n```\n:::\n:::\n\n\n## 結果の表\n\n\n::: {.cell hash='test_cache/html/unnamed-chunk-3_17d775f97a34bcafd30e8c0cfb6d1494'}\n\n```{.r .cell-code}\n#install.packages(\"modelsummary\")\nlibrary(modelsummary)\nmodelsummary(\n    res,\n    stars = TRUE,\n    fmt = '%.2f',\n    gof_omit = \"AIC|BIC|Log.Lik.\"\n    )\n```\n\n::: {.cell-output-display}\n`````{=html}\n<table style=\"NAborder-bottom: 0; width: auto !important; margin-left: auto; margin-right: auto;\" class=\"table\">\n <thead>\n  <tr>\n   <th style=\"text-align:left;\">   </th>\n   <th style=\"text-align:center;\">  (1) </th>\n  </tr>\n </thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> (Intercept) </td>\n   <td style=\"text-align:center;\"> 100495.49*** </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\">  </td>\n   <td style=\"text-align:center;\"> (12569.41) </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> lag(研究開発費) </td>\n   <td style=\"text-align:center;\"> 17.17*** </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\">  </td>\n   <td style=\"text-align:center;\"> (0.26) </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> lag(広告宣伝費) </td>\n   <td style=\"text-align:center;\"> 6.91*** </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;box-shadow: 0px 1.5px\">  </td>\n   <td style=\"text-align:center;box-shadow: 0px 1.5px\"> (0.52) </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> Num.Obs. </td>\n   <td style=\"text-align:center;\"> 5174 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> R2 </td>\n   <td style=\"text-align:center;\"> 0.785 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> R2 Adj. </td>\n   <td style=\"text-align:center;\"> 0.785 </td>\n  </tr>\n  <tr>\n   <td style=\"text-align:left;\"> RMSE </td>\n   <td style=\"text-align:center;\"> 861991.65 </td>\n  </tr>\n</tbody>\n<tfoot><tr><td style=\"padding: 0; \" colspan=\"100%\">\n<sup></sup> + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>\n</table>\n\n`````\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"site_libs/kePrint-0.0.1/kePrint.js\"></script>\n<link href=\"site_libs/lightable-0.0.1/lightable.css\" rel=\"stylesheet\" />\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

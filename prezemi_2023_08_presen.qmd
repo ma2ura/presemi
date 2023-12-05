@@ -33,7 +33,7 @@ execute:
 :::
 :::{.column width="50%"}
 
-第7回講義の**到達度検証のための課題**
+**到達度検証のための課題**
 
 - 製造業と非製造業で利益率が違うかどうかの検定を行う。
 - 広告宣伝費と売上高の相関関係を分析する。
@@ -436,9 +436,10 @@ df_test |>
 
 右肩上がりの関係が見えてきます。
 
-## 前期の値
+## 前期の広告宣伝費
 
-当期の広告宣伝費より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかも。
+当期より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかもしれないので、
+`lag()`関数を使って作図してみる。
 
 ```{r}
 #| code-fold: true
@@ -449,3 +450,51 @@ df_test |>
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)
 ```
+
+## 指数関数とは
+
+対数の前に、**指数関数**(exponential function)を説明する。
+指数関数とは，$y$が正の実数のとき，$x = \mathrm{a}^y$となる関数$f:y \mapsto x$である。
+定数$a$を$y$乗すると$x$になる関数である。
+
+```{r}
+#| echo: false
+t <- c(1:10)
+a <- 2^t
+# 2つのグラフを並べる
+par(mfrow = c(1,2))
+plot(t, type = "l")
+plot(a, type = "l")
+```
+
+
+## 対数関数
+
+逆に、$x$が正の実数のとき，$y = \log x$となる$y$のことを**対数**(logarithm)といい、
+対数関数とは，$y = \log x$となる関数$f:x \mapsto y$のことである。
+
+
+```{r}
+#| echo: false
+x <- c(1:10)
+y <- log(x)
+# 2つのグラフを並べる
+par(mfrow = c(1,2))
+plot(x, type = "l")
+plot(y, type = "l")
+```
+
+## 指数関数と対数関数
+
+$$
+t = \log x \Longleftrightarrow x = \mathrm{e}^t
+$$
+つまり、指数関数と対数関数は**逆関数**なので、
+
+$$
+\begin{aligned}
+t = \log x = \log \mathrm{e}^t\\
+x = \mathrm{e}^t = \mathrm{e}^{\log x}
+\end{aligned}
+$$
+が成り立つ。

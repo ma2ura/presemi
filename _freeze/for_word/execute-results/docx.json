@@ -1,0 +1,14 @@
+{
+  "hash": "9a9b209f1bf741759e61e892c6c4d168",
+  "result": {
+    "markdown": "---\ntitle: \"My Document using Quarto\"\nauthor: \"Soichi Matsuura\"\nformat:\n  docx:\n    toc: true\n    code-fold: true\n---\n\n\n# section\n\nここに文章を書く。\n\n## subsection\n\n\n::: {.cell hash='for_word_cache/docx/unnamed-chunk-1_aa0beb6f688a16ff87581c95b4066b26'}\n\n```{.r .cell-code}\nlibrary(ggplot2)\nggplot(cars) + aes(speed, dist) + geom_point()\n```\n\n::: {.cell-output-display}\n![](for_word_files/figure-docx/unnamed-chunk-1-1.png)\n:::\n:::\n\n\n### subsubsection\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}

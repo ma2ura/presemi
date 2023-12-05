@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.361">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Soichi Matsuura">
   <title>プレゼミ講義ノート - プレゼミ2023  第8回 分析してみよう</title>
@@ -421,7 +421,7 @@ Soichi Matsuura
 <li>分析をするための関数を作成することができる。</li>
 </ul>
 </div><div class="column" style="width:50%;">
-<p>第7回講義の<strong>到達度検証のための課題</strong></p>
+<p><strong>到達度検証のための課題</strong></p>
 <ul>
 <li>製造業と非製造業で利益率が違うかどうかの検定を行う。</li>
 <li>広告宣伝費と売上高の相関関係を分析する。</li>
@@ -915,9 +915,9 @@ r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i
 </div>
 <img data-src="prezemi_2023_08_presen_files/figure-revealjs/unnamed-chunk-31-1.png" width="1344" class="r-stretch"><p>右肩上がりの関係が見えてきます。</p>
 </section>
-<section id="前期の値" class="slide level2">
-<h2>前期の値</h2>
-<p>当期の広告宣伝費より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかも。</p>
+<section id="前期の広告宣伝費" class="slide level2">
+<h2>前期の広告宣伝費</h2>
+<p>当期より昨年度の広告宣伝費のほうが当期の売上高に影響を与えているかもしれないので、 <code>lag()</code>関数を使って作図してみる。</p>
 <div class="cell" data-hash="prezemi_2023_08_presen_cache/revealjs/unnamed-chunk-32_d0241f1c9140dc482e8e50e8f038e105">
 <details>
 <summary>Rコード</summary>
@@ -929,8 +929,30 @@ r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i
 </details>
 
 </div>
+<img data-src="prezemi_2023_08_presen_files/figure-revealjs/unnamed-chunk-32-1.png" width="1344" class="r-stretch"></section>
+<section id="指数関数とは" class="slide level2">
+<h2>指数関数とは</h2>
+<p>対数の前に、<strong>指数関数</strong>(exponential function)を説明する。 指数関数とは，<span class="math inline">\(y\)</span>が正の実数のとき，<span class="math inline">\(x = \mathrm{a}^y\)</span>となる関数<span class="math inline">\(f:y \mapsto x\)</span>である。 定数<span class="math inline">\(a\)</span>を<span class="math inline">\(y\)</span>乗すると<span class="math inline">\(x\)</span>になる関数である。</p>
 
-<img data-src="prezemi_2023_08_presen_files/figure-revealjs/unnamed-chunk-32-1.png" width="1344" class="r-stretch"><div class="footer footer-default">
+<img data-src="prezemi_2023_08_presen_files/figure-revealjs/unnamed-chunk-33-1.png" width="1344" class="r-stretch"></section>
+<section id="対数関数" class="slide level2">
+<h2>対数関数</h2>
+<p>逆に、<span class="math inline">\(x\)</span>が正の実数のとき，<span class="math inline">\(y = \log x\)</span>となる<span class="math inline">\(y\)</span>のことを<strong>対数</strong>(logarithm)といい、 対数関数とは，<span class="math inline">\(y = \log x\)</span>となる関数<span class="math inline">\(f:x \mapsto y\)</span>のことである。</p>
+
+<img data-src="prezemi_2023_08_presen_files/figure-revealjs/unnamed-chunk-34-1.png" width="1344" class="r-stretch"></section>
+<section id="指数関数と対数関数" class="slide level2">
+<h2>指数関数と対数関数</h2>
+<p><span class="math display">\[
+t = \log x \Longleftrightarrow x = \mathrm{e}^t
+\]</span> つまり、指数関数と対数関数は<strong>逆関数</strong>なので、</p>
+<p><span class="math display">\[
+\begin{aligned}
+t = \log x = \log \mathrm{e}^t\\
+x = \mathrm{e}^t = \mathrm{e}^{\log x}
+\end{aligned}
+\]</span> が成り立つ。</p>
+
+<div class="footer footer-default">
 
 </div>
 </section></section>

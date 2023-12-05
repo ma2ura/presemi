@@ -1,0 +1,40 @@
+---
+title: "プレゼミレポート"
+author: "松浦総一"
+format: html
+editor: visual
+---
+
+## はじめに
+
+はじめに
+
+## 回帰分析
+
+### データの読み込み
+
+```{r}
+library(tidyverse)
+df <- read_csv("https://so-ichi.com/adv_2023.csv")
+```
+
+## 分析
+
+```{r}
+res <- lm(売上高 ~ lag(研究開発費) + lag(広告宣伝費), data = df)
+coef(res)
+```
+
+## 結果の表
+
+```{r}
+#install.packages("modelsummary")
+library(modelsummary)
+modelsummary(
+    res,
+    stars = TRUE,
+    fmt = '%.2f',
+    gof_omit = "AIC|BIC|Log.Lik."
+    )
+```
+
