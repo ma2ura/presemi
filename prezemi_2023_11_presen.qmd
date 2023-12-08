@@ -1,0 +1,416 @@
+---
+title: |
+  <b>プレゼミ2023</b> </br>
+  <span style="color: #282A36; ">第12回 回帰分析の応用</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    chalkboard: true
+    df_print: paged
+    code-line-numbers: false
+webr:
+  packages: ['ggplot2', 'dplyr'] # Install R packages on document open
+# autoload-packages: false       # Disable automatic loading of packages
+# show-startup-message: false    # Disable displaying status of webR initialization
+filters:
+  - webr
+# highlight-style: "dracula"
+highlight-style: github
+execute:
+  echo: true
+  warning: false
+---
+
+# ダミー変数の利用
+
+## WebRの使用
+
+```{webr-r}
+fit = lm(mpg ~ am, data = mtcars)
+
+summary(fit)
+```
+
+## ダミー変数
+
+**ダミー変数**(dummy variable)とは，二値変数(binary variable)とか指示変数(indicator variable)とも呼ばれ，カテゴリーに属しているかどうかを表す1か0の値をとる変数のこと
+
+$$
+\begin{aligned}
+X = \begin{cases}
+1 & \text{if カテゴリーに属している}\\
+0 & \text{if カテゴリーに属していない}
+\end{cases}
+\end{aligned}
+$$
+
+## ダミー変数
+
+例えば、単回帰分析の説明変数がダミー変数$D$である場合を考えます。
+
+$$
+\begin{aligned}
+Y = \beta_0 + \beta_1 D + \varepsilon
+\end{aligned}
+$$
+
+このとき、この単回帰モデルを次のように書くことが出来ます。
+
+$$
+\begin{aligned}
+Y = \begin{cases}
+\beta_0 + \varepsilon & \text{if } D = 0 \\
+\beta_0 + \beta_1 + \varepsilon & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+---
+
+このとき、期待値$\mathrm{E}[Y]$は次のようになります。
+
+$$
+\begin{aligned}
+\mathrm{E}[Y] = \begin{cases}
+\beta_0  & \text{if } D = 0 \\
+\beta_0 + \beta_1 & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+この単回帰モデルの切片$\beta_0$は、ダミー変数$D$が0のときの$Y$の平均値を表しています。
+
+## ダミー変数の利用
+
+- 会計研究では，コントロール変数として頻出の業種ダミーや年度ダミーに加えて，監査の質の代理変数となる四大監査法人ダミーや，会計基準選択で用いられるIFRSダミーといったものなど，非常に多くのダミー変数が用いられています。
+
+- 回帰分析にダミー変数を使う場合に気をつける点として，
+**カテゴリの数が$k$個のカテゴリー変数は，$k-1$個のダミー変数を回帰分析に組み込む**という点です。
+
+
+## 製造業ダミーの例
+
+- すべての企業が製造業か非製造業のどちらかに属するとします。
+- 製造業に属するかどうかを表すダミー変数$mani$と，非製造業に属するかどうかを表すダミー変数$nomani$を作成
+- 製造業であれば$mani = 1$，非製造業であれば$mani = 0$という製造業ダミー変数と，
+- 非製造であれば$nomani = 1$，製造業であれば$nomani = 0$をとる非製造業ダミー変数を作る。
+
+## 多重共線性
+
+- ここで，製造業ダミーが$1$の値をとるとき，非製造業ダミーは必ず$0$をとり，逆に非製造業ダミーが$1$の値を取るとき，製造業ダミーはかならず$0$の値を取ります。つまりこの2つのダミー変数は相関係数が$-1$となり，同じ情報をもっている変数となります。
+- このような完全な負の関係にある2つの変数を回帰分析に組み込むと，多重共線性が発生します。
+
+## 準備
+
+必要なパッケージと設定。無ければインストールする。
+
+```{r}
+knitr::opts_chunk$set(dev = "ragg_png")
+library(tidyverse) # とりあえずこれ
+library(ggthemes) # ggplot2のテーマ
+library(knitr) # 作表
+library(kableExtra) # 作表の拡張
+library(scales) # 軸の単位を制御
+library(modelsummary) # モデルのまとめ
+theme_set(theme_few(base_size = 12))
+update_geom_defaults("point", list(size = 3))
+```
+
+## Rで確認してみる。
+
+研究開発費のデータを読み込みます。
+
+```{r}
+setwd("/Users/soichi/Dropbox/R/presemi/")
+df <- read_csv("data/RD_2022.csv")
+names(df)
+```
+
+## 業種大分類
+
+`日経業種コード`は6ケタの整数をもつデータで，1ケタ目が製造業か非製造業，つぎの2ケタが日経産業中分類，つぎの3ケタが日経産業小分類を表します。
+
+最初の1ケタが`1`なら製造業，`2`なら非製造業を表す製造業ダミー変数と非製造業ダミー変数を作る。
+
+```{r}
+df <- df |>
+  mutate(
+    大分類 = substr(df$日経業種コード,1,1)
+  )
+table(df$大分類) # 大分類の頻度
+```
+
+## ダミー変数の作成
+
+<!-- この大分類を用いてダミー変数を作ります。 -->
+ダミー変数を作成するときは，`mutate()`と`ifelse()`を組み合わせると便利です。
+```{r}
+df <- df %>%
+  mutate(
+    製造業ダミー = ifelse(大分類 == 1, 1, 0),
+    非製造業ダミー = ifelse(大分類 == 2, 1, 0)
+  )
+table(df$製造業ダミー, df$非製造業ダミー)
+```
+上の表より，製造業ダミーと非製造業ダミーは完全に負の関係にあることが分かります。
+
+## ダミー変数を説明変数とする回帰分析
+
+次に，研究開発費が翌期の売上高に与える影響を分析する回帰式に，製造業ダミーと非製造業ダミーの2つのダミー変数を組み込んでみます。
+
+```{r}
+res <- lm(売上高 ~ lag(研究開発費) + 製造業ダミー + 非製造業ダミー, data = df)
+summary(res)
+```
+
+上の分析結果をみると，`1 not defined because of singularities`というメッセージがあり，`非製造業ダミー`が`NA`になっていることが分かります。
+これは`製造業ダミー`と`非製造業ダミー`の相関が高すぎることにより，Rが自動で変数を落としているのです。
+
+# ダミー変数を使った回帰分析
+
+## 変数変換
+
+回帰分析を実行するときに，変数をそのまま使うのでは無く，変数を変換して使う場合が多いです。
+決算書の財務データは「百万円」か「千円」の単位で記録されているので，百万円でそろえる必要がありますし，外貨で保有する資産などは円換算する必要があります。
+
+売上高や利益額は同じ企業の過去の値と比較するのであれば問題ないですが，規模が異なる企業の売上高や利益を比較しても意味はないので，ROEや総資産回転率といった財務比率に直すことも多いです。
+
+
+
+### 線形変換
+
+確率変数$X$がアフィン変換(affine transformation)をする場合を考えます。
+
+$$
+\begin{aligned}
+Y =  a + bX
+\end{aligned}
+$$
+
+によって確率変数$X$が確率変数$Y$に変換されたとします。
+ここで$a$と$b$はパラメータです。
+つまりアフィン変換とは確率変数を定数倍して定数を足す，という変換です。
+このとき，次の関係が成立します。
+
+まず期待値については，
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= \mathbb{E}[a + bX] \nonumber \\
+       &= \mathbb{E}[a] + \mathbb{E}[bX] \nonumber\\
+       &= a + b \mathbb{E}[X]
+\end{aligned}
+$$
+となり，分散については，
+$$
+\begin{aligned}
+\mathbb{V}[Y]
+        &= \mathbb{E}[(Y - \mathbb{E}[Y])^2]      \nonumber \\
+        &= \mathbb{E}[(a + bX - (a+b\mathbb{E}[X]))^2] \nonumber\\
+        &= \mathbb{E}[(bX - b \mathbb{E}[X])^2]   \nonumber\\
+        &= \mathbb{E}[b^2 (X - \mathbb{E}[X])^2]  \nonumber\\
+        &= b^2 \mathbb{E}[ (X - \mathbb{E}[X])^2] \nonumber\\
+        &= b^2 \mathbb{V}[X]
+\end{aligned}
+$$
+
+となり，標準偏差については，
+
+$$
+\begin{aligned}
+\sigma _Y = \sqrt{\mathbb{V}[Y]} = |b| \sqrt{\mathbb{V}[X]}
+\end{aligned}
+$$
+
+となることが分かっています。
+
+:::{.callout-tip}
+## アフィン変換
+
+ある工事が完了する日数とその確率が次のように予測されているとします。
+
+| 日数$X$     | 1     | 2      | 3      | 4      | 5      |
+|:-----------:|:-----:|:------:|:------:|:------:|:------:|
+| 確率$p(x)$  | $5\%$ | $20\%$ | $35\%$ | $30\%$ | $10\%$ |
+
+このとき
+
+$$
+\begin{aligned}
+\mathbb{E}[X] &\equiv \sum _k p_k x_k \text{より} & \mathbb{E}[X] &= 3.2\\
+\mathbb{V} [X] &\equiv \sum _k p_k (x_k - \mathbb{E}[X])^2 \text{より} & \mathbb{V} [X] &= 1.06
+\end{aligned}
+$$
+
+この工事では，固定費として100万円，変動費として1日あたり10万円の費用がかかるとすると，総費用は，
+
+$$
+\begin{aligned}
+Y = 100  + 10 X
+\end{aligned}
+$$
+
+として表される。
+このとき，総費用の期待値および分散は，
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= 100 + 10 \mathbb{E}[X] = 100 + 10 \times 3.2 = 132\\
+\mathbb{V}[Y] &= 10^2 \mathbb{V}[X] = 100  \times 1.06 = 106
+\end{aligned}
+$$
+
+となる。
+:::
+
+
+
+
+より一般的に，$k$個の確率変数$X_i$, $i = 1, \dots ,k$の一次結合$Y = c_0 + c_1 X_1 + \cdots + c_k X_k$で表される確率変数$Y$において，次の関係が成立する。
+ここで，$c_0,c_1, \dots, c_k$はパラメータで，定数です。
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= c_0 + c_1 \mu _1 + \cdots c_k \mu_k\\
+\mathbb{V} [Y] &= c_1^2 \sigma_1^2 + \cdots +  c_k^2 \sigma _k^2 + \sum _{i\not = j}^k \sum_{j \not = i}^k c_i c_j \sigma _{ij}
+\end{aligned}
+$$
+
+ここで，$\mu _i = \mathbb{E}[X_i]$，$\sigma _i^2 = \mathbb{V}[X_i]$，$\sigma _{ij} = \mathbb{COV}[X_i,X_j]$である。
+
+例えば，$k=2$のケースでは，
+
+$$
+\begin{align}
+\mathbb{E}[Y]   &= c_0 + c_1 \mu _1 + c_2 \mu_2\\
+\mathbb{V} [Y] &= c_1^2 \sigma_1^2 + c_2^2 \sigma _2^2 + 2 c_1 c_2 \sigma _{12}
+\end{align}
+$$
+
+:::{.callout-warning}
+## 問題3
+
+$k=3$のケースにおける確率変数$Y$の期待値と分散を求めなさい。
+:::
+
+:::{.callout-warning}
+## 例8
+
+$k=2$のケースで，$Y=0.5X_1 + 0.5 X_2$の期待値および分散を求めます。
+ただし，$\mu _1 = 0.07$，$\sigma _1^2 = 1.48$，$\mu_2 = -0.02$，$\sigma _2^2 = 1.46$とします。
+
+- 無相関($\rho _{12} = 0$, $\mathbb{COV}[X_1,X_2] =0 $)のケース
+	$$
+  \begin{aligned}
+	\mathbb{E}[Y]   &= 0.5 \times 0.07 + 0.5 \times - 0.02 = 0.025\\
+	\mathbb{V} [Y] &= 0.5^2 \times 1.48 + 0.5^2 \times 1.46 + 2 \times 0.5 \times 0.5 \times 0 = 0.735
+	\end{aligned}
+  $$
+
+  $Y$の分散は，$X_1$と$X_2$の分散よりも小さい。
+
+- 負の相関($\rho _{12} = -0.99 \Leftrightarrow \mathbb{COV}[X_1,X_2] = -1.46 $)のケース
+	$$
+  \begin{aligned}
+	\mathbb{E}[Y]   &= 0.5 \times 0.07 + 0.5 \times - 0.02 = 0.025\\
+	\mathbb{V} [Y] &= 0.5^2 \times 1.48 + 0.5^2 \times 1.46 + 2 \times 0.5 \times 0.5 \times -1.46 = 0.005
+	\end{aligned}
+  $$
+
+	$Y$の分散は，$X_1$と$X_2$の分散よりも小さい。
+
+
+$X_1$と$X_2$の共分散は，$Y$の分散に影響を与える。
+:::
+
+
+### 中心化
+
+変数変換の一つに**中心化**(centering)があります。
+これは，説明変数からその平均値を引くことで，説明変数の平均値を0にする変換です。これは一次関数の平行移動に相当する線形変換の一種で，回帰式の切片の解釈を容易にするために使われます。
+
+平均値として標本平均を用いることが一般的ですが，理論的に考えられる平均値を使うこともあります。
+たとえば，男女ダミーの平均は$0.5$，というような場合です。
+
+では中心化をしてみます。
+中心化するための自作関数を作成したり，
+`mutate()`関数で平均を引くことで中心化された変数を作成したりすることもできますが，ここでは中心化や標準化を行う`scale()`関数を使ってみます。
+
+先の回帰分析では，次のようなモデルを推定しました。
+
+$$
+\text{売上高} = \alpha + \beta_1 \text{研究開発費} + \beta_2 \text{製造業ダミー} + \varepsilon
+$$
+
+この回帰式を推定すると，次のようになります。
+
+```{r}
+res01 <- lm(売上高 ~ lag(研究開発費) + 製造業ダミー , data = df)
+summary(res01)
+```
+
+この回帰式の切片`r res$coefficients[1]`の意味を考えてみましょう。
+この切片は，`研究開発費`と`製造業ダミー`が0の場合の`売上高`の平均値を示しています。つまり非製造業企業で研究開発費がゼロの企業における平均売上高を表しています。
+
+研究開発費がゼロの企業というのはそれなりに存在しているので，教科書のように父親の身長がゼロのとき，といった非現実的な状況を表しているわけではないですが，非製造業企業だけの平均売上高だけでなく，全体の平均を表すために，変数を中心化(centering)します。
+
+ここでは，標本平均を差し引くことで中心化します。
+
+```{r}
+df <- df %>%
+  mutate(
+    研究開発費中心化 = scale(研究開発費, center = TRUE, scale = FALSE),
+    売上高中心化 = scale(売上高, center = TRUE, scale = FALSE)
+  )
+res02 <- lm(売上高中心化 ~ lag(研究開発費中心化) + 製造業ダミー , data = df)
+res <- list(res01,res02)
+library(modelsummary)
+modelsummary(res)
+```
+先の中心化前の回帰分析結果と比べて違っているのは，切片`(intercept)`の値だけです。
+
+
+## まとめ
+
+$$
+\begin{aligned}
+2\times 2 = 2^2 = 4\\
+2\times 2 \times 2 = 2^3 = 8\\
+2\times 2 \times 2 \times 2 = 2^4 = 16\\
+\end{aligned}
+$$
+
+
+```{r}
+#| warning: false
+library(gapminder)
+library(plotly)
+
+data(gapminder)
+gg <- ggplot(gapminder) +
+    aes(x = gdpPercap, y = lifeExp, color = continent) +
+    geom_point(aes(size = pop, frame = year, ids = country)) +
+    scale_x_log10()
+ggplotly(gg)
+```
+
+
+```{r}
+#| warning: false
+base <- gapminder %>%
+    plot_ly(x = ~gdpPercap, y = ~lifeExp, size = ~pop, text = ~country, hoberinfo = "text") %>%
+    layout(xaxis = list(type = "log"))
+
+base %>%
+    add_markers(color = ~continent, frame = ~year, ids = ~country) %>%
+    animation_opts(frame = 1000, easing = "elastic", redraw = FALSE) %>%
+    animation_button(
+        x = 1, xanchor = "right",
+        y = 0, yanchor = "bottom") %>%
+    animation_slider(
+        currentvalue = list(prefix = "YEAR: ", font = list(color = "red"))
+    )
+```
