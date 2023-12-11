@@ -1,110 +1,488 @@
 ---
 title: |
   <b>プレゼミ2023</b> </br>
-  <span style="color: #282A36; ">WebRの実験</span>
+  <span style="color: #282A36; ">回帰分析の応用</span>
 author: "Soichi Matsuura"
-format: revealjs
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    chalkboard: true
+    df_print: paged
+    code-line-numbers: false
 webr:
   packages: ['ggplot2', 'dplyr'] # Install R packages on document open
-# autoload-packages: false       # Disable automatic loading of packages
-# show-startup-message: false    # Disable displaying status of webR initialization
 filters:
   - webr
+execute:
+  echo: true
+  warning: false
 ---
 
+# 回帰分析の復習
 
-## Welcome
+## 回帰分析とは
 
-Welcome to a demo RevealJS presentation that uses the [`quarto-webr`](https://github.com/coatless/quarto-webr) extension to generate interactive code cells with [Quarto](https://quarto.org) and [webR](https://docs.r-wasm.org/webr/latest/).
+- 1つ以上の説明変数と1つの応答変数との間の**因果関係**を調べるための統計的手法
+- ここでは、説明変数$X$と応答変数$Y$との間に線形関係を仮定する**線形回帰モデル**を考える。
 
-:::{.callout-important}
-This template requires a [**pre-release** version of Quarto that is 1.4.502 or greater](https://quarto.org/docs/download/prerelease)  that contains an updated copy of `pandoc`. For more details, please see [Issue #14](https://github.com/coatless/quarto-webr/issues/14).
+$$
+Y = \alpha + \sum _{i=1}^k \beta _i X_i + \varepsilon
+$$
+
+- 回帰パラメータ$\alpha$と$\beta$を推定する方法として**最小二乗法**を用いる。
+
+## 最小二乗法
+
+- 今手元に説明変数$X$と応答変数$Y$のデータの組$(x_i,y_i)$があるとする。
+- このデータから回帰パラメータを推定する最小二乗法は、**残差平方和を最小にするような**回帰パラメータを求める方法である。
+
+$$
+\begin{aligned}
+\min _{\hat{\alpha}, \hat{\beta}} \sum _{i=1}^n (y_i - \alpha - \sum _{j=1}^k \beta _j x_{ij})^2
+\end{aligned}
+$$
+
+## 回帰分析の実装
+
+Rでは`lm()`関数を使って最小二乗法による回帰分析を行う。
+`lm()`の主要な引数は，`formula`と`data`の2つ
+
+- `formula` ： 回帰式を表す式で，`Y ~ X`のように書く。
+- `data` ： 回帰分析に用いるデータフレーム
+
+```{r}
+#| eval: FALSE
+res <- lm(Y ~ X, data = df)
+```
+
+## 準備
+
+```{r}
+knitr::opts_chunk$set(dev = "ragg_png")
+library(tidyverse) # とりあえずこれ
+library(ggthemes) # ggplot2のテーマ
+library(knitr) # 作表
+library(kableExtra) # 作表の拡張
+library(scales) # 軸の単位を制御
+library(modelsummary) # モデルのまとめ
+theme_set(theme_few(base_size = 12))
+update_geom_defaults("point", list(size = 3))
+```
+
+## 回帰分析の練習
+
+ボストン住宅価格データを使って回帰分析を実行
+
+```{r}
+#| echo = TRUE
+library(MASS) # データを取得
+df <- Boston
+df
+```
+
+## 回帰分析の練習
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- `crim` : 犯罪率
+- `zn`:	広い家の割合
+- `indus`:	非小売業の割合
+- `chas`:	川に近接(1:yes, 0:no)
+- `nox`:	一酸化窒素濃度
+- `rm`:	平均部屋数
+- `age`:	古い家の割合
+
 :::
 
-Not the right template? Let's go back to the [documentation portal](../../)
+::: {.column width="50%"}
 
-## webR in RevealJS
+- `dis`:	主要施設への距離
+- `rad`:	主要高速道路へのアクセス性
+- `tax`:	固定資産税率
+- `ptratio`:	生徒先生の比率
+- `black`:	黒人の割合
+- `lstat`:	低所得者割合
+- `medv`:	住宅価格
 
-This is a webR-enabled code cell in a Quarto RevealJS document.
-
-```{webr-r}
-fit = lm(mpg ~ wt, data = mtcars)
-
-summary(fit)
-```
-
-## Base R Graphing with webR
-
-```{webr-r}
-plot(pressure)
-```
-
-## ggplot2 in webR
-
-```{webr-r}
-ggplot(mpg, aes(displ, hwy, colour = class)) +
-  geom_point()
-```
-
-## Help Documentation
-
-```{webr-r}
-?mean
-```
-
-
-## Prints, Warnings, and Errors
-
-```{webr-r}
-cat("Hello there!\n")
-
-x = c(1, 2, 3)
-print(x)
-
-warning("Uh-oh, something is amiss")
-
-stop("I'm sorry Dave, I'm afraid I can't do that")
-```
-
-
-## Keyboard Shortcuts
-
-- Run selected code using either:
-  - macOS: <kbd>⌘</kbd> + <kbd>↩/Return</kbd>
-  - Windows/Linux: <kbd>Ctrl</kbd> + <kbd>↩/Enter</kbd>
-- Run the entire code by clicking the "Run code" button or pressing <kbd>Shift</kbd>+<kbd>↩</kbd>.
-
-```{webr-r}
-print("Hello quarto-webr RevealJS world!")
-
-3 + 5
-```
-
-## Embedded Slides
-
-You can embed the slide deck inside of a Quarto Website or Book by using:
-
-````html
-<style>
-.slide-deck {
-    border: 3px solid #dee2e6;
-    width: 100%;
-    height: 475px;
-}
-</style>
-
-<div>
-```{=html}
-<iframe class="slide-deck" src="path/to/presentation/"></iframe>
-```
-</div>
-````
-
-:::{.callout-note}
-Avoid using _within_ a RevealJS presentation. Only 1 instance of webR should be running.
 :::
 
-## Fin
+::::
 
-Thanks for checking out the demo! Let's head back to
-the [documentation portal](../../).
+## 回帰分析の練習
+
+このデータを使って、回帰モデルを構築してみてください。
+たとえば、
+
+```{webr-r}
+# 好きなようにモデルを変えてみてください
+library(MASS) # データを取得
+df <- Boston
+lm(medv ~ rm, data = df) |> summary()
+```
+
+# 回帰分析の応用
+
+## ダミー変数の利用
+
+**ダミー変数**(dummy variable)とは，二値変数(binary variable)とか指示変数(indicator variable)とも呼ばれ，カテゴリーに属しているかどうかを表す1か0の値をとる変数のことです。
+
+$$
+\begin{aligned}
+X = \begin{cases}
+1 & \text{if カテゴリーに属している}\\
+0 & \text{if カテゴリーに属していない}
+\end{cases}
+\end{aligned}
+$$
+
+
+## 説明変数がダミー変数のみの回帰
+
+例えば、単回帰分析の説明変数がダミー変数$D$である場合
+
+$$
+\begin{aligned}
+Y = \beta_0 + \beta_1 D + \varepsilon
+\end{aligned}
+$$
+
+このとき、この単回帰モデルを次のように書くことが出来ます。
+
+$$
+\begin{aligned}
+Y = \begin{cases}
+\beta_0 + \varepsilon & \text{if } D = 0 \\
+\beta_0 + \beta_1 + \varepsilon & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+
+## 説明変数がダミー変数のみの回帰
+
+このとき、期待値$\mathrm{E}[Y]$は次のようになります。
+
+$$
+\begin{aligned}
+\mathrm{E}[Y] = \begin{cases}
+\beta_0  & \text{if } D = 0 \\
+\beta_0 + \beta_1 & \text{if } D = 1
+\end{cases}
+\end{aligned}
+$$
+
+この単回帰モデルの切片$\beta_0$は、ダミー変数$D$が0のときの$Y$の平均値を表しています。
+
+## 説明変数がダミー変数のみの回帰
+
+住宅価格と川に隣接しているかどうかのダミー変数を使って回帰分析
+
+```{r}
+res <- lm(medv ~ chas, data = df)
+coef(res)
+```
+
+- 川に接してない家の平均価格は、`r coef(res)[1]`ドル
+- 川に接している家の平均価格は、`r coef(res)[1] + coef(res)[2]`ドル
+- `chas`の係数の$p$値は、`r round(coef(summary(res))[2,4],digits = 3)`
+
+## 会計研究のダミー変数の例
+
+経営の定量研究では，コントロール変数として頻出の
+
+- 企業ダミー
+- 業種ダミー
+- 年度ダミー
+
+に加えて，会計だと
+
+- 監査の質の代理変数となる四大監査法人ダミー
+- IFRSダミー
+
+と広範囲で利用されている。
+
+
+## ダミー変数の注意点
+
+回帰分析にダミー変数を使う場合に気をつける点として，
+
+- **カテゴリの数が$k$個のカテゴリー変数は，$k-1$個のダミー変数を回帰分析に組み込む**
+- **ダミー変数の数が多すぎると，推定値の標準誤差が大きくなる**
+
+という2点があります。
+
+## ダミー変数の注意点
+
+ダミー変数が表すカテゴリーの数より1つ少ないダミー変数を使う。
+カテゴリーが3つある場合は、2つのダミー変数を使う。
+次のデータで確認してみる。
+
+```{r}
+df <- read_csv("data/RD_2022.csv")
+names(df)
+```
+
+## 製造業ダミーの例
+
+- すべての企業が製造業か非製造業のどちらかに属する
+- 製造業に属するかどうかを表すダミー変数$mani$と，非製造業に属するかどうかを表すダミー変数$nomani$を作成
+- 製造業であれば$mani = 1$，非製造業であれば$mani = 0$という製造業ダミー変数と，
+- 非製造であれば$nomani = 1$，製造業であれば$nomani = 0$をとる非製造業ダミー変数を作る。
+
+## 多重共線性
+
+- ここで，製造業ダミーが$1$の値をとるとき，非製造業ダミーは必ず$0$をとり，逆に非製造業ダミーが$1$の値を取るとき，製造業ダミーはかならず$0$の値を取ります。つまりこの2つのダミー変数は相関係数が$-1$となり，同じ情報をもっている変数となります。
+- このような完全な負の関係にある2つの変数を回帰分析に組み込むと，多重共線性が発生する。
+
+## ダミー変数の注意点
+
+`substr()`関数を使って，日経業種コードの大分類を作成
+
+```{r}
+df$dai <- substr(df$日経業種コード,1,1) # 大分類
+table(df$dai) # 大分類の頻度
+```
+
+この大分類を用いてダミー変数を作ります。
+
+```{r}
+df <- df %>%
+  mutate(
+    製造業ダミー = ifelse(dai == 1, 1, 0),
+    非製造業ダミー = ifelse(dai == 2, 1, 0)
+  )
+table(df$製造業ダミー, df$非製造業ダミー)
+```
+
+
+## ダミー変数の注意点
+
+研究開発費が翌期の売上高に与える影響を分析する回帰式に，製造業ダミーと非製造業ダミーの2つのダミー変数を組み込んでみる。
+
+```{r}
+res <- lm(売上高 ~ lag(研究開発費) + 製造業ダミー + 非製造業ダミー, data = df)
+summary(res)
+```
+
+## ダミー変数の注意点
+
+分析結果をみると，`1 not defined because of singularities`というメッセージがあり，`非製造業ダミー`が`NA`になっていることが分かる。Rが自動で変数を落としている。
+
+こんなことしなくても、Rはダミー変数となりうる変数を因子型にして回帰分析に組み込めば、勝手にダミー変数として適切に処理してくれる。
+
+```{r}
+#| output-location: slide
+res01 <- lm(売上高 ~ lag(研究開発費) + 非製造業ダミー, data = df)
+res02 <- lm(売上高 ~ lag(研究開発費) + factor(dai), data = df)
+result <- list(res01,res02)
+modelsummary(result)
+```
+
+
+
+# 変数変換
+
+- 回帰分析を実行するときに，手許にあるデータをそのまま使うのでは無く，変数変換する場合が多い
+- 例えば決算書の財務データは「百万円」か「千円」の単位で記録されているので，百万円でそろえる必要があるし外貨で保有する資産などは円換算する必要がある。
+- 売上高や利益を規模の異なる他企業と比較してもあまり意味はないので，ROEや総資産回転率といった財務比率に直すことも多い.
+
+## 線形変換
+
+確率変数$X$がアフィン変換(affine transformation)をする場合を考える。
+
+$$
+\begin{aligned}
+Y =  a + bX
+\end{aligned}
+$$
+
+- 確率変数$X$が確率変数$Y$に変換されたとする。
+- $a$と$b$はパラメータです。
+
+このとき，次の関係が成立します。
+
+## 線形変換の期待値
+
+期待値については，
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= \mathbb{E}[a + bX] \nonumber \\
+       &= \mathbb{E}[a] + \mathbb{E}[bX] \nonumber\\
+       &= a + b \mathbb{E}[X]
+\end{aligned}
+$$
+
+## 線形変換の分散
+
+分散については，
+$$
+\begin{aligned}
+\mathbb{V}[Y]
+        &= \mathbb{E}[(Y - \mathbb{E}[Y])^2]      \nonumber \\
+        &= \mathbb{E}[(a + bX - (a+b\mathbb{E}[X]))^2] \nonumber\\
+        &= \mathbb{E}[(bX - b \mathbb{E}[X])^2]   \nonumber\\
+        &= \mathbb{E}[b^2 (X - \mathbb{E}[X])^2]  \nonumber\\
+        &= b^2 \mathbb{E}[ (X - \mathbb{E}[X])^2] \nonumber\\
+        &= b^2 \mathbb{V}[X]
+\end{aligned}
+$$
+
+となる。
+
+## 線形変換の標準偏差
+
+標準偏差は，次の通り
+
+$$
+\begin{aligned}
+\sigma _Y = \sqrt{\mathbb{V}[Y]} = |b| \sqrt{\mathbb{V}[X]}
+\end{aligned}
+$$
+
+
+## アフィン変換の例
+
+ある工事が完了する日数とその確率が次のように予測されているとする。
+
+| 日数$X$     | 1     | 2      | 3      | 4      | 5      |
+|:-----------:|:-----:|:------:|:------:|:------:|:------:|
+| 確率$p(x)$  | $5\%$ | $20\%$ | $35\%$ | $30\%$ | $10\%$ |
+
+このとき
+
+$$
+\begin{aligned}
+\mathbb{E}[X] &\equiv \sum _k p_k x_k \text{より} & \mathbb{E}[X] &= 3.2\\
+\mathbb{V} [X] &\equiv \sum _k p_k (x_k - \mathbb{E}[X])^2 \text{より} & \mathbb{V} [X] &= 1.06
+\end{aligned}
+$$
+
+## アフィン変換の例
+
+この工事では，固定費として100万円，変動費として1日あたり10万円の費用がかかるとすると，総費用は，
+
+$$
+\begin{aligned}
+Y = 100  + 10 X
+\end{aligned}
+$$
+
+として表される。
+このとき，総費用の期待値および分散は，
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= 100 + 10 \mathbb{E}[X] = 100 + 10 \times 3.2 = 132\\
+\mathbb{V}[Y] &= 10^2 \mathbb{V}[X] = 100  \times 1.06 = 106
+\end{aligned}
+$$
+
+となる。
+
+
+
+## 一般的な例
+
+より一般的に，$k$個の確率変数$X_i$, $i = 1, \dots ,k$の一次結合$Y = c_0 + c_1 X_1 + \cdots + c_k X_k$で表される確率変数$Y$において，次の関係が成立する。
+ここで，$c_0,c_1, \dots, c_k$はパラメータで，定数です。
+
+$$
+\begin{aligned}
+\mathbb{E}[Y] &= c_0 + c_1 \mu _1 + \cdots c_k \mu_k\\
+\mathbb{V} [Y] &= c_1^2 \sigma_1^2 + \cdots +  c_k^2 \sigma _k^2 + \sum _{i\not = j}^k \sum_{j \not = i}^k c_i c_j \sigma _{ij}
+\end{aligned}
+$$
+
+ここで，$\mu _i = \mathbb{E}[X_i]$，$\sigma _i^2 = \mathbb{V}[X_i]$，$\sigma _{ij} = \mathbb{COV}[X_i,X_j]$である。
+
+
+## 一般的な例$k=2$のケース
+
+$$
+\begin{align}
+\mathbb{E}[Y]   &= c_0 + c_1 \mu _1 + c_2 \mu_2\\
+\mathbb{V} [Y] &= c_1^2 \sigma_1^2 + c_2^2 \sigma _2^2 + 2 c_1 c_2 \sigma _{12}
+\end{align}
+$$
+
+<!--
+## 例8
+
+$k=2$のケースで，$Y=0.5X_1 + 0.5 X_2$の期待値および分散を求めます。
+ただし，$\mu _1 = 0.07$，$\sigma _1^2 = 1.48$，$\mu_2 = -0.02$，$\sigma _2^2 = 1.46$とします。
+
+- 無相関($\rho _{12} = 0$, $\mathbb{COV}[X_1,X_2] =0 $)のケース
+	$$
+  \begin{aligned}
+	\mathbb{E}[Y]   &= 0.5 \times 0.07 + 0.5 \times - 0.02 = 0.025\\
+	\mathbb{V} [Y] &= 0.5^2 \times 1.48 + 0.5^2 \times 1.46 + 2 \times 0.5 \times 0.5 \times 0 = 0.735
+	\end{aligned}
+  $$
+
+  $Y$の分散は，$X_1$と$X_2$の分散よりも小さい。
+
+- 負の相関($\rho _{12} = -0.99 \Leftrightarrow \mathbb{COV}[X_1,X_2] = -1.46 $)のケース
+	$$
+  \begin{aligned}
+	\mathbb{E}[Y]   &= 0.5 \times 0.07 + 0.5 \times - 0.02 = 0.025\\
+	\mathbb{V} [Y] &= 0.5^2 \times 1.48 + 0.5^2 \times 1.46 + 2 \times 0.5 \times 0.5 \times -1.46 = 0.005
+	\end{aligned}
+  $$
+
+	$Y$の分散は，$X_1$と$X_2$の分散よりも小さい。
+
+
+$X_1$と$X_2$の共分散は，$Y$の分散に影響を与える。
+ -->
+
+
+## 中心化
+
+- 変数変換の一つである**中心化**(centering)
+- 説明変数からその**平均値を引く**ことで平均値を0にする変換
+- 一次関数の平行移動に相当する線形変換の一種で，回帰式の切片の解釈を容易にするために利用される
+- 中心化や標準化を行う`scale()`関数が便利
+
+## 中心化した回帰分析
+
+先の回帰分析では，次のようなモデルを推定
+
+$$
+\text{売上高} = \alpha + \beta_1 \text{研究開発費} + \beta_2 \text{非製造業ダミー} + \varepsilon
+$$
+
+この回帰式を推定すると，次のようになります。
+
+```{r}
+res01 <- lm(売上高 ~ lag(研究開発費) + 非製造業ダミー , data = df)
+coef(res01)
+```
+
+## 中心化した回帰
+
+- この回帰式の切片`r round(res$coefficients[1], digits = 4)`の意味を考えてみる。
+- 切片は，`研究開発費`と`製造業ダミー`が0の場合の`売上高`の平均値を表す。
+- 研究開発費がゼロの企業というのはそれなりに存在しているので，教科書のように父親の身長がゼロのとき，といった非現実的な状況を表しているわけではないですが，非製造業企業だけの平均売上高だけでなく，全体の平均を表すために，変数を中心化(centering)
+
+## 中心化した回帰
+
+標本平均を差し引くことで中心化を行う。
+中心化は、`scale()`関数を使って行う。
+
+```{r}
+#| output-location: slide
+df <- df %>%
+  mutate(
+    研究開発費中心化 = scale(研究開発費, center = TRUE, scale = FALSE),
+    売上高中心化 = scale(売上高, center = TRUE, scale = FALSE)
+  )
+res02 <- lm(売上高中心化 ~ lag(研究開発費中心化) + 非製造業ダミー , data = df)
+res <- list(res01,res02)
+modelsummary(res)
+```
+先の中心化前の回帰分析結果と比べて違っているのは，切片`(intercept)`の値だけ
