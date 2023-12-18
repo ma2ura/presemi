@@ -13,5 +13,4 @@ knitr
 kableExtra
 scales
 modelsummary
-gapminder
-plotly
+MASS

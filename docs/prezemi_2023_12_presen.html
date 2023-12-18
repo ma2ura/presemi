@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.521">
+  <meta name="generator" content="quarto-1.4.523">
 
   <meta name="author" content="Soichi Matsuura">
   <title>プレゼミ講義ノート - プレゼミ2023  回帰分析の応用</title>
@@ -760,30 +760,30 @@ Y = \alpha + \sum _{i=1}^k \beta _i X_i + \varepsilon
 <li><code>data</code> ： 回帰分析に用いるデータフレーム</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(Y <span class="sc">~</span> X, <span class="at">data =</span> df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="準備" class="slide level2">
 <h2>準備</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># とりあえずこれ</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># ggplot2のテーマ</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># 作表</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># 作表の拡張</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># 軸の単位を制御</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="co"># モデルのまとめ</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># とりあえずこれ</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># ggplot2のテーマ</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># 作表</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># 作表の拡張</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales) <span class="co"># 軸の単位を制御</span></span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="co"># モデルのまとめ</span></span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="回帰分析の練習" class="slide level2">
 <h2>回帰分析の練習</h2>
 <p>ボストン住宅価格データを使って回帰分析を実行</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) <span class="co"># データを取得</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> Boston</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS) <span class="co"># データを取得</span></span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> Boston</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>df</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        crim    zn indus chas    nox    rm   age     dis rad tax ptratio  black
 1    0.00632  18.0  2.31    0 0.5380 6.575  65.2  4.0900   1 296    15.3 396.90
@@ -2165,8 +2165,8 @@ Y = \begin{cases}
 <h2>説明変数がダミー変数のみの回帰</h2>
 <p>住宅価格と川に隣接しているかどうかのダミー変数を使って回帰分析</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(medv <span class="sc">~</span> chas, <span class="at">data =</span> df)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(medv <span class="sc">~</span> chas, <span class="at">data =</span> df)</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)        chas 
   22.093843    6.346157 </code></pre>
@@ -2206,8 +2206,8 @@ Y = \begin{cases}
 <h2>ダミー変数の注意点</h2>
 <p>ダミー変数が表すカテゴリーの数より1つ少ないダミー変数を使う。 カテゴリーが3つある場合は、2つのダミー変数を使う。 次のデータで確認してみる。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/RD_2022.csv"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/RD_2022.csv"</span>)</span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "会社コード"                     "企業名"                        
  [3] "決算期"                         "決算種別"                      
@@ -2244,8 +2244,8 @@ Y = \begin{cases}
 <h2>ダミー変数の注意点</h2>
 <p><code>substr()</code>関数を使って，日経業種コードの大分類を作成</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>dai <span class="ot">&lt;-</span> <span class="fu">substr</span>(df<span class="sc">$</span>日経業種コード,<span class="dv">1</span>,<span class="dv">1</span>) <span class="co"># 大分類</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>dai) <span class="co"># 大分類の頻度</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>dai <span class="ot">&lt;-</span> <span class="fu">substr</span>(df<span class="sc">$</span>日経業種コード,<span class="dv">1</span>,<span class="dv">1</span>) <span class="co"># 大分類</span></span>
+<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>dai) <span class="co"># 大分類の頻度</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     1     2 
@@ -2254,12 +2254,12 @@ Y = \begin{cases}
 </div>
 <p>この大分類を用いてダミー変数を作ります。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    製造業ダミー <span class="ot">=</span> <span class="fu">ifelse</span>(dai <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    非製造業ダミー <span class="ot">=</span> <span class="fu">ifelse</span>(dai <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>製造業ダミー, df<span class="sc">$</span>非製造業ダミー)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>    製造業ダミー <span class="ot">=</span> <span class="fu">ifelse</span>(dai <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a>    非製造業ダミー <span class="ot">=</span> <span class="fu">ifelse</span>(dai <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb11-5"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb11-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>製造業ダミー, df<span class="sc">$</span>非製造業ダミー)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
         0     1
@@ -2272,8 +2272,8 @@ Y = \begin{cases}
 <h2>ダミー変数の注意点</h2>
 <p>研究開発費が翌期の売上高に与える影響を分析する回帰式に，製造業ダミーと非製造業ダミーの2つのダミー変数を組み込んでみる。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 製造業ダミー <span class="sc">+</span> 非製造業ダミー, <span class="at">data =</span> df)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 製造業ダミー <span class="sc">+</span> 非製造業ダミー, <span class="at">data =</span> df)</span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -2305,10 +2305,10 @@ F-statistic: 3.766e+04 on 2 and 36278 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>分析結果をみると，<code>1 not defined because of singularities</code>というメッセージがあり，<code>非製造業ダミー</code>が<code>NA</code>になっていることが分かる。Rが自動で変数を落としている。</p>
 <p>こんなことしなくても、Rはダミー変数となりうる変数を因子型にして回帰分析に組み込めば、勝手にダミー変数として適切に処理してくれる。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>res01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 非製造業ダミー, <span class="at">data =</span> df)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>res02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> <span class="fu">factor</span>(dai), <span class="at">data =</span> df)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">list</span>(res01,res02)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>res01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 非製造業ダミー, <span class="at">data =</span> df)</span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>res02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> <span class="fu">factor</span>(dai), <span class="at">data =</span> df)</span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">list</span>(res01,res02)</span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(result)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section><section id="ダミー変数の注意点-4-output" class="slide level2 output-location-slide"><h2>ダミー変数の注意点</h2><div class="cell output-location-slide">
@@ -2577,8 +2577,8 @@ $X_1$と$X_2$の共分散は，$Y$の分散に影響を与える。
 \]</span></p>
 <p>この回帰式を推定すると，次のようになります。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>res01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 非製造業ダミー , <span class="at">data =</span> df)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(res01)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a>res01 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費) <span class="sc">+</span> 非製造業ダミー , <span class="at">data =</span> df)</span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(res01)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    (Intercept) lag(研究開発費)  非製造業ダミー 
     68916.62208        19.44671    164270.98889 </code></pre>
@@ -2597,14 +2597,14 @@ $X_1$と$X_2$の共分散は，$Y$の分散に影響を与える。
 <h2>中心化した回帰</h2>
 <p>標本平均を差し引くことで中心化を行う。 中心化は、<code>scale()</code>関数を使って行う。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    研究開発費中心化 <span class="ot">=</span> <span class="fu">scale</span>(研究開発費, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    売上高中心化 <span class="ot">=</span> <span class="fu">scale</span>(売上高, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>res02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高中心化 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費中心化) <span class="sc">+</span> 非製造業ダミー , <span class="at">data =</span> df)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">list</span>(res01,res02)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>    研究開発費中心化 <span class="ot">=</span> <span class="fu">scale</span>(研究開発費, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>    売上高中心化 <span class="ot">=</span> <span class="fu">scale</span>(売上高, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a>res02 <span class="ot">&lt;-</span> <span class="fu">lm</span>(売上高中心化 <span class="sc">~</span> <span class="fu">lag</span>(研究開発費中心化) <span class="sc">+</span> 非製造業ダミー , <span class="at">data =</span> df)</span>
+<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">list</span>(res01,res02)</span>
+<span id="cb18-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(res)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <p>先の中心化前の回帰分析結果と比べて違っているのは，切片<code>(intercept)</code>の値だけ</p>
