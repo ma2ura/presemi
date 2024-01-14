@@ -12,6 +12,4 @@ lubridate
 ggthemes
 knitr
 kableExtra
-patchwork
-modelsummary
 ggrepel

@@ -174,10 +174,9 @@ $$
 この$\boldsymbol{A}$と$\boldsymbol{f}$を決定する必要がある。
 
 
+# 因子分析のモデル
 
-# 3. 因子分析のモデル
-
-## 3.1 モデルの表現
+## モデルの表現
 
 上のモデルに観測値との誤差$\varepsilon_i$を加え、
 $$
@@ -188,7 +187,13 @@ $$
 しかし回帰分析と違うところは，$Y_i$のみ観察可能で，$\alpha_{i1}$も$\alpha_{i2}$も$f_1$も$f_2$も観察できない点である。
 手元にあるデータは，$n$人から回収したアンケートより入手できた回答項目5個についての回答結果となる$Y_i, \quad i = 1,\dots , 5$のみである。
 
-## 3.2 モデルの仮定
+## モデルの例
+
+![五教科の得点](img/gokamoku.png)
+
+
+
+## モデルの仮定
 
 そこで$Y_i$に一定の仮定を置くことで、$\alpha$と$f$を探す方法を考える。
 
@@ -251,7 +256,7 @@ $$
 ここで，$\mathrm{Var}(Y_i) = 1$を用いている。
 これを**寄与率**(contribution ratio)とよぶ。
 
-## 3.3 モデルの推定
+## モデルの推定
 
 観測された変数$Y_i$の相関の大きさを用いて因子負荷量$a_{ij}$と独自因子$\sigma_i$といったパラメータを推定する。 まずは観測された変数の共分散行列を因子分析モデルのパラメータで表現する。
 
@@ -266,39 +271,24 @@ $$
 
 
 
-# 4. 知覚マップの作成
+# 因子分析の実践
 
-```{r setup, echo = FALSE, message=FALSE}
-library(psych)
-library(tidyverse)
-library(ggthemes)
-library(knitr)
-library(kableExtra)
-library(patchwork)
-library(modelsummary)
-# font for mac
-
-# mystyle <- list( #ggplotのテーマ
-#   theme_calc(),
-#   scale_colour_calc(),
-#   theme(
-#     text = element_text(
-#       family = "HiraKakuProN-W3",
-#       size = 12),
-#     legend.position = 'none',
-#     axis.text=element_text(size=8),
-#     axis.text.x = element_text(angle = 90,vjust=0.5,hjust=1)
-#     )
-# )
-
+```{r setup}
+#| message: FALSE
+library(psych) # 心理学用パッケージ
+library(tidyverse) # いつもの
+library(ggthemes) # 図をきれいに
+library(knitr) # 表をキレイに
+library(kableExtra) # 表をキレイに
 knitr::opts_chunk$set(dev = "ragg_png")
-# テーマを設定
 theme_set(theme_few(base_size = 12))
-# 以下、ggplot2のデフォルトを変更
 update_geom_defaults("point", list(size = 3))
 ```
 
 ## データの読み込み
+
+今回はテキストファイル`.txt`を読み込むので、`readr`パッケージの`read_table()`関数を用いる。
+<!-- 練習用データはお菓子のデータである。 -->
 
 ```{r read_data, message=FALSE, warning=FALSE}
 df_senbei <- readr::read_table("data/senbei.txt")
@@ -347,17 +337,16 @@ KMO値が高いほどデータが因子分析により適しているといえ�
 
 <!--- The measure of sampling adequacy is calculated for each indicator as
 --->
-
+<!-- 
 ## MSA
 
 各指標に対して計算されるサンプリング妥当性尺度(MSA)は次の通り。
 $$
 MSA_j = \displaystyle \frac{\sum _{k \not = j} r^2_{jk}}{\sum _{k \not = j} r^2_{jk} + \sum _{k \not = j} p^2_{jk}}
-$$
+$$ 
+-->
 
 ## KMO
-
-これを1から0の間の値を取るように変換したものがKMO値である。
 
 $$
 KMO = \displaystyle \frac{\sum _{j\not=k} \sum _{k \not = j} r^2_{jk}}{\sum _{j \not =k} \sum _{k \not = j} r^2_{jk} + \sum _{j \not =k} \sum _{k \not = j} p^2_{jk}}
@@ -384,7 +373,7 @@ KMO値が0に近いということは，**相関の合計に比べて部分相�
 ## RでKMO
 
 RでKMO値を求めるには、`psych`パッケージの`KMO()`関数を用いる。
-`KMO()`の引数には、データフレームがはいるため，データフレームには必要な変数のみを入れておくようにする。
+`KMO()`の引数はデータフレームなので、必要な変数のみを入れておく。
 
 ```{r kmo}
 KMO(df_senbei)
@@ -405,8 +394,9 @@ knitr::kable(correlation) |>
   kable_styling(font_size = 20)
 ```
 
-観測変数間の相関行列が求まりました。これを$\Sigma$(シグマ)とする。
-$\sum$ではなく，ギリシャ文字の$\sigma$の大文字であることに注意。
+観測変数間の相関行列が求まりました。
+<!-- これを$\Sigma$(シグマ)とする。 -->
+<!-- $\sum$ではなく，ギリシャ文字の$\sigma$の大文字であることに注意。 -->
 
 
 <!--
@@ -440,8 +430,12 @@ kable(combined_corr) |> kable_styling(font_size = 24)
 `psych`パッケージの`fa.parallel()`関数で、スクリーンプロットを作成し因子の数を検討
 因子分析では，**因子の数を何個に設定するかは分析者の自由**である。
 
-```{r screenplot, warning=FALSE}
+```{r screenplot}
+#| message: FALSE
+#| warning: FALSE
+#| fig.height: 6
 #| output-location: slide
+?fa.parallel()
 fa.parallel(correlation, n.obs = 11, fa = "fa" ) # スクリープロットを表示
 abline( h = 0 ) # y = 0 の横線を追加
 ```
@@ -458,7 +452,9 @@ abline( h = 0 ) # y = 0 の横線を追加
 
 ## 因子負荷の推定
 
-```{r fa2, warning=FALSE}
+```{r fa2}
+#| warning: FALSE
+#| output-location: slide
 result = fa(correlation,
             nfactors = 2,　# 因子の数
             fm = "minres",# 最小二乗法
@@ -466,7 +462,10 @@ result = fa(correlation,
             use = "complete.obs" # 欠損値
             )
 print( result, digits = 3, sort = T )
+?fa
 ```
+`fa()`関数の引数は相関係数行列、因子数、回転法、欠損値の扱いなどを指定
+`minres`は最小二乗法、`varimax`は軸の直交回転法の1つ
 <!--
 #### 因子スコアの推定値
 

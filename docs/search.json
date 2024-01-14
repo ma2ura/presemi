@@ -2103,22 +2103,22 @@
     "objectID": "prezemi_2023_15_presen.html#モデルの表現",
     "href": "prezemi_2023_15_presen.html#モデルの表現",
     "title": "プレゼミ2023 最終会  多変量解析",
-    "section": "3.1 モデルの表現",
-    "text": "3.1 モデルの表現\n上のモデルに観測値との誤差\\varepsilon_iを加え、 \nY_i = \\alpha _{i1}f_1 + \\alpha_{i2}f_2 + \\varepsilon_i, \\quad i = 1,\\dots ,5\n とすると、5本の重回帰モデルと見なせる。 この\\varepsilonの分散\\sigma_i^2は独自因子とよばれる。 しかし回帰分析と違うところは，Y_iのみ観察可能で，\\alpha_{i1}も\\alpha_{i2}もf_1もf_2も観察できない点である。 手元にあるデータは，n人から回収したアンケートより入手できた回答項目5個についての回答結果となるY_i, \\quad i = 1,\\dots , 5のみである。"
+    "section": "モデルの表現",
+    "text": "モデルの表現\n上のモデルに観測値との誤差\\varepsilon_iを加え、 \nY_i = \\alpha _{i1}f_1 + \\alpha_{i2}f_2 + \\varepsilon_i, \\quad i = 1,\\dots ,5\n とすると、5本の重回帰モデルと見なせる。 この\\varepsilonの分散\\sigma_i^2は独自因子とよばれる。 しかし回帰分析と違うところは，Y_iのみ観察可能で，\\alpha_{i1}も\\alpha_{i2}もf_1もf_2も観察できない点である。 手元にあるデータは，n人から回収したアンケートより入手できた回答項目5個についての回答結果となるY_i, \\quad i = 1,\\dots , 5のみである。"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#モデルの仮定",
     "href": "prezemi_2023_15_presen.html#モデルの仮定",
     "title": "プレゼミ2023 最終会  多変量解析",
-    "section": "3.2 モデルの仮定",
-    "text": "3.2 モデルの仮定\nそこでY_iに一定の仮定を置くことで、\\alphaとfを探す方法を考える。\n\n\n\n\n\n\n共通因子に関する仮定\n\n\n\nf_1とf_2はiidで、平均ゼロ、分散1となる確率変数\nf_iと\\varepsilon_iは独立、Cov(f_i,\\varepsilon_i) = 0)\n\\varepsilon _iと\\varepsilon_jは独立\n\n\n\n\n目的変数Y_iの間の相関係数を利用して、偏回帰係数に対応する因子負荷量a_{ij}を推定する。"
+    "section": "モデルの仮定",
+    "text": "モデルの仮定\nそこでY_iに一定の仮定を置くことで、\\alphaとfを探す方法を考える。\n\n\n\n\n\n\n共通因子に関する仮定\n\n\n\nf_1とf_2はiidで、平均ゼロ、分散1となる確率変数\nf_iと\\varepsilon_iは独立、Cov(f_i,\\varepsilon_i) = 0)\n\\varepsilon _iと\\varepsilon_jは独立\n\n\n\n\n目的変数Y_iの間の相関係数を利用して、偏回帰係数に対応する因子負荷量a_{ij}を推定する。"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#モデルの推定",
     "href": "prezemi_2023_15_presen.html#モデルの推定",
     "title": "プレゼミ2023 最終会  多変量解析",
-    "section": "3.3 モデルの推定",
-    "text": "3.3 モデルの推定\n観測された変数Y_iの相関の大きさを用いて因子負荷量a_{ij}と独自因子\\sigma_iといったパラメータを推定する。 まずは観測された変数の共分散行列を因子分析モデルのパラメータで表現する。\n共通因子の仮定3より、\\varepsilon_iと\\varepsilon_jは独立であるため、その共分散はゼロとなる。 よってY_iとY_jの共分散は、\n\n\\begin{align*}\n\\mathrm{Cov}(Y_1, Y_2) &= a_{11}a_{21}\\mathrm{Var}(f_1) + a_{12}a_{22}\\mathrm{Var}(f_2) + \\mathrm{Cov}(\\varepsilon_i, \\varepsilon_j)\\\\\n&= a_{11} a_{21} + a_{12}a_{22}\n\\end{align*}"
+    "section": "モデルの推定",
+    "text": "モデルの推定\n観測された変数Y_iの相関の大きさを用いて因子負荷量a_{ij}と独自因子\\sigma_iといったパラメータを推定する。 まずは観測された変数の共分散行列を因子分析モデルのパラメータで表現する。\n共通因子の仮定3より、\\varepsilon_iと\\varepsilon_jは独立であるため、その共分散はゼロとなる。 よってY_iとY_jの共分散は、\n\n\\begin{align*}\n\\mathrm{Cov}(Y_1, Y_2) &= a_{11}a_{21}\\mathrm{Var}(f_1) + a_{12}a_{22}\\mathrm{Var}(f_2) + \\mathrm{Cov}(\\varepsilon_i, \\varepsilon_j)\\\\\n&= a_{11} a_{21} + a_{12}a_{22}\n\\end{align*}"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析-2",
@@ -2167,7 +2167,7 @@
     "href": "prezemi_2023_15_presen.html#データの読み込み",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "データの読み込み",
-    "text": "データの読み込み\n\ndf_senbei &lt;- readr::read_table(\"data/senbei.txt\")\nknitr::kable(df_senbei) |&gt; kable_styling(font_size = 20)\n\n\n\n\n製品名\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\nハッピーターン\n89\n63\n32\n51\n37\n\n\n雪の宿\n73\n46\n25\n48\n32\n\n\nぽたぽた焼き\n65\n45\n17\n32\n21\n\n\n黒豆せんべい\n72\n33\n2\n50\n9\n\n\nまがりせんべい\n70\n29\n11\n35\n21\n\n\nチーズアーモンド\n71\n20\n10\n38\n24\n\n\n手塩屋\n71\n38\n3\n38\n13\n\n\nばかうけ\n48\n39\n10\n16\n16\n\n\n粒より小餅\n49\n26\n17\n27\n30\n\n\n田舎おかき\n51\n16\n1\n38\n5\n\n\nうまい！堅焼き\n48\n15\n4\n36\n1"
+    "text": "データの読み込み\n今回はテキストファイル.txtを読み込むので、readrパッケージのread_table()関数を用いる。 \n\ndf_senbei &lt;- readr::read_table(\"data/senbei.txt\")\nknitr::kable(df_senbei) |&gt; kable_styling(font_size = 20)\n\n\n\n\n製品名\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\nハッピーターン\n89\n63\n32\n51\n37\n\n\n雪の宿\n73\n46\n25\n48\n32\n\n\nぽたぽた焼き\n65\n45\n17\n32\n21\n\n\n黒豆せんべい\n72\n33\n2\n50\n9\n\n\nまがりせんべい\n70\n29\n11\n35\n21\n\n\nチーズアーモンド\n71\n20\n10\n38\n24\n\n\n手塩屋\n71\n38\n3\n38\n13\n\n\nばかうけ\n48\n39\n10\n16\n16\n\n\n粒より小餅\n49\n26\n17\n27\n30\n\n\n田舎おかき\n51\n16\n1\n38\n5\n\n\nうまい！堅焼き\n48\n15\n4\n36\n1"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#データの詳細",
@@ -2209,21 +2209,21 @@
     "href": "prezemi_2023_15_presen.html#kmo",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "KMO",
-    "text": "KMO\nこれを1から0の間の値を取るように変換したものがKMO値である。\n\nKMO = \\displaystyle \\frac{\\sum _{j\\not=k} \\sum _{k \\not = j} r^2_{jk}}{\\sum _{j \\not =k} \\sum _{k \\not = j} r^2_{jk} + \\sum _{j \\not =k} \\sum _{k \\not = j} p^2_{jk}}\n  ここでr_{jk}は，問題の変数と他の変数との相関係数であり，p_{jk}は偏相関である。\n\nKMOが0.9を超えると素晴らしい，0.80を超えると立派\n0.70を超えると中程度，0.60を超えると普通，\n0.50を超えるだけだと悲惨，0.5を下回ると受け入れられない\n\nという解釈"
+    "text": "KMO\n\nKMO = \\displaystyle \\frac{\\sum _{j\\not=k} \\sum _{k \\not = j} r^2_{jk}}{\\sum _{j \\not =k} \\sum _{k \\not = j} r^2_{jk} + \\sum _{j \\not =k} \\sum _{k \\not = j} p^2_{jk}}\n  ここでr_{jk}は，問題の変数と他の変数との相関係数であり，p_{jk}は偏相関である。\n\nKMOが0.9を超えると素晴らしい，0.80を超えると立派\n0.70を超えると中程度，0.60を超えると普通，\n0.50を超えるだけだと悲惨，0.5を下回ると受け入れられない\n\nという解釈"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#rでkmo",
     "href": "prezemi_2023_15_presen.html#rでkmo",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "RでKMO",
-    "text": "RでKMO\nRでKMO値を求めるには、psychパッケージのKMO()関数を用いる。 KMO()の引数には、データフレームがはいるため，データフレームには必要な変数のみを入れておくようにする。\n\nKMO(df_senbei)\n\nKaiser-Meyer-Olkin factor adequacy\nCall: KMO(r = df_senbei)\nOverall MSA =  0.44\nMSA for each item = \n                  味   パッケージデザイン             広告宣伝 \n                0.44                 0.50                 0.47 \n          素材栄養素 キャンペーンイベント \n                0.30                 0.46 \n\n\n各項目が0.6以上あれば適切らしい。ぜんぶ0.6未満やん。カイザー基準だと悲惨な状態である。"
+    "text": "RでKMO\nRでKMO値を求めるには、psychパッケージのKMO()関数を用いる。 KMO()の引数はデータフレームなので、必要な変数のみを入れておく。\n\nKMO(df_senbei)\n\nKaiser-Meyer-Olkin factor adequacy\nCall: KMO(r = df_senbei)\nOverall MSA =  0.44\nMSA for each item = \n                  味   パッケージデザイン             広告宣伝 \n                0.44                 0.50                 0.47 \n          素材栄養素 キャンペーンイベント \n                0.30                 0.46 \n\n\n各項目が0.6以上あれば適切らしい。ぜんぶ0.6未満やん。カイザー基準だと悲惨な状態である。"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析を行う",
     "href": "prezemi_2023_15_presen.html#因子分析を行う",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子分析を行う。",
-    "text": "因子分析を行う。\n\nすべての変数間の相関係数をcor()関数で計算\n\ncorrelation &lt;- cor(df_senbei, use = \"complete.obs\") |&gt;\n  round(digits = 3)\nknitr::kable(correlation) |&gt;\n  kable_styling(font_size = 20)\n\n\n\n\n\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\n味\n1.000\n0.672\n0.512\n0.750\n0.550\n\n\nパッケージデザイン\n0.672\n1.000\n0.757\n0.298\n0.658\n\n\n広告宣伝\n0.512\n0.757\n1.000\n0.242\n0.911\n\n\n素材栄養素\n0.750\n0.298\n0.242\n1.000\n0.176\n\n\nキャンペーンイベント\n0.550\n0.658\n0.911\n0.176\n1.000\n\n\n\n\n\n\n\n観測変数間の相関行列が求まりました。これを\\Sigma(シグマ)とする。 \\sumではなく，ギリシャ文字の\\sigmaの大文字であることに注意。"
+    "text": "因子分析を行う。\n\nすべての変数間の相関係数をcor()関数で計算\n\ncorrelation &lt;- cor(df_senbei, use = \"complete.obs\") |&gt;\n  round(digits = 3)\nknitr::kable(correlation) |&gt;\n  kable_styling(font_size = 20)\n\n\n\n\n\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\n味\n1.000\n0.672\n0.512\n0.750\n0.550\n\n\nパッケージデザイン\n0.672\n1.000\n0.757\n0.298\n0.658\n\n\n広告宣伝\n0.512\n0.757\n1.000\n0.242\n0.911\n\n\n素材栄養素\n0.750\n0.298\n0.242\n1.000\n0.176\n\n\nキャンペーンイベント\n0.550\n0.658\n0.911\n0.176\n1.000\n\n\n\n\n\n\n\n観測変数間の相関行列が求まりました。"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析のモデル-1",
@@ -2265,7 +2265,7 @@
     "href": "prezemi_2023_15_presen.html#因子の数を決める",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子の数を決める",
-    "text": "因子の数を決める\npsychパッケージのfa.parallel()関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，因子の数を何個に設定するかは分析者の自由である。\n\nfa.parallel(correlation, n.obs = 11, fa = \"fa\" ) # スクリープロットを表示"
+    "text": "因子の数を決める\npsychパッケージのfa.parallel()関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，因子の数を何個に設定するかは分析者の自由である。\n\n?fa.parallel()\nfa.parallel(correlation, n.obs = 11, fa = \"fa\" ) # スクリープロットを表示"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子の数を決める-1",
@@ -2286,7 +2286,7 @@
     "href": "prezemi_2023_15_presen.html#因子負荷の推定",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子負荷の推定",
-    "text": "因子負荷の推定\n\nresult = fa(correlation,\n            nfactors = 2,　# 因子の数\n            fm = \"minres\",# 最小二乗法\n            rotate = \"varimax\", # 軸の回転\n            use = \"complete.obs\" # 欠損値\n            )\nprint( result, digits = 3, sort = T )\n\nFactor Analysis using method =  minres\nCall: fa(r = correlation, nfactors = 2, rotate = \"varimax\", fm = \"minres\", \n    use = \"complete.obs\")\nStandardized loadings (pattern matrix) based upon correlation matrix\n                     item   MR1   MR2    h2       u2  com\n広告宣伝                3 0.985 0.158 0.995  0.00454 1.05\nキャンペーンイベント    5 0.890 0.168 0.819  0.18066 1.07\nパッケージデザイン      2 0.698 0.374 0.627  0.37293 1.53\n味                      1 0.414 0.921 1.020 -0.01958 1.39\n素材栄養素              4 0.078 0.764 0.591  0.40948 1.02\n\n                        MR1   MR2\nSS loadings           2.427 1.625\nProportion Var        0.485 0.325\nCumulative Var        0.485 0.810\nProportion Explained  0.599 0.401\nCumulative Proportion 0.599 1.000\n\nMean item complexity =  1.2\nTest of the hypothesis that 2 factors are sufficient.\n\ndf null model =  10  with the objective function =  4.853\ndf of  the model are 1  and the objective function was  0.756 \n\nThe root mean square of the residuals (RMSR) is  0.03 \nThe df corrected root mean square of the residuals is  0.096 \n\nFit based upon off diagonal values = 0.997"
+    "text": "因子負荷の推定\n\nresult = fa(correlation,\n            nfactors = 2,　# 因子の数\n            fm = \"minres\",# 最小二乗法\n            rotate = \"varimax\", # 軸の回転\n            use = \"complete.obs\" # 欠損値\n            )\nprint( result, digits = 3, sort = T )\n\n\nfa()関数の引数は相関係数行列、因子数、回転法、欠損値の扱いなどを指定 minresは最小二乗法、varimaxは軸の直交回転法の1つ"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析のパス図",
@@ -2511,5 +2511,19 @@
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子分析のイメージ",
     "text": "因子分析のイメージ\n\n因子分析のイメージ"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#モデルの例",
+    "href": "prezemi_2023_15_presen.html#モデルの例",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "モデルの例",
+    "text": "モデルの例\n\n五教科の得点"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#因子負荷の推定-output",
+    "href": "prezemi_2023_15_presen.html#因子負荷の推定-output",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "因子負荷の推定",
+    "text": "因子負荷の推定\n\nFactor Analysis using method =  minres\nCall: fa(r = correlation, nfactors = 2, rotate = \"varimax\", fm = \"minres\", \n    use = \"complete.obs\")\nStandardized loadings (pattern matrix) based upon correlation matrix\n                     item   MR1   MR2    h2       u2  com\n広告宣伝                3 0.985 0.158 0.995  0.00454 1.05\nキャンペーンイベント    5 0.890 0.168 0.819  0.18066 1.07\nパッケージデザイン      2 0.698 0.374 0.627  0.37293 1.53\n味                      1 0.414 0.921 1.020 -0.01958 1.39\n素材栄養素              4 0.078 0.764 0.591  0.40948 1.02\n\n                        MR1   MR2\nSS loadings           2.427 1.625\nProportion Var        0.485 0.325\nCumulative Var        0.485 0.810\nProportion Explained  0.599 0.401\nCumulative Proportion 0.599 1.000\n\nMean item complexity =  1.2\nTest of the hypothesis that 2 factors are sufficient.\n\ndf null model =  10  with the objective function =  4.853\ndf of  the model are 1  and the objective function was  0.756 \n\nThe root mean square of the residuals (RMSR) is  0.03 \nThe df corrected root mean square of the residuals is  0.096 \n\nFit based upon off diagonal values = 0.997"
   }
 ]
