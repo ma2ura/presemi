@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<link href="./favicon.ico" rel="icon">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.529">
+
+  <meta name="author" content="Soichi Matsuura">
+  <title>プレゼミ講義ノート - プレゼミ2023 最終会  多変量解析</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title"><p><b>プレゼミ2023 最終会</b> <br> <span style="color: #282A36; ">多変量解析</span></p></h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Soichi Matsuura 
+</div>
+</div>
+</div>
+
+</section>
+<section>
+<section id="因子分析" class="title-slide slide level1 center">
+<h1>因子分析</h1>
+
+</section>
+<section id="本日の内容" class="slide level2">
+<h2>本日の内容</h2>
+<p>多変量解説の1つ「因子分析」について学習する。</p>
+<ol type="1">
+<li>因子分析の目的</li>
+<li>因子分析の使い方</li>
+<li>因子分析でアンケート分析</li>
+<li>実際にアンケート調査をやってみよう。</li>
+</ol>
+<p>因子分析は、**データの背後に潜むモノを見つけ出す手法</p>
+</section>
+<section id="因子分析-1" class="slide level2">
+<h2>因子分析</h2>
+<ul>
+<li>因子分析(factanal analysis)の目的は、<strong>多くの変数を，より少ない変数で表すこと</strong>である。</li>
+<li>本当に知りたいことを直接測定することは難しい（たとえば、幸福度とか顧客満足度とか）。</li>
+<li>幸福度を知りたいとき、アンケートで「あなたは幸せですか？」と聞くことで幸福度を測ることができるでしょうか？</li>
+<li>このように直接は測定できないものを、間接的に測定する方法を考える。</li>
+</ul>
+</section>
+<section id="因子分析のイメージ" class="slide level2">
+<h2>因子分析のイメージ</h2>
+
+<!-- - たとえば，生徒の学力を「英・数・国・理・社」の5教科の点数で表すより，「文系」と「理系」の2つの因子で表したほうが，生徒の能力を表す変数の数が少なくて済む。 -->
+<img data-src="img/konnaomoi.png" class="r-stretch quarto-figure-center"><p class="caption">背後に潜む思い</p></section>
+<section id="前提知識回転" class="slide level2">
+<h2>前提知識：回転</h2>
+<p>座標の回転について簡単に説明</p>
+
+<img data-src="img/kaiten.png" class="r-stretch quarto-figure-center"><p class="caption">座標の回転</p></section>
+<section id="座標の回転" class="slide level2">
+<h2>座標の回転</h2>
+<p>座標<span class="math inline">(b_1,b_2)</span>を数式で書くと</p>
+<p><span class="math display">
+(b_1,b_2) = (a_1 \cos \theta - a_2 \sin \theta, a_1 \sin \theta + a_2 \cos \theta)
+</span></p>
+<p>つまり、 <span class="math display">
+\begin{aligned}
+b_1 &amp;= a_1 \cos \theta - a_2 \sin \theta \\
+b_2 &amp;= a_1 \sin \theta + a_2 \cos \theta
+\end{aligned}
+</span></p>
+</section>
+<section id="行列で表現すると" class="slide level2">
+<h2>行列で表現すると</h2>
+<p><span class="math display">
+\begin{pmatrix}
+b_1\\
+b_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos \theta &amp; -\sin \theta\\
+\sin \theta &amp; \cos \theta
+\end{pmatrix}
+\begin{pmatrix}
+a_1\\
+a_2
+\end{pmatrix}
+</span></p>
+<p>となる。</p>
+</section>
+<section id="軸の回転" class="slide level2">
+<h2>軸の回転</h2>
+<p>下の2つの図は同じ意味</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/lotation1.png"></p>
+<figcaption>座標の回転</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="img/lotation2.png"></p>
+<figcaption>軸の回転</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="固有値と固有ベクトル" class="slide level2">
+<h2>固有値と固有ベクトル</h2>
+<p>行列にはそれぞれ対応する<strong>固有値</strong>と<strong>固有ベクトル</strong>がある。</p>
+<p>例えば、行列<span class="math inline">A</span>に対して、</p>
+<p><span class="math display">
+A\boldsymbol{v} = \lambda \boldsymbol{v}
+</span></p>
+<p>となる<span class="math inline">\lambda</span>と<span class="math inline">\boldsymbol{v}</span>が存在する。</p>
+</section>
+<section id="因子分析のイメージ-1" class="slide level2">
+<h2>因子分析のイメージ</h2>
+
+<img data-src="img/mitsukedasu.png" class="r-stretch quarto-figure-center"><p class="caption">因子分析のイメージ</p></section>
+<section id="因子分析の概要" class="slide level2">
+<h2>因子分析の概要</h2>
+<p>いま、5つの変数のそれぞれが、2個の変数<span class="math inline">f_1</span>と<span class="math inline">f_2</span>で決まっている、と仮定する。 つまり、</p>
+<p><span class="math display">
+\begin{align*}
+Y_1 &amp; \fallingdotseq a_{11} f_1 + a_{12} f_2\\
+Y_2 &amp; \fallingdotseq a_{21} f_1 + a_{22} f_2\\
+\vdots\\
+Y_5 &amp; \fallingdotseq a_{51} f_1 + a_{52} f_2\\
+\end{align*}
+</span></p>
+</section>
+<section id="連立方程式を行列表記する" class="slide level2">
+<h2>連立方程式を行列表記する</h2>
+<p>行列で表現すると、</p>
+<p><span class="math display">
+\begin{align*}
+\underbrace{
+\begin{pmatrix}
+Y_1\\
+\vdots \\
+Y_5
+\end{pmatrix}
+}_{5\times 1}&amp;=
+\underbrace{
+\begin{pmatrix}
+a_{11} &amp; a_{12}\\
+\vdots &amp; \vdots\\
+a_{51} &amp; a_{52}\\
+\end{pmatrix}
+}_{5 \times 2}
+\underbrace{
+\begin{pmatrix}
+f_{1} \\
+f_{2}
+\end{pmatrix}
+}_{2 \times 1}
+\end{align*}
+</span></p>
+<p>まとめて書くと</p>
+<p><span class="math display">
+\boldsymbol{Y} = \boldsymbol{A}\boldsymbol{f}
+</span> となる。</p>
+</section>
+<section id="線形写像" class="slide level2">
+<h2>線形写像</h2>
+<p>つまり，潜在的な因子を表す<span class="math inline">\boldsymbol{f}</span>を因子負荷量行列<span class="math inline">\boldsymbol{A}</span>で観察された変数<span class="math inline">\boldsymbol{Y}</span>へと線形写像している，というモデルを考える。 この<span class="math inline">\boldsymbol{A}</span>と<span class="math inline">\boldsymbol{f}</span>を決定する必要がある。</p>
+</section></section>
+<section>
+<section id="因子分析のモデル" class="title-slide slide level1 center">
+<h1>3. 因子分析のモデル</h1>
+
+</section>
+<section id="モデルの表現" class="slide level2">
+<h2>3.1 モデルの表現</h2>
+<p>上のモデルに観測値との誤差<span class="math inline">\varepsilon_i</span>を加え、 <span class="math display">
+Y_i = \alpha _{i1}f_1 + \alpha_{i2}f_2 + \varepsilon_i, \quad i = 1,\dots ,5
+</span> とすると、5本の重回帰モデルと見なせる。 この<span class="math inline">\varepsilon</span>の分散<span class="math inline">\sigma_i^2</span>は<strong>独自因子</strong>とよばれる。 しかし回帰分析と違うところは，<span class="math inline">Y_i</span>のみ観察可能で，<span class="math inline">\alpha_{i1}</span>も<span class="math inline">\alpha_{i2}</span>も<span class="math inline">f_1</span>も<span class="math inline">f_2</span>も観察できない点である。 手元にあるデータは，<span class="math inline">n</span>人から回収したアンケートより入手できた回答項目5個についての回答結果となる<span class="math inline">Y_i, \quad i = 1,\dots , 5</span>のみである。</p>
+</section>
+<section id="モデルの仮定" class="slide level2">
+<h2>3.2 モデルの仮定</h2>
+<p>そこで<span class="math inline">Y_i</span>に一定の仮定を置くことで、<span class="math inline">\alpha</span>と<span class="math inline">f</span>を探す方法を考える。</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>共通因子に関する仮定</strong></p>
+</div>
+<div class="callout-content">
+<ol type="1">
+<li><span class="math inline">f_1</span>と<span class="math inline">f_2</span>はiidで、平均ゼロ、分散1となる確率変数</li>
+<li><span class="math inline">f_i</span>と<span class="math inline">\varepsilon_i</span>は独立、<span class="math inline">Cov(f_i,\varepsilon_i) = 0</span>)</li>
+<li><span class="math inline">\varepsilon _i</span>と<span class="math inline">\varepsilon_j</span>は独立</li>
+</ol>
+</div>
+</div>
+</div>
+<p>目的変数<span class="math inline">Y_i</span>の間の相関係数を利用して、偏回帰係数に対応する因子負荷量<span class="math inline">a_{ij}</span>を推定する。</p>
+</section>
+<section id="因子分析の仮定" class="slide level2">
+<h2>因子分析の仮定</h2>
+<p>共通因子に関する仮定(1)と(2)から、</p>
+<p><span class="math display">
+\begin{align*}
+\mathrm{Var}(Y_i) &amp;= \mathrm{Var}(a_{i1}f_1 + a_{i2}f_2 + \varepsilon_i)\\
+                  &amp;= a_{i1}^2\mathrm{Var}(f_1) + a_{i2}^2\mathrm{Var}(f_2) +{Var}(\varepsilon_i)\\
+                  &amp;= a_{i1}^2 + a_{i2}^2 + \sigma_i^2
+\end{align*}
+</span> が導出される。1行目から2行目の変形に仮定2、2行目から3行目の変形に仮定1を用いている。</p>
+</section>
+<section id="共通性と独自因子" class="slide level2">
+<h2>共通性と独自因子</h2>
+<p>変数<span class="math inline">Y_i</span>の分散は、共通性と独自因子に分けられる。 <span class="math display">
+\mathrm{Var}(Y_i) = \underbrace{a_{i1}^2 + a_{i2}^2}_{第i変数の共通性} + \underbrace{\sigma_i^2}_{独自因子}
+</span></p>
+<p>共通因子がゼロのとき，<span class="math inline">Y_i</span>の分散は独自因子の分散で決定されている。</p>
+</section>
+<section id="因子分析-2" class="slide level2">
+<h2>因子分析</h2>
+<p>変数<span class="math inline">Y_i</span>を標準化し、<span class="math inline">\mathrm{Var}(Y_i) = 1</span>としているとき、共通性は以下のように表すことができる。 <span class="math display">
+\begin{align*}
+1 &amp;= a_{i1}^2 + a_{i2}^2 + \sigma_i^2 \\
+a_{i1}^2 + a_{i2}^2 &amp;= 1 - \sigma_i^2
+\end{align*}
+</span></p>
+<p><span class="math inline">Y_i</span>の分散から独自因子<span class="math inline">\varepsilon_i</span>の分散を除いた残りが共通性であり、 2つの共通因子<span class="math inline">f_1</span>、<span class="math inline">f_2</span>で説明できる部分を表している。 これが因子分析における決定係数<span class="math inline">R^2</span>に対応する統計量となる。</p>
+</section>
+<section id="因子の適合度" class="slide level2">
+<h2>因子の適合度</h2>
+<p>5本の方程式全体の適合度は、この共通性の合計して、全変数の分散の和に占める割合は， <span class="math display">
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{\sum _{i=1}^5 \mathrm{Var}(Y_i)} =
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{\sum _{i=1}^5 1} =
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{5}
+</span> で定義される。 ここで，<span class="math inline">\mathrm{Var}(Y_i) = 1</span>を用いている。 これを<strong>寄与率</strong>(contribution ratio)とよぶ。</p>
+</section>
+<section id="モデルの推定" class="slide level2">
+<h2>3.3 モデルの推定</h2>
+<p>観測された変数<span class="math inline">Y_i</span>の相関の大きさを用いて因子負荷量<span class="math inline">a_{ij}</span>と独自因子<span class="math inline">\sigma_i</span>といったパラメータを推定する。 まずは観測された変数の共分散行列を因子分析モデルのパラメータで表現する。</p>
+<p>共通因子の仮定3より、<span class="math inline">\varepsilon_i</span>と<span class="math inline">\varepsilon_j</span>は独立であるため、その共分散はゼロとなる。 よって<span class="math inline">Y_i</span>と<span class="math inline">Y_j</span>の共分散は、</p>
+<p><span class="math display">
+\begin{align*}
+\mathrm{Cov}(Y_1, Y_2) &amp;= a_{11}a_{21}\mathrm{Var}(f_1) + a_{12}a_{22}\mathrm{Var}(f_2) + \mathrm{Cov}(\varepsilon_i, \varepsilon_j)\\
+&amp;= a_{11} a_{21} + a_{12}a_{22}
+\end{align*}
+</span></p>
+</section></section>
+<section>
+<section id="知覚マップの作成" class="title-slide slide level1 center">
+<h1>4. 知覚マップの作成</h1>
+
+</section>
+<section id="データの読み込み" class="slide level2">
+<h2>データの読み込み</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="st">"data/senbei.txt"</span>)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df_senbei) <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">製品名</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">味</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">パッケージデザイン</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">広告宣伝</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">素材栄養素</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">キャンペーンイベント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ハッピーターン</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">雪の宿</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ぽたぽた焼き</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">黒豆せんべい</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">まがりせんべい</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">チーズアーモンド</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">手塩屋</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ばかうけ</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">39</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">粒より小餅</td>
+<td style="text-align: right;">49</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">田舎おかき</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">うまい！堅焼き</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="データの整形" class="slide level2">
+<h2>データの整形</h2>
+<p>このデータフレームには、製品名、味、パッケージデザイン、広告宣伝、素材栄養素、キャンペーンイベントという6つの変数から構成されている。分析を容易にするため製品名を行名にするため、<code>tibble</code>パッケージの<code>column_to_rownames()</code>関数を用いる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(df_senbei, <span class="st">"製品名"</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">味</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">パッケージデザイン</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">広告宣伝</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">素材栄養素</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">キャンペーンイベント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ハッピーターン</td>
+<td style="text-align: right;">89</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">雪の宿</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">32</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ぽたぽた焼き</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">黒豆せんべい</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">まがりせんべい</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">チーズアーモンド</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">24</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="データの詳細" class="slide level2">
+<h2>データの詳細</h2>
+<ul>
+<li>製品ごとに、味やパッケージデザイン、広告宣伝、素材栄養素、キャンペーンイベントの5項目について得点が付されている。</li>
+<li>Rで因子分析を行うには、<code>psych</code>パッケージの<code>fa()</code>関数を用いる方法と、基本関数の<code>factanal()</code>関数を用いる方法がある。</li>
+</ul>
+</section>
+<section id="fa関数を用いた場合" class="slide level2">
+<h2>fa()関数を用いた場合</h2>
+<p>まず相関係数行列を作成する。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/cor_matrix-1.png" width="1344" class="r-stretch"></section>
+<section id="相関係数行列" class="slide level2">
+<h2>相関係数行列</h2>
+<p>この相関係数行列をみると、</p>
+<ul>
+<li>味と素材栄養素</li>
+<li>パッケージデザインと広告宣伝</li>
+<li>広告宣伝とキャンペーンイベント</li>
+</ul>
+<p>の相関係数が非常に高いことがわかる。</p>
+</section>
+<section id="kaiser-meyer-olkinの標本妥当性の測度" class="slide level2">
+<h2>Kaiser-Meyer-Olkinの標本妥当性の測度</h2>
+<p>カイザー・マイヤー・オルキン (Kaiser-Meyer-Olkin：KMO) 検定は，データが因子分析にどの程度適しているかを決定する統計的尺度である。 この検定は，モデル中の各変数と完全なモデルのサンプリングの妥当性を測定する。 この統計量は，共通分散であるかもしれない変数間の分散の比率の尺度である。 KMO値が高いほどデータが因子分析により適しているといえる(by wikipedia)。</p>
+<!--- The measure of sampling adequacy is calculated for each indicator as
+--->
+</section>
+<section id="msa" class="slide level2">
+<h2>MSA</h2>
+<p>各指標に対して計算されるサンプリング妥当性尺度(MSA)は次の通り。 <span class="math display">
+MSA_j = \displaystyle \frac{\sum _{k \not = j} r^2_{jk}}{\sum _{k \not = j} r^2_{jk} + \sum _{k \not = j} p^2_{jk}}
+</span></p>
+</section>
+<section id="kmo" class="slide level2">
+<h2>KMO</h2>
+<p>これを1から0の間の値を取るように変換したものがKMO値である。</p>
+<p><span class="math display">
+KMO = \displaystyle \frac{\sum _{j\not=k} \sum _{k \not = j} r^2_{jk}}{\sum _{j \not =k} \sum _{k \not = j} r^2_{jk} + \sum _{j \not =k} \sum _{k \not = j} p^2_{jk}}
+</span> <!---
+Here $r_{jk}$ is the correlation between the variable in question and another, and $p_{jk}$ is the partial correlation.
+----> ここで<span class="math inline">r_{jk}</span>は，問題の変数と他の変数との相関係数であり，<span class="math inline">p_{jk}</span>は偏相関である。</p>
+<ul>
+<li>KMOが0.9を超えると素晴らしい，0.80を超えると立派</li>
+<li>0.70を超えると中程度，0.60を超えると普通，</li>
+<li>0.50を超えるだけだと悲惨，0.5を下回ると受け入れられない</li>
+</ul>
+<p>という解釈</p>
+<!--
+一般に，KMO値が0.8～1の場合は，サンプリングが適切であることを示す。0.6未満のKMO値は，サンプリングが適切ではなく，改善措置を講じる必要があることを示す。
+KMO値が0に近いということは，**相関の合計に比べて部分相関が大きい**ことを意味する。
+言い換えれば，因子分析にとって大きな問題となる相関が広範囲に存在するということである。
+行列が因子分析可能であるかどうかの代替尺度は，行列が恒等行列から逸脱する度合いを検定するバートレット検定である。
+-->
+</section>
+<section id="rでkmo" class="slide level2">
+<h2>RでKMO</h2>
+<p>RでKMO値を求めるには、<code>psych</code>パッケージの<code>KMO()</code>関数を用いる。 <code>KMO()</code>の引数には、データフレームがはいるため，データフレームには必要な変数のみを入れておくようにする。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">KMO</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kaiser-Meyer-Olkin factor adequacy
+Call: KMO(r = df_senbei)
+Overall MSA =  0.44
+MSA for each item = 
+                  味   パッケージデザイン             広告宣伝 
+                0.44                 0.50                 0.47 
+          素材栄養素 キャンペーンイベント 
+                0.30                 0.46 </code></pre>
+</div>
+</div>
+<p>各項目が0.6以上あれば適切らしい。ぜんぶ0.6未満やん。カイザー基準だと悲惨な状態である。</p>
+</section>
+<section id="因子分析を行う" class="slide level2">
+<h2>因子分析を行う。</h2>
+<!-- KMOは無かったことにして， -->
+<p>すべての変数間の相関係数を<code>cor()</code>関数で計算</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_senbei, <span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(correlation) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">味</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">パッケージデザイン</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">広告宣伝</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">素材栄養素</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">キャンペーンイベント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">味</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.672</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">0.550</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">パッケージデザイン</td>
+<td style="text-align: right;">0.672</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.757</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.658</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">広告宣伝</td>
+<td style="text-align: right;">0.512</td>
+<td style="text-align: right;">0.757</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">0.911</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">素材栄養素</td>
+<td style="text-align: right;">0.750</td>
+<td style="text-align: right;">0.298</td>
+<td style="text-align: right;">0.242</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.176</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">キャンペーンイベント</td>
+<td style="text-align: right;">0.550</td>
+<td style="text-align: right;">0.658</td>
+<td style="text-align: right;">0.911</td>
+<td style="text-align: right;">0.176</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>観測変数間の相関行列が求まりました。これを<span class="math inline">\Sigma</span>(シグマ)とする。 <span class="math inline">\sum</span>ではなく，ギリシャ文字の<span class="math inline">\sigma</span>の大文字であることに注意。</p>
+<!--
+## 因子分析のモデル
+
+
+ちなみに相関行列を対角より右上と左下には同じ数字が入っており，無駄であるため，
+
+
+右上にはスピアマンの順位相関係数を，左下にはピアソンの相関係数を入れる。
+`lower.tri()`関数は対角より右上の要素を`TRUE`とする論理ベクトルを返すので，これを使って行列の右上要素にノンパラの順位相関を入れる。
+
+
+::: {.cell output-location='slide'}
+
+```{.r .cell-code}
+# スピアマンの順位相関係数
+spearman_corr = round(cor(df_senbei, method='spearman'), digits = 4)
+# ピアソンの積率相関係数
+pearson_corr = round(cor(df_senbei, method='pearson'), digits = 4)
+
+# 相関係数行列の組み合わせ
+combined_corr <- spearman_corr
+combined_corr[lower.tri(combined_corr)] <- pearson_corr[lower.tri(pearson_corr)]
+
+kable(combined_corr) |> kable_styling(font_size = 24)
+```
+
+::: {.cell-output-display}
+
+`````{=html}
+
+<table class="table" data-quarto-postprocess="true" style="font-size: 24px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">味</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">パッケージデザイン</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">広告宣伝</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">素材栄養素</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">キャンペーンイベント</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">味</td>
+<td style="text-align: right;">1.0000</td>
+<td style="text-align: right;">0.5708</td>
+<td style="text-align: right;">0.3211</td>
+<td style="text-align: right;">0.8479</td>
+<td style="text-align: right;">0.5263</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">パッケージデザイン</td>
+<td style="text-align: right;">0.6719</td>
+<td style="text-align: right;">1.0000</td>
+<td style="text-align: right;">0.6393</td>
+<td style="text-align: right;">0.2477</td>
+<td style="text-align: right;">0.6105</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">広告宣伝</td>
+<td style="text-align: right;">0.5122</td>
+<td style="text-align: right;">0.7570</td>
+<td style="text-align: right;">1.0000</td>
+<td style="text-align: right;">-0.0230</td>
+<td style="text-align: right;">0.8947</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">素材栄養素</td>
+<td style="text-align: right;">0.7498</td>
+<td style="text-align: right;">0.2983</td>
+<td style="text-align: right;">0.2416</td>
+<td style="text-align: right;">1.0000</td>
+<td style="text-align: right;">0.1517</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">キャンペーンイベント</td>
+<td style="text-align: right;">0.5496</td>
+<td style="text-align: right;">0.6583</td>
+<td style="text-align: right;">0.9107</td>
+<td style="text-align: right;">0.1756</td>
+<td style="text-align: right;">1.0000</td>
+</tr>
+</tbody>
+</table>
+
+
+`````
+
+:::
+:::
+
+-->
+</section>
+<section id="因子の数を決める" class="slide level2">
+<h2>因子の数を決める</h2>
+<p><code>psych</code>パッケージの<code>fa.parallel()</code>関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，<strong>因子の数を何個に設定するかは分析者の自由</strong>である。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(correlation, <span class="at">n.obs =</span> <span class="dv">11</span>, <span class="at">fa =</span> <span class="st">"fa"</span> ) <span class="co"># スクリープロットを表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section>
+<section id="因子の数を決める-output" class="slide level2 output-location-slide"><h2>因子の数を決める</h2><div class="cell output-location-slide">
+<div class="cell-output cell-output-stdout">
+<pre><code>Parallel analysis suggests that the number of factors =  2  and the number of components =  NA </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>( <span class="at">h =</span> <span class="dv">0</span> ) <span class="co"># y = 0 の横線を追加</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/screenplot-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="因子の数を決める-1" class="slide level2">
+<h2>因子の数を決める</h2>
+<p><code>fa.parallel()</code>の結果から，因子数は2が提案されている。</p>
+<ul>
+<li><p>このグラフは何を表しているのかというと，<strong>横軸が因子数</strong>，<strong>縦軸が固有値</strong>(eigen values)を表している。</p></li>
+<li><p><strong>固有値</strong>は因子分析で用いられる共通因子の数を決定するための非常に重要な数値</p></li>
+<li><p>詳しくは「経営のための数学」の<strong>線形代数</strong>で学習しておきましょう。</p></li>
+</ul>
+</section>
+<section id="因子負荷の推定" class="slide level2">
+<h2>因子負荷の推定</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">fa</span>(correlation,</span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">nfactors =</span> <span class="dv">2</span>,　<span class="co"># 因子の数</span></span>
+<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">fm =</span> <span class="st">"minres"</span>,<span class="co"># 最小二乗法</span></span>
+<span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="co"># 軸の回転</span></span>
+<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">use =</span> <span class="st">"complete.obs"</span> <span class="co"># 欠損値</span></span>
+<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb10-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>( result, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">sort =</span> T )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Factor Analysis using method =  minres
+Call: fa(r = correlation, nfactors = 2, rotate = "varimax", fm = "minres", 
+    use = "complete.obs")
+Standardized loadings (pattern matrix) based upon correlation matrix
+                     item   MR1   MR2    h2       u2  com
+広告宣伝                3 0.985 0.158 0.995  0.00454 1.05
+キャンペーンイベント    5 0.890 0.168 0.819  0.18066 1.07
+パッケージデザイン      2 0.698 0.374 0.627  0.37293 1.53
+味                      1 0.414 0.921 1.020 -0.01958 1.39
+素材栄養素              4 0.078 0.764 0.591  0.40948 1.02
+
+                        MR1   MR2
+SS loadings           2.427 1.625
+Proportion Var        0.485 0.325
+Cumulative Var        0.485 0.810
+Proportion Explained  0.599 0.401
+Cumulative Proportion 0.599 1.000
+
+Mean item complexity =  1.2
+Test of the hypothesis that 2 factors are sufficient.
+
+df null model =  10  with the objective function =  4.853
+df of  the model are 1  and the objective function was  0.756 
+
+The root mean square of the residuals (RMSR) is  0.03 
+The df corrected root mean square of the residuals is  0.096 
+
+Fit based upon off diagonal values = 0.997</code></pre>
+</div>
+</div>
+<!--
+#### 因子スコアの推定値
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#library(maptools) # plotにラベルを表示
+#plot(result$scores[,1], result$scores[,2], xlab="マーケティング因子",  ylab="製品因子")
+#pointLabel(x = result$scores[,1], y=result$scores[,2], labels=rownames(df_senbei))
+```
+:::
+
+-->
+</section>
+<section id="因子分析のパス図" class="slide level2">
+<h2>因子分析のパス図</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.diagram</span>(result) <span class="co"># 因子の図</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-1-1.png" width="1344" class="r-stretch"></section>
+<section id="因子負荷量" class="slide level2">
+<h2>因子負荷量</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>loadings, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> <span class="fl">0.3</span> )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Loadings:
+                     MR1  MR2 
+味                   0.41 0.92
+パッケージデザイン   0.70 0.37
+広告宣伝             0.99     
+素材栄養素                0.76
+キャンペーンイベント 0.89     
+
+                MR1  MR2
+SS loadings    2.43 1.63
+Proportion Var 0.49 0.33
+Cumulative Var 0.49 0.81</code></pre>
+</div>
+</div>
+</section>
+<section id="基本関数factanalの場合" class="slide level2">
+<h2>基本関数factanalの場合</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">factanal</span>(df_senbei,</span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">factor=</span><span class="dv">2</span>,  <span class="co"># 因子数</span></span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">rotation=</span><span class="st">"varimax"</span>, <span class="co"># 回転</span></span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">scores=</span><span class="st">"regression"</span> <span class="co"># 推定法</span></span>
+<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(f1<span class="sc">$</span>scores, f1<span class="sc">$</span>loading)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<p><code>factanal()</code>関数で因子分析を行い、<code>biplot()</code>で因子負荷量をプロットすると、図のようになる。横軸が因子1、縦軸が因子2となる。</p>
+</section>
+<section id="基本関数factanalの場合-output" class="slide level2 output-location-slide"><h2>基本関数factanalの場合</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-3-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="第1因子と第2因子の因子負荷量" class="slide level2">
+<h2>第1因子と第2因子の因子負荷量</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 第1因子と第2因子の因子負荷量</span></span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">rbind</span>(f1<span class="sc">$</span>loading[,<span class="dv">1</span>], f1<span class="sc">$</span>loading[,<span class="dv">2</span>])</span>
+<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(f1_loading))</span>
+<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f1_loading) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"マーケティング因子"</span>,<span class="st">"製品因子"</span>)</span>
+<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>f1_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(f1<span class="sc">$</span>scores)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="作図" class="slide level2">
+<h2>作図</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()</span>
+<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_point</span>(</span>
+<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> f1_scores,</span>
+<span id="cb17-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1,  <span class="at">y =</span> Factor2,)</span>
+<span id="cb17-7"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-8"><a aria-hidden="true" tabindex="-1"></a><span class="co"># チーム名を描画</span></span>
+<span id="cb17-9"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_text_repel</span>(</span>
+<span id="cb17-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>f1_scores,</span>
+<span id="cb17-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1, <span class="at">y =</span> Factor2, <span class="at">label=</span><span class="fu">rownames</span>(f1_scores)),</span>
+<span id="cb17-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">colour=</span><span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Japan(14)"</span>, <span class="st">"magenta"</span>,</span>
+<span id="cb17-13"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Japan(18)"</span>, <span class="st">"magenta"</span>,</span>
+<span id="cb17-14"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Germany(14)"</span>, <span class="st">"magenta"</span>,</span>
+<span id="cb17-15"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"France(18)"</span>, <span class="st">"magenta"</span>, <span class="st">"blue4"</span></span>
+<span id="cb17-16"><a aria-hidden="true" tabindex="-1"></a>         )))),</span>
+<span id="cb17-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.9</span>,<span class="at">size=</span><span class="dv">3</span></span>
+<span id="cb17-18"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-19"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+</section><section id="作図-output" class="slide level2 output-location-slide"><h2>作図</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
+<section>
+<section id="マーケティングデータ分析の例" class="title-slide slide level1 center">
+<h1>マーケティング・データ分析の例</h1>
+
+</section>
+<section id="データの読み込み-1" class="slide level2">
+<h2>データの読み込み</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み。</span></span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データはサポートサイトからダウンロード可能</span></span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>data_chap11 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/chapter_11.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>dat_lov <span class="ot">&lt;-</span> data_chap11[, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="相関係数" class="slide level2">
+<h2>相関係数</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(dat_lov),<span class="at">digits =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 28px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV2</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV3</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV4</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV6</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV7</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV8</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">LOV1</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.381</td>
+<td style="text-align: right;">0.364</td>
+<td style="text-align: right;">0.248</td>
+<td style="text-align: right;">0.442</td>
+<td style="text-align: right;">0.041</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.309</td>
+<td style="text-align: right;">0.324</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOV2</td>
+<td style="text-align: right;">0.381</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.470</td>
+<td style="text-align: right;">0.538</td>
+<td style="text-align: right;">0.507</td>
+<td style="text-align: right;">0.400</td>
+<td style="text-align: right;">0.317</td>
+<td style="text-align: right;">0.517</td>
+<td style="text-align: right;">0.590</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOV3</td>
+<td style="text-align: right;">0.364</td>
+<td style="text-align: right;">0.470</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.668</td>
+<td style="text-align: right;">0.671</td>
+<td style="text-align: right;">0.536</td>
+<td style="text-align: right;">0.505</td>
+<td style="text-align: right;">0.618</td>
+<td style="text-align: right;">0.617</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOV4</td>
+<td style="text-align: right;">0.248</td>
+<td style="text-align: right;">0.538</td>
+<td style="text-align: right;">0.668</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.595</td>
+<td style="text-align: right;">0.570</td>
+<td style="text-align: right;">0.565</td>
+<td style="text-align: right;">0.739</td>
+<td style="text-align: right;">0.774</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOV5</td>
+<td style="text-align: right;">0.442</td>
+<td style="text-align: right;">0.507</td>
+<td style="text-align: right;">0.671</td>
+<td style="text-align: right;">0.595</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.377</td>
+<td style="text-align: right;">0.378</td>
+<td style="text-align: right;">0.576</td>
+<td style="text-align: right;">0.595</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOV6</td>
+<td style="text-align: right;">0.041</td>
+<td style="text-align: right;">0.400</td>
+<td style="text-align: right;">0.536</td>
+<td style="text-align: right;">0.570</td>
+<td style="text-align: right;">0.377</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.752</td>
+<td style="text-align: right;">0.586</td>
+<td style="text-align: right;">0.616</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOV7</td>
+<td style="text-align: right;">0.065</td>
+<td style="text-align: right;">0.317</td>
+<td style="text-align: right;">0.505</td>
+<td style="text-align: right;">0.565</td>
+<td style="text-align: right;">0.378</td>
+<td style="text-align: right;">0.752</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.581</td>
+<td style="text-align: right;">0.572</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">LOV8</td>
+<td style="text-align: right;">0.309</td>
+<td style="text-align: right;">0.517</td>
+<td style="text-align: right;">0.618</td>
+<td style="text-align: right;">0.739</td>
+<td style="text-align: right;">0.576</td>
+<td style="text-align: right;">0.586</td>
+<td style="text-align: right;">0.581</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.781</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LOV9</td>
+<td style="text-align: right;">0.324</td>
+<td style="text-align: right;">0.590</td>
+<td style="text-align: right;">0.617</td>
+<td style="text-align: right;">0.774</td>
+<td style="text-align: right;">0.595</td>
+<td style="text-align: right;">0.616</td>
+<td style="text-align: right;">0.572</td>
+<td style="text-align: right;">0.781</td>
+<td style="text-align: right;">1.000</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="固有値" class="slide level2">
+<h2>固有値</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="ot">&lt;-</span> <span class="fu">eigen</span>(<span class="fu">cor</span>(dat_lov))<span class="sc">$</span>values <span class="co"># 固有値</span></span>
+<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eigenvalues, <span class="at">type =</span> <span class="st">"b"</span>) <span class="co"># 作図</span></span>
+<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>) <span class="co"># 水平線</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"></section>
+<section id="因子を抽出" class="slide level2">
+<h2>因子を抽出</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="因子に名前を付ける" class="slide level2">
+<h2>因子に名前を付ける</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>label_lov <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"achievement factor"</span>, <span class="st">"belongingness factor"</span>)</span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>loadings[,]</span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_loadings) <span class="ot">&lt;-</span> label_lov</span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings, <span class="at">pch =</span> <span class="st">""</span>)</span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings[,<span class="dv">1</span>], fa_loadings[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-10-1.png" width="1344" class="r-stretch"></section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>result_fa_n <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">rotation =</span> <span class="st">"none"</span>)</span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings_n <span class="ot">&lt;-</span> result_fa_n<span class="sc">$</span>loadings[,]</span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings_n, <span class="at">pch =</span> <span class="st">""</span>)</span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings_n[,<span class="dv">1</span>], fa_loadings_n[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings_n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344" class="r-stretch"></section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">scores =</span> <span class="st">"regression"</span>)</span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>fa_scores <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>scores</span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_scores) <span class="ot">&lt;-</span> label_lov</span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_scores)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344" class="r-stretch"></section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a>dat_lu <span class="ot">&lt;-</span> data_chap11[,<span class="dv">10</span><span class="sc">:</span><span class="dv">17</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat_lu)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          LUAT1     LUAT2     LUAT3     LUBE1     LUBE2     LUBE3     LUBE4
+LUAT1 1.0000000 0.6863097 0.6530632 0.4216778 0.4153562 0.2854687 0.2182564
+LUAT2 0.6863097 1.0000000 0.7031984 0.3998382 0.4011859 0.3186372 0.1806116
+LUAT3 0.6530632 0.7031984 1.0000000 0.4230186 0.4658564 0.3360935 0.1492323
+LUBE1 0.4216778 0.3998382 0.4230186 1.0000000 0.8293229 0.6718840 0.3731311
+LUBE2 0.4153562 0.4011859 0.4658564 0.8293229 1.0000000 0.6780064 0.3638658
+LUBE3 0.2854687 0.3186372 0.3360935 0.6718840 0.6780064 1.0000000 0.4973186
+LUBE4 0.2182564 0.1806116 0.1492323 0.3731311 0.3638658 0.4973186 1.0000000
+LUBE5 0.4580084 0.4108389 0.4266380 0.4730922 0.5001806 0.4537937 0.4267252
+          LUBE5
+LUAT1 0.4580084
+LUAT2 0.4108389
+LUAT3 0.4266380
+LUBE1 0.4730922
+LUBE2 0.5001806
+LUBE3 0.4537937
+LUBE4 0.4267252
+LUBE5 1.0000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">eigen</span>(<span class="fu">cor</span>(dat_lu))<span class="sc">$</span>values, <span class="at">type =</span> <span class="st">"b"</span>)</span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344" class="r-stretch"></section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lu, <span class="dv">2</span>)</span>
+<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>loadings[,]</span>
+<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings, <span class="at">pch =</span> <span class="st">""</span>)</span>
+<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings[,<span class="dv">1</span>], fa_loadings[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+
+
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344" class="r-stretch"></section><div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'convex',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "コピーしました");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "コピーしました");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

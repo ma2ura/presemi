@@ -79,8 +79,8 @@ $code-block-bg: $lightgray;
 $code-block-border-color: $black;
 $code-block-color: $foreground;
 $mainFont: "Noto Sans JP", $systemFontsSansSerif;
-$codeFont: "Fira Code", $systemFontsMono;
-
+$codeFont: "MyricaM M", $systemFontsMono;
+//Fira Code
 
 // Define additional color effects based on Dracula spec
 // https://spec.draculatheme.com/
@@ -138,4 +138,3 @@ strong {
 orange {
 	color: darkorange;
 }
-  

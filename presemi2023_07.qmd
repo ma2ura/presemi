@@ -116,7 +116,7 @@ g <- g + annotate(geom = "text", x = -2.4, y = 0.08, label = "α/2", size = 10) 
   geom = "segment", x = -2.4, xend = -2.2,
   y = 0.07, yend = 0.04, color = "black", size = 0.5,
   arrow = arrow(length = unit(0.3, "cm"))
-  ) + mystyle
+  )
 print(g)
 ```
 
@@ -140,7 +140,7 @@ $$
 ```{r}
 N <- 10000
 X <- rnorm(N, 62, 5) # 母集団
-ggplot(data.frame(X)) + aes(X) + geom_histogram() + ggtitle("母集団") + geom_vline(xintercept = 62, color = "red") + mystyle
+ggplot(data.frame(X)) + aes(X) + geom_histogram() + ggtitle("母集団") + geom_vline(xintercept = 62, color = "red")
 ```
 
 この母集団から標本サイズ100の標本を100個とりだし、平均を100個計算します。
@@ -162,7 +162,7 @@ df_mean <- data.frame(sample_mean)
 g_mean <- ggplot(df_mean) + aes(x=sample_mean) +
   geom_histogram() + xlab("標本平均") + ylab("度数") +
   geom_vline(xintercept = mean(sample_mean), color = "blue") +
-  geom_vline(xintercept = 62, color="red") + mystyle
+  geom_vline(xintercept = 62, color="red")
 print(g_mean)
 ```
 
@@ -171,7 +171,7 @@ g_m <- ggplot(df_mean) +
     aes(x = reorder(seq_along(sample_mean), sample_mean), y = sample_mean) +
     geom_bar(stat="identity") + geom_hline(yintercept = 62, color = "red") +
    coord_cartesian(ylim = c(60, 64)) +
-    ylab("標本平均") + xlab("標本ID") + ggtitle("標本平均の分布") + mystyle
+    ylab("標本平均") + xlab("標本ID") + ggtitle("標本平均の分布")
 print(g_m)
 ```
 
@@ -207,7 +207,7 @@ ggplot(df_mean) +
     aes(x = reorder(seq_along(p_value), p_value), y = p_value) + # グラフの設定
     geom_bar(stat="identity", fill = ifelse(df_mean$p_value < 0.05, "red", "black")) + #
     geom_hline(yintercept = 0.05, color = "red") + # 有意水準0.05
-    ylab("p値") + xlab("標本ID") + ggtitle("p値の分布") + mystyle # 軸の設定
+    ylab("p値") + xlab("標本ID") + ggtitle("p値の分布")  # 軸の設定
 ```
 
 となり，$t$値が生じる確率が5%未満となる標本がいくつかあることがわかった。
@@ -282,7 +282,7 @@ g <- g + annotate("text", x = mu1 + 2.5, y = max(df$dnorm1) / 6,
 g <- g + annotate("text", x = mu1 - 2, y = max(df$dnorm1)-0.1,
                   label = "帰無仮説下の分布", color = "blue", family = "HiraKakuProN-W3" ) +
   annotate("text", x = mu2 + 1.5, y = max(df$dnorm2) - 0.1,
-           label = "真の分布", color = "red", family = "HiraKakuProN-W3") + mystyle
+           label = "真の分布", color = "red", family = "HiraKakuProN-W3")
 print(g)
 ```
 
@@ -327,7 +327,7 @@ g <- g + annotate("text", x = mu1 + 2.5, y = max(df$dnorm1) / 6,
 g <- g + annotate("text", x = mu1 - 2, y = max(df$dnorm1)-0.1,
                   label = "帰無仮説下の分布", color = "blue", family = "HiraKakuProN-W3" ) +
   annotate("text", x = mu2 + 1.5, y = max(df$dnorm2) - 0.1,
-           label = "真の分布", color = "red", family = "HiraKakuProN-W3") + mystyle
+           label = "真の分布", color = "red", family = "HiraKakuProN-W3")
 print(g)
 ```
 

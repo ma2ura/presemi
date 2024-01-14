@@ -1,0 +1,627 @@
+---
+title: |
+  <b>プレゼミ2023 最終会</b> </br>
+  <span style="color: #282A36; ">多変量解析</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    df_print: paged
+    code-line-numbers: false
+    html-math-method: katex
+webr:
+  packages: ['dplyr','ggplot2','readr'] # Install R packages on document open
+filters:
+  - webr
+execute:
+  echo: true
+  warning: false
+---
+
+# 因子分析
+
+## 本日の内容
+
+多変量解説の1つ「因子分析」について学習する。
+
+1. 因子分析の目的
+2. 因子分析の使い方
+3. 因子分析でアンケート分析
+4. 実際にアンケート調査をやってみよう。
+
+因子分析は、**データの背後に潜むモノを見つけ出す手法
+
+
+
+## 因子分析
+
+- 因子分析(factanal analysis)の目的は、**多くの変数を，より少ない変数で表すこと**である。
+- 本当に知りたいことを直接測定することは難しい（たとえば、幸福度とか顧客満足度とか）。
+- 幸福度を知りたいとき、アンケートで「あなたは幸せですか？」と聞くことで幸福度を測ることができるでしょうか？
+- このように直接は測定できないものを、間接的に測定する方法を考える。
+
+## 因子分析のイメージ
+
+
+![背後に潜む思い](img/konnaomoi.png)
+
+<!-- - たとえば，生徒の学力を「英・数・国・理・社」の5教科の点数で表すより，「文系」と「理系」の2つの因子で表したほうが，生徒の能力を表す変数の数が少なくて済む。 -->
+
+## 前提知識：回転
+
+座標の回転について簡単に説明
+
+![座標の回転](img/kaiten.png)
+
+## 座標の回転
+
+座標$(b_1,b_2)$を数式で書くと
+
+$$
+(b_1,b_2) = (a_1 \cos \theta - a_2 \sin \theta, a_1 \sin \theta + a_2 \cos \theta)
+$$
+
+つまり、
+$$
+\begin{aligned}
+b_1 &= a_1 \cos \theta - a_2 \sin \theta \\
+b_2 &= a_1 \sin \theta + a_2 \cos \theta
+\end{aligned}
+$$
+
+## 行列で表現すると
+
+$$
+\begin{pmatrix}
+b_1\\
+b_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos \theta & -\sin \theta\\
+\sin \theta & \cos \theta
+\end{pmatrix}
+\begin{pmatrix}
+a_1\\
+a_2
+\end{pmatrix}
+$$
+
+となる。
+
+## 軸の回転
+
+下の2つの図は同じ意味
+
+:::{layout-ncol=2}
+![座標の回転](img/lotation1.png)
+
+![軸の回転](img/lotation2.png)
+:::
+
+## 固有値と固有ベクトル
+
+行列にはそれぞれ対応する**固有値**と**固有ベクトル**がある。
+
+例えば、行列$A$に対して、
+
+$$
+A\boldsymbol{v} = \lambda \boldsymbol{v}
+$$
+
+となる$\lambda$と$\boldsymbol{v}$が存在する。
+
+## 因子分析のイメージ
+
+![因子分析のイメージ](img/mitsukedasu.png)
+
+## 因子分析の概要
+
+いま、5つの変数のそれぞれが、2個の変数$f_1$と$f_2$で決まっている、と仮定する。
+つまり、
+
+$$
+\begin{align*}
+Y_1 & \fallingdotseq a_{11} f_1 + a_{12} f_2\\
+Y_2 & \fallingdotseq a_{21} f_1 + a_{22} f_2\\
+\vdots\\
+Y_5 & \fallingdotseq a_{51} f_1 + a_{52} f_2\\
+\end{align*}
+$$
+
+## 連立方程式を行列表記する
+
+行列で表現すると、
+
+$$
+\begin{align*}
+\underbrace{
+\begin{pmatrix}
+Y_1\\
+\vdots \\
+Y_5
+\end{pmatrix}
+}_{5\times 1}&=
+\underbrace{
+\begin{pmatrix}
+a_{11} & a_{12}\\
+\vdots & \vdots\\
+a_{51} & a_{52}\\
+\end{pmatrix}
+}_{5 \times 2}
+\underbrace{
+\begin{pmatrix}
+f_{1} \\
+f_{2}
+\end{pmatrix}
+}_{2 \times 1}
+\end{align*}
+$$
+
+まとめて書くと
+
+$$
+\boldsymbol{Y} = \boldsymbol{A}\boldsymbol{f}
+$$
+となる。
+
+
+## 線形写像
+
+つまり，潜在的な因子を表す$\boldsymbol{f}$を因子負荷量行列$\boldsymbol{A}$で観察された変数$\boldsymbol{Y}$へと線形写像している，というモデルを考える。
+この$\boldsymbol{A}$と$\boldsymbol{f}$を決定する必要がある。
+
+
+
+# 3. 因子分析のモデル
+
+## 3.1 モデルの表現
+
+上のモデルに観測値との誤差$\varepsilon_i$を加え、
+$$
+Y_i = \alpha _{i1}f_1 + \alpha_{i2}f_2 + \varepsilon_i, \quad i = 1,\dots ,5
+$$
+とすると、5本の重回帰モデルと見なせる。
+この$\varepsilon$の分散$\sigma_i^2$は**独自因子**とよばれる。
+しかし回帰分析と違うところは，$Y_i$のみ観察可能で，$\alpha_{i1}$も$\alpha_{i2}$も$f_1$も$f_2$も観察できない点である。
+手元にあるデータは，$n$人から回収したアンケートより入手できた回答項目5個についての回答結果となる$Y_i, \quad i = 1,\dots , 5$のみである。
+
+## 3.2 モデルの仮定
+
+そこで$Y_i$に一定の仮定を置くことで、$\alpha$と$f$を探す方法を考える。
+
+::: callout-important
+## 共通因子に関する仮定
+
+1.  $f_1$と$f_2$はiidで、平均ゼロ、分散1となる確率変数
+2.  $f_i$と$\varepsilon_i$は独立、$Cov(f_i,\varepsilon_i) = 0$)
+3.  $\varepsilon _i$と$\varepsilon_j$は独立
+:::
+
+目的変数$Y_i$の間の相関係数を利用して、偏回帰係数に対応する因子負荷量$a_{ij}$を推定する。
+
+## 因子分析の仮定
+
+共通因子に関する仮定(1)と(2)から、
+
+$$
+\begin{align*}
+\mathrm{Var}(Y_i) &= \mathrm{Var}(a_{i1}f_1 + a_{i2}f_2 + \varepsilon_i)\\
+                  &= a_{i1}^2\mathrm{Var}(f_1) + a_{i2}^2\mathrm{Var}(f_2) +{Var}(\varepsilon_i)\\
+                  &= a_{i1}^2 + a_{i2}^2 + \sigma_i^2
+\end{align*}
+$$
+が導出される。1行目から2行目の変形に仮定2、2行目から3行目の変形に仮定1を用いている。
+
+## 共通性と独自因子
+
+変数$Y_i$の分散は、共通性と独自因子に分けられる。
+$$
+\mathrm{Var}(Y_i) = \underbrace{a_{i1}^2 + a_{i2}^2}_{第i変数の共通性} + \underbrace{\sigma_i^2}_{独自因子}
+$$
+
+
+共通因子がゼロのとき，$Y_i$の分散は独自因子の分散で決定されている。
+
+
+## 因子分析
+
+変数$Y_i$を標準化し、$\mathrm{Var}(Y_i) = 1$としているとき、共通性は以下のように表すことができる。
+$$
+\begin{align*}
+1 &= a_{i1}^2 + a_{i2}^2 + \sigma_i^2 \\
+a_{i1}^2 + a_{i2}^2 &= 1 - \sigma_i^2
+\end{align*}
+$$
+
+$Y_i$の分散から独自因子$\varepsilon_i$の分散を除いた残りが共通性であり、 2つの共通因子$f_1$、$f_2$で説明できる部分を表している。 これが因子分析における決定係数$R^2$に対応する統計量となる。
+
+## 因子の適合度
+
+
+5本の方程式全体の適合度は、この共通性の合計して、全変数の分散の和に占める割合は，
+$$
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{\sum _{i=1}^5 \mathrm{Var}(Y_i)} =
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{\sum _{i=1}^5 1} =
+\frac{\sum _{i=1}^5 (a_{i1}^2 + a_{i2}^2)}{5}
+$$
+で定義される。
+ここで，$\mathrm{Var}(Y_i) = 1$を用いている。
+これを**寄与率**(contribution ratio)とよぶ。
+
+## 3.3 モデルの推定
+
+観測された変数$Y_i$の相関の大きさを用いて因子負荷量$a_{ij}$と独自因子$\sigma_i$といったパラメータを推定する。 まずは観測された変数の共分散行列を因子分析モデルのパラメータで表現する。
+
+共通因子の仮定3より、$\varepsilon_i$と$\varepsilon_j$は独立であるため、その共分散はゼロとなる。 よって$Y_i$と$Y_j$の共分散は、
+
+$$
+\begin{align*}
+\mathrm{Cov}(Y_1, Y_2) &= a_{11}a_{21}\mathrm{Var}(f_1) + a_{12}a_{22}\mathrm{Var}(f_2) + \mathrm{Cov}(\varepsilon_i, \varepsilon_j)\\
+&= a_{11} a_{21} + a_{12}a_{22}
+\end{align*}
+$$
+
+
+
+# 4. 知覚マップの作成
+
+```{r setup, echo = FALSE, message=FALSE}
+library(psych)
+library(tidyverse)
+library(ggthemes)
+library(knitr)
+library(kableExtra)
+library(patchwork)
+library(modelsummary)
+# font for mac
+
+# mystyle <- list( #ggplotのテーマ
+#   theme_calc(),
+#   scale_colour_calc(),
+#   theme(
+#     text = element_text(
+#       family = "HiraKakuProN-W3",
+#       size = 12),
+#     legend.position = 'none',
+#     axis.text=element_text(size=8),
+#     axis.text.x = element_text(angle = 90,vjust=0.5,hjust=1)
+#     )
+# )
+
+knitr::opts_chunk$set(dev = "ragg_png")
+# テーマを設定
+theme_set(theme_few(base_size = 12))
+# 以下、ggplot2のデフォルトを変更
+update_geom_defaults("point", list(size = 3))
+```
+
+## データの読み込み
+
+```{r read_data, message=FALSE, warning=FALSE}
+df_senbei <- readr::read_table("data/senbei.txt")
+knitr::kable(df_senbei) |> kable_styling(font_size = 20)
+```
+
+## データの整形
+
+このデータフレームには、製品名、味、パッケージデザイン、広告宣伝、素材栄養素、キャンペーンイベントという6つの変数から構成されている。分析を容易にするため製品名を行名にするため、`tibble`パッケージの`column_to_rownames()`関数を用いる。
+
+```{r rownames}
+df_senbei <- column_to_rownames(df_senbei, "製品名")
+df_senbei |> head() |> kable() |> kable_styling(font_size = 20)
+```
+
+## データの詳細
+
+- 製品ごとに、味やパッケージデザイン、広告宣伝、素材栄養素、キャンペーンイベントの5項目について得点が付されている。
+- Rで因子分析を行うには、`psych`パッケージの`fa()`関数を用いる方法と、基本関数の`factanal()`関数を用いる方法がある。
+
+## fa()関数を用いた場合
+
+まず相関係数行列を作成する。
+
+```{r cor_matrix}
+pairs.panels(df_senbei)
+```
+
+## 相関係数行列
+
+
+この相関係数行列をみると、
+
+-   味と素材栄養素
+-   パッケージデザインと広告宣伝
+-   広告宣伝とキャンペーンイベント
+
+の相関係数が非常に高いことがわかる。
+
+## Kaiser-Meyer-Olkinの標本妥当性の測度
+
+カイザー・マイヤー・オルキン (Kaiser-Meyer-Olkin：KMO) 検定は，データが因子分析にどの程度適しているかを決定する統計的尺度である。
+この検定は，モデル中の各変数と完全なモデルのサンプリングの妥当性を測定する。
+この統計量は，共通分散であるかもしれない変数間の分散の比率の尺度である。
+KMO値が高いほどデータが因子分析により適しているといえる(by wikipedia)。
+
+<!--- The measure of sampling adequacy is calculated for each indicator as
+--->
+
+## MSA
+
+各指標に対して計算されるサンプリング妥当性尺度(MSA)は次の通り。
+$$
+MSA_j = \displaystyle \frac{\sum _{k \not = j} r^2_{jk}}{\sum _{k \not = j} r^2_{jk} + \sum _{k \not = j} p^2_{jk}}
+$$
+
+## KMO
+
+これを1から0の間の値を取るように変換したものがKMO値である。
+
+$$
+KMO = \displaystyle \frac{\sum _{j\not=k} \sum _{k \not = j} r^2_{jk}}{\sum _{j \not =k} \sum _{k \not = j} r^2_{jk} + \sum _{j \not =k} \sum _{k \not = j} p^2_{jk}}
+$$
+<!---
+Here $r_{jk}$ is the correlation between the variable in question and another, and $p_{jk}$ is the partial correlation.
+---->
+ここで$r_{jk}$は，問題の変数と他の変数との相関係数であり，$p_{jk}$は偏相関である。
+
+- KMOが0.9を超えると素晴らしい，0.80を超えると立派
+- 0.70を超えると中程度，0.60を超えると普通，
+- 0.50を超えるだけだと悲惨，0.5を下回ると受け入れられない
+
+という解釈
+
+
+<!--
+一般に，KMO値が0.8～1の場合は，サンプリングが適切であることを示す。0.6未満のKMO値は，サンプリングが適切ではなく，改善措置を講じる必要があることを示す。
+KMO値が0に近いということは，**相関の合計に比べて部分相関が大きい**ことを意味する。
+言い換えれば，因子分析にとって大きな問題となる相関が広範囲に存在するということである。
+行列が因子分析可能であるかどうかの代替尺度は，行列が恒等行列から逸脱する度合いを検定するバートレット検定である。
+-->
+
+## RでKMO
+
+RでKMO値を求めるには、`psych`パッケージの`KMO()`関数を用いる。
+`KMO()`の引数には、データフレームがはいるため，データフレームには必要な変数のみを入れておくようにする。
+
+```{r kmo}
+KMO(df_senbei)
+```
+
+各項目が0.6以上あれば適切らしい。ぜんぶ0.6未満やん。カイザー基準だと悲惨な状態である。
+
+## 因子分析を行う。
+
+
+<!-- KMOは無かったことにして， -->
+すべての変数間の相関係数を`cor()`関数で計算
+
+```{r corr}
+correlation <- cor(df_senbei, use = "complete.obs") |>
+  round(digits = 3)
+knitr::kable(correlation) |>
+  kable_styling(font_size = 20)
+```
+
+観測変数間の相関行列が求まりました。これを$\Sigma$(シグマ)とする。
+$\sum$ではなく，ギリシャ文字の$\sigma$の大文字であることに注意。
+
+
+<!--
+## 因子分析のモデル
+
+
+ちなみに相関行列を対角より右上と左下には同じ数字が入っており，無駄であるため，
+
+
+右上にはスピアマンの順位相関係数を，左下にはピアソンの相関係数を入れる。
+`lower.tri()`関数は対角より右上の要素を`TRUE`とする論理ベクトルを返すので，これを使って行列の右上要素にノンパラの順位相関を入れる。
+
+```{r corr2}
+#| output-location: slide
+# スピアマンの順位相関係数
+spearman_corr = round(cor(df_senbei, method='spearman'), digits = 4)
+# ピアソンの積率相関係数
+pearson_corr = round(cor(df_senbei, method='pearson'), digits = 4)
+
+# 相関係数行列の組み合わせ
+combined_corr <- spearman_corr
+combined_corr[lower.tri(combined_corr)] <- pearson_corr[lower.tri(pearson_corr)]
+
+kable(combined_corr) |> kable_styling(font_size = 24)
+```
+-->
+
+## 因子の数を決める
+
+
+`psych`パッケージの`fa.parallel()`関数で、スクリーンプロットを作成し因子の数を検討
+因子分析では，**因子の数を何個に設定するかは分析者の自由**である。
+
+```{r screenplot, warning=FALSE}
+#| output-location: slide
+fa.parallel(correlation, n.obs = 11, fa = "fa" ) # スクリープロットを表示
+abline( h = 0 ) # y = 0 の横線を追加
+```
+
+## 因子の数を決める
+
+`fa.parallel()`の結果から，因子数は2が提案されている。
+
+- このグラフは何を表しているのかというと，**横軸が因子数**，**縦軸が固有値**(eigen values)を表している。
+
+- **固有値**は因子分析で用いられる共通因子の数を決定するための非常に重要な数値
+- 詳しくは「経営のための数学」の**線形代数**で学習しておきましょう。
+
+
+## 因子負荷の推定
+
+```{r fa2, warning=FALSE}
+result = fa(correlation,
+            nfactors = 2,　# 因子の数
+            fm = "minres",# 最小二乗法
+            rotate = "varimax", # 軸の回転
+            use = "complete.obs" # 欠損値
+            )
+print( result, digits = 3, sort = T )
+```
+<!--
+#### 因子スコアの推定値
+
+```{r maptools, warning=FALSE}
+#library(maptools) # plotにラベルを表示
+#plot(result$scores[,1], result$scores[,2], xlab="マーケティング因子",  ylab="製品因子")
+#pointLabel(x = result$scores[,1], y=result$scores[,2], labels=rownames(df_senbei))
+```
+-->
+
+## 因子分析のパス図
+
+```{r}
+fa.diagram(result) # 因子の図
+```
+
+## 因子負荷量
+
+```{r}
+print(result$loadings, digits = 2, cutoff = 0.3 )
+```
+
+## 基本関数factanalの場合
+
+```{r}
+#| output-location: slide
+f1 <- factanal(df_senbei,
+               factor=2,  # 因子数
+               rotation="varimax", # 回転
+               scores="regression" # 推定法
+)
+biplot(f1$scores, f1$loading)
+```
+
+`factanal()`関数で因子分析を行い、`biplot()`で因子負荷量をプロットすると、図のようになる。横軸が因子1、縦軸が因子2となる。
+
+## 第1因子と第2因子の因子負荷量
+
+```{r}
+# 第1因子と第2因子の因子負荷量
+f1_loading <- rbind(f1$loading[,1], f1$loading[,2])
+f1_loading <- data.frame(t(f1_loading))
+colnames(f1_loading) <- c("マーケティング因子","製品因子")
+f1_scores <- data.frame(f1$scores)
+```
+
+## 作図
+
+```{r}
+#| output-location: slide
+library(ggrepel)
+
+g <- ggplot()
+g <- g + geom_point(
+  data = f1_scores,
+  aes(x = Factor1,  y = Factor2,)
+  )
+# チーム名を描画
+g <- g + geom_text_repel(
+  data=f1_scores,
+  aes(x = Factor1, y = Factor2, label=rownames(f1_scores)),
+  colour=ifelse(rownames(f1_scores)=="Japan(14)", "magenta",
+         ifelse(rownames(f1_scores)=="Japan(18)", "magenta",
+         ifelse(rownames(f1_scores)=="Germany(14)", "magenta",
+         ifelse(rownames(f1_scores)=="France(18)", "magenta", "blue4"
+         )))),
+  alpha=0.9,size=3
+)
+print(g)
+```
+
+
+
+
+
+# マーケティング・データ分析の例
+
+## データの読み込み
+
+```{r}
+# データの読み込み。
+# データはサポートサイトからダウンロード可能
+data_chap11 <- read.csv("data/chapter_11.csv", header = TRUE)
+dat_lov <- data_chap11[, 1:9]
+```
+
+## 相関係数
+
+```{r}
+round(cor(dat_lov),digits = 3) |>
+  kable() |> kable_styling(font_size = 28)
+```
+## 固有値
+
+```{r}
+#| fig-height: 6
+eigenvalues <- eigen(cor(dat_lov))$values # 固有値
+plot(eigenvalues, type = "b") # 作図
+abline(h = 1) # 水平線
+```
+
+## 因子を抽出
+
+```{r}
+result_fa <- factanal(dat_lov, 2)
+```
+
+## 因子に名前を付ける
+
+```{r}
+label_lov <- c("achievement factor", "belongingness factor")
+fa_loadings <- result_fa$loadings[,]
+colnames(fa_loadings) <- label_lov
+plot(fa_loadings, pch = "")
+text(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))
+```
+
+##
+
+```{r}
+result_fa_n <- factanal(dat_lov, 2, rotation = "none")
+fa_loadings_n <- result_fa_n$loadings[,]
+plot(fa_loadings_n, pch = "")
+text(fa_loadings_n[,1], fa_loadings_n[,2], row.names(fa_loadings_n))
+```
+
+##
+
+```{r}
+result_fa <- factanal(dat_lov, 2, scores = "regression")
+fa_scores <- result_fa$scores
+colnames(fa_scores) <- label_lov
+plot(fa_scores)
+```
+
+##
+
+```{r}
+dat_lu <- data_chap11[,10:17]
+```
+
+##
+
+```{r}
+cor(dat_lu)
+plot(eigen(cor(dat_lu))$values, type = "b")
+abline(h = 1)
+```
+
+
+## 
+
+```{r}
+result_fa <- factanal(dat_lu, 2)
+fa_loadings <- result_fa$loadings[,]
+plot(fa_loadings, pch = "")
+text(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))
+```

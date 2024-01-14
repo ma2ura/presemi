@@ -9,3 +9,6 @@ stringr
 forcats
 lubridate
 ggthemes
+knitr
+kableExtra
+gghighlight

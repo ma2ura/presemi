@@ -1,0 +1,17 @@
+psych
+tidyverse
+ggplot2
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+lubridate
+ggthemes
+knitr
+kableExtra
+patchwork
+modelsummary
+ggrepel

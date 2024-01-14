@@ -1,0 +1,21 @@
+---
+title: "My Document using Quarto"
+author: "Soichi Matsuura"
+format:
+  docx:
+    toc: true
+    code-fold: true
+---
+
+# section
+
+ここに文章を書く。
+
+## subsection
+
+```{r}
+library(ggplot2)
+ggplot(cars) + aes(speed, dist) + geom_point()
+```
+
+### subsubsection

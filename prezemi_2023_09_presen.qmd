@@ -578,14 +578,3 @@ graph TB
     A --> C[売上高]
     B -.-> C
 ```
-
-# 財務分析
-
-## 売上高と広告宣伝費
-
-
-```{r}
-names(df)
-ggplot(df) + aes(x = 広告宣伝費, y = 売上高) + geom_point() + geom_smooth(method = "lm", se = FALSE)
-```
-```
