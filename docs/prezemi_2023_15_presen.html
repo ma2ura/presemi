@@ -451,8 +451,22 @@ Soichi Matsuura
 
 <!-- - たとえば，生徒の学力を「英・数・国・理・社」の5教科の点数で表すより，「文系」と「理系」の2つの因子で表したほうが，生徒の能力を表す変数の数が少なくて済む。 -->
 <img data-src="img/konnaomoi.png" class="r-stretch quarto-figure-center"><p class="caption">背後に潜む思い</p></section>
-<section id="前提知識回転" class="slide level2">
-<h2>前提知識：回転</h2>
+<section id="因子分析のイメージ2" class="slide level2">
+<h2>因子分析のイメージ2</h2>
+
+<img data-src="img/mitsukedasu.png" class="r-stretch quarto-figure-center"><p class="caption">因子分析のイメージ</p></section></section>
+<section>
+<section id="前提知識" class="title-slide slide level1 center">
+<h1>前提知識</h1>
+
+</section>
+<section id="三角比" class="slide level2">
+<h2>三角比</h2>
+<p>コサインとサインの関係</p>
+
+<img data-src="img/sankaku.png" class="r-stretch quarto-figure-center"><p class="caption">三角関数</p></section>
+<section id="回転" class="slide level2">
+<h2>回転</h2>
 <p>座標の回転について簡単に説明</p>
 
 <img data-src="img/kaiten.png" class="r-stretch quarto-figure-center"><p class="caption">座標の回転</p></section>
@@ -468,6 +482,46 @@ b_1 &amp;= a_1 \cos \theta - a_2 \sin \theta \\
 b_2 &amp;= a_1 \sin \theta + a_2 \cos \theta
 \end{aligned}
 </span></p>
+</section>
+<section id="rでやってみる" class="slide level2">
+<h2>Rでやってみる</h2>
+<p>座標(3,1)の点を60度回転させると</p>
+<div class="cell">
+<details class="code-fold">
+<summary>コード</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a>a1 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>a2 <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">180</span></span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> a1 <span class="sc">*</span> <span class="fu">cos</span>(theta) <span class="sc">-</span> a2 <span class="sc">*</span> <span class="fu">sin</span>(theta)</span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> a1 <span class="sc">*</span> <span class="fu">sin</span>(theta) <span class="sc">+</span> a2 <span class="sc">*</span> <span class="fu">cos</span>(theta)</span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>dfx <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, a1, b1),</span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">0</span>, a2, b2)</span>
+<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(dfx, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">4</span>), <span class="at">asp =</span> <span class="dv">1</span>)</span>
+<span id="cb1-13"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">v =</span> <span class="dv">0</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-1-1.png" width="1344" class="r-stretch"></section>
+<section id="公式の証明" class="slide level2">
+<h2>公式の証明</h2>
+<p>座標<span class="math inline">(a_1,a_2)</span>から座標<span class="math inline">(b_1, b_2)</span>への回転は，原点から座標<span class="math inline">(a_1, a_2)</span>までの距離を<span class="math inline">r</span>，偏角を<span class="math inline">\alpha</span>とする。</p>
+<p>このとき<span class="math inline">a_1 = r \cos \alpha</span>，<span class="math inline">a_2 = r \sin \alpha</span>である。</p>
+<p>コサインの加法定理を用いると，次のように書ける。 <span class="math display">
+\begin{aligned}
+b_1 &amp;= r \cos (\alpha + \theta)\\
+    &amp;= r \cos \alpha \cos \theta - r \sin \alpha \sin \theta \\
+    &amp;= a_1  \cos \theta - a_2 \sin \theta
+\end{aligned}
+</span> となり，<span class="math inline">b_2</span>も同様に求められる。</p>
+</section>
+<section id="加法定理を図的に考える" class="slide level2">
+<h2>加法定理を図的に考える</h2>
+
+<img data-src="img/kahouteiri.png" class="r-stretch quarto-figure-center"><p class="caption">加法定理</p><p>証明は省略</p>
 </section>
 <section id="行列で表現すると" class="slide level2">
 <h2>行列で表現すると</h2>
@@ -486,7 +540,11 @@ a_1\\
 a_2
 \end{pmatrix}
 </span></p>
-<p>となる。</p>
+<p>となる。 記号をつかってシンプルにすると，</p>
+<p><span class="math display">
+\boldsymbol{b} = \boldsymbol{A}\boldsymbol{a}
+</span></p>
+<p>と書け，<span class="math inline">\boldsymbol{A}</span>を回転行列とよぶ。 ベクトル<span class="math inline">\boldsymbol{a}</span>を回転行列<span class="math inline">\boldsymbol{A}</span>で回転させると<span class="math inline">\boldsymbol{b}</span>になる，ということ</p>
 </section>
 <section id="軸の回転" class="slide level2">
 <h2>軸の回転</h2>
@@ -512,21 +570,93 @@ a_2
 </div>
 </div>
 </section>
+<section id="前提知識固有値と固有ベクトル" class="slide level2">
+<h2>前提知識：固有値と固有ベクトル</h2>
+<p>行列にはそれぞれ対応する<strong>固有値</strong>と<strong>固有ベクトル</strong>がある。</p>
+<p>さきほどの<span class="math inline">\boldsymbol{b}</span>を<span class="math inline">-\theta</span>だけ回転させると<span class="math inline">\boldsymbol{a}</span>になる。</p>
+<p><span class="math display">
+\begin{pmatrix}
+\cos (-\theta) &amp; -\sin (-\theta)\\
+\sin (-\theta) &amp; \cos (-\theta)
+\end{pmatrix}
+\begin{pmatrix}
+b_1\\
+b_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_1\\
+a_2
+\end{pmatrix}
+</span></p>
+<p>シンプルにすると，</p>
+<p><span class="math display">
+\boldsymbol{A}^{-1} \boldsymbol{b} = \boldsymbol{A}^{-1} \boldsymbol{A} \boldsymbol{a} = \boldsymbol{a}
+</span></p>
+</section>
 <section id="固有値と固有ベクトル" class="slide level2">
 <h2>固有値と固有ベクトル</h2>
-<p>行列にはそれぞれ対応する<strong>固有値</strong>と<strong>固有ベクトル</strong>がある。</p>
-<p>例えば、行列<span class="math inline">A</span>に対して、</p>
+<p>この行列<span class="math inline">\boldsymbol{A}</span>の固有値とは，</p>
 <p><span class="math display">
-A\boldsymbol{v} = \lambda \boldsymbol{v}
+\boldsymbol{A}\boldsymbol{b} = \lambda \boldsymbol{b}
 </span></p>
-<p>となる<span class="math inline">\lambda</span>と<span class="math inline">\boldsymbol{v}</span>が存在する。</p>
+<p>を満たす<span class="math inline">\lambda</span>のことである。 <span class="math inline">p</span>行<span class="math inline">p</span>列の行列<span class="math inline">\boldsymbol{A}</span>の固有値は原則<span class="math inline">p</span>個存在する。</p>
 </section>
-<section id="因子分析のイメージ-1" class="slide level2">
-<h2>因子分析のイメージ</h2>
-
-<img data-src="img/mitsukedasu.png" class="r-stretch quarto-figure-center"><p class="caption">因子分析のイメージ</p></section>
-<section id="因子分析の概要" class="slide level2">
-<h2>因子分析の概要</h2>
+<section id="対称行列" class="slide level2">
+<h2>対称行列</h2>
+<p>対称行列とは，転置行列と元の行列が等しい行列のことである。ようするに，対角線を軸にして左右が対称になっている行列のことである。</p>
+<p><span class="math display">
+\boldsymbol{A} =
+\begin{pmatrix}
+A &amp; B &amp; C\\
+B &amp; A &amp; D\\
+C &amp; D &amp; A
+\end{pmatrix}
+</span></p>
+<p>対称行列は，固有値が実数であることが知られている。</p>
+</section>
+<section id="対称行列と固有値固有ベクトル" class="slide level2 smaller">
+<h2>対称行列と固有値・固有ベクトル</h2>
+<p>細かい話しは飛ばしてしまって，実は対称行列の固有値と固有ベクトルは，以下のようになる。 <span class="math inline">\boldsymbol{A}</span>を<span class="math inline">3\times3</span>の対称行列とし，その固有値を<span class="math inline">\lambda_1 &gt; \lambda_2 &gt; \lambda_3</span>とする。</p>
+<p><span class="math display">
+\begin{align*}
+\boldsymbol{A} &amp;=
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_3} \times \text{3固有ベクトル}\\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_3} \times \text{3固有ベクトル}\\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_3} \times \text{3固有ベクトル}
+\end{pmatrix}\\
+&amp;\times
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_1} \times \text{1固有ベクトル}\\
+\sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル}\\
+\sqrt{\lambda_3} \times \text{3固有ベクトル} &amp; \sqrt{\lambda_3} \times \text{3固有ベクトル} &amp; \sqrt{\lambda_3} \times \text{3固有ベクトル}
+\end{pmatrix}\\
+\end{align*}
+</span></p>
+</section>
+<section id="固有値が小さいと" class="slide level2 smaller">
+<h2>固有値が小さいと</h2>
+<p>例えば，固有値<span class="math inline">\lambda_3</span>がほぼゼロだとすると，さっきの式は，</p>
+<p><span class="math display">
+\begin{align*}
+\boldsymbol{A} &amp;=
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} \\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} \\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル}
+\end{pmatrix}\\
+&amp;\times
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_1} \times \text{1固有ベクトル} &amp; \sqrt{\lambda_1} \times \text{1固有ベクトル}\\
+\sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル} &amp; \sqrt{\lambda_2} \times \text{2固有ベクトル}
+\end{pmatrix}\\
+\end{align*}
+</span></p>
+<p>となり，行列<span class="math inline">\boldsymbol{A}</span>は，2つの固有値<span class="math inline">\lambda_1</span>と<span class="math inline">\lambda_2</span>の固有ベクトルの線形結合で表すことができる。</p>
+</section>
+<section id="因子分析の例" class="slide level2">
+<h2>因子分析の例</h2>
 <p>いま、5つの変数のそれぞれが、2個の変数<span class="math inline">f_1</span>と<span class="math inline">f_2</span>で決まっている、と仮定する。 つまり、</p>
 <p><span class="math display">
 \begin{align*}
@@ -661,22 +791,22 @@ a_{i1}^2 + a_{i2}^2 &amp;= 1 - \sigma_i^2
 <section id="因子分析の実践" class="title-slide slide level1 center">
 <h1>因子分析の実践</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># 心理学用パッケージ</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># いつもの</span></span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># 図をきれいに</span></span>
-<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># 表をキレイに</span></span>
-<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># 表をキレイに</span></span>
-<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
-<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
-<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych) <span class="co"># 心理学用パッケージ</span></span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># いつもの</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes) <span class="co"># 図をきれいに</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) <span class="co"># 表をキレイに</span></span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra) <span class="co"># 表をキレイに</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="データの読み込み" class="slide level2">
 <h2>データの読み込み</h2>
 <p>今回はテキストファイル<code>.txt</code>を読み込むので、<code>readr</code>パッケージの<code>read_table()</code>関数を用いる。 <!-- 練習用データはお菓子のデータである。 --></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="st">"data/senbei.txt"</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df_senbei) <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_table</span>(<span class="st">"https://so-ichi.com/senbei.txt"</span>)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df_senbei) <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -789,8 +919,8 @@ a_{i1}^2 + a_{i2}^2 &amp;= 1 - \sigma_i^2
 <h2>データの整形</h2>
 <p>このデータフレームには、製品名、味、パッケージデザイン、広告宣伝、素材栄養素、キャンペーンイベントという6つの変数から構成されている。分析を容易にするため製品名を行名にするため、<code>tibble</code>パッケージの<code>column_to_rownames()</code>関数を用いる。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(df_senbei, <span class="st">"製品名"</span>)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(df_senbei, <span class="st">"製品名"</span>)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>df_senbei <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -870,7 +1000,7 @@ a_{i1}^2 + a_{i2}^2 &amp;= 1 - \sigma_i^2
 <h2>fa()関数を用いた場合</h2>
 <p>まず相関係数行列を作成する。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">pairs.panels</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="prezemi_2023_15_presen_files/figure-revealjs/cor_matrix-1.png" width="1344" class="r-stretch"></section>
@@ -889,13 +1019,13 @@ a_{i1}^2 + a_{i2}^2 &amp;= 1 - \sigma_i^2
 <p>カイザー・マイヤー・オルキン (Kaiser-Meyer-Olkin：KMO) 検定は，データが因子分析にどの程度適しているかを決定する統計的尺度である。 この検定は，モデル中の各変数と完全なモデルのサンプリングの妥当性を測定する。 この統計量は，共通分散であるかもしれない変数間の分散の比率の尺度である。 KMO値が高いほどデータが因子分析により適しているといえる(by wikipedia)。</p>
 <!--- The measure of sampling adequacy is calculated for each indicator as
 --->
-<!-- 
+<!--
 ## MSA
 
 各指標に対して計算されるサンプリング妥当性尺度(MSA)は次の通り。
 $$
 MSA_j = \displaystyle \frac{\sum _{k \not = j} r^2_{jk}}{\sum _{k \not = j} r^2_{jk} + \sum _{k \not = j} p^2_{jk}}
-$$ 
+$$
 -->
 </section>
 <section id="kmo" class="slide level2">
@@ -922,7 +1052,7 @@ KMO値が0に近いということは，**相関の合計に比べて部分相�
 <h2>RでKMO</h2>
 <p>RでKMO値を求めるには、<code>psych</code>パッケージの<code>KMO()</code>関数を用いる。 <code>KMO()</code>の引数はデータフレームなので、必要な変数のみを入れておく。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">KMO</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">KMO</span>(df_senbei)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Kaiser-Meyer-Olkin factor adequacy
 Call: KMO(r = df_senbei)
@@ -941,10 +1071,10 @@ MSA for each item =
 <!-- KMOは無かったことにして， -->
 <p>すべての変数間の相関係数を<code>cor()</code>関数で計算</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_senbei, <span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(correlation) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>correlation <span class="ot">&lt;-</span> <span class="fu">cor</span>(df_senbei, <span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(correlation) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1102,8 +1232,7 @@ kable(combined_corr) |> kable_styling(font_size = 24)
 <h2>因子の数を決める</h2>
 <p><code>psych</code>パッケージの<code>fa.parallel()</code>関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，<strong>因子の数を何個に設定するかは分析者の自由</strong>である。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a>?<span class="fu">fa.parallel</span>()</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(correlation, <span class="at">n.obs =</span> <span class="dv">11</span>, <span class="at">fa =</span> <span class="st">"fa"</span> ) <span class="co"># スクリープロットを表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.parallel</span>(correlation, <span class="at">n.obs =</span> <span class="dv">11</span>, <span class="at">fa =</span> <span class="st">"fa"</span> ) <span class="co"># スクリープロットを表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section>
@@ -1111,7 +1240,7 @@ kable(combined_corr) |> kable_styling(font_size = 24)
 <div class="cell-output cell-output-stdout">
 <pre><code>Parallel analysis suggests that the number of factors =  2  and the number of components =  NA </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>( <span class="at">h =</span> <span class="dv">0</span> ) <span class="co"># y = 0 の横線を追加</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>( <span class="at">h =</span> <span class="dv">0</span> ) <span class="co"># y = 0 の横線を追加</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1131,13 +1260,13 @@ kable(combined_corr) |> kable_styling(font_size = 24)
 <section id="因子負荷の推定" class="slide level2">
 <h2>因子負荷の推定</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">fa</span>(correlation,</span>
-<span id="cb11-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">nfactors =</span> <span class="dv">2</span>,　<span class="co"># 因子の数</span></span>
-<span id="cb11-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">fm =</span> <span class="st">"minres"</span>,<span class="co"># 最小二乗法</span></span>
-<span id="cb11-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="co"># 軸の回転</span></span>
-<span id="cb11-5"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">use =</span> <span class="st">"complete.obs"</span> <span class="co"># 欠損値</span></span>
-<span id="cb11-6"><a aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb11-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>( result, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">sort =</span> T )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a>result <span class="ot">=</span> <span class="fu">fa</span>(correlation,</span>
+<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">nfactors =</span> <span class="dv">2</span>,　<span class="co"># 因子の数</span></span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">fm =</span> <span class="st">"minres"</span>,<span class="co"># 最小二乗法</span></span>
+<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">rotate =</span> <span class="st">"varimax"</span>, <span class="co"># 軸の回転</span></span>
+<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a>            <span class="at">use =</span> <span class="st">"complete.obs"</span> <span class="co"># 欠損値</span></span>
+<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb12-7"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>( result, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">sort =</span> T )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <p><code>fa()</code>関数の引数は相関係数行列、因子数、回転法、欠損値の扱いなどを指定 <code>minres</code>は最小二乗法、<code>varimax</code>は軸の直交回転法の1つ <!--
@@ -1162,11 +1291,11 @@ Call: fa(r = correlation, nfactors = 2, rotate = "varimax", fm = "minres",
     use = "complete.obs")
 Standardized loadings (pattern matrix) based upon correlation matrix
                      item   MR1   MR2    h2       u2  com
-広告宣伝                3 0.985 0.158 0.995  0.00454 1.05
-キャンペーンイベント    5 0.890 0.168 0.819  0.18066 1.07
-パッケージデザイン      2 0.698 0.374 0.627  0.37293 1.53
+広告宣伝                3 0.985 0.158 0.995  0.00458 1.05
+キャンペーンイベント    5 0.890 0.168 0.819  0.18055 1.07
+パッケージデザイン      2 0.698 0.374 0.627  0.37290 1.53
 味                      1 0.414 0.921 1.020 -0.01958 1.39
-素材栄養素              4 0.078 0.764 0.591  0.40948 1.02
+素材栄養素              4 0.078 0.764 0.591  0.40950 1.02
 
                         MR1   MR2
 SS loadings           2.427 1.625
@@ -1189,14 +1318,14 @@ Fit based upon off diagonal values = 0.997</code></pre>
 </div></section><section id="因子分析のパス図" class="slide level2">
 <h2>因子分析のパス図</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.diagram</span>(result) <span class="co"># 因子の図</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">fa.diagram</span>(result) <span class="co"># 因子の図</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-1-1.png" width="1344" class="r-stretch"></section>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-2-1.png" width="1344" class="r-stretch"></section>
 <section id="因子負荷量" class="slide level2">
 <h2>因子負荷量</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>loadings, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> <span class="fl">0.3</span> )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result<span class="sc">$</span>loadings, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">cutoff =</span> <span class="fl">0.3</span> )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Loadings:
@@ -1217,12 +1346,12 @@ Cumulative Var 0.49 0.81</code></pre>
 <section id="基本関数factanalの場合" class="slide level2">
 <h2>基本関数factanalの場合</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">factanal</span>(df_senbei,</span>
-<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">factor=</span><span class="dv">2</span>,  <span class="co"># 因子数</span></span>
-<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">rotation=</span><span class="st">"varimax"</span>, <span class="co"># 回転</span></span>
-<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">scores=</span><span class="st">"regression"</span> <span class="co"># 推定法</span></span>
-<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(f1<span class="sc">$</span>scores, f1<span class="sc">$</span>loading)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="fu">factanal</span>(df_senbei,</span>
+<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">factor=</span><span class="dv">2</span>,  <span class="co"># 因子数</span></span>
+<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">rotation=</span><span class="st">"varimax"</span>, <span class="co"># 回転</span></span>
+<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a>               <span class="at">scores=</span><span class="st">"regression"</span> <span class="co"># 推定法</span></span>
+<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(f1<span class="sc">$</span>scores, f1<span class="sc">$</span>loading)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 <p><code>factanal()</code>関数で因子分析を行い、<code>biplot()</code>で因子負荷量をプロットすると、図のようになる。横軸が因子1、縦軸が因子2となる。</p>
@@ -1231,49 +1360,44 @@ Cumulative Var 0.49 0.81</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-3-1.png" width="1344"></p>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-4-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="第1因子と第2因子の因子負荷量" class="slide level2">
 <h2>第1因子と第2因子の因子負荷量</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 第1因子と第2因子の因子負荷量</span></span>
-<span id="cb17-2"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">rbind</span>(f1<span class="sc">$</span>loading[,<span class="dv">1</span>], f1<span class="sc">$</span>loading[,<span class="dv">2</span>])</span>
-<span id="cb17-3"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(f1_loading))</span>
-<span id="cb17-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f1_loading) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"マーケティング因子"</span>,<span class="st">"製品因子"</span>)</span>
-<span id="cb17-5"><a aria-hidden="true" tabindex="-1"></a>f1_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(f1<span class="sc">$</span>scores)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># 第1因子と第2因子の因子負荷量</span></span>
+<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">rbind</span>(f1<span class="sc">$</span>loading[,<span class="dv">1</span>], f1<span class="sc">$</span>loading[,<span class="dv">2</span>])</span>
+<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>f1_loading <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(f1_loading))</span>
+<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(f1_loading) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"マーケティング因子"</span>,<span class="st">"製品因子"</span>)</span>
+<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>f1_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(f1<span class="sc">$</span>scores)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="作図" class="slide level2">
 <h2>作図</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb18-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()</span>
-<span id="cb18-4"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_point</span>(</span>
-<span id="cb18-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> f1_scores,</span>
-<span id="cb18-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1,  <span class="at">y =</span> Factor2,)</span>
-<span id="cb18-7"><a aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-8"><a aria-hidden="true" tabindex="-1"></a><span class="co"># チーム名を描画</span></span>
-<span id="cb18-9"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_text_repel</span>(</span>
-<span id="cb18-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>f1_scores,</span>
-<span id="cb18-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1, <span class="at">y =</span> Factor2, <span class="at">label=</span><span class="fu">rownames</span>(f1_scores)),</span>
-<span id="cb18-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">colour=</span><span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Japan(14)"</span>, <span class="st">"magenta"</span>,</span>
-<span id="cb18-13"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Japan(18)"</span>, <span class="st">"magenta"</span>,</span>
-<span id="cb18-14"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"Germany(14)"</span>, <span class="st">"magenta"</span>,</span>
-<span id="cb18-15"><a aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(<span class="fu">rownames</span>(f1_scores)<span class="sc">==</span><span class="st">"France(18)"</span>, <span class="st">"magenta"</span>, <span class="st">"blue4"</span></span>
-<span id="cb18-16"><a aria-hidden="true" tabindex="-1"></a>         )))),</span>
-<span id="cb18-17"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.9</span>,<span class="at">size=</span><span class="dv">3</span></span>
-<span id="cb18-18"><a aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-19"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()</span>
+<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_point</span>(</span>
+<span id="cb19-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> f1_scores,</span>
+<span id="cb19-6"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1,  <span class="at">y =</span> Factor2,)</span>
+<span id="cb19-7"><a aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb19-8"><a aria-hidden="true" tabindex="-1"></a><span class="co"># チーム名を描画</span></span>
+<span id="cb19-9"><a aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_text_repel</span>(</span>
+<span id="cb19-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>f1_scores,</span>
+<span id="cb19-11"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Factor1, <span class="at">y =</span> Factor2, <span class="at">label=</span><span class="fu">rownames</span>(f1_scores)),</span>
+<span id="cb19-12"><a aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha=</span><span class="fl">0.9</span>,<span class="at">size=</span><span class="dv">3</span></span>
+<span id="cb19-13"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-14"><a aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 </section><section id="作図-output" class="slide level2 output-location-slide"><h2>作図</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344"></p>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-6-1.png" width="1344"></p>
 </figure>
 </div>
 </div>
@@ -1286,17 +1410,129 @@ Cumulative Var 0.49 0.81</code></pre>
 <section id="データの読み込み-1" class="slide level2">
 <h2>データの読み込み</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み。</span></span>
-<span id="cb19-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データはサポートサイトからダウンロード可能</span></span>
-<span id="cb19-3"><a aria-hidden="true" tabindex="-1"></a>data_chap11 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/chapter_11.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb19-4"><a aria-hidden="true" tabindex="-1"></a>dat_lov <span class="ot">&lt;-</span> data_chap11[, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み。</span></span>
+<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a><span class="co"># データはサポートサイトからダウンロード可能</span></span>
+<span id="cb20-3"><a aria-hidden="true" tabindex="-1"></a>data_chap11 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://so-ichi.com/chapter_11.csv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-4"><a aria-hidden="true" tabindex="-1"></a>dat_lov <span class="ot">&lt;-</span> data_chap11[, <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span>
+<span id="cb20-5"><a aria-hidden="true" tabindex="-1"></a>dat_lov <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table" data-quarto-postprocess="true" style="font-size: 28px; margin-left: auto; margin-right: auto;">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV2</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV3</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV4</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV5</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV6</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV7</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV8</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">LOV9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="変数の意味" class="slide level2 smaller">
+<h2>変数の意味</h2>
+<!-- このスライドのフォントを小さくしたい -->
+<p>人生における価値観を測定するためのアンケート調査（1〜7点）</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><code>LOV1</code> : 何かに帰属していること</li>
+<li><code>LOV2</code> : 興奮すること</li>
+<li><code>LOV3</code> : 心温まる親交を持つこと</li>
+<li><code>LOV4</code> : 自分の手で何かを成し遂げること</li>
+<li><code>LOV5</code> : 尊敬される人物であること</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><code>LOV6</code> : 人生を楽しむこと</li>
+<li><code>LOV7</code> : 安心して生活を送れること</li>
+<li><code>LOV8</code> : 自分に誇りをもつこと</li>
+<li><code>LOV9</code> : 達成感を得ること</li>
+</ul>
+</div>
 </div>
 </section>
 <section id="相関係数" class="slide level2">
 <h2>相関係数</h2>
+<p>変数間の相関係数を計算</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(dat_lov),<span class="at">digits =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(dat_lov),<span class="at">digits =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">28</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table" data-quarto-postprocess="true" style="font-size: 28px; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1432,96 +1668,82 @@ Cumulative Var 0.49 0.81</code></pre>
 <section id="固有値" class="slide level2">
 <h2>固有値</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="ot">&lt;-</span> <span class="fu">eigen</span>(<span class="fu">cor</span>(dat_lov))<span class="sc">$</span>values <span class="co"># 固有値</span></span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eigenvalues, <span class="at">type =</span> <span class="st">"b"</span>) <span class="co"># 作図</span></span>
-<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>) <span class="co"># 水平線</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="ot">&lt;-</span> dat_lov <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>() <span class="sc">|&gt;</span> <span class="co"># 相関係数</span></span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="fu">eigen</span>() <span class="sc">%&gt;%</span> <span class="co"># 固有値を計算</span></span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>values <span class="co"># 固有値の値</span></span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eigenvalues, <span class="at">type =</span> <span class="st">"b"</span>) <span class="co"># 作図</span></span>
+<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>) <span class="co"># 水平線</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"></section>
+<!-- eigenvalues <- eigen(cor(dat_lov))$values # 固有値 -->
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344" class="r-stretch"></section>
 <section id="因子を抽出" class="slide level2">
 <h2>因子を抽出</h2>
+<p><code>factanal()</code>関数を用いて因子分析を行う。 <code>factanal()</code>関数の主な引数は，</p>
+<ul>
+<li><code>x</code>：データフレーム</li>
+<li><code>factors</code>：因子数</li>
+<li><code>rotation</code>：回転法</li>
+<li><code>scores</code>：因子スコアの推定法</li>
+</ul>
+<p>である。ここでは因子数2としている。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="因子に名前を付ける" class="slide level2">
 <h2>因子に名前を付ける</h2>
+<p>因子の名前は，分析者が自由に付けることができる。 以下では，第1因子を「達成因子」，第2因子を「帰属因子」と名付けている。 因子名には「納得感」が重要である。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a>label_lov <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"achievement factor"</span>, <span class="st">"belongingness factor"</span>)</span>
-<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>loadings[,]</span>
-<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_loadings) <span class="ot">&lt;-</span> label_lov</span>
-<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings, <span class="at">pch =</span> <span class="st">""</span>)</span>
-<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings[,<span class="dv">1</span>], fa_loadings[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>label_lov <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"達成因子"</span>, <span class="st">"帰属因子"</span>) <span class="co"># 因子名</span></span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>loadings[,] <span class="co"># 因子負荷量</span></span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_loadings) <span class="ot">&lt;-</span> label_lov <span class="co"># 変数名を与える</span></span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings, <span class="at">pch =</span> <span class="st">""</span>) <span class="co"># 散布図</span></span>
+<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings[,<span class="dv">1</span>], fa_loadings[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings)) <span class="co"># ラベルを表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-10-1.png" width="1344" class="r-stretch"></section>
-<section id="section" class="slide level2">
-<h2></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a>result_fa_n <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">rotation =</span> <span class="st">"none"</span>)</span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings_n <span class="ot">&lt;-</span> result_fa_n<span class="sc">$</span>loadings[,]</span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings_n, <span class="at">pch =</span> <span class="st">""</span>)</span>
-<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings_n[,<span class="dv">1</span>], fa_loadings_n[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings_n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+</section>
+<section id="因子に名前を付ける-output" class="slide level2 output-location-slide"><h2>因子に名前を付ける</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344"></p>
+</figure>
 </div>
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344" class="r-stretch"></section>
-<section id="section-1" class="slide level2">
-<h2></h2>
+</div>
+</div></section><section id="無回転の場合" class="slide level2">
+<h2>無回転の場合</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">scores =</span> <span class="st">"regression"</span>)</span>
-<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>fa_scores <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>scores</span>
-<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_scores) <span class="ot">&lt;-</span> label_lov</span>
-<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_scores)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a>result_fa_n <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">rotation =</span> <span class="st">"none"</span>)</span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings_n <span class="ot">&lt;-</span> result_fa_n<span class="sc">$</span>loadings[,]</span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings_n, <span class="at">pch =</span> <span class="st">""</span>)</span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings_n[,<span class="dv">1</span>], fa_loadings_n[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings_n))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
 <img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344" class="r-stretch"></section>
-<section id="section-2" class="slide level2">
-<h2></h2>
+<section id="因子得点の推定方法" class="slide level2">
+<h2>因子得点の推定方法</h2>
+<p>因子得点の推定方法は，<code>factanal()</code>関数の<code>scores</code>引数で指定する。 <code>scores = "regression"</code>とすると，回帰法により因子得点を推定する。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a>dat_lu <span class="ot">&lt;-</span> data_chap11[,<span class="dv">10</span><span class="sc">:</span><span class="dv">17</span>]</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lov, <span class="dv">2</span>, <span class="at">scores =</span> <span class="st">"regression"</span>)</span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a>fa_scores <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>scores <span class="co"># 因子得点を抽出</span></span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fa_scores) <span class="ot">&lt;-</span> label_lov <span class="co"># 因子名を与える</span></span>
+<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_scores) <span class="co">#因子得点を散布図で表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
 </div>
+<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-13-1.png" width="1344" class="r-stretch"></section></section>
+<section>
+<section id="因子分析をやってみよう" class="title-slide slide level1 center">
+<h1>因子分析をやってみよう。</h1>
+
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(dat_lu)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          LUAT1     LUAT2     LUAT3     LUBE1     LUBE2     LUBE3     LUBE4
-LUAT1 1.0000000 0.6863097 0.6530632 0.4216778 0.4153562 0.2854687 0.2182564
-LUAT2 0.6863097 1.0000000 0.7031984 0.3998382 0.4011859 0.3186372 0.1806116
-LUAT3 0.6530632 0.7031984 1.0000000 0.4230186 0.4658564 0.3360935 0.1492323
-LUBE1 0.4216778 0.3998382 0.4230186 1.0000000 0.8293229 0.6718840 0.3731311
-LUBE2 0.4153562 0.4011859 0.4658564 0.8293229 1.0000000 0.6780064 0.3638658
-LUBE3 0.2854687 0.3186372 0.3360935 0.6718840 0.6780064 1.0000000 0.4973186
-LUBE4 0.2182564 0.1806116 0.1492323 0.3731311 0.3638658 0.4973186 1.0000000
-LUBE5 0.4580084 0.4108389 0.4266380 0.4730922 0.5001806 0.4537937 0.4267252
-          LUBE5
-LUAT1 0.4580084
-LUAT2 0.4108389
-LUAT3 0.4266380
-LUBE1 0.4730922
-LUBE2 0.5001806
-LUBE3 0.4537937
-LUBE4 0.4267252
-LUBE5 1.0000000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">eigen</span>(<span class="fu">cor</span>(dat_lu))<span class="sc">$</span>values, <span class="at">type =</span> <span class="st">"b"</span>)</span>
-<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344" class="r-stretch"></section>
-<section id="section-4" class="slide level2">
-<h2></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a>result_fa <span class="ot">&lt;-</span> <span class="fu">factanal</span>(dat_lu, <span class="dv">2</span>)</span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a>fa_loadings <span class="ot">&lt;-</span> result_fa<span class="sc">$</span>loadings[,]</span>
-<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fa_loadings, <span class="at">pch =</span> <span class="st">""</span>)</span>
-<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(fa_loadings[,<span class="dv">1</span>], fa_loadings[,<span class="dv">2</span>], <span class="fu">row.names</span>(fa_loadings))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
+<section id="アンケート調査" class="slide level2">
+<h2>アンケート調査</h2>
 
 
-<img data-src="prezemi_2023_15_presen_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344" class="r-stretch"></section><div class="quarto-auto-generated-content">
+
+<img data-src="img/QRanke.png" class="r-stretch quarto-figure-center"><p class="caption">授業評価アンケート</p></section><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

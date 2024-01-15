@@ -49,7 +49,25 @@ execute:
 
 <!-- - たとえば，生徒の学力を「英・数・国・理・社」の5教科の点数で表すより，「文系」と「理系」の2つの因子で表したほうが，生徒の能力を表す変数の数が少なくて済む。 -->
 
-## 前提知識：回転
+
+## 因子分析のイメージ2
+
+![因子分析のイメージ](img/mitsukedasu.png)
+
+
+
+# 前提知識
+
+## 三角比
+
+コサインとサインの関係
+
+![三角関数](img/sankaku.png)
+
+
+
+
+## 回転
 
 座標の回転について簡単に説明
 
@@ -71,6 +89,54 @@ b_2 &= a_1 \sin \theta + a_2 \cos \theta
 \end{aligned}
 $$
 
+
+## Rでやってみる
+
+座標(3,1)の点を60度回転させると
+
+```{r}
+#| code-fold: true
+a1 <- 3
+a2 <- 1
+theta <- 60 * pi / 180
+
+b1 <- a1 * cos(theta) - a2 * sin(theta)
+b2 <- a1 * sin(theta) + a2 * cos(theta)
+
+dfx <- data.frame(
+  x = c(0, a1, b1),
+  y = c(0, a2, b2)
+)
+plot(dfx, xlim = c(-1, 4), ylim = c(-1, 4), asp = 1)
+abline(h = 0, v = 0)
+```
+
+## 公式の証明
+
+座標$(a_1,a_2)$から座標$(b_1, b_2)$への回転は，原点から座標$(a_1, a_2)$までの距離を$r$，偏角を$\alpha$とする。
+
+このとき$a_1 = r \cos \alpha$，$a_2 = r \sin \alpha$である。
+
+
+
+
+コサインの加法定理を用いると，次のように書ける。
+$$
+\begin{aligned}
+b_1 &= r \cos (\alpha + \theta)\\
+    &= r \cos \alpha \cos \theta - r \sin \alpha \sin \theta \\
+    &= a_1  \cos \theta - a_2 \sin \theta
+\end{aligned}
+$$
+となり，$b_2$も同様に求められる。
+
+
+## 加法定理を図的に考える
+
+![加法定理](img/kahouteiri.png)
+
+証明は省略
+
 ## 行列で表現すると
 
 $$
@@ -90,6 +156,14 @@ a_2
 $$
 
 となる。
+記号をつかってシンプルにすると，
+
+$$
+\boldsymbol{b} = \boldsymbol{A}\boldsymbol{a}
+$$
+
+と書け，$\boldsymbol{A}$を回転行列とよぶ。
+ベクトル$\boldsymbol{a}$を回転行列$\boldsymbol{A}$で回転させると$\boldsymbol{b}$になる，ということ
 
 ## 軸の回転
 
@@ -101,23 +175,107 @@ $$
 ![軸の回転](img/lotation2.png)
 :::
 
-## 固有値と固有ベクトル
+## 前提知識：固有値と固有ベクトル
 
 行列にはそれぞれ対応する**固有値**と**固有ベクトル**がある。
 
-例えば、行列$A$に対して、
+さきほどの$\boldsymbol{b}$を$-\theta$だけ回転させると$\boldsymbol{a}$になる。
 
 $$
-A\boldsymbol{v} = \lambda \boldsymbol{v}
+\begin{pmatrix}
+\cos (-\theta) & -\sin (-\theta)\\
+\sin (-\theta) & \cos (-\theta)
+\end{pmatrix}
+\begin{pmatrix}
+b_1\\
+b_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_1\\
+a_2
+\end{pmatrix}
 $$
 
-となる$\lambda$と$\boldsymbol{v}$が存在する。
+シンプルにすると，
 
-## 因子分析のイメージ
+$$
+\boldsymbol{A}^{-1} \boldsymbol{b} = \boldsymbol{A}^{-1} \boldsymbol{A} \boldsymbol{a} = \boldsymbol{a}
+$$
 
-![因子分析のイメージ](img/mitsukedasu.png)
+## 固有値と固有ベクトル
 
-## 因子分析の概要
+この行列$\boldsymbol{A}$の固有値とは，
+
+$$
+\boldsymbol{A}\boldsymbol{b} = \lambda \boldsymbol{b}
+$$
+
+を満たす$\lambda$のことである。
+$p$行$p$列の行列$\boldsymbol{A}$の固有値は原則$p$個存在する。
+
+## 対称行列
+
+対称行列とは，転置行列と元の行列が等しい行列のことである。ようするに，対角線を軸にして左右が対称になっている行列のことである。
+
+$$
+\boldsymbol{A} =
+\begin{pmatrix}
+A & B & C\\
+B & A & D\\
+C & D & A
+\end{pmatrix}
+$$
+
+対称行列は，固有値が実数であることが知られている。
+
+## 対称行列と固有値・固有ベクトル {.smaller}
+
+細かい話しは飛ばしてしまって，実は対称行列の固有値と固有ベクトルは，以下のようになる。
+$\boldsymbol{A}$を$3\times3$の対称行列とし，その固有値を$\lambda_1 > \lambda_2 > \lambda_3$とする。
+
+$$
+\begin{align*}
+\boldsymbol{A} &=
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_3} \times \text{3固有ベクトル}\\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_3} \times \text{3固有ベクトル}\\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_3} \times \text{3固有ベクトル}
+\end{pmatrix}\\
+&\times
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_1} \times \text{1固有ベクトル}\\
+\sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル}\\
+\sqrt{\lambda_3} \times \text{3固有ベクトル} & \sqrt{\lambda_3} \times \text{3固有ベクトル} & \sqrt{\lambda_3} \times \text{3固有ベクトル}
+\end{pmatrix}\\
+\end{align*}
+$$
+
+
+## 固有値が小さいと {.smaller}
+
+例えば，固有値$\lambda_3$がほぼゼロだとすると，さっきの式は，
+
+$$
+\begin{align*}
+\boldsymbol{A} &=
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} \\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} \\
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル}
+\end{pmatrix}\\
+&\times
+\begin{pmatrix}
+\sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_1} \times \text{1固有ベクトル} & \sqrt{\lambda_1} \times \text{1固有ベクトル}\\
+\sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル} & \sqrt{\lambda_2} \times \text{2固有ベクトル}
+\end{pmatrix}\\
+\end{align*}
+$$
+
+となり，行列$\boldsymbol{A}$は，2つの固有値$\lambda_1$と$\lambda_2$の固有ベクトルの線形結合で表すことができる。
+
+
+## 因子分析の例
 
 いま、5つの変数のそれぞれが、2個の変数$f_1$と$f_2$で決まっている、と仮定する。
 つまり、
@@ -291,7 +449,8 @@ update_geom_defaults("point", list(size = 3))
 <!-- 練習用データはお菓子のデータである。 -->
 
 ```{r read_data, message=FALSE, warning=FALSE}
-df_senbei <- readr::read_table("data/senbei.txt")
+#| cache: TRUE
+df_senbei <- readr::read_table("https://so-ichi.com/senbei.txt")
 knitr::kable(df_senbei) |> kable_styling(font_size = 20)
 ```
 
@@ -337,13 +496,13 @@ KMO値が高いほどデータが因子分析により適しているといえ�
 
 <!--- The measure of sampling adequacy is calculated for each indicator as
 --->
-<!-- 
+<!--
 ## MSA
 
 各指標に対して計算されるサンプリング妥当性尺度(MSA)は次の通り。
 $$
 MSA_j = \displaystyle \frac{\sum _{k \not = j} r^2_{jk}}{\sum _{k \not = j} r^2_{jk} + \sum _{k \not = j} p^2_{jk}}
-$$ 
+$$
 -->
 
 ## KMO
@@ -435,7 +594,7 @@ kable(combined_corr) |> kable_styling(font_size = 24)
 #| warning: FALSE
 #| fig.height: 6
 #| output-location: slide
-?fa.parallel()
+
 fa.parallel(correlation, n.obs = 11, fa = "fa" ) # スクリープロットを表示
 abline( h = 0 ) # y = 0 の横線を追加
 ```
@@ -462,7 +621,6 @@ result = fa(correlation,
             use = "complete.obs" # 欠損値
             )
 print( result, digits = 3, sort = T )
-?fa
 ```
 `fa()`関数の引数は相関係数行列、因子数、回転法、欠損値の扱いなどを指定
 `minres`は最小二乗法、`varimax`は軸の直交回転法の1つ
@@ -527,11 +685,6 @@ g <- g + geom_point(
 g <- g + geom_text_repel(
   data=f1_scores,
   aes(x = Factor1, y = Factor2, label=rownames(f1_scores)),
-  colour=ifelse(rownames(f1_scores)=="Japan(14)", "magenta",
-         ifelse(rownames(f1_scores)=="Japan(18)", "magenta",
-         ifelse(rownames(f1_scores)=="Germany(14)", "magenta",
-         ifelse(rownames(f1_scores)=="France(18)", "magenta", "blue4"
-         )))),
   alpha=0.9,size=3
 )
 print(g)
@@ -546,13 +699,45 @@ print(g)
 ## データの読み込み
 
 ```{r}
+#| cache: TRUE
 # データの読み込み。
 # データはサポートサイトからダウンロード可能
-data_chap11 <- read.csv("data/chapter_11.csv", header = TRUE)
+data_chap11 <- read.csv("https://so-ichi.com/chapter_11.csv", header = TRUE)
 dat_lov <- data_chap11[, 1:9]
+dat_lov |> head() |> kable() |> kable_styling(font_size = 28)
 ```
 
+## 変数の意味 {.smaller}
+<!-- このスライドのフォントを小さくしたい -->
+
+
+
+
+人生における価値観を測定するためのアンケート調査（1〜7点）
+
+:::{.columns}
+
+:::{.column width="50%"}
+- `LOV1` : 何かに帰属していること
+- `LOV2` : 興奮すること
+- `LOV3` : 心温まる親交を持つこと
+- `LOV4` : 自分の手で何かを成し遂げること
+- `LOV5` : 尊敬される人物であること
+
+:::
+:::{.column width="50%"}
+
+- `LOV6` : 人生を楽しむこと
+- `LOV7` : 安心して生活を送れること
+- `LOV8` : 自分に誇りをもつこと
+- `LOV9` : 達成感を得ること
+
+:::
+:::
+
 ## 相関係数
+
+変数間の相関係数を計算
 
 ```{r}
 round(cor(dat_lov),digits = 3) |>
@@ -562,12 +747,27 @@ round(cor(dat_lov),digits = 3) |>
 
 ```{r}
 #| fig-height: 6
-eigenvalues <- eigen(cor(dat_lov))$values # 固有値
+eigenvalues <- dat_lov |>
+  cor() |> # 相関係数
+  eigen() %>% # 固有値を計算
+  .$values # 固有値の値
 plot(eigenvalues, type = "b") # 作図
 abline(h = 1) # 水平線
 ```
 
+<!-- eigenvalues <- eigen(cor(dat_lov))$values # 固有値 -->
+
 ## 因子を抽出
+
+`factanal()`関数を用いて因子分析を行う。
+`factanal()`関数の主な引数は，
+
+-  `x`：データフレーム
+-  `factors`：因子数
+-  `rotation`：回転法
+-  `scores`：因子スコアの推定法
+
+である。ここでは因子数2としている。
 
 ```{r}
 result_fa <- factanal(dat_lov, 2)
@@ -575,15 +775,20 @@ result_fa <- factanal(dat_lov, 2)
 
 ## 因子に名前を付ける
 
+因子の名前は，分析者が自由に付けることができる。
+以下では，第1因子を「達成因子」，第2因子を「帰属因子」と名付けている。
+因子名には「納得感」が重要である。
+
 ```{r}
-label_lov <- c("achievement factor", "belongingness factor")
-fa_loadings <- result_fa$loadings[,]
-colnames(fa_loadings) <- label_lov
-plot(fa_loadings, pch = "")
-text(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))
+#| output-location: slide
+label_lov <- c("達成因子", "帰属因子") # 因子名
+fa_loadings <- result_fa$loadings[,] # 因子負荷量
+colnames(fa_loadings) <- label_lov # 変数名を与える
+plot(fa_loadings, pch = "") # 散布図
+text(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings)) # ラベルを表示
 ```
 
-##
+## 無回転の場合
 
 ```{r}
 result_fa_n <- factanal(dat_lov, 2, rotation = "none")
@@ -592,35 +797,22 @@ plot(fa_loadings_n, pch = "")
 text(fa_loadings_n[,1], fa_loadings_n[,2], row.names(fa_loadings_n))
 ```
 
-##
+## 因子得点の推定方法
+
+因子得点の推定方法は，`factanal()`関数の`scores`引数で指定する。
+`scores = "regression"`とすると，回帰法により因子得点を推定する。
 
 ```{r}
 result_fa <- factanal(dat_lov, 2, scores = "regression")
-fa_scores <- result_fa$scores
-colnames(fa_scores) <- label_lov
-plot(fa_scores)
-```
-
-##
-
-```{r}
-dat_lu <- data_chap11[,10:17]
-```
-
-##
-
-```{r}
-cor(dat_lu)
-plot(eigen(cor(dat_lu))$values, type = "b")
-abline(h = 1)
+fa_scores <- result_fa$scores # 因子得点を抽出
+colnames(fa_scores) <- label_lov # 因子名を与える
+plot(fa_scores) #因子得点を散布図で表示
 ```
 
 
-## 
+# 因子分析をやってみよう。
 
-```{r}
-result_fa <- factanal(dat_lu, 2)
-fa_loadings <- result_fa$loadings[,]
-plot(fa_loadings, pch = "")
-text(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))
-```
+## アンケート調査
+
+![授業評価アンケート](img/QRanke.png)
+

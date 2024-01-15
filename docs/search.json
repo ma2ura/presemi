@@ -2167,7 +2167,7 @@
     "href": "prezemi_2023_15_presen.html#データの読み込み",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "データの読み込み",
-    "text": "データの読み込み\n今回はテキストファイル.txtを読み込むので、readrパッケージのread_table()関数を用いる。 \n\ndf_senbei &lt;- readr::read_table(\"data/senbei.txt\")\nknitr::kable(df_senbei) |&gt; kable_styling(font_size = 20)\n\n\n\n\n製品名\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\nハッピーターン\n89\n63\n32\n51\n37\n\n\n雪の宿\n73\n46\n25\n48\n32\n\n\nぽたぽた焼き\n65\n45\n17\n32\n21\n\n\n黒豆せんべい\n72\n33\n2\n50\n9\n\n\nまがりせんべい\n70\n29\n11\n35\n21\n\n\nチーズアーモンド\n71\n20\n10\n38\n24\n\n\n手塩屋\n71\n38\n3\n38\n13\n\n\nばかうけ\n48\n39\n10\n16\n16\n\n\n粒より小餅\n49\n26\n17\n27\n30\n\n\n田舎おかき\n51\n16\n1\n38\n5\n\n\nうまい！堅焼き\n48\n15\n4\n36\n1"
+    "text": "データの読み込み\n今回はテキストファイル.txtを読み込むので、readrパッケージのread_table()関数を用いる。 \n\ndf_senbei &lt;- readr::read_table(\"https://so-ichi.com/senbei.txt\")\nknitr::kable(df_senbei) |&gt; kable_styling(font_size = 20)\n\n\n\n\n製品名\n味\nパッケージデザイン\n広告宣伝\n素材栄養素\nキャンペーンイベント\n\n\n\n\nハッピーターン\n89\n63\n32\n51\n37\n\n\n雪の宿\n73\n46\n25\n48\n32\n\n\nぽたぽた焼き\n65\n45\n17\n32\n21\n\n\n黒豆せんべい\n72\n33\n2\n50\n9\n\n\nまがりせんべい\n70\n29\n11\n35\n21\n\n\nチーズアーモンド\n71\n20\n10\n38\n24\n\n\n手塩屋\n71\n38\n3\n38\n13\n\n\nばかうけ\n48\n39\n10\n16\n16\n\n\n粒より小餅\n49\n26\n17\n27\n30\n\n\n田舎おかき\n51\n16\n1\n38\n5\n\n\nうまい！堅焼き\n48\n15\n4\n36\n1"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#データの詳細",
@@ -2265,7 +2265,7 @@
     "href": "prezemi_2023_15_presen.html#因子の数を決める",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子の数を決める",
-    "text": "因子の数を決める\npsychパッケージのfa.parallel()関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，因子の数を何個に設定するかは分析者の自由である。\n\n?fa.parallel()\nfa.parallel(correlation, n.obs = 11, fa = \"fa\" ) # スクリープロットを表示"
+    "text": "因子の数を決める\npsychパッケージのfa.parallel()関数で、スクリーンプロットを作成し因子の数を検討 因子分析では，因子の数を何個に設定するかは分析者の自由である。\n\nfa.parallel(correlation, n.obs = 11, fa = \"fa\" ) # スクリープロットを表示"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子の数を決める-1",
@@ -2321,21 +2321,21 @@
     "href": "prezemi_2023_15_presen.html#作図",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "作図",
-    "text": "作図\n\nlibrary(ggrepel)\n\ng &lt;- ggplot()\ng &lt;- g + geom_point(\n  data = f1_scores,\n  aes(x = Factor1,  y = Factor2,)\n  )\n# チーム名を描画\ng &lt;- g + geom_text_repel(\n  data=f1_scores,\n  aes(x = Factor1, y = Factor2, label=rownames(f1_scores)),\n  colour=ifelse(rownames(f1_scores)==\"Japan(14)\", \"magenta\",\n         ifelse(rownames(f1_scores)==\"Japan(18)\", \"magenta\",\n         ifelse(rownames(f1_scores)==\"Germany(14)\", \"magenta\",\n         ifelse(rownames(f1_scores)==\"France(18)\", \"magenta\", \"blue4\"\n         )))),\n  alpha=0.9,size=3\n)\nprint(g)"
+    "text": "作図\n\nlibrary(ggrepel)\n\ng &lt;- ggplot()\ng &lt;- g + geom_point(\n  data = f1_scores,\n  aes(x = Factor1,  y = Factor2,)\n  )\n# チーム名を描画\ng &lt;- g + geom_text_repel(\n  data=f1_scores,\n  aes(x = Factor1, y = Factor2, label=rownames(f1_scores)),\n  alpha=0.9,size=3\n)\nprint(g)"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#データの読み込み-1",
     "href": "prezemi_2023_15_presen.html#データの読み込み-1",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "データの読み込み",
-    "text": "データの読み込み\n\n# データの読み込み。\n# データはサポートサイトからダウンロード可能\ndata_chap11 &lt;- read.csv(\"data/chapter_11.csv\", header = TRUE)\ndat_lov &lt;- data_chap11[, 1:9]"
+    "text": "データの読み込み\n\n# データの読み込み。\n# データはサポートサイトからダウンロード可能\ndata_chap11 &lt;- read.csv(\"https://so-ichi.com/chapter_11.csv\", header = TRUE)\ndat_lov &lt;- data_chap11[, 1:9]\ndat_lov |&gt; head() |&gt; kable() |&gt; kable_styling(font_size = 28)\n\n\n\n\nLOV1\nLOV2\nLOV3\nLOV4\nLOV5\nLOV6\nLOV7\nLOV8\nLOV9\n\n\n\n\n5\n4\n5\n6\n5\n7\n7\n6\n6\n\n\n5\n5\n6\n6\n6\n6\n7\n6\n6\n\n\n5\n6\n6\n6\n6\n6\n6\n6\n6\n\n\n6\n5\n6\n5\n4\n7\n7\n6\n6\n\n\n2\n3\n2\n2\n2\n6\n6\n6\n3\n\n\n5\n5\n6\n5\n5\n6\n7\n6\n5"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#相関係数",
     "href": "prezemi_2023_15_presen.html#相関係数",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "相関係数",
-    "text": "相関係数\n\nround(cor(dat_lov),digits = 3) |&gt;\n  kable() |&gt; kable_styling(font_size = 28)\n\n\n\n\n\nLOV1\nLOV2\nLOV3\nLOV4\nLOV5\nLOV6\nLOV7\nLOV8\nLOV9\n\n\n\n\nLOV1\n1.000\n0.381\n0.364\n0.248\n0.442\n0.041\n0.065\n0.309\n0.324\n\n\nLOV2\n0.381\n1.000\n0.470\n0.538\n0.507\n0.400\n0.317\n0.517\n0.590\n\n\nLOV3\n0.364\n0.470\n1.000\n0.668\n0.671\n0.536\n0.505\n0.618\n0.617\n\n\nLOV4\n0.248\n0.538\n0.668\n1.000\n0.595\n0.570\n0.565\n0.739\n0.774\n\n\nLOV5\n0.442\n0.507\n0.671\n0.595\n1.000\n0.377\n0.378\n0.576\n0.595\n\n\nLOV6\n0.041\n0.400\n0.536\n0.570\n0.377\n1.000\n0.752\n0.586\n0.616\n\n\nLOV7\n0.065\n0.317\n0.505\n0.565\n0.378\n0.752\n1.000\n0.581\n0.572\n\n\nLOV8\n0.309\n0.517\n0.618\n0.739\n0.576\n0.586\n0.581\n1.000\n0.781\n\n\nLOV9\n0.324\n0.590\n0.617\n0.774\n0.595\n0.616\n0.572\n0.781\n1.000"
+    "text": "相関係数\n変数間の相関係数を計算\n\nround(cor(dat_lov),digits = 3) |&gt;\n  kable() |&gt; kable_styling(font_size = 28)\n\n\n\n\n\nLOV1\nLOV2\nLOV3\nLOV4\nLOV5\nLOV6\nLOV7\nLOV8\nLOV9\n\n\n\n\nLOV1\n1.000\n0.381\n0.364\n0.248\n0.442\n0.041\n0.065\n0.309\n0.324\n\n\nLOV2\n0.381\n1.000\n0.470\n0.538\n0.507\n0.400\n0.317\n0.517\n0.590\n\n\nLOV3\n0.364\n0.470\n1.000\n0.668\n0.671\n0.536\n0.505\n0.618\n0.617\n\n\nLOV4\n0.248\n0.538\n0.668\n1.000\n0.595\n0.570\n0.565\n0.739\n0.774\n\n\nLOV5\n0.442\n0.507\n0.671\n0.595\n1.000\n0.377\n0.378\n0.576\n0.595\n\n\nLOV6\n0.041\n0.400\n0.536\n0.570\n0.377\n1.000\n0.752\n0.586\n0.616\n\n\nLOV7\n0.065\n0.317\n0.505\n0.565\n0.378\n0.752\n1.000\n0.581\n0.572\n\n\nLOV8\n0.309\n0.517\n0.618\n0.739\n0.576\n0.586\n0.581\n1.000\n0.781\n\n\nLOV9\n0.324\n0.590\n0.617\n0.774\n0.595\n0.616\n0.572\n0.781\n1.000"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#構造方程式モデル",
@@ -2363,21 +2363,21 @@
     "href": "prezemi_2023_15_presen.html#固有値",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "固有値",
-    "text": "固有値\n\neigenvalues &lt;- eigen(cor(dat_lov))$values # 固有値\nplot(eigenvalues, type = \"b\") # 作図\nabline(h = 1) # 水平線"
+    "text": "固有値\n\neigenvalues &lt;- dat_lov |&gt;\n  cor() |&gt; # 相関係数\n  eigen() %&gt;% # 固有値を計算\n  .$values # 固有値の値\nplot(eigenvalues, type = \"b\") # 作図\nabline(h = 1) # 水平線"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子を抽出",
     "href": "prezemi_2023_15_presen.html#因子を抽出",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子を抽出",
-    "text": "因子を抽出\n\nresult_fa &lt;- factanal(dat_lov, 2)"
+    "text": "因子を抽出\nfactanal()関数を用いて因子分析を行う。 factanal()関数の主な引数は，\n\nx：データフレーム\nfactors：因子数\nrotation：回転法\nscores：因子スコアの推定法\n\nである。ここでは因子数2としている。\n\nresult_fa &lt;- factanal(dat_lov, 2)"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子に名前を付ける",
     "href": "prezemi_2023_15_presen.html#因子に名前を付ける",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子に名前を付ける",
-    "text": "因子に名前を付ける\n\nlabel_lov &lt;- c(\"achievement factor\", \"belongingness factor\")\nfa_loadings &lt;- result_fa$loadings[,]\ncolnames(fa_loadings) &lt;- label_lov\nplot(fa_loadings, pch = \"\")\ntext(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))"
+    "text": "因子に名前を付ける\n因子の名前は，分析者が自由に付けることができる。 以下では，第1因子を「達成因子」，第2因子を「帰属因子」と名付けている。 因子名には「納得感」が重要である。\n\nlabel_lov &lt;- c(\"達成因子\", \"帰属因子\") # 因子名\nfa_loadings &lt;- result_fa$loadings[,] # 因子負荷量\ncolnames(fa_loadings) &lt;- label_lov # 変数名を与える\nplot(fa_loadings, pch = \"\") # 散布図\ntext(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings)) # ラベルを表示"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析-1",
@@ -2412,28 +2412,28 @@
     "href": "prezemi_2023_15_presen.html#section",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "",
-    "text": "result_fa_n &lt;- factanal(dat_lov, 2, rotation = \"none\")\nfa_loadings_n &lt;- result_fa_n$loadings[,]\nplot(fa_loadings_n, pch = \"\")\ntext(fa_loadings_n[,1], fa_loadings_n[,2], row.names(fa_loadings_n))"
+    "text": "result_fa &lt;- factanal(dat_lov, 2, scores = \"regression\")\nfa_scores &lt;- result_fa$scores\ncolnames(fa_scores) &lt;- label_lov\nplot(fa_scores)"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#section-1",
     "href": "prezemi_2023_15_presen.html#section-1",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "",
-    "text": "result_fa &lt;- factanal(dat_lov, 2, scores = \"regression\")\nfa_scores &lt;- result_fa$scores\ncolnames(fa_scores) &lt;- label_lov\nplot(fa_scores)"
+    "text": "dat_lu &lt;- data_chap11[,10:17]"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#section-2",
     "href": "prezemi_2023_15_presen.html#section-2",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "",
-    "text": "dat_lu &lt;- data_chap11[,10:17]"
+    "text": "cor(dat_lu)\n\n          LUAT1     LUAT2     LUAT3     LUBE1     LUBE2     LUBE3     LUBE4\nLUAT1 1.0000000 0.6863097 0.6530632 0.4216778 0.4153562 0.2854687 0.2182564\nLUAT2 0.6863097 1.0000000 0.7031984 0.3998382 0.4011859 0.3186372 0.1806116\nLUAT3 0.6530632 0.7031984 1.0000000 0.4230186 0.4658564 0.3360935 0.1492323\nLUBE1 0.4216778 0.3998382 0.4230186 1.0000000 0.8293229 0.6718840 0.3731311\nLUBE2 0.4153562 0.4011859 0.4658564 0.8293229 1.0000000 0.6780064 0.3638658\nLUBE3 0.2854687 0.3186372 0.3360935 0.6718840 0.6780064 1.0000000 0.4973186\nLUBE4 0.2182564 0.1806116 0.1492323 0.3731311 0.3638658 0.4973186 1.0000000\nLUBE5 0.4580084 0.4108389 0.4266380 0.4730922 0.5001806 0.4537937 0.4267252\n          LUBE5\nLUAT1 0.4580084\nLUAT2 0.4108389\nLUAT3 0.4266380\nLUBE1 0.4730922\nLUBE2 0.5001806\nLUBE3 0.4537937\nLUBE4 0.4267252\nLUBE5 1.0000000\n\nplot(eigen(cor(dat_lu))$values, type = \"b\")\nabline(h = 1)"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#section-3",
     "href": "prezemi_2023_15_presen.html#section-3",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "",
-    "text": "cor(dat_lu)\n\n          LUAT1     LUAT2     LUAT3     LUBE1     LUBE2     LUBE3     LUBE4\nLUAT1 1.0000000 0.6863097 0.6530632 0.4216778 0.4153562 0.2854687 0.2182564\nLUAT2 0.6863097 1.0000000 0.7031984 0.3998382 0.4011859 0.3186372 0.1806116\nLUAT3 0.6530632 0.7031984 1.0000000 0.4230186 0.4658564 0.3360935 0.1492323\nLUBE1 0.4216778 0.3998382 0.4230186 1.0000000 0.8293229 0.6718840 0.3731311\nLUBE2 0.4153562 0.4011859 0.4658564 0.8293229 1.0000000 0.6780064 0.3638658\nLUBE3 0.2854687 0.3186372 0.3360935 0.6718840 0.6780064 1.0000000 0.4973186\nLUBE4 0.2182564 0.1806116 0.1492323 0.3731311 0.3638658 0.4973186 1.0000000\nLUBE5 0.4580084 0.4108389 0.4266380 0.4730922 0.5001806 0.4537937 0.4267252\n          LUBE5\nLUAT1 0.4580084\nLUAT2 0.4108389\nLUAT3 0.4266380\nLUBE1 0.4730922\nLUBE2 0.5001806\nLUBE3 0.4537937\nLUBE4 0.4267252\nLUBE5 1.0000000\n\nplot(eigen(cor(dat_lu))$values, type = \"b\")\nabline(h = 1)"
+    "text": "result_fa &lt;- factanal(dat_lu, 2)\nfa_loadings &lt;- result_fa$loadings[,]\nplot(fa_loadings, pch = \"\")\ntext(fa_loadings[,1], fa_loadings[,2], row.names(fa_loadings))"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#section-4",
@@ -2489,7 +2489,7 @@
     "href": "prezemi_2023_15_presen.html#行列で表現すると",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "行列で表現すると",
-    "text": "行列で表現すると\n\n\\begin{pmatrix}\nb_1\\\\\nb_2\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n\\cos \\theta & -\\sin \\theta\\\\\n\\sin \\theta & \\cos \\theta\n\\end{pmatrix}\n\\begin{pmatrix}\na_1\\\\\na_2\n\\end{pmatrix}\n\nとなる。"
+    "text": "行列で表現すると\n\n\\begin{pmatrix}\nb_1\\\\\nb_2\n\\end{pmatrix}\n=\n\\begin{pmatrix}\n\\cos \\theta & -\\sin \\theta\\\\\n\\sin \\theta & \\cos \\theta\n\\end{pmatrix}\n\\begin{pmatrix}\na_1\\\\\na_2\n\\end{pmatrix}\n\nとなる。 記号をつかってシンプルにすると，\n\n\\boldsymbol{b} = \\boldsymbol{A}\\boldsymbol{a}\n\nと書け，\\boldsymbol{A}を回転行列とよぶ。 ベクトル\\boldsymbol{a}を回転行列\\boldsymbol{A}で回転させると\\boldsymbol{b}になる，ということ"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#軸の回転",
@@ -2503,7 +2503,7 @@
     "href": "prezemi_2023_15_presen.html#固有値と固有ベクトル",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "固有値と固有ベクトル",
-    "text": "固有値と固有ベクトル\n行列にはそれぞれ対応する固有値と固有ベクトルがある。\n例えば、行列Aに対して、\n\nA\\boldsymbol{v} = \\lambda \\boldsymbol{v}\n\nとなる\\lambdaと\\boldsymbol{v}が存在する。"
+    "text": "固有値と固有ベクトル\nこの行列\\boldsymbol{A}の固有値とは，\n\n\\boldsymbol{A}\\boldsymbol{b} = \\lambda \\boldsymbol{b}\n\nを満たす\\lambdaのことである。 p行p列の行列\\boldsymbol{A}の固有値は原則p個存在する。"
   },
   {
     "objectID": "prezemi_2023_15_presen.html#因子分析のイメージ-1",
@@ -2524,6 +2524,125 @@
     "href": "prezemi_2023_15_presen.html#因子負荷の推定-output",
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "因子負荷の推定",
-    "text": "因子負荷の推定\n\nFactor Analysis using method =  minres\nCall: fa(r = correlation, nfactors = 2, rotate = \"varimax\", fm = \"minres\", \n    use = \"complete.obs\")\nStandardized loadings (pattern matrix) based upon correlation matrix\n                     item   MR1   MR2    h2       u2  com\n広告宣伝                3 0.985 0.158 0.995  0.00454 1.05\nキャンペーンイベント    5 0.890 0.168 0.819  0.18066 1.07\nパッケージデザイン      2 0.698 0.374 0.627  0.37293 1.53\n味                      1 0.414 0.921 1.020 -0.01958 1.39\n素材栄養素              4 0.078 0.764 0.591  0.40948 1.02\n\n                        MR1   MR2\nSS loadings           2.427 1.625\nProportion Var        0.485 0.325\nCumulative Var        0.485 0.810\nProportion Explained  0.599 0.401\nCumulative Proportion 0.599 1.000\n\nMean item complexity =  1.2\nTest of the hypothesis that 2 factors are sufficient.\n\ndf null model =  10  with the objective function =  4.853\ndf of  the model are 1  and the objective function was  0.756 \n\nThe root mean square of the residuals (RMSR) is  0.03 \nThe df corrected root mean square of the residuals is  0.096 \n\nFit based upon off diagonal values = 0.997"
+    "text": "因子負荷の推定\n\nFactor Analysis using method =  minres\nCall: fa(r = correlation, nfactors = 2, rotate = \"varimax\", fm = \"minres\", \n    use = \"complete.obs\")\nStandardized loadings (pattern matrix) based upon correlation matrix\n                     item   MR1   MR2    h2       u2  com\n広告宣伝                3 0.985 0.158 0.995  0.00458 1.05\nキャンペーンイベント    5 0.890 0.168 0.819  0.18055 1.07\nパッケージデザイン      2 0.698 0.374 0.627  0.37290 1.53\n味                      1 0.414 0.921 1.020 -0.01958 1.39\n素材栄養素              4 0.078 0.764 0.591  0.40950 1.02\n\n                        MR1   MR2\nSS loadings           2.427 1.625\nProportion Var        0.485 0.325\nCumulative Var        0.485 0.810\nProportion Explained  0.599 0.401\nCumulative Proportion 0.599 1.000\n\nMean item complexity =  1.2\nTest of the hypothesis that 2 factors are sufficient.\n\ndf null model =  10  with the objective function =  4.853\ndf of  the model are 1  and the objective function was  0.756 \n\nThe root mean square of the residuals (RMSR) is  0.03 \nThe df corrected root mean square of the residuals is  0.096 \n\nFit based upon off diagonal values = 0.997"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#因子に名前を付ける-output",
+    "href": "prezemi_2023_15_presen.html#因子に名前を付ける-output",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "因子に名前を付ける",
+    "text": "因子に名前を付ける"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#無回転の場合",
+    "href": "prezemi_2023_15_presen.html#無回転の場合",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "無回転の場合",
+    "text": "無回転の場合\n\nresult_fa_n &lt;- factanal(dat_lov, 2, rotation = \"none\")\nfa_loadings_n &lt;- result_fa_n$loadings[,]\nplot(fa_loadings_n, pch = \"\")\ntext(fa_loadings_n[,1], fa_loadings_n[,2], row.names(fa_loadings_n))"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#因子得点の推定方法",
+    "href": "prezemi_2023_15_presen.html#因子得点の推定方法",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "因子得点の推定方法",
+    "text": "因子得点の推定方法\n因子得点の推定方法は，factanal()関数のscores引数で指定する。 scores = \"regression\"とすると，回帰法により因子得点を推定する。\n\nresult_fa &lt;- factanal(dat_lov, 2, scores = \"regression\")\nfa_scores &lt;- result_fa$scores # 因子得点を抽出\ncolnames(fa_scores) &lt;- label_lov # 因子名を与える\nplot(fa_scores) #因子得点を散布図で表示"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#変数の意味",
+    "href": "prezemi_2023_15_presen.html#変数の意味",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "変数の意味",
+    "text": "変数の意味\n\n人生における価値観を測定するためのアンケート調査（1〜7点）\n\n\n\nLOV1 : 何かに帰属していること\nLOV2 : 興奮すること\nLOV3 : 心温まる親交を持つこと\nLOV4 : 自分の手で何かを成し遂げること\nLOV5 : 尊敬される人物であること\n\n\n\nLOV6 : 人生を楽しむこと\nLOV7 : 安心して生活を送れること\nLOV8 : 自分に誇りをもつこと\nLOV9 : 達成感を得ること"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#前提知識固有値と固有ベクトル",
+    "href": "prezemi_2023_15_presen.html#前提知識固有値と固有ベクトル",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "前提知識：固有値と固有ベクトル",
+    "text": "前提知識：固有値と固有ベクトル\n行列にはそれぞれ対応する固有値と固有ベクトルがある。\nさきほどの\\boldsymbol{b}を-\\thetaだけ回転させると\\boldsymbol{a}になる。\n\n\\begin{pmatrix}\n\\cos (-\\theta) & -\\sin (-\\theta)\\\\\n\\sin (-\\theta) & \\cos (-\\theta)\n\\end{pmatrix}\n\\begin{pmatrix}\nb_1\\\\\nb_2\n\\end{pmatrix}\n=\n\\begin{pmatrix}\na_1\\\\\na_2\n\\end{pmatrix}\n\nシンプルにすると，\n\n\\boldsymbol{A}^{-1} \\boldsymbol{b} = \\boldsymbol{A}^{-1} \\boldsymbol{A} \\boldsymbol{a} = \\boldsymbol{a}"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#回転",
+    "href": "prezemi_2023_15_presen.html#回転",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "回転",
+    "text": "回転\n座標の回転について簡単に説明\n\n座標の回転"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#rでやってみる",
+    "href": "prezemi_2023_15_presen.html#rでやってみる",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "Rでやってみる",
+    "text": "Rでやってみる\n座標(3,1)の点を60度回転させると\n\n\nコード\na1 &lt;- 3\na2 &lt;- 1\ntheta &lt;- 60 * pi / 180\n\nb1 &lt;- a1 * cos(theta) - a2 * sin(theta)\nb2 &lt;- a1 * sin(theta) + a2 * cos(theta)\n\ndfx &lt;- data.frame(\n  x = c(0, a1, b1),\n  y = c(0, a2, b2)\n)\nplot(dfx, xlim = c(-1, 4), ylim = c(-1, 4), asp = 1)\nabline(h = 0, v = 0)"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#対称行列",
+    "href": "prezemi_2023_15_presen.html#対称行列",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "対称行列",
+    "text": "対称行列\n対称行列とは，転置行列と元の行列が等しい行列のことである。ようするに，対角線を軸にして左右が対称になっている行列のことである。\n\n\\boldsymbol{A} =\n\\begin{pmatrix}\nA & B & C\\\\\nB & A & D\\\\\nC & D & A\n\\end{pmatrix}\n\n対称行列は，固有値が実数であることが知られている。"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#対称行列と固有値固有ベクトル",
+    "href": "prezemi_2023_15_presen.html#対称行列と固有値固有ベクトル",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "対称行列と固有値・固有ベクトル",
+    "text": "対称行列と固有値・固有ベクトル\n細かい話しは飛ばしてしまって，実は対称行列の固有値と固有ベクトルは，以下のようになる。 \\boldsymbol{A}を3\\times3の対称行列とし，その固有値を\\lambda_1 &gt; \\lambda_2 &gt; \\lambda_3とする。\n\n\\begin{align*}\n\\boldsymbol{A} &=\n\\begin{pmatrix}\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_3} \\times \\text{3固有ベクトル}\\\\\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_3} \\times \\text{3固有ベクトル}\\\\\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_3} \\times \\text{3固有ベクトル}\n\\end{pmatrix}\\\\\n&\\times\n\\begin{pmatrix}\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_1} \\times \\text{1固有ベクトル}\\\\\n\\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル}\\\\\n\\sqrt{\\lambda_3} \\times \\text{3固有ベクトル} & \\sqrt{\\lambda_3} \\times \\text{3固有ベクトル} & \\sqrt{\\lambda_3} \\times \\text{3固有ベクトル}\n\\end{pmatrix}\\\\\n\\end{align*}"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#固有値が小さいと",
+    "href": "prezemi_2023_15_presen.html#固有値が小さいと",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "固有値が小さいと",
+    "text": "固有値が小さいと\n例えば，固有値\\lambda_3がほぼゼロだとすると，さっきの式は，\n\n\\begin{align*}\n\\boldsymbol{A} &=\n\\begin{pmatrix}\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} \\\\\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} \\\\\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル}\n\\end{pmatrix}\\\\\n&\\times\n\\begin{pmatrix}\n\\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_1} \\times \\text{1固有ベクトル} & \\sqrt{\\lambda_1} \\times \\text{1固有ベクトル}\\\\\n\\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル} & \\sqrt{\\lambda_2} \\times \\text{2固有ベクトル}\n\\end{pmatrix}\\\\\n\\end{align*}\n\nとなり，行列\\boldsymbol{A}は，2つの固有値\\lambda_1と\\lambda_2の固有ベクトルの線形結合で表すことができる。"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#因子分析の例",
+    "href": "prezemi_2023_15_presen.html#因子分析の例",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "因子分析の例",
+    "text": "因子分析の例\nいま、5つの変数のそれぞれが、2個の変数f_1とf_2で決まっている、と仮定する。 つまり、\n\n\\begin{align*}\nY_1 & \\fallingdotseq a_{11} f_1 + a_{12} f_2\\\\\nY_2 & \\fallingdotseq a_{21} f_1 + a_{22} f_2\\\\\n\\vdots\\\\\nY_5 & \\fallingdotseq a_{51} f_1 + a_{52} f_2\\\\\n\\end{align*}"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#因子分析のイメージ2",
+    "href": "prezemi_2023_15_presen.html#因子分析のイメージ2",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "因子分析のイメージ2",
+    "text": "因子分析のイメージ2\n\n因子分析のイメージ"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#公式の証明",
+    "href": "prezemi_2023_15_presen.html#公式の証明",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "公式の証明",
+    "text": "公式の証明\n座標(a_1,a_2)から座標(b_1, b_2)への回転は，原点から座標(a_1, a_2)までの距離をr，偏角を\\alphaとする。\nこのときa_1 = r \\cos \\alpha，a_2 = r \\sin \\alphaである。\nコサインの加法定理を用いると，次のように書ける。 \n\\begin{aligned}\nb_1 &= r \\cos (\\alpha + \\theta)\\\\\n    &= r \\cos \\alpha \\cos \\theta - r \\sin \\alpha \\sin \\theta \\\\\n    &= a_1  \\cos \\theta - a_2 \\sin \\theta\n\\end{aligned}\n となり，b_2も同様に求められる。"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#加法定理を図的に考える",
+    "href": "prezemi_2023_15_presen.html#加法定理を図的に考える",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "加法定理を図的に考える",
+    "text": "加法定理を図的に考える\n\n加法定理証明は省略"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#三角関数",
+    "href": "prezemi_2023_15_presen.html#三角関数",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "三角関数",
+    "text": "三角関数\nコサインとサインの関係\n\n三角関数"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#三角比",
+    "href": "prezemi_2023_15_presen.html#三角比",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "三角比",
+    "text": "三角比\nコサインとサインの関係\n\n三角関数"
+  },
+  {
+    "objectID": "prezemi_2023_15_presen.html#アンケート調査",
+    "href": "prezemi_2023_15_presen.html#アンケート調査",
+    "title": "プレゼミ2023 最終会  多変量解析",
+    "section": "アンケート調査",
+    "text": "アンケート調査\n\n\n\n授業評価アンケート"
   }
 ]
