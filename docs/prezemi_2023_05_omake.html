@@ -9,10 +9,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.433">
+  <meta name="generator" content="quarto-1.5.54">
 
   <meta name="author" content="Soichi Matsuura">
-  <title>プレゼミ講義ノート - プレゼミ2023  第5回 【おまけ】収益データを可視化</title>
+  <title>プレゼミ講義ノート – プレゼミ2023   第5回 【おまけ】収益データを可視化 </title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -387,15 +388,15 @@
       margin-right: 0; 
     }
   </style>
-  
   <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-  <script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
-  <script src="site_libs/plotly-binding-4.10.1/plotly.js"></script>
+  <link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
   <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
   <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
-  <link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-  <script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
   <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
   <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
 </head>
@@ -404,7 +405,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title"><p><b>プレゼミ2023</b> <br> <span style="color: #282A36; ">第5回 【おまけ】収益データを可視化</span></p></h1>
+  <h1 class="title"><p><b>プレゼミ2023</b> <br> <span style="color: #282A36;"> 第5回 【おまけ】収益データを可視化 </span></p></h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -417,19 +418,21 @@ Soichi Matsuura
 </section>
 <section id="おまけの分析事例" class="slide level2">
 <h2>おまけの分析事例</h2>
-<p>必要なパッケージを読み込む。 いつもの<code>tidyverse</code>とグラフの見た目を変える<code>ggthemes</code>とキレイな表を作る<code>knitr</code>と<code>kableExtra</code>を読み込む。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/setup_bd880180c26620d837ffbd91f68c4afb">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># データ操作全般</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggthemes) <span class="co"># グラフのスタイル拡張</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(knitr) <span class="co"># 表を作る</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(kableExtra) <span class="co"># 表を作る</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>必要なパッケージを読み込む。、 いつもの<code>tidyverse</code>とグラフの見た目を変える<code>ggthemes</code>とキレイな表を作る<code>knitr</code>と<code>kableExtra</code>を読み込む。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb1-2"><a></a>  tidyverse, <span class="co"># データ操作全般</span></span>
+<span id="cb1-3"><a></a>  ggthemes, <span class="co"># グラフのスタイル拡張</span></span>
+<span id="cb1-4"><a></a>  knitr, <span class="co"># 表を作る</span></span>
+<span id="cb1-5"><a></a>  kableExtra <span class="co"># 表を作る</span></span>
+<span id="cb1-6"><a></a>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="作業ディレクトリの場所" class="slide level2">
 <h2>作業ディレクトリの場所</h2>
 <p>まずは作業ディレクトリの場所にファイルがあることを確認しましょう。 いまRが使っている作業ディレクトリの場所は<code>getwd()</code>で確認できます。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/getwd_9600d288f02366ef054eb4f38c69889c">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">getwd</span>()</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">getwd</span>()</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/Users/soichi/Library/CloudStorage/Dropbox/R/presemi"</code></pre>
 </div>
@@ -438,29 +441,29 @@ Soichi Matsuura
 <section id="データの読み込み" class="slide level2">
 <h2>データの読み込み</h2>
 <p>ここでは、作業ディレクトリの中に<code>data</code>というフォルダがあり、 その中に<code>otomasa04.csv</code>を保存してある、という前提で話を進めます。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/read_csv_3c4676b41ed04b4019b3dd25e43f1db7">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/otomasa_04.csv"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/otomasa_04.csv"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>これで財務データが入ったデータフレーム<code>df</code>ができました。</p>
 </section>
 <section id="グラフのスタイルを保存" class="slide level2">
 <h2>グラフのスタイルを保存</h2>
 <p><code>mystyle</code>というオブジェクトに保存しておく。 <code>list</code>で設定をまとめる。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/mystyle_8d31cdc305469ad2f356d9aaddb42250">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mystyle <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="co"># mystyleとして設定を保存</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">theme_economist</span>(), <span class="co"># ggthemesが必要</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    <span class="at">size =</span> <span class="dv">18</span>,  <span class="co">#  フォントサイズ</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># mac用フォント</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>    )))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>mystyle <span class="ot">&lt;-</span> <span class="fu">list</span>( <span class="co"># mystyleとして設定を保存</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">theme_economist</span>(), <span class="co"># ggthemesが必要</span></span>
+<span id="cb5-3"><a></a>  <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(</span>
+<span id="cb5-4"><a></a>    <span class="at">size =</span> <span class="dv">18</span>,  <span class="co">#  フォントサイズ</span></span>
+<span id="cb5-5"><a></a>    <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># mac用フォント</span></span>
+<span id="cb5-6"><a></a>    )))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>windowsの人は family = “HiraKakuProN-W3” は消してください。</p>
 </section>
 <section id="データの確認" class="slide level2">
 <h2>データの確認</h2>
 <p>データの中身を確認するなら、おなじみの<code>glimpse()</code>を使う。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/glimpse_cdb0adf470fc26cec0268add76a15447">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">glimpse</span>(df)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 83,637
 Columns: 35
@@ -515,53 +518,53 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="ファクター型に変換" class="slide level2">
 <h2>ファクター型に変換</h2>
 <p>文字列をファクター型に変換するには<code>as.factor()</code>を使う。 決算期から年度データを取り出すために<code>substr()</code>を使う。 <code>substr()</code>は文字列の一部を取り出す関数である。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/factor_b862e720af9871d73f4b11813850db1c">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>    <span class="fu">mutate</span>( <span class="co"># 変数の型をファクター型に変換</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>        日経会社コード <span class="ot">=</span> <span class="fu">as.factor</span>(日経会社コード),</span>
-<span id="cb8-4"><a href="#cb8-4"></a>        企業名称 <span class="ot">=</span> <span class="fu">as.factor</span>(企業名称),</span>
-<span id="cb8-5"><a href="#cb8-5"></a>        年度 <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">substr</span>(決算期, <span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-6"><a href="#cb8-6"></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a></a>    <span class="fu">mutate</span>( <span class="co"># 変数の型をファクター型に変換</span></span>
+<span id="cb8-3"><a></a>        日経会社コード <span class="ot">=</span> <span class="fu">as.factor</span>(日経会社コード),</span>
+<span id="cb8-4"><a></a>        企業名称 <span class="ot">=</span> <span class="fu">as.factor</span>(企業名称),</span>
+<span id="cb8-5"><a></a>        年度 <span class="ot">=</span> <span class="fu">factor</span>(<span class="fu">substr</span>(決算期, <span class="dv">1</span>, <span class="dv">4</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-6"><a></a>    )</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="欠損値の処理" class="slide level2">
 <h2>欠損値の処理</h2>
 <p>オリジナルの財務データの値が欠損値の場合、それは財務諸表上に個別項目で載せられないほど額が小さいことを意味する。 そこで、欠損値にゼロを代入する。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/na_0511df9512f52be3fef06189b7d1cbcb">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>df[<span class="fu">is.na</span>(df)] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>df[<span class="fu">is.na</span>(df)] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>is.na()</code>は欠損値を<code>TRUE</code>、欠損値でない値を<code>FALSE</code>として返す関数で、TRUEにゼロを代入している。</p>
 </section>
 <section id="異常な観測値の処理" class="slide level2">
 <h2>異常な観測値の処理</h2>
 <p>決算期を変更した会社を除外するため，決算月数が12の会社のみを抽出する。 ついでに売上高が1億円未満の企業や販管費がゼロの会社も除外する。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/unusual_0c43aa7bfd855a36171f8ff6e665301d">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>    <span class="fu">filter</span>(</span>
-<span id="cb10-3"><a href="#cb10-3"></a>        決算月数 <span class="sc">==</span> <span class="dv">12</span>, <span class="co"># 決算月数が12の会社 </span></span>
-<span id="cb10-4"><a href="#cb10-4"></a>        売上高 <span class="sc">&gt;=</span> <span class="dv">100</span>, <span class="co"># 売上高1億以上</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>        販売費及び一般管理費 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="co"># 販管費が0超</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a></a>    <span class="fu">filter</span>(</span>
+<span id="cb10-3"><a></a>        決算月数 <span class="sc">==</span> <span class="dv">12</span>, <span class="co"># 決算月数が12の会社 </span></span>
+<span id="cb10-4"><a></a>        売上高 <span class="sc">&gt;=</span> <span class="dv">100</span>, <span class="co"># 売上高1億以上</span></span>
+<span id="cb10-5"><a></a>        販売費及び一般管理費 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="co"># 販管費が0超</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="変な企業を除外" class="slide level2">
 <h2>変な企業を除外</h2>
 <p>なぜか同じ年度に2つデータがある会社があるので、除外する。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/unusual2_1d76ed61f460fc4bd2ffaa44178c9b9e">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">group_by</span>(年度, 企業名称) <span class="sc">|&gt;</span> <span class="co"># 年度と企業ごとに</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">mutate</span>(<span class="at">N =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="co"># なぜか同じ年度に2コ以上データがある会社があるのでカウント</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>  <span class="fu">filter</span>(N <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="co"># 重複データを削除</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">select</span>(<span class="sc">-</span>N) <span class="co"># 上で作ったけどもういらないのでNを削除</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">group_by</span>(年度, 企業名称) <span class="sc">|&gt;</span> <span class="co"># 年度と企業ごとに</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">mutate</span>(<span class="at">N =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> <span class="co"># なぜか同じ年度に2コ以上データがある会社があるのでカウント</span></span>
+<span id="cb11-4"><a></a>  <span class="fu">filter</span>(N <span class="sc">!=</span> <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="co"># 重複データを削除</span></span>
+<span id="cb11-5"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>N) <span class="co"># 上で作ったけどもういらないのでNを削除</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>これで整然データ(tidy data)が完成した(はず)。</p>
 </section>
 <section id="売上高のヒストグラム" class="slide level2">
 <h2>売上高のヒストグラム</h2>
 <p>簡単にチェックするだけなら基本関数<code>hist()</code></p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/hist_d0ae8dec3d880fb162446e058d491e88">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">hist</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">hist</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -569,14 +572,14 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="売上高のヒストグラム-1" class="slide level2">
 <h2>売上高のヒストグラム</h2>
 <p>キレイなグラフを作るなら<code>ggplot2</code></p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/geom_hist_sales_001e41418514b38e8f57b33c7b5db4e6">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 売上高<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">+</span> <span class="co"># 売上高を100万で割って単位を兆</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="co"># ヒストグラム</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>    <span class="fu">xlab</span>(<span class="st">"売上高（兆円）"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"度数"</span>) <span class="sc">+</span> <span class="co"># x軸のラベル</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a>    mystyle <span class="co"># 上で作ったスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a></a>    <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 売上高<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">+</span> <span class="co"># 売上高を100万で割って単位を兆</span></span>
+<span id="cb13-3"><a></a>    <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="co"># ヒストグラム</span></span>
+<span id="cb13-4"><a></a>    <span class="fu">xlab</span>(<span class="st">"売上高（兆円）"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"度数"</span>) <span class="sc">+</span> <span class="co"># x軸のラベル</span></span>
+<span id="cb13-5"><a></a>    mystyle <span class="co"># 上で作ったスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -584,12 +587,12 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="分布の計上を確認" class="slide level2">
 <h2>分布の計上を確認</h2>
 <p>分布が左に固まっており、ばらつきが分からないので、分位点を確認</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/fivenum_69e722fdf072eb65783f596187e0ebb0">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">fivenum</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">fivenum</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]      100.0     9002.0    27911.5    94322.0 37154298.0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">mean</span>(df<span class="sc">$</span>売上高)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 188132.3</code></pre>
 </div>
@@ -607,16 +610,15 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <li>中央値 278億8450万円</li>
 <li>平均 1879億8710万円</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 <section id="異常値の影響" class="slide level2">
 <h2>異常値の影響</h2>
 <p>売上高の最大値が大きすぎる。 売上高の分布を正規分布に近づけるために対数を取る。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/hist_log_sales_c2bc5016c73bf25c328d39dbd17a91d9">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">hist</span>(<span class="fu">log</span>(df<span class="sc">$</span>売上高))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">hist</span>(<span class="fu">log</span>(df<span class="sc">$</span>売上高))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -624,36 +626,36 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="対数をとって散布図を書く" class="slide level2">
 <h2>対数をとって散布図を書く</h2>
 <p><code>ggplot2</code>パッケージの<code>geom_point()</code>を使って、売上高と販売費及び一般管理費の散布図を書いてみる。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/geom_point_sales_sga_e35914989d41c548f675fdd91b802047">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">filter</span>(販売費及び一般管理費 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(売上高), <span class="at">y =</span> <span class="fu">log</span>(販売費及び一般管理費)) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># ヒストグラム</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">xlab</span>(<span class="st">"売上高の対数"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"販管費の対数"</span>) <span class="sc">+</span> <span class="co"># x軸のラベル</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a>  mystyle <span class="co"># 上で作ったスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">filter</span>(販売費及び一般管理費 <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(売上高), <span class="at">y =</span> <span class="fu">log</span>(販売費及び一般管理費)) <span class="sc">+</span></span>
+<span id="cb19-4"><a></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># ヒストグラム</span></span>
+<span id="cb19-5"><a></a>  <span class="fu">xlab</span>(<span class="st">"売上高の対数"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"販管費の対数"</span>) <span class="sc">+</span> <span class="co"># x軸のラベル</span></span>
+<span id="cb19-6"><a></a>  mystyle <span class="co"># 上で作ったスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="prezemi_2023_05_omake_files/figure-revealjs/geom_point_sales_sga-1.png" width="1344" class="r-stretch"></section>
 <section id="年度別の売上高平均を計算" class="slide level2">
 <h2>年度別の売上高平均を計算</h2>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/geom_line_year_sales_97db8107b958e696d59194f30d2dca60">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># 年度別の売上高平均を計算</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a>df_year_sale <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a>    <span class="fu">group_by</span>(年度) <span class="sc">|&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb20-5"><a href="#cb20-5"></a>      売上高平均 <span class="ot">=</span> <span class="fu">mean</span>(売上高) <span class="co"># 平均売上高を計算</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>    )</span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="co"># 折れ線グラフ</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a>df_year_sale <span class="sc">|&gt;</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="co"># 年度がファクターなので、group = 1として1つのグループにまとめる</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高平均 <span class="sc">/</span> <span class="dv">100</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span><span class="co"># ヒストグラム</span></span>
-<span id="cb20-12"><a href="#cb20-12"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">3000</span>) <span class="sc">+</span> mystyle <span class="co"># 軸の範囲とスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># 年度別の売上高平均を計算</span></span>
+<span id="cb20-2"><a></a>df_year_sale <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a></a>    <span class="fu">group_by</span>(年度) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a></a>    <span class="fu">summarise</span>(</span>
+<span id="cb20-5"><a></a>      売上高平均 <span class="ot">=</span> <span class="fu">mean</span>(売上高) <span class="co"># 平均売上高を計算</span></span>
+<span id="cb20-6"><a></a>    )</span>
+<span id="cb20-7"><a></a><span class="co"># 折れ線グラフ</span></span>
+<span id="cb20-8"><a></a>df_year_sale <span class="sc">|&gt;</span></span>
+<span id="cb20-9"><a></a><span class="co"># 年度がファクターなので、group = 1として1つのグループにまとめる</span></span>
+<span id="cb20-10"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高平均 <span class="sc">/</span> <span class="dv">100</span>, <span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb20-11"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span><span class="co"># ヒストグラム</span></span>
+<span id="cb20-12"><a></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">3000</span>) <span class="sc">+</span> mystyle <span class="co"># 軸の範囲とスタイルを適用</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -661,14 +663,14 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="年度別の売上高平均棒グラフ" class="slide level2">
 <h2>年度別の売上高平均棒グラフ</h2>
 <p>横軸が年度なので，棒グラフもOK</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/geom_bar_year_sales_8d682ba78ab9d1ce962bb0464b1c987b">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>df_year_sale <span class="sc">|&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2"></a>  <span class="co"># 売上高平均を100で割って単位を億に</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高平均 <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span><span class="co"># ヒストグラム</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">3000</span>) <span class="sc">+</span> mystyle <span class="co"># Y軸の範囲とスタイル</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a>df_year_sale <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a></a>  <span class="co"># 売上高平均を100で割って単位を億に</span></span>
+<span id="cb21-3"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高平均 <span class="sc">/</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a></a>  <span class="fu">geom_col</span>() <span class="sc">+</span><span class="co"># ヒストグラム</span></span>
+<span id="cb21-5"><a></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">3000</span>) <span class="sc">+</span> mystyle <span class="co"># Y軸の範囲とスタイル</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
@@ -683,104 +685,104 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 </section>
 <section id="年度別の売上高平均を計算-1" class="slide level2">
 <h2>年度別の売上高平均を計算</h2>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/table_year_sales_0e3329c5d4ad22dd45d7dd381a8db6e2">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">select</span>(年度, 企業名称, 売上高) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">mutate</span>(売上高 <span class="ot">=</span> <span class="fu">round</span>(売上高 <span class="sc">/</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span> <span class="co"># 売上高を100で割って単位を億円に</span></span>
-<span id="cb22-4"><a href="#cb22-4"></a>  <span class="fu">filter</span>(年度 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2022"</span>, <span class="st">"2023"</span>)) <span class="sc">|&gt;</span> <span class="co"># 2022年と2023年のデータのみを抽出</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> 年度, <span class="at">values_from =</span> 売上高, <span class="at">names_prefix =</span> <span class="st">"年度"</span>) <span class="sc">|&gt;</span><span class="co"># 年度を横軸に</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">mutate</span>(<span class="co"># 売上の増加額と増加率を計算</span></span>
-<span id="cb22-7"><a href="#cb22-7"></a>    差額 <span class="ot">=</span> 年度2023 <span class="sc">-</span> 年度2022, <span class="co"># 変化額</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>    変化率 <span class="ot">=</span> <span class="fu">round</span>(差額 <span class="sc">/</span> 年度2022, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># 変化率</span></span>
-<span id="cb22-9"><a href="#cb22-9"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb22-10"><a href="#cb22-10"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(年度2023)) <span class="sc">|&gt;</span> <span class="co"># 2023年度の売上高で降順に並び替え</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="co"># 上位10社のみを抽出</span></span>
-<span id="cb22-12"><a href="#cb22-12"></a>  <span class="fu">kable</span>( <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb22-13"><a href="#cb22-13"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)  <span class="co"># 作表</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a></a>  <span class="fu">select</span>(年度, 企業名称, 売上高) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
+<span id="cb22-3"><a></a>  <span class="fu">mutate</span>(売上高 <span class="ot">=</span> <span class="fu">round</span>(売上高 <span class="sc">/</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span> <span class="co"># 売上高を100で割って単位を億円に</span></span>
+<span id="cb22-4"><a></a>  <span class="fu">filter</span>(年度 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2022"</span>, <span class="st">"2023"</span>)) <span class="sc">|&gt;</span> <span class="co"># 2022年と2023年のデータのみを抽出</span></span>
+<span id="cb22-5"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> 年度, <span class="at">values_from =</span> 売上高, <span class="at">names_prefix =</span> <span class="st">"年度"</span>) <span class="sc">|&gt;</span><span class="co"># 年度を横軸に</span></span>
+<span id="cb22-6"><a></a>  <span class="fu">mutate</span>(<span class="co"># 売上の増加額と増加率を計算</span></span>
+<span id="cb22-7"><a></a>    差額 <span class="ot">=</span> 年度2023 <span class="sc">-</span> 年度2022, <span class="co"># 変化額</span></span>
+<span id="cb22-8"><a></a>    変化率 <span class="ot">=</span> <span class="fu">round</span>(差額 <span class="sc">/</span> 年度2022, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># 変化率</span></span>
+<span id="cb22-9"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb22-10"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(年度2023)) <span class="sc">|&gt;</span> <span class="co"># 2023年度の売上高で降順に並び替え</span></span>
+<span id="cb22-11"><a></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="co"># 上位10社のみを抽出</span></span>
+<span id="cb22-12"><a></a>  <span class="fu">kable</span>(<span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb22-13"><a></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)  <span class="co"># 作表</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
+<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">企業名称</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">年度2022</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">年度2023</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">差額</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">変化率</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">企業名称 | 年度</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">022| 年度20</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">3| 差額| 変</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">率|</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">トヨタ自動車</td>
-<td style="text-align: right;">313795</td>
-<td style="text-align: right;">371543</td>
-<td style="text-align: right;">57748</td>
-<td style="text-align: right;">0.18</td>
+<td style="text-align: left;">トヨタ自動車 | 31</td>
+<td style="text-align: right;">795| 37</td>
+<td style="text-align: right;">543| 5774</td>
+<td style="text-align: right;">| 0.</td>
+<td style="text-align: right;">8|</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">三菱商事</td>
-<td style="text-align: right;">172648</td>
-<td style="text-align: right;">215720</td>
-<td style="text-align: right;">43072</td>
-<td style="text-align: right;">0.25</td>
+<td style="text-align: left;">三菱商事 |</td>
+<td style="text-align: right;">72648|</td>
+<td style="text-align: right;">15720| 43</td>
+<td style="text-align: right;">72|</td>
+<td style="text-align: right;">.25|</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">本田技研工業</td>
-<td style="text-align: right;">145527</td>
-<td style="text-align: right;">169077</td>
-<td style="text-align: right;">23550</td>
-<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">本田技研工業 | 14</td>
+<td style="text-align: right;">527| 16</td>
+<td style="text-align: right;">077| 2355</td>
+<td style="text-align: right;">| 0.</td>
+<td style="text-align: right;">6|</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ＥＮＥＯＳホールディングス</td>
-<td style="text-align: right;">109218</td>
-<td style="text-align: right;">150166</td>
-<td style="text-align: right;">40948</td>
-<td style="text-align: right;">0.37</td>
+<td style="text-align: left;">ＥＮＥＯＳホールディングス | 109218|</td>
+<td style="text-align: right;">150166| 4</td>
+<td style="text-align: right;">948| 0.</td>
+<td style="text-align: right;">7|</td>
+<td style="text-align: right;"></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">三井物産</td>
-<td style="text-align: right;">117576</td>
-<td style="text-align: right;">143064</td>
-<td style="text-align: right;">25488</td>
-<td style="text-align: right;">0.22</td>
+<td style="text-align: left;">三井物産 |</td>
+<td style="text-align: right;">17576|</td>
+<td style="text-align: right;">43064| 25</td>
+<td style="text-align: right;">88|</td>
+<td style="text-align: right;">.22|</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">伊藤忠商事</td>
-<td style="text-align: right;">122933</td>
-<td style="text-align: right;">139456</td>
-<td style="text-align: right;">16523</td>
-<td style="text-align: right;">0.13</td>
+<td style="text-align: left;">伊藤忠商事 | 1</td>
+<td style="text-align: right;">2933| 1</td>
+<td style="text-align: right;">9456| 165</td>
+<td style="text-align: right;">3| 0</td>
+<td style="text-align: right;">13|</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">セブン＆アイ・ホールディングス</td>
-<td style="text-align: right;">87498</td>
-<td style="text-align: right;">118113</td>
-<td style="text-align: right;">30615</td>
-<td style="text-align: right;">0.35</td>
+<td style="text-align: left;">セブン＆アイ・ホールディングス | 87498| 1</td>
+<td style="text-align: right;">8113| 306</td>
+<td style="text-align: right;">5| 0.35</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ソニーグループ</td>
-<td style="text-align: right;">99215</td>
-<td style="text-align: right;">115398</td>
-<td style="text-align: right;">16183</td>
-<td style="text-align: right;">0.16</td>
+<td style="text-align: left;">ソニーグループ | 99</td>
+<td style="text-align: right;">15| 115</td>
+<td style="text-align: right;">98| 16183</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">|</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">日立製作所</td>
-<td style="text-align: right;">102646</td>
-<td style="text-align: right;">108812</td>
-<td style="text-align: right;">6166</td>
-<td style="text-align: right;">0.06</td>
+<td style="text-align: left;">日立製作所 | 1</td>
+<td style="text-align: right;">2646| 1</td>
+<td style="text-align: right;">8812| 61</td>
+<td style="text-align: right;">6| 0</td>
+<td style="text-align: right;">06|</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">日産自動車</td>
-<td style="text-align: right;">84246</td>
-<td style="text-align: right;">105967</td>
-<td style="text-align: right;">21721</td>
-<td style="text-align: right;">0.26</td>
+<td style="text-align: left;">日産自動車 |</td>
+<td style="text-align: right;">4246| 1</td>
+<td style="text-align: right;">5967| 217</td>
+<td style="text-align: right;">1| 0</td>
+<td style="text-align: right;">26|</td>
 </tr>
 </tbody>
 </table>
@@ -792,158 +794,81 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
 <section id="特殊な3時点比較" class="slide level2">
 <h2>特殊な3時点比較</h2>
 <p>リーマンショック2009年、コロナ禍2021年、2023年の売上高を比較する</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/table_3years_sales_50fc4408495cbe7f5674f66b0c3be35a">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">select</span>(年度, 企業名称, 売上高) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">mutate</span>(売上高 <span class="ot">=</span> <span class="fu">round</span>(売上高 <span class="sc">/</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span> <span class="co"># 売上高を100で割って単位を億円に</span></span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">filter</span>(年度 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2009"</span>, <span class="st">"2021"</span>, <span class="st">"2023"</span>)) <span class="sc">|&gt;</span> <span class="co"># 2000年と2010年と2023年のデータのみを抽出</span></span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> 年度, <span class="at">values_from =</span> 売上高,  <span class="at">names_prefix =</span> <span class="st">"年度"</span>) <span class="sc">|&gt;</span><span class="co"># 年度を横軸に</span></span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="fu">mutate</span>(<span class="co"># 売上の増加額と増加率を計算</span></span>
-<span id="cb23-7"><a href="#cb23-7"></a>    差額 <span class="ot">=</span> 年度2023 <span class="sc">-</span> 年度2021, <span class="co"># 変化額</span></span>
-<span id="cb23-8"><a href="#cb23-8"></a>    変化率 <span class="ot">=</span> <span class="fu">round</span>(差額 <span class="sc">/</span> 年度2021, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># 変化率</span></span>
-<span id="cb23-9"><a href="#cb23-9"></a>    ) <span class="sc">|&gt;</span> </span>
-<span id="cb23-10"><a href="#cb23-10"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(年度2023)) <span class="sc">|&gt;</span> <span class="co"># 2023年度の売上高で降順に並び替え</span></span>
-<span id="cb23-11"><a href="#cb23-11"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span> <span class="co"># 上位10社のみを抽出</span></span>
-<span id="cb23-12"><a href="#cb23-12"></a>  <span class="fu">kable</span>( <span class="at">booktabs =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb23-13"><a href="#cb23-13"></a>  <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">20</span>)  <span class="co"># 作表</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a>df <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a></a>  <span class="fu">select</span>(年度, 企業名称, 売上高) <span class="sc">|&gt;</span> <span class="co"># 必要な変数を選択</span></span>
+<span id="cb23-3"><a></a>  <span class="fu">mutate</span>(売上高 <span class="ot">=</span> <span class="fu">round</span>(売上高 <span class="sc">/</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span> <span class="co"># 売上高を100で割って単位を億円に</span></span>
+<span id="cb23-4"><a></a>  <span class="fu">filter</span>(年度 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"2009"</span>, <span class="st">"2021"</span>, <span class="st">"2023"</span>)) <span class="sc">|&gt;</span> <span class="co"># 2000年と2010年と2023年のデータのみを抽出</span></span>
+<span id="cb23-5"><a></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> 年度, <span class="at">values_from =</span> 売上高,  <span class="at">names_prefix =</span> <span class="st">"年度"</span>) <span class="sc">|&gt;</span><span class="co"># 年度を横軸に</span></span>
+<span id="cb23-6"><a></a>  <span class="fu">mutate</span>(<span class="co"># 売上の増加額と増加率を計算</span></span>
+<span id="cb23-7"><a></a>    差額 <span class="ot">=</span> 年度2023 <span class="sc">-</span> 年度2021, <span class="co"># 変化額</span></span>
+<span id="cb23-8"><a></a>    変化率 <span class="ot">=</span> <span class="fu">round</span>(差額 <span class="sc">/</span> 年度2021, <span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># 変化率</span></span>
+<span id="cb23-9"><a></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb23-10"><a></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(年度2023)) <span class="sc">|&gt;</span> <span class="co"># 2023年度の売上高で降順に並び替え</span></span>
+<span id="cb23-11"><a></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="co">#|&gt; # 上位10社のみを抽出</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="font-size: 20px; margin-left: auto; margin-right: auto;">
-<thead>
-<tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">企業名称</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">年度2009</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">年度2021</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">年度2023</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">差額</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">変化率</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">トヨタ自動車</td>
-<td style="text-align: right;">205296</td>
-<td style="text-align: right;">272146</td>
-<td style="text-align: right;">371543</td>
-<td style="text-align: right;">99397</td>
-<td style="text-align: right;">0.37</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">三菱商事</td>
-<td style="text-align: right;">61464</td>
-<td style="text-align: right;">128845</td>
-<td style="text-align: right;">215720</td>
-<td style="text-align: right;">86875</td>
-<td style="text-align: right;">0.67</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">本田技研工業</td>
-<td style="text-align: right;">100112</td>
-<td style="text-align: right;">131705</td>
-<td style="text-align: right;">169077</td>
-<td style="text-align: right;">37372</td>
-<td style="text-align: right;">0.28</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ＥＮＥＯＳホールディングス</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">76580</td>
-<td style="text-align: right;">150166</td>
-<td style="text-align: right;">73586</td>
-<td style="text-align: right;">0.96</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">三井物産</td>
-<td style="text-align: right;">55048</td>
-<td style="text-align: right;">80102</td>
-<td style="text-align: right;">143064</td>
-<td style="text-align: right;">62962</td>
-<td style="text-align: right;">0.79</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">伊藤忠商事</td>
-<td style="text-align: right;">34191</td>
-<td style="text-align: right;">103626</td>
-<td style="text-align: right;">139456</td>
-<td style="text-align: right;">35830</td>
-<td style="text-align: right;">0.35</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">セブン＆アイ・ホールディングス</td>
-<td style="text-align: right;">56499</td>
-<td style="text-align: right;">57667</td>
-<td style="text-align: right;">118113</td>
-<td style="text-align: right;">60446</td>
-<td style="text-align: right;">1.05</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ソニーグループ</td>
-<td style="text-align: right;">77300</td>
-<td style="text-align: right;">89987</td>
-<td style="text-align: right;">115398</td>
-<td style="text-align: right;">25411</td>
-<td style="text-align: right;">0.28</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">日立製作所</td>
-<td style="text-align: right;">100004</td>
-<td style="text-align: right;">87292</td>
-<td style="text-align: right;">108812</td>
-<td style="text-align: right;">21520</td>
-<td style="text-align: right;">0.25</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">日産自動車</td>
-<td style="text-align: right;">84370</td>
-<td style="text-align: right;">78626</td>
-<td style="text-align: right;">105967</td>
-<td style="text-align: right;">27341</td>
-<td style="text-align: right;">0.35</td>
-</tr>
-</tbody>
-</table>
-
-
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+# Groups:   企業名称 [10]
+   企業名称                       年度2009 年度2021 年度2023  差額 変化率
+   &lt;fct&gt;                             &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1 トヨタ自動車                     205296   272146   371543 99397   0.37
+ 2 三菱商事                          61464   128845   215720 86875   0.67
+ 3 本田技研工業                     100112   131705   169077 37372   0.28
+ 4 ＥＮＥＯＳホールディングス           NA    76580   150166 73586   0.96
+ 5 三井物産                          55048    80102   143064 62962   0.79
+ 6 伊藤忠商事                        34191   103626   139456 35830   0.35
+ 7 セブン＆アイ・ホールディングス    56499    57667   118113 60446   1.05
+ 8 ソニーグループ                    77300    89987   115398 25411   0.28
+ 9 日立製作所                       100004    87292   108812 21520   0.25
+10 日産自動車                        84370    78626   105967 27341   0.35</code></pre>
 </div>
+<details class="code-fold">
+<summary>Rコードはここ</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="co">#  kable( booktabs = TRUE) |&gt; </span></span>
+<span id="cb25-2"><a></a><span class="co">#  kable_styling(font_size = 20)  # 作表</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="兆円売上高企業" class="slide level2">
 <h2>10兆円売上高企業</h2>
 <p>2023年度の売上高が10兆円以上の会社の売上高の推移をみてみる。 まず2023年度の売上高が10兆円以上の企業名を抽出する。</p>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/10trillion_sales_name_aeb9ff59cffb08e270bc9bc77f548a2f">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコードはここ</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df_name <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>  <span class="fu">filter</span>(売上高 <span class="sc">&gt;=</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span> <span class="sc">&amp;</span> 年度 <span class="sc">==</span> <span class="dv">2023</span>)</span>
-<span id="cb24-3"><a href="#cb24-3"></a>name <span class="ot">&lt;-</span> df_name<span class="sc">$</span>企業名称</span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="co"># 作図</span></span>
-<span id="cb24-5"><a href="#cb24-5"></a>g <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb24-6"><a href="#cb24-6"></a>  <span class="fu">filter</span>(企業名称 <span class="sc">%in%</span> name) <span class="sc">|&gt;</span> <span class="co"># 企業名がnameに含まれるものを抽出</span></span>
-<span id="cb24-7"><a href="#cb24-7"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高 <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">group =</span> 企業名称, <span class="at">color =</span> 企業名称) <span class="sc">+</span> <span class="co"># 企業ごとに色分け</span></span>
-<span id="cb24-8"><a href="#cb24-8"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># 折れ線グラフと散布図を組み合わせる</span></span>
-<span id="cb24-9"><a href="#cb24-9"></a>  <span class="fu">xlab</span>(<span class="st">"年度"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"売上高(兆円)"</span>) <span class="sc">+</span> mystyle <span class="sc">+</span> <span class="co"># スタイルを適用</span></span>
-<span id="cb24-10"><a href="#cb24-10"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">16</span>)) <span class="co"># x軸のラベルを90度回転</span></span>
-<span id="cb24-11"><a href="#cb24-11"></a><span class="fu">print</span>(g) <span class="co"># 出力</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>df_name <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a></a>  <span class="fu">filter</span>(売上高 <span class="sc">&gt;=</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">7</span> <span class="sc">&amp;</span> 年度 <span class="sc">==</span> <span class="dv">2023</span>)</span>
+<span id="cb26-3"><a></a>name <span class="ot">&lt;-</span> df_name<span class="sc">$</span>企業名称</span>
+<span id="cb26-4"><a></a><span class="co"># 作図</span></span>
+<span id="cb26-5"><a></a>g <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a></a>  <span class="fu">filter</span>(企業名称 <span class="sc">%in%</span> name) <span class="sc">|&gt;</span> <span class="co"># 企業名がnameに含まれるものを抽出</span></span>
+<span id="cb26-7"><a></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> 年度, <span class="at">y =</span> 売上高 <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>, <span class="at">group =</span> 企業名称, <span class="at">color =</span> 企業名称) <span class="sc">+</span> <span class="co"># 企業ごとに色分け</span></span>
+<span id="cb26-8"><a></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># 折れ線グラフと散布図を組み合わせる</span></span>
+<span id="cb26-9"><a></a>  <span class="fu">xlab</span>(<span class="st">"年度"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"売上高(兆円)"</span>) <span class="sc">+</span> mystyle <span class="sc">+</span> <span class="co"># スタイルを適用</span></span>
+<span id="cb26-10"><a></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="dv">16</span>)) <span class="co"># x軸のラベルを90度回転</span></span>
+<span id="cb26-11"><a></a><span class="fu">print</span>(g) <span class="co"># 出力</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="prezemi_2023_05_omake_files/figure-revealjs/10trillion_sales_name-1.png" width="1344" class="r-stretch"></section>
 <section id="動くグラフ" class="slide level2">
 <h2>動くグラフ</h2>
-<div class="cell" data-hash="prezemi_2023_05_omake_cache/revealjs/plotly_1e821c86da84829645aa292128077bd7">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># install.packages("plotly")</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="fu">ggplotly</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="co"># install.packages("plotly")</span></span>
+<span id="cb27-2"><a></a><span class="fu">library</span>(plotly)</span>
+<span id="cb27-3"><a></a><span class="fu">ggplotly</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b9aa711ec2ad2c7999cc" style="width:1344px;height:768px;"></div>
-<script type="application/json" data-for="htmlwidget-b9aa711ec2ad2c7999cc">{"x":{"data":[{"x":[17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[9.634396,10.723889,11.219474,12.412013,10.88246,7.530895,7.025062,10.301072,11.12963,10.011774,7.658011,10.921759,15.016554],"text":["年度: 2011<br />売上高/10^6:  9.634396<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2012<br />売上高/10^6: 10.723889<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2013<br />売上高/10^6: 11.219474<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2014<br />売上高/10^6: 12.412013<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2015<br />売上高/10^6: 10.882460<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2016<br />売上高/10^6:  7.530895<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2017<br />売上高/10^6:  7.025062<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2018<br />売上高/10^6: 10.301072<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2019<br />売上高/10^6: 11.129630<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2020<br />売上高/10^6: 10.011774<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2021<br />売上高/10^6:  7.658011<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2022<br />売上高/10^6: 10.921759<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2023<br />売上高/10^6: 15.016554<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"ＥＮＥＯＳホールディングス","legendgroup":"ＥＮＥＯＳホールディングス","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"frame":null},{"x":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.895772,5.337806,5.752392,5.649948,5.111297,5.119739,4.786344,4.991642,5.63182,6.038948,6.045704,5.835689,6.037815,6.791215,6.644359,5.766718,8.749752,11.811303],"text":["年度: 2006<br />売上高/10^6:  3.895772<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2007<br />売上高/10^6:  5.337806<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2008<br />売上高/10^6:  5.752392<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2009<br />売上高/10^6:  5.649948<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2010<br />売上高/10^6:  5.111297<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2011<br />売上高/10^6:  5.119739<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2012<br />売上高/10^6:  4.786344<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2013<br />売上高/10^6:  4.991642<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2014<br />売上高/10^6:  5.631820<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2015<br />売上高/10^6:  6.038948<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2016<br />売上高/10^6:  6.045704<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2017<br />売上高/10^6:  5.835689<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2018<br />売上高/10^6:  6.037815<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2019<br />売上高/10^6:  6.791215<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2020<br />売上高/10^6:  6.644359<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2021<br />売上高/10^6:  5.766718<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2022<br />売上高/10^6:  8.749752<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2023<br />売上高/10^6: 11.811303<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)","dash":"solid"},"hoveron":"points","name":"セブン＆アイ・ホールディングス","legendgroup":"セブン＆アイ・ホールディングス","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(216,144,0,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.983438,4.592565,5.663134,6.75549,6.804182,6.686661,7.314824,7.578258,7.473633,7.496391,7.159616,7.510597,8.295695,8.871414,7.729993,7.213998,7.181273,6.493212,6.795504,7.767266,8.21588,8.105712,7.60325,8.543982,8.665687,8.259885,8.998661,9.921513,11.539837],"text":["年度: 1995<br />売上高/10^6:  3.983438<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1996<br />売上高/10^6:  4.592565<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1997<br />売上高/10^6:  5.663134<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1998<br />売上高/10^6:  6.755490<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1999<br />売上高/10^6:  6.804182<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2000<br />売上高/10^6:  6.686661<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2001<br />売上高/10^6:  7.314824<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2002<br />売上高/10^6:  7.578258<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2003<br />売上高/10^6:  7.473633<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2004<br />売上高/10^6:  7.496391<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2005<br />売上高/10^6:  7.159616<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2006<br />売上高/10^6:  7.510597<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2007<br />売上高/10^6:  8.295695<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2008<br />売上高/10^6:  8.871414<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2009<br />売上高/10^6:  7.729993<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2010<br />売上高/10^6:  7.213998<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2011<br />売上高/10^6:  7.181273<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2012<br />売上高/10^6:  6.493212<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2013<br />売上高/10^6:  6.795504<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2014<br />売上高/10^6:  7.767266<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2015<br />売上高/10^6:  8.215880<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2016<br />売上高/10^6:  8.105712<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2017<br />売上高/10^6:  7.603250<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2018<br />売上高/10^6:  8.543982<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2019<br />売上高/10^6:  8.665687<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2020<br />売上高/10^6:  8.259885<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2021<br />売上高/10^6:  8.998661<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2022<br />売上高/10^6:  9.921513<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2023<br />売上高/10^6: 11.539837<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)","dash":"solid"},"hoveron":"points","name":"ソニーグループ","legendgroup":"ソニーグループ","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(163,165,0,1)"}},"frame":null},{"x":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[10.718739,12.243834,11.678397,12.749008,12.879561,13.424423,15.106297,16.05429,17.29476,18.551526,21.036909,23.948091,26.28924,20.52957,18.950973,18.993688,18.583653,22.064192,25.691911,27.234521,28.403118,27.597193,29.37951,30.225681,29.866547,27.214594,31.379507,37.154298],"text":["年度: 1996<br />売上高/10^6: 10.718739<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1997<br />売上高/10^6: 12.243834<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1998<br />売上高/10^6: 11.678397<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1999<br />売上高/10^6: 12.749008<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2000<br />売上高/10^6: 12.879561<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2001<br />売上高/10^6: 13.424423<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2002<br />売上高/10^6: 15.106297<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2003<br />売上高/10^6: 16.054290<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2004<br />売上高/10^6: 17.294760<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2005<br />売上高/10^6: 18.551526<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2006<br />売上高/10^6: 21.036909<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2007<br />売上高/10^6: 23.948091<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2008<br />売上高/10^6: 26.289240<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2009<br />売上高/10^6: 20.529570<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2010<br />売上高/10^6: 18.950973<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2011<br />売上高/10^6: 18.993688<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2012<br />売上高/10^6: 18.583653<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2013<br />売上高/10^6: 22.064192<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2014<br />売上高/10^6: 25.691911<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2015<br />売上高/10^6: 27.234521<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2016<br />売上高/10^6: 28.403118<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2017<br />売上高/10^6: 27.597193<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2018<br />売上高/10^6: 29.379510<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2019<br />売上高/10^6: 30.225681<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2020<br />売上高/10^6: 29.866547<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2021<br />売上高/10^6: 27.214594<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2022<br />売上高/10^6: 31.379507<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2023<br />売上高/10^6: 37.154298<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)","dash":"solid"},"hoveron":"points","name":"トヨタ自動車","legendgroup":"トヨタ自動車","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(57,182,0,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[13.447541,13.60996,15.267012,15.544508,13.899777,12.143878,12.135105,1.688128,1.68167,1.738636,1.990627,2.217393,2.646037,2.859853,3.419061,3.416637,3.651586,4.197525,4.699466,5.587526,5.591435,5.083536,4.838464,5.510059,11.600485,10.982968,10.362628,12.293348,13.945633],"text":["年度: 1995<br />売上高/10^6: 13.447541<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1996<br />売上高/10^6: 13.609960<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1997<br />売上高/10^6: 15.267012<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1998<br />売上高/10^6: 15.544508<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1999<br />売上高/10^6: 13.899777<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2000<br />売上高/10^6: 12.143878<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2001<br />売上高/10^6: 12.135105<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2002<br />売上高/10^6:  1.688128<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2003<br />売上高/10^6:  1.681670<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2004<br />売上高/10^6:  1.738636<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2005<br />売上高/10^6:  1.990627<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2006<br />売上高/10^6:  2.217393<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2007<br />売上高/10^6:  2.646037<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2008<br />売上高/10^6:  2.859853<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2009<br />売上高/10^6:  3.419061<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2010<br />売上高/10^6:  3.416637<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2011<br />売上高/10^6:  3.651586<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2012<br />売上高/10^6:  4.197525<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2013<br />売上高/10^6:  4.699466<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2014<br />売上高/10^6:  5.587526<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2015<br />売上高/10^6:  5.591435<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2016<br />売上高/10^6:  5.083536<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2017<br />売上高/10^6:  4.838464<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2018<br />売上高/10^6:  5.510059<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2019<br />売上高/10^6: 11.600485<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2020<br />売上高/10^6: 10.982968<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2021<br />売上高/10^6: 10.362628<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2022<br />売上高/10^6: 12.293348<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2023<br />売上高/10^6: 13.945633<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)","dash":"solid"},"hoveron":"points","name":"伊藤忠商事","legendgroup":"伊藤忠商事","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,125,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[17.03501,17.520184,16.32587,17.515477,13.980302,2.34006,2.372251,2.49125,2.788151,2.982936,3.494634,4.115471,4.793597,5.738878,5.504789,4.096445,4.679443,5.251602,4.912118,5.731918,5.40493,4.759694,4.363969,4.892149,6.957524,8.48413,8.010235,11.757559,14.306402],"text":["年度: 1995<br />売上高/10^6: 17.035010<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1996<br />売上高/10^6: 17.520184<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1997<br />売上高/10^6: 16.325870<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1998<br />売上高/10^6: 17.515477<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1999<br />売上高/10^6: 13.980302<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2000<br />売上高/10^6:  2.340060<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2001<br />売上高/10^6:  2.372251<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2002<br />売上高/10^6:  2.491250<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2003<br />売上高/10^6:  2.788151<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2004<br />売上高/10^6:  2.982936<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2005<br />売上高/10^6:  3.494634<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2006<br />売上高/10^6:  4.115471<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2007<br />売上高/10^6:  4.793597<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2008<br />売上高/10^6:  5.738878<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2009<br />売上高/10^6:  5.504789<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2010<br />売上高/10^6:  4.096445<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2011<br />売上高/10^6:  4.679443<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2012<br />売上高/10^6:  5.251602<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2013<br />売上高/10^6:  4.912118<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2014<br />売上高/10^6:  5.731918<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2015<br />売上高/10^6:  5.404930<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2016<br />売上高/10^6:  4.759694<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2017<br />売上高/10^6:  4.363969<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2018<br />売上高/10^6:  4.892149<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2019<br />売上高/10^6:  6.957524<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2020<br />売上高/10^6:  8.484130<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2021<br />売上高/10^6:  8.010235<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2022<br />売上高/10^6: 11.757559<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2023<br />売上高/10^6: 14.306402<br />企業名称: 三井物産<br />企業名称: 三井物産"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"三井物産","legendgroup":"三井物産","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[17.466625,17.794929,15.79208,15.907661,13.683168,13.109117,1.199069,1.291493,1.470902,3.491124,4.145884,4.826944,5.068749,6.030806,6.146406,4.540793,5.206873,5.565832,6.009887,7.635168,7.669489,6.925582,6.425761,7.567394,16.103763,14.779734,12.884521,17.264828,21.571973],"text":["年度: 1995<br />売上高/10^6: 17.466625<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1996<br />売上高/10^6: 17.794929<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1997<br />売上高/10^6: 15.792080<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1998<br />売上高/10^6: 15.907661<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1999<br />売上高/10^6: 13.683168<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2000<br />売上高/10^6: 13.109117<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2001<br />売上高/10^6:  1.199069<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2002<br />売上高/10^6:  1.291493<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2003<br />売上高/10^6:  1.470902<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2004<br />売上高/10^6:  3.491124<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2005<br />売上高/10^6:  4.145884<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2006<br />売上高/10^6:  4.826944<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2007<br />売上高/10^6:  5.068749<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2008<br />売上高/10^6:  6.030806<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2009<br />売上高/10^6:  6.146406<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2010<br />売上高/10^6:  4.540793<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2011<br />売上高/10^6:  5.206873<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2012<br />売上高/10^6:  5.565832<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2013<br />売上高/10^6:  6.009887<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2014<br />売上高/10^6:  7.635168<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2015<br />売上高/10^6:  7.669489<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2016<br />売上高/10^6:  6.925582<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2017<br />売上高/10^6:  6.425761<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2018<br />売上高/10^6:  7.567394<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2019<br />売上高/10^6: 16.103763<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2020<br />売上高/10^6: 14.779734<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2021<br />売上高/10^6: 12.884521<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2022<br />売上高/10^6: 17.264828<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2023<br />売上高/10^6: 21.571973<br />企業名称: 三菱商事<br />企業名称: 三菱商事"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)","dash":"solid"},"hoveron":"points","name":"三菱商事","legendgroup":"三菱商事","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,176,246,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[5.834123,6.039107,6.658875,6.564637,6.580001,5.977075,6.08962,6.196241,6.828588,7.429219,8.576277,9.428292,10.468583,10.824238,8.436974,7.517277,8.773093,9.409026,8.73732,10.48252,11.375207,12.189519,11.720041,11.951169,11.574247,9.878866,7.862572,8.424585,10.596695],"text":["年度: 1995<br />売上高/10^6:  5.834123<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1996<br />売上高/10^6:  6.039107<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1997<br />売上高/10^6:  6.658875<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1998<br />売上高/10^6:  6.564637<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1999<br />売上高/10^6:  6.580001<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2000<br />売上高/10^6:  5.977075<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2001<br />売上高/10^6:  6.089620<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2002<br />売上高/10^6:  6.196241<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2003<br />売上高/10^6:  6.828588<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2004<br />売上高/10^6:  7.429219<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2005<br />売上高/10^6:  8.576277<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2006<br />売上高/10^6:  9.428292<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2007<br />売上高/10^6: 10.468583<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2008<br />売上高/10^6: 10.824238<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2009<br />売上高/10^6:  8.436974<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2010<br />売上高/10^6:  7.517277<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2011<br />売上高/10^6:  8.773093<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2012<br />売上高/10^6:  9.409026<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2013<br />売上高/10^6:  8.737320<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2014<br />売上高/10^6: 10.482520<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2015<br />売上高/10^6: 11.375207<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2016<br />売上高/10^6: 12.189519<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2017<br />売上高/10^6: 11.720041<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2018<br />売上高/10^6: 11.951169<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2019<br />売上高/10^6: 11.574247<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2020<br />売上高/10^6:  9.878866<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2021<br />売上高/10^6:  7.862572<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2022<br />売上高/10^6:  8.424585<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2023<br />売上高/10^6: 10.596695<br />企業名称: 日産自動車<br />企業名称: 日産自動車"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)","dash":"solid"},"hoveron":"points","name":"日産自動車","legendgroup":"日産自動車","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(149,144,255,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[7.592266,8.12381,8.5231,8.416834,7.977374,8.001203,8.416982,7.993784,8.191752,8.63245,9.027043,9.464801,10.247903,11.226735,10.000369,8.968546,9.315807,9.665883,9.041071,9.666446,9.77493,10.034305,9.162264,9.368614,9.480619,8.767263,8.729196,10.264602,10.88115],"text":["年度: 1995<br />売上高/10^6:  7.592266<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1996<br />売上高/10^6:  8.123810<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1997<br />売上高/10^6:  8.523100<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1998<br />売上高/10^6:  8.416834<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1999<br />売上高/10^6:  7.977374<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2000<br />売上高/10^6:  8.001203<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2001<br />売上高/10^6:  8.416982<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2002<br />売上高/10^6:  7.993784<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2003<br />売上高/10^6:  8.191752<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2004<br />売上高/10^6:  8.632450<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2005<br />売上高/10^6:  9.027043<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2006<br />売上高/10^6:  9.464801<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2007<br />売上高/10^6: 10.247903<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2008<br />売上高/10^6: 11.226735<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2009<br />売上高/10^6: 10.000369<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2010<br />売上高/10^6:  8.968546<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2011<br />売上高/10^6:  9.315807<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2012<br />売上高/10^6:  9.665883<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2013<br />売上高/10^6:  9.041071<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2014<br />売上高/10^6:  9.666446<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2015<br />売上高/10^6:  9.774930<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2016<br />売上高/10^6: 10.034305<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2017<br />売上高/10^6:  9.162264<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2018<br />売上高/10^6:  9.368614<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2019<br />売上高/10^6:  9.480619<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2020<br />売上高/10^6:  8.767263<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2021<br />売上高/10^6:  8.729196<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2022<br />売上高/10^6: 10.264602<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2023<br />売上高/10^6: 10.881150<br />企業名称: 日立製作所<br />企業名称: 日立製作所"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)","dash":"solid"},"hoveron":"points","name":"日立製作所","legendgroup":"日立製作所","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(231,107,243,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.966164,4.25225,5.293302,5.999738,6.231041,6.09884,6.46383,7.362438,7.971499,8.1626,8.650105,9.907996,11.08714,12.002834,10.011241,8.579174,8.936867,7.948095,9.877947,12.506091,13.328099,14.601151,13.9992,15.361146,15.888617,14.931009,13.170519,14.552696,16.907725],"text":["年度: 1995<br />売上高/10^6:  3.966164<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1996<br />売上高/10^6:  4.252250<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1997<br />売上高/10^6:  5.293302<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1998<br />売上高/10^6:  5.999738<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1999<br />売上高/10^6:  6.231041<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2000<br />売上高/10^6:  6.098840<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2001<br />売上高/10^6:  6.463830<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2002<br />売上高/10^6:  7.362438<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2003<br />売上高/10^6:  7.971499<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2004<br />売上高/10^6:  8.162600<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2005<br />売上高/10^6:  8.650105<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2006<br />売上高/10^6:  9.907996<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2007<br />売上高/10^6: 11.087140<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2008<br />売上高/10^6: 12.002834<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2009<br />売上高/10^6: 10.011241<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2010<br />売上高/10^6:  8.579174<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2011<br />売上高/10^6:  8.936867<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2012<br />売上高/10^6:  7.948095<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2013<br />売上高/10^6:  9.877947<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2014<br />売上高/10^6: 12.506091<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2015<br />売上高/10^6: 13.328099<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2016<br />売上高/10^6: 14.601151<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2017<br />売上高/10^6: 13.999200<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2018<br />売上高/10^6: 15.361146<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2019<br />売上高/10^6: 15.888617<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2020<br />売上高/10^6: 14.931009<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2021<br />売上高/10^6: 13.170519<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2022<br />売上高/10^6: 14.552696<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2023<br />売上高/10^6: 16.907725<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)","dash":"solid"},"hoveron":"points","name":"本田技研工業","legendgroup":"本田技研工業","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,98,188,1)"}},"frame":null}],"layout":{"margin":{"t":31.9402241594022,"r":13.2835201328352,"b":75.7160647571606,"l":54.4624325446243},"plot_bgcolor":"transparent","paper_bgcolor":"rgba(213,228,235,1)","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.9103362391034},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,29.6],"tickmode":"array","ticktext":["1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"categoryorder":"array","categoryarray":["1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"],"nticks":null,"ticks":"outside","tickcolor":"rgba(0,0,0,1)","ticklen":-6.6417600664176,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":21.2536322125363},"tickangle":-90,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.531340805313408,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"年度","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.9103362391034}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.59869245,38.95205945],"tickmode":"array","ticktext":["0","10","20","30"],"tickvals":[0,10,20,30],"categoryorder":"array","categoryarray":["0","10","20","30"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":-6.6417600664176,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.9103362391034},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":1.16230801162308,"zeroline":false,"anchor":"x","title":{"text":"売上高(兆円)","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.9103362391034}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"transparent","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":29.8879202988792},"title":{"text":"企業名称","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.9103362391034}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"bc693741d634":{"x":{},"y":{},"colour":{},"type":"scatter"},"bc6943560c43":{"x":{},"y":{},"colour":{}}},"cur_data":"bc693741d634","visdat":{"bc693741d634":["function (y) ","x"],"bc6943560c43":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-a2b0858589d87dc50747" style="width:1344px;height:768px;"></div>
+<script type="application/json" data-for="htmlwidget-a2b0858589d87dc50747">{"x":{"data":[{"x":[17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[9.6343960000000006,10.723889,11.219474,12.412013,10.88246,7.5308950000000001,7.0250620000000001,10.301072,11.129630000000001,10.011774000000001,7.6580110000000001,10.921759,15.016553999999999],"text":["年度: 2011<br />売上高/10^6:  9.634396<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2012<br />売上高/10^6: 10.723889<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2013<br />売上高/10^6: 11.219474<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2014<br />売上高/10^6: 12.412013<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2015<br />売上高/10^6: 10.882460<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2016<br />売上高/10^6:  7.530895<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2017<br />売上高/10^6:  7.025062<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2018<br />売上高/10^6: 10.301072<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2019<br />売上高/10^6: 11.129630<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2020<br />売上高/10^6: 10.011774<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2021<br />売上高/10^6:  7.658011<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2022<br />売上高/10^6: 10.921759<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス","年度: 2023<br />売上高/10^6: 15.016554<br />企業名称: ＥＮＥＯＳホールディングス<br />企業名称: ＥＮＥＯＳホールディングス"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"ＥＮＥＯＳホールディングス","legendgroup":"ＥＮＥＯＳホールディングス","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"frame":null},{"x":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.895772,5.3378059999999996,5.7523920000000004,5.6499480000000002,5.1112970000000004,5.119739,4.7863439999999997,4.9916419999999997,5.6318200000000003,6.0389480000000004,6.0457039999999997,5.8356890000000003,6.0378150000000002,6.7912150000000002,6.6443589999999997,5.766718,8.7497520000000009,11.811303000000001],"text":["年度: 2006<br />売上高/10^6:  3.895772<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2007<br />売上高/10^6:  5.337806<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2008<br />売上高/10^6:  5.752392<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2009<br />売上高/10^6:  5.649948<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2010<br />売上高/10^6:  5.111297<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2011<br />売上高/10^6:  5.119739<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2012<br />売上高/10^6:  4.786344<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2013<br />売上高/10^6:  4.991642<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2014<br />売上高/10^6:  5.631820<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2015<br />売上高/10^6:  6.038948<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2016<br />売上高/10^6:  6.045704<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2017<br />売上高/10^6:  5.835689<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2018<br />売上高/10^6:  6.037815<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2019<br />売上高/10^6:  6.791215<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2020<br />売上高/10^6:  6.644359<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2021<br />売上高/10^6:  5.766718<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2022<br />売上高/10^6:  8.749752<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス","年度: 2023<br />売上高/10^6: 11.811303<br />企業名称: セブン＆アイ・ホールディングス<br />企業名称: セブン＆アイ・ホールディングス"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(216,144,0,1)","dash":"solid"},"hoveron":"points","name":"セブン＆アイ・ホールディングス","legendgroup":"セブン＆アイ・ホールディングス","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(216,144,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(216,144,0,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.983438,4.5925649999999996,5.6631340000000003,6.75549,6.804182,6.686661,7.3148239999999998,7.5782579999999999,7.4736330000000004,7.496391,7.1596159999999998,7.5105969999999997,8.2956950000000003,8.8714139999999997,7.7299930000000003,7.2139980000000001,7.181273,6.4932119999999998,6.7955040000000002,7.7672660000000002,8.2158800000000003,8.1057120000000005,7.6032500000000001,8.5439819999999997,8.6656870000000001,8.2598850000000006,8.9986610000000002,9.9215129999999991,11.539837],"text":["年度: 1995<br />売上高/10^6:  3.983438<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1996<br />売上高/10^6:  4.592565<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1997<br />売上高/10^6:  5.663134<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1998<br />売上高/10^6:  6.755490<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 1999<br />売上高/10^6:  6.804182<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2000<br />売上高/10^6:  6.686661<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2001<br />売上高/10^6:  7.314824<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2002<br />売上高/10^6:  7.578258<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2003<br />売上高/10^6:  7.473633<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2004<br />売上高/10^6:  7.496391<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2005<br />売上高/10^6:  7.159616<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2006<br />売上高/10^6:  7.510597<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2007<br />売上高/10^6:  8.295695<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2008<br />売上高/10^6:  8.871414<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2009<br />売上高/10^6:  7.729993<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2010<br />売上高/10^6:  7.213998<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2011<br />売上高/10^6:  7.181273<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2012<br />売上高/10^6:  6.493212<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2013<br />売上高/10^6:  6.795504<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2014<br />売上高/10^6:  7.767266<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2015<br />売上高/10^6:  8.215880<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2016<br />売上高/10^6:  8.105712<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2017<br />売上高/10^6:  7.603250<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2018<br />売上高/10^6:  8.543982<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2019<br />売上高/10^6:  8.665687<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2020<br />売上高/10^6:  8.259885<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2021<br />売上高/10^6:  8.998661<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2022<br />売上高/10^6:  9.921513<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ","年度: 2023<br />売上高/10^6: 11.539837<br />企業名称: ソニーグループ<br />企業名称: ソニーグループ"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)","dash":"solid"},"hoveron":"points","name":"ソニーグループ","legendgroup":"ソニーグループ","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"frame":null},{"x":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[10.718738999999999,12.243834,11.678397,12.749008,12.879561000000001,13.424423000000001,15.106297,16.054290000000002,17.29476,18.551525999999999,21.036909000000001,23.948091000000002,26.289239999999999,20.52957,18.950973000000001,18.993687999999999,18.583653000000002,22.064191999999998,25.691911000000001,27.234521000000001,28.403117999999999,27.597193000000001,29.37951,30.225681000000002,29.866547000000001,27.214594000000002,31.379507,37.154297999999997],"text":["年度: 1996<br />売上高/10^6: 10.718739<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1997<br />売上高/10^6: 12.243834<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1998<br />売上高/10^6: 11.678397<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 1999<br />売上高/10^6: 12.749008<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2000<br />売上高/10^6: 12.879561<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2001<br />売上高/10^6: 13.424423<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2002<br />売上高/10^6: 15.106297<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2003<br />売上高/10^6: 16.054290<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2004<br />売上高/10^6: 17.294760<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2005<br />売上高/10^6: 18.551526<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2006<br />売上高/10^6: 21.036909<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2007<br />売上高/10^6: 23.948091<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2008<br />売上高/10^6: 26.289240<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2009<br />売上高/10^6: 20.529570<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2010<br />売上高/10^6: 18.950973<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2011<br />売上高/10^6: 18.993688<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2012<br />売上高/10^6: 18.583653<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2013<br />売上高/10^6: 22.064192<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2014<br />売上高/10^6: 25.691911<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2015<br />売上高/10^6: 27.234521<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2016<br />売上高/10^6: 28.403118<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2017<br />売上高/10^6: 27.597193<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2018<br />売上高/10^6: 29.379510<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2019<br />売上高/10^6: 30.225681<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2020<br />売上高/10^6: 29.866547<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2021<br />売上高/10^6: 27.214594<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2022<br />売上高/10^6: 31.379507<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車","年度: 2023<br />売上高/10^6: 37.154298<br />企業名称: トヨタ自動車<br />企業名称: トヨタ自動車"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(57,182,0,1)","dash":"solid"},"hoveron":"points","name":"トヨタ自動車","legendgroup":"トヨタ自動車","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(57,182,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(57,182,0,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[17.03501,17.520184,16.325869999999998,17.515477000000001,13.980302,2.3400599999999998,2.3722509999999999,2.49125,2.788151,2.982936,3.494634,4.1154710000000003,4.7935970000000001,5.7388779999999997,5.5047889999999997,4.0964450000000001,4.679443,5.2516020000000001,4.9121180000000004,5.7319180000000003,5.4049300000000002,4.7596939999999996,4.363969,4.8921489999999999,6.9575240000000003,8.4841300000000004,8.0102349999999998,11.757559000000001,14.306402],"text":["年度: 1995<br />売上高/10^6: 17.035010<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1996<br />売上高/10^6: 17.520184<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1997<br />売上高/10^6: 16.325870<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1998<br />売上高/10^6: 17.515477<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 1999<br />売上高/10^6: 13.980302<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2000<br />売上高/10^6:  2.340060<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2001<br />売上高/10^6:  2.372251<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2002<br />売上高/10^6:  2.491250<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2003<br />売上高/10^6:  2.788151<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2004<br />売上高/10^6:  2.982936<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2005<br />売上高/10^6:  3.494634<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2006<br />売上高/10^6:  4.115471<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2007<br />売上高/10^6:  4.793597<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2008<br />売上高/10^6:  5.738878<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2009<br />売上高/10^6:  5.504789<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2010<br />売上高/10^6:  4.096445<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2011<br />売上高/10^6:  4.679443<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2012<br />売上高/10^6:  5.251602<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2013<br />売上高/10^6:  4.912118<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2014<br />売上高/10^6:  5.731918<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2015<br />売上高/10^6:  5.404930<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2016<br />売上高/10^6:  4.759694<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2017<br />売上高/10^6:  4.363969<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2018<br />売上高/10^6:  4.892149<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2019<br />売上高/10^6:  6.957524<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2020<br />売上高/10^6:  8.484130<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2021<br />売上高/10^6:  8.010235<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2022<br />売上高/10^6: 11.757559<br />企業名称: 三井物産<br />企業名称: 三井物産","年度: 2023<br />売上高/10^6: 14.306402<br />企業名称: 三井物産<br />企業名称: 三井物産"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)","dash":"solid"},"hoveron":"points","name":"三井物産","legendgroup":"三井物産","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[17.466625000000001,17.794929,15.79208,15.907660999999999,13.683168,13.109116999999999,1.1990689999999999,1.291493,1.4709019999999999,3.4911240000000001,4.1458839999999997,4.8269440000000001,5.0687490000000004,6.0308060000000001,6.1464059999999998,4.5407929999999999,5.2068729999999999,5.5658320000000003,6.009887,7.6351680000000002,7.6694889999999996,6.9255820000000003,6.4257609999999996,7.5673940000000002,16.103763000000001,14.779733999999999,12.884520999999999,17.264828000000001,21.571973],"text":["年度: 1995<br />売上高/10^6: 17.466625<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1996<br />売上高/10^6: 17.794929<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1997<br />売上高/10^6: 15.792080<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1998<br />売上高/10^6: 15.907661<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 1999<br />売上高/10^6: 13.683168<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2000<br />売上高/10^6: 13.109117<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2001<br />売上高/10^6:  1.199069<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2002<br />売上高/10^6:  1.291493<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2003<br />売上高/10^6:  1.470902<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2004<br />売上高/10^6:  3.491124<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2005<br />売上高/10^6:  4.145884<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2006<br />売上高/10^6:  4.826944<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2007<br />売上高/10^6:  5.068749<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2008<br />売上高/10^6:  6.030806<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2009<br />売上高/10^6:  6.146406<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2010<br />売上高/10^6:  4.540793<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2011<br />売上高/10^6:  5.206873<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2012<br />売上高/10^6:  5.565832<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2013<br />売上高/10^6:  6.009887<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2014<br />売上高/10^6:  7.635168<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2015<br />売上高/10^6:  7.669489<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2016<br />売上高/10^6:  6.925582<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2017<br />売上高/10^6:  6.425761<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2018<br />売上高/10^6:  7.567394<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2019<br />売上高/10^6: 16.103763<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2020<br />売上高/10^6: 14.779734<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2021<br />売上高/10^6: 12.884521<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2022<br />売上高/10^6: 17.264828<br />企業名称: 三菱商事<br />企業名称: 三菱商事","年度: 2023<br />売上高/10^6: 21.571973<br />企業名称: 三菱商事<br />企業名称: 三菱商事"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"三菱商事","legendgroup":"三菱商事","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,196,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[13.447540999999999,13.609959999999999,15.267011999999999,15.544508,13.899777,12.143878000000001,12.135104999999999,1.6881280000000001,1.68167,1.7386360000000001,1.9906269999999999,2.2173929999999999,2.6460370000000002,2.8598530000000002,3.4190610000000001,3.4166370000000001,3.651586,4.1975249999999997,4.6994660000000001,5.5875260000000004,5.5914349999999997,5.0835359999999996,4.8384640000000001,5.510059,11.600485000000001,10.982968,10.362628000000001,12.293348,13.945633000000001],"text":["年度: 1995<br />売上高/10^6: 13.447541<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1996<br />売上高/10^6: 13.609960<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1997<br />売上高/10^6: 15.267012<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1998<br />売上高/10^6: 15.544508<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 1999<br />売上高/10^6: 13.899777<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2000<br />売上高/10^6: 12.143878<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2001<br />売上高/10^6: 12.135105<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2002<br />売上高/10^6:  1.688128<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2003<br />売上高/10^6:  1.681670<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2004<br />売上高/10^6:  1.738636<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2005<br />売上高/10^6:  1.990627<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2006<br />売上高/10^6:  2.217393<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2007<br />売上高/10^6:  2.646037<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2008<br />売上高/10^6:  2.859853<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2009<br />売上高/10^6:  3.419061<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2010<br />売上高/10^6:  3.416637<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2011<br />売上高/10^6:  3.651586<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2012<br />売上高/10^6:  4.197525<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2013<br />売上高/10^6:  4.699466<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2014<br />売上高/10^6:  5.587526<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2015<br />売上高/10^6:  5.591435<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2016<br />売上高/10^6:  5.083536<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2017<br />売上高/10^6:  4.838464<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2018<br />売上高/10^6:  5.510059<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2019<br />売上高/10^6: 11.600485<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2020<br />売上高/10^6: 10.982968<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2021<br />売上高/10^6: 10.362628<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2022<br />売上高/10^6: 12.293348<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事","年度: 2023<br />売上高/10^6: 13.945633<br />企業名称: 伊藤忠商事<br />企業名称: 伊藤忠商事"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)","dash":"solid"},"hoveron":"points","name":"伊藤忠商事","legendgroup":"伊藤忠商事","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[5.8341229999999999,6.0391069999999996,6.6588750000000001,6.5646370000000003,6.5800010000000002,5.9770750000000001,6.08962,6.1962409999999997,6.8285879999999999,7.4292189999999998,8.5762769999999993,9.4282920000000008,10.468583000000001,10.824237999999999,8.4369739999999993,7.517277,8.7730929999999994,9.4090260000000008,8.7373200000000004,10.482519999999999,11.375207,12.189519000000001,11.720041,11.951169,11.574247,9.8788660000000004,7.8625720000000001,8.4245850000000004,10.596695],"text":["年度: 1995<br />売上高/10^6:  5.834123<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1996<br />売上高/10^6:  6.039107<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1997<br />売上高/10^6:  6.658875<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1998<br />売上高/10^6:  6.564637<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 1999<br />売上高/10^6:  6.580001<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2000<br />売上高/10^6:  5.977075<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2001<br />売上高/10^6:  6.089620<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2002<br />売上高/10^6:  6.196241<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2003<br />売上高/10^6:  6.828588<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2004<br />売上高/10^6:  7.429219<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2005<br />売上高/10^6:  8.576277<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2006<br />売上高/10^6:  9.428292<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2007<br />売上高/10^6: 10.468583<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2008<br />売上高/10^6: 10.824238<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2009<br />売上高/10^6:  8.436974<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2010<br />売上高/10^6:  7.517277<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2011<br />売上高/10^6:  8.773093<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2012<br />売上高/10^6:  9.409026<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2013<br />売上高/10^6:  8.737320<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2014<br />売上高/10^6: 10.482520<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2015<br />売上高/10^6: 11.375207<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2016<br />売上高/10^6: 12.189519<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2017<br />売上高/10^6: 11.720041<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2018<br />売上高/10^6: 11.951169<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2019<br />売上高/10^6: 11.574247<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2020<br />売上高/10^6:  9.878866<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2021<br />売上高/10^6:  7.862572<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2022<br />売上高/10^6:  8.424585<br />企業名称: 日産自動車<br />企業名称: 日産自動車","年度: 2023<br />売上高/10^6: 10.596695<br />企業名称: 日産自動車<br />企業名称: 日産自動車"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(149,144,255,1)","dash":"solid"},"hoveron":"points","name":"日産自動車","legendgroup":"日産自動車","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(149,144,255,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(149,144,255,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[7.5922660000000004,8.1238100000000006,8.5230999999999995,8.4168339999999997,7.9773740000000002,8.0012030000000003,8.4169820000000009,7.9937839999999998,8.1917519999999993,8.6324500000000004,9.0270430000000008,9.4648009999999996,10.247903000000001,11.226735,10.000368999999999,8.9685459999999999,9.3158069999999995,9.6658829999999991,9.0410710000000005,9.6664460000000005,9.7749299999999995,10.034305,9.1622640000000004,9.3686140000000009,9.4806190000000008,8.7672629999999998,8.729196,10.264602,10.88115],"text":["年度: 1995<br />売上高/10^6:  7.592266<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1996<br />売上高/10^6:  8.123810<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1997<br />売上高/10^6:  8.523100<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1998<br />売上高/10^6:  8.416834<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 1999<br />売上高/10^6:  7.977374<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2000<br />売上高/10^6:  8.001203<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2001<br />売上高/10^6:  8.416982<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2002<br />売上高/10^6:  7.993784<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2003<br />売上高/10^6:  8.191752<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2004<br />売上高/10^6:  8.632450<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2005<br />売上高/10^6:  9.027043<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2006<br />売上高/10^6:  9.464801<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2007<br />売上高/10^6: 10.247903<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2008<br />売上高/10^6: 11.226735<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2009<br />売上高/10^6: 10.000369<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2010<br />売上高/10^6:  8.968546<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2011<br />売上高/10^6:  9.315807<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2012<br />売上高/10^6:  9.665883<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2013<br />売上高/10^6:  9.041071<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2014<br />売上高/10^6:  9.666446<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2015<br />売上高/10^6:  9.774930<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2016<br />売上高/10^6: 10.034305<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2017<br />売上高/10^6:  9.162264<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2018<br />売上高/10^6:  9.368614<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2019<br />売上高/10^6:  9.480619<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2020<br />売上高/10^6:  8.767263<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2021<br />売上高/10^6:  8.729196<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2022<br />売上高/10^6: 10.264602<br />企業名称: 日立製作所<br />企業名称: 日立製作所","年度: 2023<br />売上高/10^6: 10.881150<br />企業名称: 日立製作所<br />企業名称: 日立製作所"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)","dash":"solid"},"hoveron":"points","name":"日立製作所","legendgroup":"日立製作所","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"frame":null},{"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"y":[3.966164,4.2522500000000001,5.2933019999999997,5.9997379999999998,6.2310410000000003,6.09884,6.4638299999999997,7.362438,7.9714989999999997,8.1625999999999994,8.6501049999999999,9.9079960000000007,11.08714,12.002834,10.011241,8.5791740000000001,8.9368669999999995,7.9480950000000004,9.8779470000000007,12.506091,13.328099,14.601151,13.9992,15.361146,15.888617,14.931009,13.170519000000001,14.552695999999999,16.907724999999999],"text":["年度: 1995<br />売上高/10^6:  3.966164<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1996<br />売上高/10^6:  4.252250<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1997<br />売上高/10^6:  5.293302<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1998<br />売上高/10^6:  5.999738<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 1999<br />売上高/10^6:  6.231041<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2000<br />売上高/10^6:  6.098840<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2001<br />売上高/10^6:  6.463830<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2002<br />売上高/10^6:  7.362438<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2003<br />売上高/10^6:  7.971499<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2004<br />売上高/10^6:  8.162600<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2005<br />売上高/10^6:  8.650105<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2006<br />売上高/10^6:  9.907996<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2007<br />売上高/10^6: 11.087140<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2008<br />売上高/10^6: 12.002834<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2009<br />売上高/10^6: 10.011241<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2010<br />売上高/10^6:  8.579174<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2011<br />売上高/10^6:  8.936867<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2012<br />売上高/10^6:  7.948095<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2013<br />売上高/10^6:  9.877947<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2014<br />売上高/10^6: 12.506091<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2015<br />売上高/10^6: 13.328099<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2016<br />売上高/10^6: 14.601151<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2017<br />売上高/10^6: 13.999200<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2018<br />売上高/10^6: 15.361146<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2019<br />売上高/10^6: 15.888617<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2020<br />売上高/10^6: 14.931009<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2021<br />売上高/10^6: 13.170519<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2022<br />売上高/10^6: 14.552696<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業","年度: 2023<br />売上高/10^6: 16.907725<br />企業名称: 本田技研工業<br />企業名称: 本田技研工業"],"type":"scatter","mode":"lines+markers","line":{"width":1.8897637795275593,"color":"rgba(255,98,188,1)","dash":"solid"},"hoveron":"points","name":"本田技研工業","legendgroup":"本田技研工業","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,98,188,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(255,98,188,1)"}},"frame":null}],"layout":{"margin":{"t":31.940224159402241,"r":13.283520132835205,"b":75.716064757160638,"l":54.462432544624335},"plot_bgcolor":"transparent","paper_bgcolor":"rgba(213,228,235,1)","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.910336239103366},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,29.600000000000001],"tickmode":"array","ticktext":["1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29],"categoryorder":"array","categoryarray":["1995","1996","1997","1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017","2018","2019","2020","2021","2022","2023"],"nticks":null,"ticks":"outside","tickcolor":"rgba(0,0,0,1)","ticklen":-6.6417600664176026,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":21.253632212536321},"tickangle":-90,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.5313408053134081,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"年度","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.910336239103366}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.59869244999999993,38.95205945],"tickmode":"array","ticktext":["0","10","20","30"],"tickvals":[0,10.000000000000002,20,30],"categoryorder":"array","categoryarray":["0","10","20","30"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":-6.6417600664176026,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.910336239103366},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":1.1623080116230804,"zeroline":false,"anchor":"x","title":{"text":"売上高(兆円)","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.910336239103366}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"transparent","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":29.887920298879209},"title":{"text":"企業名称","font":{"color":"rgba(0,0,0,1)","family":"HiraKakuProN-W3","size":23.910336239103366}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"17cc644553125":{"x":{},"y":{},"colour":{},"type":"scatter"},"17cc6350d972f":{"x":{},"y":{},"colour":{}}},"cur_data":"17cc644553125","visdat":{"17cc644553125":["function (y) ","x"],"17cc6350d972f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section>
     </div>
@@ -973,7 +898,6 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1229,18 +1153,7 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1272,11 +1185,50 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1286,8 +1238,17 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1301,7 +1262,11 @@ $ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

@@ -2644,5 +2644,355 @@
     "title": "プレゼミ2023 最終会  多変量解析",
     "section": "アンケート調査",
     "text": "アンケート調査\n\n\n\n授業評価アンケート"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#おまけの分析事例",
+    "href": "prezemi_2023_05_omake.html#おまけの分析事例",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "おまけの分析事例",
+    "text": "おまけの分析事例\n必要なパッケージを読み込む。、 いつものtidyverseとグラフの見た目を変えるggthemesとキレイな表を作るknitrとkableExtraを読み込む。\n\npacman::p_load(\n  tidyverse, # データ操作全般\n  ggthemes, # グラフのスタイル拡張\n  knitr, # 表を作る\n  kableExtra # 表を作る\n)"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#作業ディレクトリの場所",
+    "href": "prezemi_2023_05_omake.html#作業ディレクトリの場所",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "作業ディレクトリの場所",
+    "text": "作業ディレクトリの場所\nまずは作業ディレクトリの場所にファイルがあることを確認しましょう。 いまRが使っている作業ディレクトリの場所はgetwd()で確認できます。\n\ngetwd()\n\n[1] \"/Users/soichi/Library/CloudStorage/Dropbox/R/presemi\""
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#データの読み込み",
+    "href": "prezemi_2023_05_omake.html#データの読み込み",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "データの読み込み",
+    "text": "データの読み込み\nここでは、作業ディレクトリの中にdataというフォルダがあり、 その中にotomasa04.csvを保存してある、という前提で話を進めます。\n\ndf &lt;- read_csv(\"data/otomasa_04.csv\")\n\nこれで財務データが入ったデータフレームdfができました。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#グラフのスタイルを保存",
+    "href": "prezemi_2023_05_omake.html#グラフのスタイルを保存",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "グラフのスタイルを保存",
+    "text": "グラフのスタイルを保存\nmystyleというオブジェクトに保存しておく。 listで設定をまとめる。\n\nmystyle &lt;- list( # mystyleとして設定を保存\n  theme_economist(), # ggthemesが必要\n  theme(text = element_text(\n    size = 18,  #  フォントサイズ\n    family = \"HiraKakuProN-W3\" # mac用フォント\n    )))\n\nwindowsの人は family = “HiraKakuProN-W3” は消してください。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#データの確認",
+    "href": "prezemi_2023_05_omake.html#データの確認",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "データの確認",
+    "text": "データの確認\nデータの中身を確認するなら、おなじみのglimpse()を使う。\n\nglimpse(df)\n\nRows: 83,637\nColumns: 35\n$ 日経会社コード                   &lt;chr&gt; \"0000001\", \"0000001\", \"0000001\", \"000…\n$ 企業名称                         &lt;chr&gt; \"極洋\", \"極洋\", \"極洋\", \"極洋\", \"極洋…\n$ 決算期                           &lt;chr&gt; \"1995/03\", \"1996/03\", \"1997/03\", \"199…\n$ 決算種別                         &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 1…\n$ 連結基準                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ 決算月数                         &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 1…\n$ 日経業種コード                   &lt;dbl&gt; 235341, 235341, 235341, 235341, 23534…\n$ 売上高                           &lt;dbl&gt; 173803, 175202, 183640, 176022, 17194…\n$ 特別利益                         &lt;dbl&gt; 778, 903, 186, 287, 79, 1429, 282, NA…\n$ 特別損失                         &lt;dbl&gt; 778, 708, 783, 852, 1271, 2936, 478, …\n$ 売上総利益                       &lt;dbl&gt; 14314, 12327, 14222, 14225, 15206, 15…\n$ 営業利益                         &lt;dbl&gt; 1059, -148, 1362, 739, 2069, 2842, 23…\n$ 経常利益                         &lt;dbl&gt; 1049, -82, 1058, 535, 1600, 2299, 194…\n$ 当期純利益                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 親会社株主当期純利益             &lt;dbl&gt; 797, -64, 236, -377, -251, 327, 927, …\n$ `支払利息・割引料`               &lt;dbl&gt; 1394, 1011, 830, 884, 736, 683, 661, …\n$ `法人税・住民税及び事業税合計`   &lt;dbl&gt; 271, 159, 213, 341, 620, 606, 908, 85…\n$ 法人税等調整額                   &lt;dbl&gt; NA, NA, NA, NA, NA, -178, -114, 44, -…\n$ 減価償却費                       &lt;dbl&gt; NA, NA, NA, 42, 34, 84, 92, 85, 81, 8…\n$ のれん償却額                     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 1, NA, NA…\n$ `受取利息・配当金`               &lt;dbl&gt; 317, 219, 169, 195, 187, 145, 131, 97…\n$ 持分法を適用した場合の投資損益   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 支払利息                         &lt;dbl&gt; NA, NA, NA, NA, NA, 683, 661, 536, 50…\n$ 税金等調整前当期純利益           &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 税金等調整前当期利益             &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 販売費及び一般管理費             &lt;dbl&gt; 13254, 12476, 12859, 13486, 13136, 12…\n$ 売上原価                         &lt;dbl&gt; 159489, 162875, 169418, 161796, 15673…\n$ 資産合計                         &lt;dbl&gt; 61692, 63287, 65883, 62766, 62109, 60…\n$ `受取利息・割引料・有価証券利息` &lt;dbl&gt; 134, 68, 49, 69, 72, 59, 47, 59, 30, …\n$ `短期借入金・社債合計`           &lt;dbl&gt; 29693, 29887, 33371, 30942, 30937, 27…\n$ `長期借入金・社債・転換社債`     &lt;dbl&gt; 5543, 5020, 5635, 5080, 4798, 5816, 4…\n$ `1年内返済の長期借入金`          &lt;dbl&gt; NA, NA, NA, NA, NA, 1109, 1267, 1449,…\n$ コマーシャルペーパー             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ リース債務                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#カテゴリー変数",
+    "href": "prezemi_2023_05_omake.html#カテゴリー変数",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "カテゴリー変数",
+    "text": "カテゴリー変数\nデータフレームdfの中には、文字列(character)として、\n\n日経会社コード\n企業名称\n決算期\n\nが入っているので、適切な型に変換する。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#ファクター型に変換",
+    "href": "prezemi_2023_05_omake.html#ファクター型に変換",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "ファクター型に変換",
+    "text": "ファクター型に変換\n文字列をファクター型に変換するにはas.factor()を使う。 決算期から年度データを取り出すためにsubstr()を使う。 substr()は文字列の一部を取り出す関数である。\n\ndf &lt;- df |&gt;\n    mutate( # 変数の型をファクター型に変換\n        日経会社コード = as.factor(日経会社コード),\n        企業名称 = as.factor(企業名称),\n        年度 = factor(substr(決算期, 1, 4), ordered = TRUE)\n    )"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#欠損値の処理",
+    "href": "prezemi_2023_05_omake.html#欠損値の処理",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "欠損値の処理",
+    "text": "欠損値の処理\nオリジナルの財務データの値が欠損値の場合、それは財務諸表上に個別項目で載せられないほど額が小さいことを意味する。 そこで、欠損値にゼロを代入する。\n\ndf[is.na(df)] &lt;- 0\n\nis.na()は欠損値をTRUE、欠損値でない値をFALSEとして返す関数で、TRUEにゼロを代入している。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#異常な観測値の処理",
+    "href": "prezemi_2023_05_omake.html#異常な観測値の処理",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "異常な観測値の処理",
+    "text": "異常な観測値の処理\n決算期を変更した会社を除外するため，決算月数が12の会社のみを抽出する。 ついでに売上高が1億円未満の企業や販管費がゼロの会社も除外する。\n\ndf &lt;- df |&gt;\n    filter(\n        決算月数 == 12, # 決算月数が12の会社 \n        売上高 &gt;= 100, # 売上高1億以上\n        販売費及び一般管理費 &gt; 0) # 販管費が0超"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#変な企業を除外",
+    "href": "prezemi_2023_05_omake.html#変な企業を除外",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "変な企業を除外",
+    "text": "変な企業を除外\nなぜか同じ年度に2つデータがある会社があるので、除外する。\n\ndf &lt;- df |&gt;\n  group_by(年度, 企業名称) |&gt; # 年度と企業ごとに\n  mutate(N = n()) |&gt; # なぜか同じ年度に2コ以上データがある会社があるのでカウント\n  filter(N != 2) |&gt; # 重複データを削除\n  select(-N) # 上で作ったけどもういらないのでNを削除\n\nこれで整然データ(tidy data)が完成した(はず)。"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#売上高のヒストグラム",
+    "href": "prezemi_2023_05_omake.html#売上高のヒストグラム",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\n簡単にチェックするだけなら基本関数hist()\n\n\nRコードはここ\nhist(df$売上高)"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#売上高のヒストグラム-1",
+    "href": "prezemi_2023_05_omake.html#売上高のヒストグラム-1",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\nキレイなグラフを作るならggplot2\n\n\nRコードはここ\ndf |&gt;\n    ggplot() + aes(x = 売上高/1000000) + # 売上高を100万で割って単位を兆\n    geom_histogram() + # ヒストグラム\n    xlab(\"売上高（兆円）\") + ylab(\"度数\") + # x軸のラベル\n    mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#分布の計上を確認",
+    "href": "prezemi_2023_05_omake.html#分布の計上を確認",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "分布の計上を確認",
+    "text": "分布の計上を確認\n分布が左に固まっており、ばらつきが分からないので、分位点を確認\n\nfivenum(df$売上高)\n\n[1]      100.0     9002.0    27911.5    94322.0 37154298.0\n\nmean(df$売上高)\n\n[1] 188132.3\n\n\n\n\n\n最小 1億円\nQ1 135億3750万円,\nQ3 941億6700万円\n最大 37兆1542億9800万円\n\n\n\n中央値 278億8450万円\n平均 1879億8710万円"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#異常値の影響",
+    "href": "prezemi_2023_05_omake.html#異常値の影響",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "異常値の影響",
+    "text": "異常値の影響\n売上高の最大値が大きすぎる。 売上高の分布を正規分布に近づけるために対数を取る。\n\n\nRコードはここ\nhist(log(df$売上高))"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#対数をとって散布図を書く",
+    "href": "prezemi_2023_05_omake.html#対数をとって散布図を書く",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "対数をとって散布図を書く",
+    "text": "対数をとって散布図を書く\nggplot2パッケージのgeom_point()を使って、売上高と販売費及び一般管理費の散布図を書いてみる。\n\n\nRコードはここ\ndf |&gt;\n  filter(販売費及び一般管理費 &gt; 0) |&gt;\n  ggplot() + aes(x = log(売上高), y = log(販売費及び一般管理費)) +\n  geom_point() + # ヒストグラム\n  xlab(\"売上高の対数\") + ylab(\"販管費の対数\") + # x軸のラベル\n  mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均を計算",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均を計算",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\n# 年度別の売上高平均を計算\ndf_year_sale &lt;- df |&gt;\n    group_by(年度) |&gt;\n    summarise(\n      売上高平均 = mean(売上高) # 平均売上高を計算\n    )\n# 折れ線グラフ\ndf_year_sale |&gt;\n# 年度がファクターなので、group = 1として1つのグループにまとめる\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100, group = 1) +\n  geom_line() + geom_point() +# ヒストグラム\n  ylim(0, 3000) + mystyle # 軸の範囲とスタイルを適用"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均棒グラフ",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均棒グラフ",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "年度別の売上高平均棒グラフ",
+    "text": "年度別の売上高平均棒グラフ\n横軸が年度なので，棒グラフもOK\n\n\nRコードはここ\ndf_year_sale |&gt;\n  # 売上高平均を100で割って単位を億に\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100) +\n  geom_col() +# ヒストグラム\n  ylim(0, 3000) + mystyle # Y軸の範囲とスタイル"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#グラフの読み取り",
+    "href": "prezemi_2023_05_omake.html#グラフの読み取り",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "グラフの読み取り",
+    "text": "グラフの読み取り\n\nなんか2023年度の売上が以上に増加している\n2023年度に売上高が急増した企業があるのかもしれない\n2023年度売上高ランク上位10社の2022年度と2023年度の売上高を比較しなきゃ"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#年度別の売上高平均を計算-1",
+    "href": "prezemi_2023_05_omake.html#年度別の売上高平均を計算-1",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2022\", \"2023\")) |&gt; # 2022年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高, names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2022, # 変化額\n    変化率 = round(差額 / 年度2022, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) |&gt; # 上位10社のみを抽出\n  kable(booktabs = TRUE) |&gt; \n  kable_styling(font_size = 20)  # 作表\n\n\n\n\n\n企業名称 | 年度\n022| 年度20\n3| 差額| 変\n率|\n\n\n\n\n\nトヨタ自動車 | 31\n795| 37\n543| 5774\n| 0.\n8|\n\n\n三菱商事 |\n72648|\n15720| 43\n72|\n.25|\n\n\n本田技研工業 | 14\n527| 16\n077| 2355\n| 0.\n6|\n\n\nＥＮＥＯＳホールディングス | 109218|\n150166| 4\n948| 0.\n7|\n\n\n\n三井物産 |\n17576|\n43064| 25\n88|\n.22|\n\n\n伊藤忠商事 | 1\n2933| 1\n9456| 165\n3| 0\n13|\n\n\nセブン＆アイ・ホールディングス | 87498| 1\n8113| 306\n5| 0.35\n\n\n\n\nソニーグループ | 99\n15| 115\n98| 16183\n0.1\n|\n\n\n日立製作所 | 1\n2646| 1\n8812| 61\n6| 0\n06|\n\n\n日産自動車 |\n4246| 1\n5967| 217\n1| 0\n26|"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#特殊な3時点比較",
+    "href": "prezemi_2023_05_omake.html#特殊な3時点比較",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "特殊な3時点比較",
+    "text": "特殊な3時点比較\nリーマンショック2009年、コロナ禍2021年、2023年の売上高を比較する\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2009\", \"2021\", \"2023\")) |&gt; # 2000年と2010年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高,  names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2021, # 変化額\n    変化率 = round(差額 / 年度2021, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) #|&gt; # 上位10社のみを抽出\n\n\n# A tibble: 10 × 6\n# Groups:   企業名称 [10]\n   企業名称                       年度2009 年度2021 年度2023  差額 変化率\n   &lt;fct&gt;                             &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;\n 1 トヨタ自動車                     205296   272146   371543 99397   0.37\n 2 三菱商事                          61464   128845   215720 86875   0.67\n 3 本田技研工業                     100112   131705   169077 37372   0.28\n 4 ＥＮＥＯＳホールディングス           NA    76580   150166 73586   0.96\n 5 三井物産                          55048    80102   143064 62962   0.79\n 6 伊藤忠商事                        34191   103626   139456 35830   0.35\n 7 セブン＆アイ・ホールディングス    56499    57667   118113 60446   1.05\n 8 ソニーグループ                    77300    89987   115398 25411   0.28\n 9 日立製作所                       100004    87292   108812 21520   0.25\n10 日産自動車                        84370    78626   105967 27341   0.35\n\n\nRコードはここ\n#  kable( booktabs = TRUE) |&gt; \n#  kable_styling(font_size = 20)  # 作表"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#兆円売上高企業",
+    "href": "prezemi_2023_05_omake.html#兆円売上高企業",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "10兆円売上高企業",
+    "text": "10兆円売上高企業\n2023年度の売上高が10兆円以上の会社の売上高の推移をみてみる。 まず2023年度の売上高が10兆円以上の企業名を抽出する。\n\n\nRコードはここ\ndf_name &lt;- df |&gt;\n  filter(売上高 &gt;= 10^7 & 年度 == 2023)\nname &lt;- df_name$企業名称\n# 作図\ng &lt;- df |&gt;\n  filter(企業名称 %in% name) |&gt; # 企業名がnameに含まれるものを抽出\n  ggplot() + aes(x = 年度, y = 売上高 / 10^6, group = 企業名称, color = 企業名称) + # 企業ごとに色分け\n  geom_line() + geom_point() + # 折れ線グラフと散布図を組み合わせる\n  xlab(\"年度\") + ylab(\"売上高(兆円)\") + mystyle + # スタイルを適用\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 16)) # x軸のラベルを90度回転\nprint(g) # 出力"
+  },
+  {
+    "objectID": "prezemi_2023_05_omake.html#動くグラフ",
+    "href": "prezemi_2023_05_omake.html#動くグラフ",
+    "title": "プレゼミ2023   第5回 【おまけ】収益データを可視化 ",
+    "section": "動くグラフ",
+    "text": "動くグラフ\n\n# install.packages(\"plotly\")\nlibrary(plotly)\nggplotly(g)"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#パッケージ",
+    "href": "Accounting_Finance_08.html#パッケージ",
+    "title": "補講 : 収益データを可視化",
+    "section": "パッケージ",
+    "text": "パッケージ\n必要なパッケージを読み込むために、pacmanパッケージを使います。 tidyverseとグラフの見た目を変えるggthemesとキレイな表を作るknitrとkableExtraを読み込みます。\n\npacman::p_load(\n  tidyverse, # データ操作全般\n  ggthemes, # グラフのスタイル拡張\n  knitr, # 表を作る\n  kableExtra # 表を作る\n)"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#作業ディレクトリの場所",
+    "href": "Accounting_Finance_08.html#作業ディレクトリの場所",
+    "title": "補講 : 収益データを可視化",
+    "section": "作業ディレクトリの場所",
+    "text": "作業ディレクトリの場所\nまずは作業ディレクトリの場所にファイルがあることを確認しましょう。 いまRが使っている作業ディレクトリの場所はgetwd()で確認できます。\n\ngetwd()\n\n[1] \"/Users/soichi/Library/CloudStorage/Dropbox/R/presemi\""
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#データの読み込み",
+    "href": "Accounting_Finance_08.html#データの読み込み",
+    "title": "補講 : 収益データを可視化",
+    "section": "データの読み込み",
+    "text": "データの読み込み\nここでは、作業ディレクトリの中にdataというフォルダがあり、 その中にotomasa04.csvを保存してある、という前提で話を進めます。\n\ndf &lt;- read_csv(\"data/otomasa_04.csv\")\n\nこれで財務データが入ったデータフレームdfができました。"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#グラフのスタイルを保存",
+    "href": "Accounting_Finance_08.html#グラフのスタイルを保存",
+    "title": "補講 : 収益データを可視化",
+    "section": "グラフのスタイルを保存",
+    "text": "グラフのスタイルを保存\nmystyleというオブジェクトに保存しておく。 listで設定をまとめる。\n\nmystyle &lt;- list( # mystyleとして設定を保存\n  theme_economist_white(), # ggthemesが必要\n  theme(text = element_text(\n    size = 14,  #  フォントサイズ\n    family = \"HiraKakuProN-W3\" # mac用フォント\n    )))\n\nWindowsの人は family = “HiraKakuProN-W3” は消してください。"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#データの確認",
+    "href": "Accounting_Finance_08.html#データの確認",
+    "title": "補講 : 収益データを可視化",
+    "section": "データの確認",
+    "text": "データの確認\nデータの中身を確認するならglimpse()を使うと便利です。\n\nglimpse(df)\n\nRows: 83,637\nColumns: 35\n$ 日経会社コード                   &lt;chr&gt; \"0000001\", \"0000001\", \"0000001\", \"000…\n$ 企業名称                         &lt;chr&gt; \"極洋\", \"極洋\", \"極洋\", \"極洋\", \"極洋…\n$ 決算期                           &lt;chr&gt; \"1995/03\", \"1996/03\", \"1997/03\", \"199…\n$ 決算種別                         &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 1…\n$ 連結基準                         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n$ 決算月数                         &lt;dbl&gt; 12, 12, 12, 12, 12, 12, 12, 12, 12, 1…\n$ 日経業種コード                   &lt;dbl&gt; 235341, 235341, 235341, 235341, 23534…\n$ 売上高                           &lt;dbl&gt; 173803, 175202, 183640, 176022, 17194…\n$ 特別利益                         &lt;dbl&gt; 778, 903, 186, 287, 79, 1429, 282, NA…\n$ 特別損失                         &lt;dbl&gt; 778, 708, 783, 852, 1271, 2936, 478, …\n$ 売上総利益                       &lt;dbl&gt; 14314, 12327, 14222, 14225, 15206, 15…\n$ 営業利益                         &lt;dbl&gt; 1059, -148, 1362, 739, 2069, 2842, 23…\n$ 経常利益                         &lt;dbl&gt; 1049, -82, 1058, 535, 1600, 2299, 194…\n$ 当期純利益                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 親会社株主当期純利益             &lt;dbl&gt; 797, -64, 236, -377, -251, 327, 927, …\n$ `支払利息・割引料`               &lt;dbl&gt; 1394, 1011, 830, 884, 736, 683, 661, …\n$ `法人税・住民税及び事業税合計`   &lt;dbl&gt; 271, 159, 213, 341, 620, 606, 908, 85…\n$ 法人税等調整額                   &lt;dbl&gt; NA, NA, NA, NA, NA, -178, -114, 44, -…\n$ 減価償却費                       &lt;dbl&gt; NA, NA, NA, 42, 34, 84, 92, 85, 81, 8…\n$ のれん償却額                     &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, 1, NA, NA…\n$ `受取利息・配当金`               &lt;dbl&gt; 317, 219, 169, 195, 187, 145, 131, 97…\n$ 持分法を適用した場合の投資損益   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 支払利息                         &lt;dbl&gt; NA, NA, NA, NA, NA, 683, 661, 536, 50…\n$ 税金等調整前当期純利益           &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 税金等調整前当期利益             &lt;dbl&gt; 1049, 112, 461, -29, 408, 791, 1750, …\n$ 販売費及び一般管理費             &lt;dbl&gt; 13254, 12476, 12859, 13486, 13136, 12…\n$ 売上原価                         &lt;dbl&gt; 159489, 162875, 169418, 161796, 15673…\n$ 資産合計                         &lt;dbl&gt; 61692, 63287, 65883, 62766, 62109, 60…\n$ `受取利息・割引料・有価証券利息` &lt;dbl&gt; 134, 68, 49, 69, 72, 59, 47, 59, 30, …\n$ `短期借入金・社債合計`           &lt;dbl&gt; 29693, 29887, 33371, 30942, 30937, 27…\n$ `長期借入金・社債・転換社債`     &lt;dbl&gt; 5543, 5020, 5635, 5080, 4798, 5816, 4…\n$ `1年内返済の長期借入金`          &lt;dbl&gt; NA, NA, NA, NA, NA, 1109, 1267, 1449,…\n$ コマーシャルペーパー             &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ リース債務                       &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n$ 長期リース債務                   &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, N…"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#カテゴリー変数",
+    "href": "Accounting_Finance_08.html#カテゴリー変数",
+    "title": "補講 : 収益データを可視化",
+    "section": "カテゴリー変数",
+    "text": "カテゴリー変数\nデータフレームdfの中には、文字列(character)として、\n\n日経会社コード\n企業名称\n決算期\n\nが入っているので、適切な型に変換する。"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#ファクター型に変換",
+    "href": "Accounting_Finance_08.html#ファクター型に変換",
+    "title": "補講 : 収益データを可視化",
+    "section": "ファクター型に変換",
+    "text": "ファクター型に変換\n文字列をファクター型に変換するにはas.factor()を使う。 決算期から年度データを取り出すためにsubstr()を使う。 substr()は文字列の一部を取り出す関数である。\n\ndf &lt;- df |&gt;\n    mutate( # 変数の型をファクター型に変換\n        日経会社コード = as.factor(日経会社コード),\n        企業名称 = as.factor(企業名称),\n        年度 = factor(substr(決算期, 1, 4), ordered = TRUE)\n    )"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#欠損値の処理",
+    "href": "Accounting_Finance_08.html#欠損値の処理",
+    "title": "補講 : 収益データを可視化",
+    "section": "欠損値の処理",
+    "text": "欠損値の処理\nオリジナルの財務データの値が欠損値の場合、それは財務諸表上に個別項目で載せられないほど額が小さいことを意味する。 そこで、欠損値にゼロを代入する。\n\ndf[is.na(df)] &lt;- 0\n\nis.na()は欠損値をTRUE、欠損値でない値をFALSEとして返す関数で、TRUEにゼロを代入している。"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#異常な観測値の処理",
+    "href": "Accounting_Finance_08.html#異常な観測値の処理",
+    "title": "補講 : 収益データを可視化",
+    "section": "異常な観測値の処理",
+    "text": "異常な観測値の処理\n決算期を変更した会社を除外するため，決算月数が12の会社のみを抽出する。 ついでに売上高が1億円未満の企業や販管費がゼロの会社も除外する。\n\ndf &lt;- df |&gt;\n    filter(\n        決算月数 == 12, # 決算月数が12の会社 \n        売上高 &gt;= 100, # 売上高1億以上\n        販売費及び一般管理費 &gt; 0) # 販管費が0超"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#確認",
+    "href": "Accounting_Finance_08.html#確認",
+    "title": "補講 : 収益データを可視化",
+    "section": "確認",
+    "text": "確認\n\ndf |&gt;\n  select(企業名称, 決算期, 決算月数, 売上高, 販売費及び一般管理費) |&gt;\n  head(10) |&gt;\n  kable(format = \"html\", booktabs = TRUE) |&gt;\n  kable_styling(font_size = 20)\n\n\n\n\n企業名称\n決算期\n決算月数\n売上高\n販売費及び一般管理費\n\n\n\n\n極洋\n1995/03\n12\n173803\n13254\n\n\n極洋\n1996/03\n12\n175202\n12476\n\n\n極洋\n1997/03\n12\n183640\n12859\n\n\n極洋\n1998/03\n12\n176022\n13486\n\n\n極洋\n1999/03\n12\n171944\n13136\n\n\n極洋\n2000/03\n12\n171031\n12946\n\n\n極洋\n2001/03\n12\n166644\n13117\n\n\n極洋\n2002/03\n12\n158006\n13377\n\n\n極洋\n2003/03\n12\n162773\n13716\n\n\n極洋\n2004/03\n12\n151534\n13499"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#変な企業を除外",
+    "href": "Accounting_Finance_08.html#変な企業を除外",
+    "title": "補講 : 収益データを可視化",
+    "section": "変な企業を除外",
+    "text": "変な企業を除外\n諸事情により同じ年度に2つデータがある会社があるので、除外する。\n\ndf &lt;- df |&gt;\n  group_by(年度, 企業名称) |&gt; # 年度と企業ごとに\n  mutate(N = n()) |&gt; # なぜか同じ年度に2コ以上データがある会社があるのでカウント\n  filter(N != 2) |&gt; # 重複データを削除\n  select(-N) # 上で作ったけどもういらないのでNを削除\n\nこれで整然データ(tidy data)が完成した(はず)。"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#売上高のヒストグラム",
+    "href": "Accounting_Finance_08.html#売上高のヒストグラム",
+    "title": "補講 : 収益データを可視化",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\n簡単にチェックするだけなら基本関数hist()\n\n\nRコードはここ\nhist(df$売上高)"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#売上高のヒストグラム-1",
+    "href": "Accounting_Finance_08.html#売上高のヒストグラム-1",
+    "title": "補講 : 収益データを可視化",
+    "section": "売上高のヒストグラム",
+    "text": "売上高のヒストグラム\nキレイなグラフを作るならggplot2\n\n\nRコードはここ\ndf |&gt;\n    ggplot() + aes(x = 売上高/1000000) + # 売上高を100万で割って単位を兆\n    geom_histogram() + # ヒストグラム\n    xlab(\"売上高（兆円）\") + ylab(\"度数\") + # x軸のラベル\n    mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#分布の計上を確認",
+    "href": "Accounting_Finance_08.html#分布の計上を確認",
+    "title": "補講 : 収益データを可視化",
+    "section": "分布の計上を確認",
+    "text": "分布の計上を確認\n分布が左に固まっており、ばらつきが分からないので、分位点を確認\n\nfivenum(df$売上高)\n\n[1]      100.0     9002.0    27911.5    94322.0 37154298.0\n\nmean(df$売上高)\n\n[1] 188132.3\n\n\n\n\n\n最小 1億円\nQ1 135億3750万円,\nQ3 941億6700万円\n最大 37兆1542億9800万円\n\n\n\n中央値 278億8450万円\n平均 1879億8710万円"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#異常値の影響",
+    "href": "Accounting_Finance_08.html#異常値の影響",
+    "title": "補講 : 収益データを可視化",
+    "section": "異常値の影響",
+    "text": "異常値の影響\n売上高の最大値が大きすぎる。 売上高の分布を正規分布に近づけるために対数を取る。\n\n\nRコードはここ\nhist(log(df$売上高))"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#対数をとって散布図を書く",
+    "href": "Accounting_Finance_08.html#対数をとって散布図を書く",
+    "title": "補講 : 収益データを可視化",
+    "section": "対数をとって散布図を書く",
+    "text": "対数をとって散布図を書く\nggplot2パッケージのgeom_point()を使って、売上高と販売費及び一般管理費の散布図を書いてみる。\n\n\nRコードはここ\ndf |&gt;\n  filter(販売費及び一般管理費 &gt; 0) |&gt;\n  ggplot() + aes(x = log(売上高), y = log(販売費及び一般管理費)) +\n  geom_point() + # ヒストグラム\n  xlab(\"売上高の対数\") + ylab(\"販管費の対数\") + # x軸のラベル\n  mystyle # 上で作ったスタイルを適用"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#年度別の売上高平均を計算",
+    "href": "Accounting_Finance_08.html#年度別の売上高平均を計算",
+    "title": "補講 : 収益データを可視化",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\n# 年度別の売上高平均を計算\ndf_year_sale &lt;- df |&gt;\n    group_by(年度) |&gt;\n    summarise(\n      売上高平均 = mean(売上高) # 平均売上高を計算\n    )\n# 折れ線グラフ\ndf_year_sale |&gt;\n# 年度がファクターなので、group = 1として1つのグループにまとめる\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100, group = 1) +\n  geom_line() + geom_point() +# ヒストグラム\n  ylim(0, 3000) +\n  mystyle + # 軸の範囲とスタイルを適用\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) # X軸のラベルを90度回転"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#年度別の売上高平均棒グラフ",
+    "href": "Accounting_Finance_08.html#年度別の売上高平均棒グラフ",
+    "title": "補講 : 収益データを可視化",
+    "section": "年度別の売上高平均棒グラフ",
+    "text": "年度別の売上高平均棒グラフ\n横軸が年度なので，棒グラフもOK\n\n\nRコードはここ\ndf_year_sale |&gt;\n  # 売上高平均を100で割って単位を億に\n  ggplot() + aes(x = 年度, y = 売上高平均 / 100) +\n  geom_col() +# ヒストグラム\n  ylim(0, 3000) + mystyle + # Y軸の範囲とスタイル\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) # X軸のラベルを90度回転"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#グラフの読み取り",
+    "href": "Accounting_Finance_08.html#グラフの読み取り",
+    "title": "補講 : 収益データを可視化",
+    "section": "グラフの読み取り",
+    "text": "グラフの読み取り\n\nなんか2023年度の売上が以上に増加している\n2023年度に売上高が急増した企業があるのかもしれない\n2023年度売上高ランク上位10社の2022年度と2023年度の売上高を比較しなきゃ"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#年度別の売上高平均を計算-1",
+    "href": "Accounting_Finance_08.html#年度別の売上高平均を計算-1",
+    "title": "補講 : 収益データを可視化",
+    "section": "年度別の売上高平均を計算",
+    "text": "年度別の売上高平均を計算\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2022\", \"2023\")) |&gt; # 2022年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高, names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2022, # 変化額\n    変化率 = 1 + round(差額 / 年度2022, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) |&gt; # 上位10社のみを抽出\n  kable(format = \"html\", booktabs = TRUE) |&gt; \n  kable_styling(font_size = 20)  # 作表\n\n\n\n\n\n企業名称\n年度2022\n年度2023\n差額\n変化率\n\n\n\n\nトヨタ自動車\n313795\n371543\n57748\n1.18\n\n\n三菱商事\n172648\n215720\n43072\n1.25\n\n\n本田技研工業\n145527\n169077\n23550\n1.16\n\n\nＥＮＥＯＳホールディングス\n109218\n150166\n40948\n1.37\n\n\n三井物産\n117576\n143064\n25488\n1.22\n\n\n伊藤忠商事\n122933\n139456\n16523\n1.13\n\n\nセブン＆アイ・ホールディングス\n87498\n118113\n30615\n1.35\n\n\nソニーグループ\n99215\n115398\n16183\n1.16\n\n\n日立製作所\n102646\n108812\n6166\n1.06\n\n\n日産自動車\n84246\n105967\n21721\n1.26"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#特殊な3時点比較",
+    "href": "Accounting_Finance_08.html#特殊な3時点比較",
+    "title": "補講 : 収益データを可視化",
+    "section": "特殊な3時点比較",
+    "text": "特殊な3時点比較\nリーマンショック2009年、コロナ禍2021年、2023年の売上高を比較する\n\n\nRコードはここ\ndf |&gt;\n  select(年度, 企業名称, 売上高) |&gt; # 必要な変数を選択\n  mutate(売上高 = round(売上高 / 100)) |&gt; # 売上高を100で割って単位を億円に\n  filter(年度 %in% c(\"2009\", \"2021\", \"2023\")) |&gt; # 2000年と2010年と2023年のデータのみを抽出\n  pivot_wider(names_from = 年度, values_from = 売上高,  names_prefix = \"年度\") |&gt;# 年度を横軸に\n  mutate(# 売上の増加額と増加率を計算\n    差額 = 年度2023 - 年度2021, # 変化額\n    変化率 = round(差額 / 年度2021, digits = 2) # 変化率\n    ) |&gt; \n  arrange(desc(年度2023)) |&gt; # 2023年度の売上高で降順に並び替え\n  head(10) |&gt; # 上位10社のみを抽出\n  kable(format = \"html\", booktabs = TRUE) |&gt; \n  kable_styling(font_size = 20)  # 作表\n\n\n\n\n\n企業名称\n年度2009\n年度2021\n年度2023\n差額\n変化率\n\n\n\n\nトヨタ自動車\n205296\n272146\n371543\n99397\n0.37\n\n\n三菱商事\n61464\n128845\n215720\n86875\n0.67\n\n\n本田技研工業\n100112\n131705\n169077\n37372\n0.28\n\n\nＥＮＥＯＳホールディングス\nNA\n76580\n150166\n73586\n0.96\n\n\n三井物産\n55048\n80102\n143064\n62962\n0.79\n\n\n伊藤忠商事\n34191\n103626\n139456\n35830\n0.35\n\n\nセブン＆アイ・ホールディングス\n56499\n57667\n118113\n60446\n1.05\n\n\nソニーグループ\n77300\n89987\n115398\n25411\n0.28\n\n\n日立製作所\n100004\n87292\n108812\n21520\n0.25\n\n\n日産自動車\n84370\n78626\n105967\n27341\n0.35"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#兆円売上高企業",
+    "href": "Accounting_Finance_08.html#兆円売上高企業",
+    "title": "補講 : 収益データを可視化",
+    "section": "10兆円売上高企業",
+    "text": "10兆円売上高企業\n2023年度の売上高が10兆円以上の会社の売上高の推移\n\n\nRコードはここ\n# 2023年度に10兆円売上高企業の企業名を取得\ndf_name &lt;- df |&gt;\n  filter(売上高 &gt;= 10^7 & 年度 == 2023)\nname &lt;- df_name$企業名称\n# 10兆円企業の売上高推移\ng &lt;- df |&gt;\n  filter(企業名称 %in% name) |&gt; # 企業名がnameに含まれるものを抽出\n  ggplot() + aes(x = 年度, y = 売上高 / 10^6, group = 企業名称, color = 企業名称,shape = 企業名称) + # 企業ごとに色分け\n  geom_line() + geom_point() + # 折れ線グラフと散布図を組み合わせる\n  xlab(\"年度\") + ylab(\"売上高(兆円)\") + mystyle + # スタイルを適用\n  theme(\n    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),\n    legend.text = element_text(size = 10)  # フォントサイズを指定\n  )\nprint(g) # 出力"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#dcfの計算",
+    "href": "Accounting_Finance_08.html#dcfの計算",
+    "title": "補講 : 収益データを可視化",
+    "section": "DCFの計算",
+    "text": "DCFの計算\nサンプルデータの生成を行います。 ここでは過去5年間のFCFを次のように設定します。\n\nset.seed(123)  # 再現性のためのシード設定\nyears &lt;- 20 # 推定期間\ninitial_fcf &lt;- 1e6 # 初年度のFCF\nmean_growth &lt;- 1e3  # 平均成長量\nsd_growth &lt;- 2e5    # 成長量の標準偏差"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#fcfの生成",
+    "href": "Accounting_Finance_08.html#fcfの生成",
+    "title": "補講 : 収益データを可視化",
+    "section": "FCFの生成",
+    "text": "FCFの生成\n正規分布からランダムな増加量を生成し、右肩上がりのFCFを作成\n\ngrowth_rates &lt;- rnorm(years, mean = mean_growth, sd = sd_growth)\nfcf &lt;- data.frame(\n  Year = seq(from = 2020, by = 1, length.out = years),\n  FCF = cumsum(c(initial_fcf, growth_rates[-1]))\n)"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#fcfのグラフ",
+    "href": "Accounting_Finance_08.html#fcfのグラフ",
+    "title": "補講 : 収益データを可視化",
+    "section": "FCFのグラフ",
+    "text": "FCFのグラフ\n生成したFCFのグラフを描画\n\nggplot(fcf, aes(x = Year, y = FCF)) +\n  geom_line() +\n  geom_point() +\n  ggtitle(\"Free Cash Flow over Years\") +\n  xlab(\"Year\") +\n  ylab(\"Free Cash Flow\") +\n  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#企業価値評価の設定",
+    "href": "Accounting_Finance_08.html#企業価値評価の設定",
+    "title": "補講 : 収益データを可視化",
+    "section": "企業価値評価の設定",
+    "text": "企業価値評価の設定\nWACC、成長率の設定\n\n# 加重平均資本コストの設定\nwacc &lt;- 0.05\n# 永続成長率の設定（0%と仮定）\ng &lt;- 0.00"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#企業価値評価-1",
+    "href": "Accounting_Finance_08.html#企業価値評価-1",
+    "title": "補講 : 収益データを可視化",
+    "section": "企業価値評価",
+    "text": "企業価値評価\n企業価値評価（DCF法）の計算を関数化する。\n\ncalculate_dcf &lt;- function(fcf, wacc, g) {\n\n  # 年度順に並べる\n  fcf &lt;- fcf %&gt;% arrange(Year)\n  # 最終年度のFCFを取得\n  last_fcf &lt;- tail(fcf$FCF, n = 1)\n  # ターミナルバリューの計算\n  terminal_value &lt;- last_fcf / (wacc - g)\n  # 割引キャッシュフローの計算\n  fcf$DiscountedFCF &lt;- fcf$FCF / (1 + wacc)^(fcf$Year - min(fcf$Year) + 1)\n  # ターミナルバリューの割引現在価値\n  terminal_value_discounted &lt;- terminal_value / (1 + wacc)^years\n  # 企業価値の計算\n  enterprise_value &lt;- sum(fcf$DiscountedFCF) + terminal_value_discounted\n  return(enterprise_value)\n}"
+  },
+  {
+    "objectID": "Accounting_Finance_08.html#企業価値の計算",
+    "href": "Accounting_Finance_08.html#企業価値の計算",
+    "title": "補講 : 収益データを可視化",
+    "section": "企業価値の計算",
+    "text": "企業価値の計算\n上で作成した関数を用いて、企業価値を計算します。\n\nenterprise_value &lt;- calculate_dcf(fcf, wacc, g)\n\n結果の表示\n\ncat(\"企業価値（DCF法）:\", enterprise_value, \"\\n\")\n\n企業価値（DCF法）: 31022732"
   }
 ]

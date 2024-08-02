@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.529">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Soichi Matsuura">
   <title>プレゼミ講義ノート - プレゼミ2023  統計分析総復習</title>
@@ -2014,6 +2014,7 @@ mean(df$expm)`,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df) <span class="sc">|&gt;</span> <span class="fu">kable</span>() <span class="sc">|&gt;</span> <span class="fu">kable_styling</span>(<span class="at">font_size =</span> <span class="dv">12</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
 <table class="table" data-quarto-postprocess="true" style="font-size: 12px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
@@ -2158,7 +2159,7 @@ mean(df$expm)`,
 <td style="text-align: left;">3rd Qu.:59.0</td>
 <td style="text-align: left;">3rd Qu.:5.000</td>
 <td style="text-align: left;">3rd Qu.:3.000</td>
-<td style="text-align: left;">3rd Qu.: 86494</td>
+<td style="text-align: left;">3rd Qu.: 86495</td>
 <td style="text-align: left;">3rd Qu.:390637</td>
 <td style="text-align: left;">3rd Qu.:67.53</td>
 <td style="text-align: left;">3rd Qu.:11044485</td>
@@ -2222,6 +2223,7 @@ mean(df$expm)`,
 </table>
 
 
+</div>
 </div>
 </div>
 </section>
@@ -2373,7 +2375,7 @@ mean(df$expm)`,
 <span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="dv">20</span>) <span class="co"># ヒストグラムを作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 </div>
-<img data-src="prezemi_2023_14_presen_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344" class="r-stretch"><p>平均値は9.9488225で、母平均<span class="math inline">\(10\)</span>と一致しない。 この差を<strong>誤差</strong>という。</p>
+<img data-src="prezemi_2023_14_presen_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344" class="r-stretch"><p>平均値は9.9682777で、母平均<span class="math inline">\(10\)</span>と一致しない。 この差を<strong>誤差</strong>という。</p>
 </section>
 <section id="標本平均の分布" class="slide level2">
 <h2>標本平均の分布</h2>
@@ -2384,7 +2386,7 @@ mean(df$expm)`,
 <span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<p>標本平均の平均は、9.9988835で、母平均<span class="math inline">\(10\)</span>に近い。</p>
+<p>標本平均の平均は、9.9980213で、母平均<span class="math inline">\(10\)</span>に近い。</p>
 </section>
 <section id="標本平均の分布-output" class="slide level2 output-location-slide"><h2>標本平均の分布</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -2403,12 +2405,12 @@ mean(df$expm)`,
 </ul>
 <p><span class="math inline">\(t\)</span>検定には<code>t.test()</code>関数を使う。</p>
 
-
-</section><div class="quarto-auto-generated-content">
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
-</div></section>
+</div>
+</section></section>
     </div>
   </div>
 
