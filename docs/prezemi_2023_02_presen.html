@@ -9,7 +9,7 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.433">
+  <meta name="generator" content="quarto-1.4.554">
 
   <meta name="author" content="Soichi Matsuura">
   <title>プレゼミ講義ノート - プレゼミ2023  第2回 研究、仮説、実証会計</title>
@@ -32,6 +32,22 @@
     }
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -157,7 +173,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -363,10 +380,10 @@ Soichi Matsuura
 <section id="第2回講義の目次" class="slide level2">
 <h2>第2回講義の目次</h2>
 <ul>
-<li><a href="#/sec-01">セクション&nbsp;2</a> 実証研究・実証会計</li>
-<li><a href="#/sec-02">セクション&nbsp;3</a> 研究テーマの選び方</li>
-<li><a href="#/sec-03">セクション&nbsp;4</a> 理論</li>
-<li><a href="#/sec-04">セクション&nbsp;5</a> 仮説</li>
+<li><a href="#/sec-01" class="quarto-xref">セクション&nbsp;2</a> 実証研究・実証会計</li>
+<li><a href="#/sec-02" class="quarto-xref">セクション&nbsp;3</a> 研究テーマの選び方</li>
+<li><a href="#/sec-03" class="quarto-xref">セクション&nbsp;4</a> 理論</li>
+<li><a href="#/sec-04" class="quarto-xref">セクション&nbsp;5</a> 仮説</li>
 </ul>
 </section></section>
 <section>
@@ -457,7 +474,7 @@ Soichi Matsuura
 <li>ファイナンス理論（コーポレート・ファイナンス）</li>
 <li>プログラミング</li>
 </ul>
-<!-- 
+<!--
 
 同じ事実解明型研究の中でも、証拠では無く論理による主張を目指す分析的会計研究で必要な知識・技術として、
 
@@ -472,7 +489,7 @@ Soichi Matsuura
 しかし、理論と実証は研究の両輪をなすものであり、どちらも重要であることに違いはないので、完全に理解することはできなくても、目を通す努力は必要でしょう。
 
 ただやはり難しい数式が出てくる会計研究は松浦には完全に理解することはできないので、ここでは実証的会計研究について考えていきます。ヴィトゲンシュタインの言葉を借りれば、語り得ないものは語らないということで、分析的会計研究は沈黙するべきです。 -->
-<!-- 
+<!--
 ## 他の経営学領域 {#sec-03}
 
 誤解を恐れずに、会計学者の松浦が他の経営学領域についてざっくりと説明
@@ -496,7 +513,7 @@ Soichi Matsuura
 に分けることがおおい。
 
 - 企業外への情報提供 or 会社内部の経営管理
-- 情報提供を主目的とする財務会計は、制度会計とも呼ばれ、会社が共通して利用する会計基準に従って情報生産をする会計システムを研究対象としています。 
+- 情報提供を主目的とする財務会計は、制度会計とも呼ばれ、会社が共通して利用する会計基準に従って情報生産をする会計システムを研究対象としています。
 
 これに対し、経営管理を主目的とする管理会計は、会社ごとに独自の会計システムを構築し、会社の経営管理に役立てることを目的としています。
 
@@ -811,7 +828,7 @@ Soichi Matsuura
 1. 構成概念を定義し、因果関係を示す理論を説明できる。
 2. 作業仮説を作り、構成概念を検証するための代理変数を構築する。
 3. 構成概念の代理変数として複数の候補を挙げる。
-4. Kinny's Bosを作成する。 
+4. Kinny's Bosを作成する。
 -->
 </section>
 <section id="libbys-box" class="slide level2">
@@ -830,12 +847,12 @@ Soichi Matsuura
 </section>
 <section id="理論とは" class="slide level2">
 <h2>理論とは</h2>
-<p>理論とは「原因と結果について一般的な論述」で、「〇〇であるとき、△△が起こる」というようなものです。 <!-- 推論といってもよいです。 --> 原因と結果の関係を「説明変数<span class="math inline">\(X\)</span>」(explanatory variable)と「応答変数<span class="math inline">\(Y\)</span>」(response variable)の関係として表現します。</p>
-<p><span class="math display">\[
+<p>理論とは「原因と結果について一般的な論述」で、「〇〇であるとき、△△が起こる」というようなものです。 <!-- 推論といってもよいです。 --> 原因と結果の関係を「説明変数<span class="math inline">X</span>」(explanatory variable)と「応答変数<span class="math inline">Y</span>」(response variable)の関係として表現します。</p>
+<p><span class="math display">
 \begin{aligned}
 X \Longrightarrow Y
 \end{aligned}
-\]</span></p>
+</span></p>
 <p>推論を作る際には，<strong>どれだけ説得力があり納得できる仮定を設定するか</strong>が重要となります。 仮定のない推論など役に立たないからです。 <!-- 経営学は独自の理論をもたない学問とも言われ，とりわけ会計学における**事実解明的研究**(positive research)では，心理学や経済学で蓄積された理論を借用することが多いです（松浦は経済学に基づく推論を行っています）。 --></p>
 </section>
 <section id="よい理論とは" class="slide level2">
@@ -899,9 +916,9 @@ X \Longrightarrow Y
 <section id="因果推論の書籍" class="slide level2">
 <h2>因果推論の書籍</h2>
 <p>例えば、こんな本が近年出版されています。</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/inga01.jpg" style="width:6cm"></p>
@@ -909,7 +926,7 @@ X \Longrightarrow Y
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/inga02.jpg" style="width:6cm"></p>
@@ -917,7 +934,7 @@ X \Longrightarrow Y
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="img/inga03.jpg" style="width:6cm"></p>
@@ -932,7 +949,7 @@ X \Longrightarrow Y
 <h2>因果関係</h2>
 <p><strong>因果関係</strong>とは、<strong>原因</strong>(causal)と<strong>結果</strong>(outcome)の関係のことです。</p>
 <ul>
-<li>正確に言うと、<em>ある要因<span class="math inline">\(X\)</span>を操作するとき、別の要因<span class="math inline">\(Y\)</span>が変化すること</em>です(Imbens and Rubin, 2015, p.4)。</li>
+<li>正確に言うと、<em>ある要因<span class="math inline">X</span>を操作するとき、別の要因<span class="math inline">Y</span>が変化すること</em>です(Imbens and Rubin, 2015, p.4)。</li>
 <li>因果関係を考える際には、「<strong>効果をもたらした原因</strong>」(causal of effect)と「<strong>原因のもたらす効果</strong>」(effect of cause)の両方を考える必要があります。
 <ul>
 <li>例えば、ある企業が従業員の給料を上げたとします。従業員の給料が上がったことが「効果をもたらした原因」であり、給料増加で従業員のモチベーションが上がったことが「原因のもたらす効果」</li>
@@ -997,8 +1014,10 @@ X \Longrightarrow Y
 <li>どんな結果がでれば、自分の作業仮説が正しいと言えるか、考えてみてください。</li>
 </ul>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
 
@@ -1018,7 +1037,6 @@ X \Longrightarrow Y
   <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="site_libs/revealjs/plugin/search/search.js"></script>
   <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1028,7 +1046,6 @@ X \Longrightarrow Y
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1186,27 +1203,9 @@ X \Longrightarrow Y
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom
@@ -1289,10 +1288,27 @@ X \Longrightarrow Y
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1302,8 +1318,17 @@ X \Longrightarrow Y
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1317,7 +1342,11 @@ X \Longrightarrow Y
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {

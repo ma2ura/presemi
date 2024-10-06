@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.54">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>プレゼミ講義ノート – presemi2023_04</title>
+<title>presemi2023_04 – プレゼミ講義ノート</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -77,7 +77,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "一致なし",
     "search-matching-documents-text": "一致した文書",
@@ -86,6 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "追加の検索結果",
     "search-more-matches-text": "追加の検索結果",
     "search-clear-button-title": "消去",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "取消",
     "search-submit-button-title": "検索",
     "search-label": "サーチ"
@@ -95,64 +102,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">プレゼミ講義ノート</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="サーチ"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="dropdown-header">
- <span class="menu-text">講義内容</span>
-</li>
+<li class="nav-item">
+    <span class="nav-link">
+<span class="menu-text">講義内容</span>
+    </span>
+  </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text"></span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-">
 <li>
-    <a class="dropdown-item" href="./index.html" rel="" target="">
+    <a class="dropdown-item" href="./index.html">
  <span class="dropdown-text">はじめに</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_01.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_01.html">
  <span class="dropdown-text">第1回 講義ガイダンス</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_02.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_02.html">
  <span class="dropdown-text">第2回 実証研究</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_03.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_03.html">
  <span class="dropdown-text">第3回 Rの使い方</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_04.html">
  <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_05.html">
  <span class="dropdown-text">第5回 記述統計と可視化</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_06.html">
  <span class="dropdown-text">第6回 統計的推定</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_07.html">
  <span class="dropdown-text">第7回 統計的仮説検定</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_08.html">
  <span class="dropdown-text">第8回 変数間の関連性</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
+    <a class="dropdown-item" href="./presemi2023_09.html">
  <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
   </li>  
     </ul>
@@ -160,23 +169,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <ul class="navbar-nav navbar-nav-scroll ms-auto">
 <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/uribo/230827ism_ws" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/uribo/230827ism_ws"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text">GitHub</span></a>
+<span class="menu-text">GitHub</span></a>
   </li>  
 </ul>
-<div class="quarto-navbar-tools">
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
@@ -250,6 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>このように、値とコンマ<code>,</code>のみで構成されたファイルのため、余計な情報が入っておらず、またファイルサイズも小さく、加工が簡単なので、データのやり取りによく使われます。</p>
 <p>さっそくファイルを読み込んでみましょう。 ここでは、松浦のウェブサイトにあるデータ<code>keshohin_2023.csv</code>を読み込んでみます。 Rの場合は、<code>read.csv</code>という関数を使って、URLを直接指定して読み込むことができます。読み込んだデータを<code>df</code>という変数に代入しています。</p>
 <p>Excelの場合は、インターネット上のデータを直接取り込むことは難しいので、いったんパソコンの中に保存してから、ファイルを開くとします。</p>
+<div class="columns">
+<div class="column" style="width:49%;">
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -261,11 +268,14 @@ Rの場合
 </div>
 <div class="callout-body-container callout-body">
 <p><code>R</code>でcsvファイルを読み込む最もシンプルな方法は、基本関数<code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code>を用いて、ファイル名やファイルを参照するURLを直接指定することです。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-2_0a9f607d005e8ac64b026d270268a966">
+<div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"https://so-ichi.com/kesho_2023.csv"</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -282,8 +292,12 @@ MS Excelの場合
 </ol>
 </div>
 </div>
+</div>
+</div>
 </section><section id="excelファイルの読み込み" class="level3"><h3 class="anchored" data-anchor-id="excelファイルの読み込み">Excelファイルの読み込み</h3>
 <p>MS Excelのファイルは拡張子が<code>.xlsx</code>、古いMS Excelだと<code>.xls</code>です。 RでExcelファイルを読み込むときは、<code>read_excel</code>という関数を使います。 Excelファイルを用意するのが面倒なので、ここではこうやれば読み込めるよ、というコードだけ説明します。ファイル名は<code>hoge.xlsx</code>とします。</p>
+<div class="columns">
+<div class="column" style="width:49%;">
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -295,11 +309,14 @@ Rの場合
 </div>
 <div class="callout-body-container callout-body">
 <p><code>R</code>でMS Excelのファイルを読み込むには、<code>readxl</code>パッケージの<code>read_excel()</code>関数を用います。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-3_ba516d3f768f7227e2813d8584bd88d6">
+<div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dfx</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"hoge.xlsx"</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -313,6 +330,8 @@ MS Excelの場合
 <ol type="1">
 <li>「ファイル」から「開く…」をクリックし、保存してあるExcelファイルを選択し「開く」をクリック</li>
 </ol>
+</div>
+</div>
 </div>
 </div>
 <p>MS Excelの問題点は、目的のデータがどのExcelファイルに入っていて、それがどこに保存されているのかを覚えておかないと、いちいちファイルを開いて探さないといけないことです。</p>
@@ -341,11 +360,11 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-4_fb5b7926f4ce71c14868b61f7e2af86b">
+<div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: right;">code</th>
 <th style="text-align: left;">name</th>
@@ -488,7 +507,7 @@ MS Excelの場合
 <code>group_by()</code> : データをグループ化する</li>
 </ul></section><section id="パイプ演算子" class="level3"><h3 class="anchored" data-anchor-id="パイプ演算子">パイプ演算子</h3>
 <p>Rでソースコードを書く際に，理解しやすく，読みやすいコードにするために非常に便利なのが，パイプ演算子<code>%&gt;%</code>です。 パイプ演算子<code>%&gt;%</code>は，左側のオブジェクトを右側の関数の第一引数に渡すという処理を行います。 たとえば，</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-5_e9844bd7d6986d2dd720c178240a14be">
+<div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.732051</code></pre>
@@ -501,50 +520,50 @@ MS Excelの場合
 <li>標準偏差</li>
 </ol>
 <p>したがって，<code>rnorm(100, 0, 1)</code>と書くと，平均0，分散1の標準正規分布から100個のデータを取り出すことができます。 パイプ演算子を使うと，</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-6_e8f3bd5d96144cd33a51c43f6a9b0e05">
+<div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">100</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  0.063002985  0.844220595 -0.859654144 -0.002598543 -0.673578358
-  [6]  1.639704853 -1.549973784  0.295819981  0.964837474 -0.020988105
- [11]  0.145755011 -0.572766400  0.211520038  0.142918140  1.200105131
- [16] -1.356500340  0.160727176  2.107029445  0.684120140 -1.131749423
- [21]  0.065803029 -1.053419403  0.071881357  0.393473855  1.345375015
- [26]  0.182275159  0.106148856  0.770796621  0.282349942  2.075331770
- [31] -0.647271035 -0.816778157 -0.467397752 -0.843322581 -0.593600586
- [36] -0.726601884 -1.411886656 -0.106748290  0.099307863 -0.783453133
- [41] -1.625140162  0.702656323 -0.482923735 -0.612147194 -0.315351199
- [46]  0.080216155  0.599338123 -1.518915104 -0.829310311  2.169091051
- [51]  0.998798468  0.160424232  0.881413387  0.556656966  1.241829913
- [56] -0.433506814  0.799280369 -1.321652130 -0.886215684  1.297740051
- [61]  0.541221113  0.187269574 -0.799209946  2.096347220 -1.155127641
- [66]  0.943143604  0.988734856  0.391969098 -0.243363347  1.888303431
- [71]  0.405853978  0.888160467  1.560873419  0.266495427 -0.157736359
- [76] -0.910317880  0.863239959  1.142179270 -0.785002218 -1.392131708
- [81] -0.625873931 -0.955372590  0.957322565 -1.134434260 -0.285509488
- [86] -2.115343597  0.653078769  2.399415564 -0.140698689  2.523217876
- [91] -0.113023442 -1.174571457  0.638856097  1.577217187 -0.093800828
- [96] -1.445292349 -1.377312236  0.546255685 -0.273281621 -0.012987443</code></pre>
+<pre><code>  [1]  0.399995731 -0.244300577 -0.111144279  0.142719036  0.987534026
+  [6]  0.310545125 -0.734251535 -0.886236809 -1.306520508 -0.193385736
+ [11]  0.270780392  0.078684010  0.153200815 -0.319974934 -0.350619593
+ [16]  0.334677753 -1.092495519  0.022138175 -0.147219349 -2.340002349
+ [21]  0.059336203 -0.019287223 -1.706937343 -0.810759694 -1.032253168
+ [26]  0.626371132  1.121595265  0.540051474  0.586554692 -0.355795529
+ [31] -1.369383102 -0.851766035 -0.778159060 -0.309411146  0.398149227
+ [36]  0.440547898 -0.161049544 -0.471011944 -0.679671266 -0.308360362
+ [41]  0.427693344  1.206988971  0.009189624  0.868219362  0.404424414
+ [46]  1.371265345 -1.088072278  1.685123711 -0.867080384  1.360015663
+ [51] -1.350882343  0.252424018 -0.098501497  0.245920252 -1.325008967
+ [56]  0.189093924 -0.034365388 -0.997510505 -1.024974379 -0.588015416
+ [61]  0.276582168  2.848918655 -0.350788335  0.076833930 -0.062570623
+ [66] -0.455860044 -0.240410963  0.303515175  0.467989687  0.320119385
+ [71] -0.022850093  0.328751344 -0.662025022  0.703939156  1.236474834
+ [76] -0.350655962 -0.377560133 -1.586343110 -0.087461346  0.665080960
+ [81]  1.487312637 -1.302126012  1.480878661 -1.672714687  0.161176926
+ [86]  0.154581898 -0.298791735 -0.066720260  0.964567953  1.280706696
+ [91] -1.594323823 -1.336552519 -0.774886511  0.066160353  0.544369136
+ [96]  2.218752084  0.371808169 -0.543143724  0.988821129 -1.371057108</code></pre>
 </div>
 </div>
 <p>となります。 これは<code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>関数の第1引数がデータの個数なので，そこに<code>100</code>を渡しています。 ここで平均に値を渡したい場合を考えます。 <code>mean</code>引数は第2引数なので，パイプ演算子では自動で渡してくれません。 そこで<code>.</code>を使って渡す場所を指定してあげます。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-7_355ebfabf4908b24710c85773ee09938">
+<div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">100</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span><span class="va">.</span> , sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1]  98.48961 100.51837 102.71930  99.87553 100.22687 100.60825  98.95075
-  [8]  99.76190 101.62591  99.25217 100.74600  98.98241 101.29855  99.40596
- [15]  99.04232  99.99752 101.31296  99.49977  99.25496  99.98878  99.25437
- [22] 102.36015  97.36997  99.75281 100.29611  99.95644  99.57598  99.30659
- [29] 101.68088  99.94344 100.34321 101.92322 100.79492  99.63788 100.74923
- [36] 100.67090 100.36256  99.68836  99.49566  99.78931 100.07927 100.76766
- [43]  98.99613  98.94864 100.18985  98.90317  99.47791 100.23840  99.23254
- [50] 101.25166 101.78315 101.38781 100.52495 100.26678 100.68225  99.52430
- [57]  98.69746 100.47472  98.41986 101.24240 101.76202 100.93738  99.64664
- [64]  99.45147  99.81417  99.51845 100.14589 100.03142 101.17669  98.30816
- [71] 101.47371  99.75616 100.70050 100.50162 100.84103  98.28449  99.49989
- [78] 100.07390 100.24002  99.68234 101.40671  99.42597  98.98013  99.46850
- [85] 100.80821  99.81356 100.44890  98.97466 101.58507  99.99225  99.60774
- [92]  97.93813 101.02105  98.66530 101.36966  98.61330  99.78128 100.83186
- [99]  98.88836  99.45513</code></pre>
+<pre><code>  [1]  99.71663 102.07214 100.70202  98.55249  98.77577  99.73392 100.37184
+  [8] 100.21970  98.88382  98.82665 100.83246  99.41049  98.25081 101.44440
+ [15] 100.80225  99.40968  99.23891 100.82542  99.42318 100.73821  99.75261
+ [22]  99.64845  99.52975  98.11973 100.20879 100.14159 100.41300 100.28750
+ [29]  99.63098 100.15545 100.26542  99.69721  99.89842  99.01987 100.58617
+ [36]  97.82402 101.24842 100.67750  99.16652  99.48503  99.51661  99.77213
+ [43] 101.51068 101.12479 100.85492 101.09001  98.21321  99.52989  99.38251
+ [50] 100.36858  99.93354  98.67055  99.53843  98.97122  99.60932  98.84864
+ [57]  99.92877  98.30932 100.53495  98.92464 101.67189 100.44226 100.14855
+ [64] 100.26952 100.39634 100.39723 100.42881  99.40985 100.16921  98.03561
+ [71] 100.21117  99.71526 100.62529  99.80876  97.88336 101.27021  99.53975
+ [78] 100.23329 101.11550 101.44461 102.28643 101.77642 101.30953  99.99299
+ [85] 100.53561 100.02464 101.74240  99.30356 100.35171  99.38804  99.32791
+ [92] 100.48180  99.53838  99.57912  99.26648 100.44504 100.26888  99.65390
+ [99] 100.66986 100.23643</code></pre>
 </div>
 </div>
 <p>これで平均100，標準偏差1の正規分布から100個のデータを取り出せました。</p>
@@ -556,7 +575,7 @@ MS Excelの場合
 <li>利益率が高い順番に並び替える</li>
 </ol>
 <p>をパイプ演算子を使って書くと，</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-8_f0317671f3fb79ab1609cd99cfdfb62a">
+<div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">term</span> <span class="op">==</span> <span class="st">"2020"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># 2020年のみ</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span> <span class="co"># 新しい変数を作成</span></span>
@@ -582,7 +601,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-9_d88807febf6d3937c8f1156a987ac0f1">
+<div class="cell">
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span> <span class="co"># 新しい変数を作成</span></span>
 <span>        ratio <span class="op">=</span> <span class="va">netincome</span> <span class="op">/</span> <span class="va">sales</span> <span class="co"># 売上高利益率</span></span>
@@ -606,7 +625,7 @@ MS Excelの場合
 </div>
 </div>
 <p>次に，ある変数の値に応じて異なる値をとる変数を作るには，<code>mutate()</code>関数と<code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>関数を同時に使います。<code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code>関数は次のような引数を取ります。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-10_8ac7f80f6568eab8d43c4f2edb897997">
+<div class="cell">
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">条件</span>, <span class="va">条件が真のときの値</span>, <span class="va">条件が偽のときの値</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>先ほど計算した売上高当期純利益率が5%以上ならば「高い」，そうでなければ「低い」という変数<code>highlow</code>を作ってみましょう。</p>
@@ -620,7 +639,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-11_0acf6f1b0061f528e0ab4fd7fb44b67a">
+<div class="cell">
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span> <span class="co"># 新しい変数を作成</span></span>
 <span>        highlow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">ratio</span> <span class="op">&gt;=</span> <span class="fl">0.05</span>, <span class="st">"高い"</span>, <span class="st">"低い"</span><span class="op">)</span> <span class="co"># 売上高利益率</span></span>
@@ -655,7 +674,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-12_e2430ac881cf7738fd7ce7bdbd25d11b">
+<div class="cell">
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">mutate</span><span class="op">(</span> <span class="co"># 新しい変数を作成</span></span>
 <span>        name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span></span>
@@ -667,7 +686,7 @@ Rの場合
 </section><section id="データを抽出する-filter" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="データを抽出する-filter">データを抽出する <code>filter</code>
 </h3>
 <p>データを抽出するには，<code>dplyr</code>パッケージの<code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数を使います。 <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数は，次のような引数を取ります。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-13_051d8073fd030d83ad0df01fd7c6f110">
+<div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">データ</span>, <span class="va">条件</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>先ほど作成した<code>ratio2</code>が「高い」企業だけを抽出してみましょう。 <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>関数の中の条件は，<code>==</code>を使って，<code>"高い"</code>という文字列と一致するかどうかを確認しています。 ここでは，<code>highlow</code>変数の値が<code>"高い"</code>と一致する企業だけを抽出し，<code>df_high</code>という変数に代入しています。</p>
@@ -681,7 +700,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-14_3374ac712d1702afc73b9ad576f21f2e">
+<div class="cell">
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_high</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">highlow</span> <span class="op">==</span> <span class="st">"高い"</span><span class="op">)</span> <span class="co"># 条件</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -732,7 +751,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-15_817c0102d5aae5b37911c8bb2891503c">
+<div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_shiseido_kao</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"資生堂"</span>, <span class="st">"花王"</span><span class="op">)</span><span class="op">)</span> <span class="co"># 2社だけ抽出</span></span>
 <span><span class="va">df_high2</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
@@ -753,7 +772,7 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-16_23fc366faa4601a6000c1573564d4c67">
+<div class="cell">
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">code</span>, <span class="va">name</span>, <span class="va">ratio</span><span class="op">)</span> <span class="co"># 3つの変数だけ選択</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -799,14 +818,14 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-17_b3ff4d9910bc1457e5345bf171985c98">
+<div class="cell">
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">name</span>, <span class="va">ratio</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># 2つの変数だけ選択</span></span>
 <span>    <span class="fu">arrange</span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">ratio</th>
@@ -854,14 +873,14 @@ Rの場合
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-18_d886c769b57c7d1ccbd3d98ee4c41e30">
+<div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">select</span><span class="op">(</span><span class="va">name</span>, <span class="va">ratio</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># 2つの変数だけ選択</span></span>
 <span>    <span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># 先頭の10行</span></span>
 <span>    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 表をきれいに表示</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">ratio</th>
@@ -932,7 +951,7 @@ MS Excelの場合
 <p>となります。 簡単ですが，MS Excelの並び替えは注意が必要で，並び替えた後にデータを追加すると，並び替えが解除されてしまい，元に戻せなくなったり，空列があると並び替えがうまくいかなかったりします。</p>
 </section><section id="long形式とwide形式" class="level3"><h3 class="anchored" data-anchor-id="long形式とwide形式">long形式とwide形式</h3>
 <p>人間には読みやすいけれどパソコンは読みにくい，というデータの形式があります。 例えば下の表を見てみましょう。</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: center;">地点</th>
 <th style="text-align: center;">6時</th>
@@ -961,7 +980,7 @@ MS Excelの場合
 </tbody>
 </table>
 <p>このような形のデータをワイド形式(wide)といいます。 天気予報で見かけそうなこの表は，人間にとっては分かりやすいですが，実はコンピュータにとっては，分かりにくいものです。 コンピュータが理解しやすいデータとして表すなら，次のような表になります。</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: center;">地点</th>
 <th style="text-align: center;">時間</th>
@@ -1026,7 +1045,7 @@ MS Excelの場合
 <p>上の表は，地点，時間，天気，気温の4つの変数があり1つの列をつくっています(ルール1)。 大阪12時の天気は雨，気温は12℃といったように1つの行が1つの観測を表しています(ルール2)。 このデータには種類の異なる観測はない(ルール3)。 また，各セルには1つの値が入っています(ルール4)。 よって，これが整然データとなります。</p>
 <p>上のロング型の天気データを使って，ロングからワイド，ワイドからロングの操作を学びましょう。</p>
 <p>まずデータを作ります。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-19_909a2d601efb86c45c5b715fb8f6b0ed">
+<div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_weather</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    place <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"札幌"</span>,<span class="st">"札幌"</span>,<span class="st">"札幌"</span>,<span class="st">"大阪"</span>,<span class="st">"大阪"</span>,<span class="st">"大阪"</span>,<span class="st">"福岡"</span>,<span class="st">"福岡"</span>,<span class="st">"福岡"</span><span class="op">)</span>, <span class="co"># 各地を3個ずつ</span></span>
 <span>    time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"6時"</span>, <span class="st">"12時"</span>, <span class="st">"18時"</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>,</span>
@@ -1053,7 +1072,7 @@ MS Excelの場合
 <p>教科書で使用されている<code>spread()</code>は「根本的に設計ミスってた」と公式で発表されているので，R神が作った<code>pivot_wider()</code>を使います。widerという名前の通り，ワイド型に変換する関数です。</p>
 <p><code>pivot_wider()</code>の引数は，<code>names_from</code>と<code>values_from</code>です。<code>names_from</code>は，ワイド型に変換するときに，どの変数を列にするかを指定します。<code>values_from</code>は，ワイド型に変換するときに，どの変数の値を使うかを指定します。</p>
 <p>以下のコードでは，<code>time</code>変数の値を列に，<code>temp</code>変数の値を値にして，<code>df_wide</code>という変数に代入しています。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-20_3389183b1cb58466de226b09ca1fc73b">
+<div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_wide</span> <span class="op">&lt;-</span> <span class="va">df_weather</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">time</span>, values_from <span class="op">=</span> <span class="va">temp</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_wide</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1080,7 +1099,7 @@ MS Excelの場合
 <code>values_to</code>は，ロング型に変換するときに，どの変数の値を使うかを指定</li>
 </ul>
 <p>以下のコードでは，<code>6時</code>，<code>12時</code>，<code>18時</code>の3つの変数を行に，<code>time</code>という変数の値を列に，<code>temp</code>という変数の値を値にして，<code>df_long</code>という変数に代入しています。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-21_db26a6f0b4422f1d6d64739fc8607349">
+<div class="cell">
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_long</span> <span class="op">&lt;-</span> <span class="va">df_wide</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">pivot_longer</span><span class="op">(</span></span>
 <span>        cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"6時"</span>, <span class="st">"12時"</span>, <span class="st">"18時"</span><span class="op">)</span>, <span class="co"># 縦にする変数</span></span>
@@ -1106,7 +1125,7 @@ MS Excelの場合
 </section><section id="データの結合" class="level3"><h3 class="anchored" data-anchor-id="データの結合">データの結合</h3>
 <p>別々のデータを結合させて使いたいことはよくあります。 例えば，次のようなデータを結合させる場合を考えてみましょう。</p>
 <section id="表a" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="表a">表A</h4>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">term</th>
@@ -1145,7 +1164,7 @@ MS Excelの場合
 </tr>
 </tbody>
 </table>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-22_679d2c216310134cba3465c0d14b0be8">
+<div class="cell">
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span><span class="op">)</span>,</span>
 <span>    term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span>, <span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span><span class="op">)</span>,</span>
@@ -1153,7 +1172,7 @@ MS Excelの場合
 <span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="表b" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="表b">表B</h4>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">term</th>
@@ -1192,7 +1211,7 @@ MS Excelの場合
 </tr>
 </tbody>
 </table>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-23_09a9827d9b419ddabc2226cb2a384b29">
+<div class="cell">
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_B</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"日産"</span>, <span class="st">"日産"</span>, <span class="st">"日産"</span>, <span class="st">"マツダ"</span>, <span class="st">"マツダ"</span>, <span class="st">"マツダ"</span><span class="op">)</span>,</span>
 <span>    term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span>, <span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span><span class="op">)</span>,</span>
@@ -1200,7 +1219,7 @@ MS Excelの場合
 <span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="表c" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="表c">表C</h4>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: left;">name</th>
 <th style="text-align: right;">term</th>
@@ -1254,7 +1273,7 @@ MS Excelの場合
 </tr>
 </tbody>
 </table>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-24_88cb351008aea34d8714850c75ffebce">
+<div class="cell">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_C</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"トヨタ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"ホンダ"</span>, <span class="st">"スバル"</span>, <span class="st">"スバル"</span>, <span class="st">"スバル"</span><span class="op">)</span>,</span>
 <span>    term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span>, <span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span>, <span class="fl">2020</span>, <span class="fl">2021</span>, <span class="fl">2022</span><span class="op">)</span>,</span>
@@ -1262,7 +1281,7 @@ MS Excelの場合
 <span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>この3つのデータを結合させる場合を考えます。 まず表Aと表Bは同じ変数をもつデータなので，これらを結合させるには，縦につなげる必要があります。 このような結合を<strong>縦結合</strong>とか連結といいます。 縦結合は，<code>dplyr</code>パッケージの<code>bind_rows()</code>関数を使います。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-25_92c7483ae5eb6fdcbf88393fd62d97c4">
+<div class="cell">
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_AB</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">df_A</span>, <span class="va">df_B</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_AB</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1313,16 +1332,16 @@ MS Excelの場合
 <p>R神の神書籍<a href="https://r4ds.hadley.nz/">R for Data Science (2e)</a>の図がわかりやすいので，ここで紹介します。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="img/R4D_join.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">外部結合の例</figcaption></figure>
+<figcaption>外部結合の例</figcaption></figure>
 </div>
 <p>内部結合と3つの外部結合をベン図で表すとこうなります。</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="img/R4D_outer_join.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">外部結合のベン図</figcaption></figure>
+<figcaption>外部結合のベン図</figcaption></figure>
 </div>
 <p>最もよく使われる結合は<strong>左結合</strong>です。 元データに他のデータを結合する場合，元データに含まれるデータのみ保持したい場合が多いので，追加データを調べるときはいつもこれを使います。 左結合はデフォルトの結合であるべきで、他の結合を選択する強い理由がない限り、これを使用します。</p>
 <p>では，<code>df_AB</code>と<code>df_C</code>を左結合してみましょう。 結合する際にキーとなる変数を指定する必要があります。 ここでは<code>name</code>と<code>term</code>の2つの変数をキーとして指定します。 こうすることで，<code>name</code>と<code>term</code>が一致する観測値を結合します。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-26_57f149f568249c78e09340ebfa4175ec">
+<div class="cell">
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_left</span> <span class="op">&lt;-</span> <span class="va">df_AB</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">left_join</span><span class="op">(</span><span class="va">df_C</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"term"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_left</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1344,7 +1363,7 @@ MS Excelの場合
 </div>
 <p><code>df_AB</code>にはトヨタ，ホンダ，日産，マツダのデータがありますが，<code>df_C</code>には日産とマツダのデータがなく，スバルのデータがあります。 そのため左結合すると，日産とマツダの<code>netincome</code>には<code>NA</code>が入り，スバルは欠落します。</p>
 <p><code>df_AB</code>と<code>df_C</code>を右結合してみましょう。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-27_f04b85c2d707c59ced37c2215e0231c9">
+<div class="cell">
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_right</span> <span class="op">&lt;-</span> <span class="va">df_AB</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">right_join</span><span class="op">(</span><span class="va">df_C</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"term"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_right</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1363,7 +1382,7 @@ MS Excelの場合
 </div>
 <p><code>df_C</code>には日産とマツダのデータがなく，トヨタとホンダとスバルのデータがあります。 そのため右結合すると日産とマツダのデータが欠落し，<code>df_C</code>に含まれていたトヨタ，ホンダ，スバルのデータが残ります。 しかしスバルの<code>sale</code>には<code>NA</code>が入ります。</p>
 <p>最後に，<code>df_AB</code>と<code>df_C</code>を完全結合してみましょう。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-28_2e1bb8836ac3604a4d062fb469e1d85c">
+<div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_full</span> <span class="op">&lt;-</span> <span class="va">df_AB</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">full_join</span><span class="op">(</span><span class="va">df_C</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"term"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_full</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1389,7 +1408,7 @@ MS Excelの場合
 <p><code>df_AB</code>にはトヨタ，ホンダ，日産，マツダのデータがありますが，<code>df_C</code>にはトヨタ，ホンダ，スバルのデータがあるため， 完全結合した<code>df_full</code>にはすべての企業のデータが入ります。 しかし，日産とマツダの<code>netincome</code>には<code>NA</code>が入り，スバルの<code>sale</code>にも<code>NA</code>が入ります。</p>
 <p>このように，結合するデータによって，結合したデータに含まれるデータが変わるので，自分が望む結合後のデータの形を考えて，どの結合を使うかを選ぶ必要があります。</p>
 <p>ついでに内部結合もやってみましょう。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-29_13e50e05594c804b2d8c8a4613540f89">
+<div class="cell">
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_inner</span> <span class="op">&lt;-</span> <span class="va">df_AB</span> <span class="op">%&gt;%</span></span>
 <span>    <span class="fu">inner_join</span><span class="op">(</span><span class="va">df_C</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"term"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_inner</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1413,7 +1432,7 @@ MS Excelの場合
 <li><code>append = FALSE</code></li>
 </ul>
 <p>となります。 <code>file</code>は保存するファイル名を指定します。 <code>na</code>は欠損値をどうするかを指定します。デフォルトでは<code>NA</code>となっています。 <code>append</code>は，既存のファイルに追記するかどうかを指定します。基本は上書きなので，<code>FALSE</code>にしておきます。</p>
-<div class="cell" data-hash="presemi2023_04_cache/html/unnamed-chunk-30_0c216219d99c15d9e3232f16853a8c06">
+<div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">write_csv</span><span class="op">(</span><span class="va">df_left</span>, file <span class="op">=</span> <span class="st">"df_left.csv"</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>これで，作業ディレクトリに<code>df_left.csv</code>が保存されました。 分析を進める際は，このようにして保存したデータを読み込んで使います。</p>
@@ -1460,6 +1479,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1528,13 +1574,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1569,18 +1617,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1612,11 +1649,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1626,8 +1704,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1639,7 +1726,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1683,6 +1893,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1708,6 +1919,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1765,25 +2002,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Soichi Matsuura</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, Soichi Matsuura</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>

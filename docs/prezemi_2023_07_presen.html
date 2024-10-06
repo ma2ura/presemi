@@ -9,10 +9,10 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.361">
+  <meta name="generator" content="quarto-1.5.56">
 
   <meta name="author" content="Soichi Matsuura">
-  <title>プレゼミ講義ノート - プレゼミ2023  第7回 統計的仮説検定</title>
+  <title>プレゼミ講義ノート – プレゼミ2023  第7回 統計的仮説検定</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -97,6 +97,22 @@
     code span.wa { color: #ff5555; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -224,7 +240,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -387,7 +404,6 @@
       margin-right: 0; 
     }
   </style>
-  
   <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
   <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 </head>
@@ -423,8 +439,7 @@ Soichi Matsuura
 <li>統計的仮説を立てることができる。</li>
 <li>第1種の過誤と第2種の過誤を解釈する</li>
 </ul>
-</div>
-</div>
+</div></div>
 </section>
 
 <section>
@@ -447,9 +462,9 @@ Soichi Matsuura
 <li>まず，パン屋さんに行って，400gと表記されている食パンを1斤買い，その重量を量ると403gだった。</li>
 <li>それから30日間，食パンを1斤購入して重さを量り，表を作ったところ次のようになった。</li>
 </ul>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-1_3860e1488a69c9875d235b2a6861ac98">
+<div class="cell">
 <div class="cell-output-display">
-<table class="table" data-quarto-postprocess="true" style="font-size: 22px; margin-left: auto; margin-right: auto;">
+<table class="table caption-top" data-quarto-postprocess="true" style="font-size: 22px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th">date</th>
@@ -613,27 +628,42 @@ Soichi Matsuura
 <section id="仮説検定パンのケース" class="slide level2">
 <h2>仮説検定：パンのケース</h2>
 <ul>
-<li>帰無仮説：<span class="math inline">\(\mu = 400\)</span>，パンの重量は400gである。</li>
-<li>対立仮説：<span class="math inline">\(\mu \not = 400\)</span>, パンの重量は400gではない。</li>
+<li>帰無仮説：<span class="math inline">\mu = 400</span>，パンの重量は400gである。</li>
+<li>対立仮説：<span class="math inline">\mu \not = 400</span>, パンの重量は400gではない。</li>
 </ul>
 <p>帰無仮説が正しく，母平均が400gであると仮定したとき，標本平均397.13gが生じる確率はどのくらいか？を考える。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">t.test</span>(df<span class="sc">$</span>weight, <span class="at">mu =</span> <span class="dv">400</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  df$weight
+t = -1.4411, df = 29, p-value = 0.1603
+alternative hypothesis: true mean is not equal to 400
+95 percent confidence interval:
+ 393.0488 401.2045
+sample estimates:
+mean of x 
+ 397.1267 </code></pre>
+</div>
+</div>
 </section>
 <section id="準備" class="slide level2">
 <h2>準備</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-3_24f98d31296ce1520a4e59c09165fb98">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># 文字化け防止のおまじない、R 4.1.0以降</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="fu">library</span>(tidyverse) <span class="co"># とりあえずこれ</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="fu">library</span>(ggthemes) <span class="co"># ggplot2のテーマ</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">library</span>(gghighlight)</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co"># テーマを設定</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># 以下、ggplot2のデフォルトを変更</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># 文字化け防止のおまじない、R 4.1.0以降</span></span>
+<span id="cb3-2"><a></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">dev =</span> <span class="st">"ragg_png"</span>)</span>
+<span id="cb3-3"><a></a><span class="co"># パッケージの導入</span></span>
+<span id="cb3-4"><a></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<span id="cb3-5"><a></a>  tidyverse, <span class="co"># データ加工</span></span>
+<span id="cb3-6"><a></a>  ggthemes, gghighlight, <span class="co"># グラフ拡張</span></span>
+<span id="cb3-7"><a></a>  knitr, kableExtra <span class="co"># 表作成</span></span>
+<span id="cb3-8"><a></a>  )</span>
+<span id="cb3-9"><a></a><span class="co"># テーマを設定</span></span>
+<span id="cb3-10"><a></a><span class="fu">theme_set</span>(<span class="fu">theme_few</span>(<span class="at">base_size =</span> <span class="dv">12</span>))</span>
+<span id="cb3-11"><a></a><span class="co"># 以下、ggplot2のデフォルトを変更</span></span>
+<span id="cb3-12"><a></a><span class="fu">update_geom_defaults</span>(<span class="st">"point"</span>, <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">3</span>))</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="統計的仮説検定-1" class="slide level2">
@@ -668,10 +698,10 @@ Soichi Matsuura
 <section id="仮説の立て方の例" class="slide level2">
 <h2>仮説の立て方の例</h2>
 <ul>
-<li>帰無仮説<span class="math inline">\(H_0\)</span> : 利益反応係数<span class="math inline">\(ERC\)</span>はゼロである。　<span class="math inline">\(ERC =0\)</span></li>
-<li>対立仮説<span class="math inline">\(H_A\)</span> : 利益反応係数$<span class="math inline">\(ERC\)</span>はゼロではない。 <span class="math inline">\(ERC \not = 0\)</span></li>
+<li>帰無仮説<span class="math inline">H_0</span> : 利益反応係数<span class="math inline">ERC</span>はゼロである。　<span class="math inline">ERC =0</span></li>
+<li>対立仮説<span class="math inline">H_A</span> : 利益反応係数$<span class="math inline">ERC</span>はゼロではない。 <span class="math inline">ERC \not = 0</span></li>
 </ul>
-<p>「母数がある特定の値をとる」という帰無仮説を<em>否定するためには</em>、その値以外の取りうることを示せばよいだけだが， 対立仮説が<span class="math inline">\(ERC=0\)</span>であったなら、これを示すためには、<span class="math inline">\(ERC \not = 0\)</span>を示す必要があるが，これは不可能</p>
+<p>「母数がある特定の値をとる」という帰無仮説を<em>否定するためには</em>、その値以外の取りうることを示せばよいだけだが， 対立仮説が<span class="math inline">ERC=0</span>であったなら、これを示すためには、<span class="math inline">ERC \not = 0</span>を示す必要があるが，これは不可能</p>
 </section>
 <section id="有意水準の設定" class="slide level2">
 <h2>有意水準の設定</h2>
@@ -679,185 +709,189 @@ Soichi Matsuura
 <ul>
 <li><strong>帰無仮説として仮定した母数の値から標本から計算した値が大きく異なる場合</strong>には、<strong>帰無仮説を棄却</strong>する、とする。</li>
 <li><strong>どのくらい</strong>帰無仮説として仮定した母数の値から離れたら帰無仮説を棄却するのかを決めるのが<strong>有意水準</strong>(significance level)</li>
-<li>有意水準は、<span class="math inline">\(\alpha\)</span>で表され、会計研究では<span class="math inline">\(0.01\)</span>、<span class="math inline">\(0.05\)</span>、<span class="math inline">\(0.10\)</span>が使われることが多い</li>
+<li>有意水準は、<span class="math inline">\alpha</span>で表され、会計研究では<span class="math inline">0.01</span>、<span class="math inline">0.05</span>、<span class="math inline">0.10</span>が使われることが多い</li>
 </ul>
 </section>
 <section id="有意水準の例" class="slide level2">
 <h2>有意水準の例</h2>
-<p>母集団の平均<span class="math inline">\(\mu\)</span>が<span class="math inline">\(0\)</span>である、という帰無仮説を考える。</p>
+<p>母集団の平均<span class="math inline">\mu</span>が<span class="math inline">0</span>である、という帰無仮説を考える。</p>
 <ul>
-<li>対立仮説は母集団の平均<span class="math inline">\(\mu\)</span>は<span class="math inline">\(0\)</span>ではない，となる。</li>
-<li>標本サイズ100の標本から計算した標本平均の分布から計算した<span class="math inline">\(t\)</span>値が自由度<span class="math inline">\(100-1\)</span>の<span class="math inline">\(t\)</span>分布にしたがうとき、</li>
+<li>対立仮説は母集団の平均<span class="math inline">\mu</span>は<span class="math inline">0</span>ではない，となる。</li>
+<li>標本サイズ100の標本から計算した標本平均の分布から計算した<span class="math inline">t</span>値が自由度<span class="math inline">100-1</span>の<span class="math inline">t</span>分布にしたがうとき、</li>
 </ul>
-<p><span class="math display">\[
+<p><span class="math display">
 t = \frac{\bar{x} - \mu}{s/\sqrt{n}}
-\]</span></p>
-<p>となり，今<span class="math inline">\(\bar{x} = \mu\)</span>という帰無仮説を仮定しているので、<span class="math inline">\(t = 0\)</span>となる。</p>
+</span></p>
+<p>となり，今<span class="math inline">\bar{x} = \mu</span>という帰無仮説を仮定しているので、<span class="math inline">t = 0</span>となる。</p>
 </section>
 <section id="有意水準の計算" class="slide level2">
 <h2>有意水準の計算</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-4_2482936300df5a0f1ed3eb611bde70bb">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># 自由度を設定</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>n <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>df <span class="ot">&lt;-</span> n<span class="dv">-1</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># データを生成</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
-<span id="cb2-7"><a href="#cb2-7"></a>data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">dt</span>(data<span class="sc">$</span>x, df) <span class="co"># 変数yを作成</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># 90%の領域の上限と下限をqt()で計算</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>ql <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, df)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>qu <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, df)</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co"># t分布を書く</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
-<span id="cb2-16"><a href="#cb2-16"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> ql), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;=</span> qu), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
-<span id="cb2-17"><a href="#cb2-17"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"t値"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"確率密度"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"90%の確率で起こるt値の範囲"</span>)</span>
-<span id="cb2-19"><a href="#cb2-19"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span>
-<span id="cb2-20"><a href="#cb2-20"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>)</span>
-<span id="cb2-21"><a href="#cb2-21"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">xend =</span> <span class="fl">2.2</span>,</span>
-<span id="cb2-23"><a href="#cb2-23"></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-24"><a href="#cb2-24"></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
-<span id="cb2-25"><a href="#cb2-25"></a>  )</span>
-<span id="cb2-26"><a href="#cb2-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>  <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">xend =</span> <span class="sc">-</span><span class="fl">2.2</span>,</span>
-<span id="cb2-29"><a href="#cb2-29"></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
-<span id="cb2-30"><a href="#cb2-30"></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
-<span id="cb2-31"><a href="#cb2-31"></a>  )</span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-4-1.png" width="1344" class="r-stretch"></section>
-<section id="検定統計量の計算" class="slide level2">
-<h2>検定統計量の計算 <!-- 8.1.3 ---></h2>
-<p>標本から平均などの統計量を計算し，その統計量は確率変数なので分布をもつ。</p>
-<p><span class="math display">\[
-\begin{aligned}
-t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt{n}}}
-\end{aligned}
-\]</span> を検定統計量</p>
-</section>
-<section id="rでやってみる" class="slide level2">
-<h2>Rでやってみる</h2>
-<ul>
-<li>母平均<span class="math inline">\(62\)</span>，母標準偏差<span class="math inline">\(5\)</span>の正規分布にしたがう変数<span class="math inline">\(X\)</span>を考える。</li>
-<li>母集団のサイズは10000</li>
-</ul>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-5_5fbb832ef90a9589828552ef3faad927">
-<details>
-<summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>true_mean <span class="ot">&lt;-</span> <span class="dv">62</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>true_sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, true_mean, true_sd) <span class="co"># 母集団</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># 作図</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(X)) <span class="sc">+</span> <span class="fu">aes</span>(X) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"母集団"</span>) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> true_mean, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># 自由度を設定</span></span>
+<span id="cb4-2"><a></a>n <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb4-3"><a></a>df <span class="ot">&lt;-</span> n<span class="dv">-1</span></span>
+<span id="cb4-4"><a></a></span>
+<span id="cb4-5"><a></a><span class="co"># データを生成</span></span>
+<span id="cb4-6"><a></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>))</span>
+<span id="cb4-7"><a></a>data<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">dt</span>(data<span class="sc">$</span>x, df) <span class="co"># 変数yを作成</span></span>
+<span id="cb4-8"><a></a></span>
+<span id="cb4-9"><a></a></span>
+<span id="cb4-10"><a></a><span class="co"># 90%の領域の上限と下限をqt()で計算</span></span>
+<span id="cb4-11"><a></a>ql <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.025</span>, df)</span>
+<span id="cb4-12"><a></a>qu <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, df)</span>
+<span id="cb4-13"><a></a></span>
+<span id="cb4-14"><a></a><span class="co"># t分布を書く</span></span>
+<span id="cb4-15"><a></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">+</span> <span class="fu">geom_line</span>()</span>
+<span id="cb4-16"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> ql), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(x <span class="sc">&gt;=</span> qu), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb4-17"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb4-18"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"t値"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"確率密度"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"90%の確率で起こるt値の範囲"</span>)</span>
+<span id="cb4-19"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>)</span>
+<span id="cb4-20"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb4-21"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
+<span id="cb4-22"><a></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">xend =</span> <span class="fl">2.2</span>,</span>
+<span id="cb4-23"><a></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb4-24"><a></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
+<span id="cb4-25"><a></a>  )</span>
+<span id="cb4-26"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">y =</span> <span class="fl">0.08</span>, <span class="at">label =</span> <span class="st">"α/2"</span>, <span class="at">size =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb4-27"><a></a>  <span class="fu">annotate</span>(<span class="co"># 始点や終点などを指定して矢印を追加</span></span>
+<span id="cb4-28"><a></a>  <span class="at">geom =</span> <span class="st">"segment"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="fl">2.4</span>, <span class="at">xend =</span> <span class="sc">-</span><span class="fl">2.2</span>,</span>
+<span id="cb4-29"><a></a>  <span class="at">y =</span> <span class="fl">0.07</span>, <span class="at">yend =</span> <span class="fl">0.04</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb4-30"><a></a>  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
+<span id="cb4-31"><a></a>  )</span>
+<span id="cb4-32"><a></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-5-1.png" width="1344" class="r-stretch"></section>
+<section id="検定統計量の計算" class="slide level2">
+<h2>検定統計量の計算 <!-- 8.1.3 ---></h2>
+<p>標本から平均などの統計量を計算し，その統計量は確率変数なので分布をもつ。</p>
+<p><span class="math display">
+\begin{aligned}
+t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt{n}}}
+\end{aligned}
+</span> を検定統計量</p>
+</section>
+<section id="rでやってみる" class="slide level2">
+<h2>Rでやってみる</h2>
+<ul>
+<li>母平均<span class="math inline">62</span>，母標準偏差<span class="math inline">5</span>の正規分布にしたがう変数<span class="math inline">X</span>を考える。</li>
+<li>母集団のサイズは10000</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb5-2"><a></a>true_mean <span class="ot">&lt;-</span> <span class="dv">62</span></span>
+<span id="cb5-3"><a></a>true_sd <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb5-4"><a></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(N, true_mean, true_sd) <span class="co"># 母集団</span></span>
+<span id="cb5-5"><a></a><span class="co"># 作図</span></span>
+<span id="cb5-6"><a></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(X)) <span class="sc">+</span> <span class="fu">aes</span>(X) <span class="sc">+</span></span>
+<span id="cb5-7"><a></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"母集団"</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> true_mean, <span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-6-1.png" width="1344" class="r-stretch"></section>
 <section id="サンプリング" class="slide level2">
 <h2>サンプリング</h2>
 <p>この母集団から標本サイズ100の標本を100個とりだし、平均を100個計算</p>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-6_c85f5836618582da1445a8b66b104d33">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>trial <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">replicate</span>(trial, <span class="fu">mean</span>(<span class="fu">sample</span>(X,n)))</span>
-<span id="cb4-4"><a href="#cb4-4"></a>df_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sample_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>n <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="co"># 標本サイズ</span></span>
+<span id="cb6-2"><a></a>trial <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb6-3"><a></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">replicate</span>(trial, <span class="fu">mean</span>(<span class="fu">sample</span>(X,n)))</span>
+<span id="cb6-4"><a></a>df_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(sample_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>たとえば、ある標本の平均値は62.44となる。</p>
+<p>たとえば、ある標本の平均値は61.29となる。</p>
 <p>この平均値がどのように分布しているのかを調べるために、ヒストグラムを作成してみます。</p>
 </section>
 <section id="標本平均のヒストグラム" class="slide level2">
 <h2>標本平均のヒストグラム</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-7_750a0f3c9470f4e12b27fd5400df4995">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>g_mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>sample_mean) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"度数"</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(sample_mean), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="fu">print</span>(g_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-7-1.png" width="1344" class="r-stretch"></section>
-<section id="標本平均のヒストグラム-1" class="slide level2">
-<h2>標本平均のヒストグラム</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-8_7bc681b363a4b85dc8daf012704ac003">
-<details>
-<summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>g_m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(sample_mean), sample_mean), <span class="at">y =</span> sample_mean) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>   <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">64</span>)) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="fu">ylab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"標本平均の分布"</span>)</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="fu">print</span>(g_m)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>g_mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span>sample_mean) <span class="sc">+</span></span>
+<span id="cb7-2"><a></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"度数"</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(sample_mean), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">62</span>, <span class="at">color=</span><span class="st">"red"</span>)</span>
+<span id="cb7-5"><a></a><span class="fu">print</span>(g_mean)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-8-1.png" width="1344" class="r-stretch"></section>
+<section id="標本平均のヒストグラム-1" class="slide level2">
+<h2>標本平均のヒストグラム</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Rコード</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>g_m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
+<span id="cb8-2"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(sample_mean), sample_mean), <span class="at">y =</span> sample_mean) <span class="sc">+</span></span>
+<span id="cb8-3"><a></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">62</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a></a>   <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">64</span>)) <span class="sc">+</span></span>
+<span id="cb8-5"><a></a>    <span class="fu">ylab</span>(<span class="st">"標本平均"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"標本平均の分布"</span>)</span>
+<span id="cb8-6"><a></a><span class="fu">print</span>(g_m)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-9-1.png" width="1344" class="r-stretch"></section>
 <section id="標本平均の平均" class="slide level2">
 <h2>標本平均の平均</h2>
 <ul>
-<li>おおよそ母平均<span class="math inline">\(\mu = 62\)</span>の周りに分布していることがわかりますが，かなり離れた標本平均をもつ標本もある</li>
-<li>100個の標本で最小の標本平均となった標本の平均は60.59</li>
-<li>このように母平均62，母標準偏差5の母集団から抽出した1つの標本サイズ100の標本平均が，60.59という値になる確率を知りたい。</li>
-<li>標本平均から<span class="math inline">\(t\)</span>値を計算し，その<span class="math inline">\(t\)</span>値が自由度99の<span class="math inline">\(t\)</span>分布にしたがう確率を求めることで，この確率を求める</li>
+<li>おおよそ母平均<span class="math inline">\mu = 62</span>の周りに分布していることがわかりますが，かなり離れた標本平均をもつ標本もある</li>
+<li>100個の標本で最小の標本平均となった標本の平均は60.67</li>
+<li>このように母平均62，母標準偏差5の母集団から抽出した1つの標本サイズ100の標本平均が，60.67という値になる確率を知りたい。</li>
+<li>標本平均から<span class="math inline">t</span>値を計算し，その<span class="math inline">t</span>値が自由度99の<span class="math inline">t</span>分布にしたがう確率を求めることで，この確率を求める</li>
 </ul>
 </section>
 <section id="標本平均のt値" class="slide level2">
-<h2>標本平均の<span class="math inline">\(t\)</span>値</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-9_446d2231180d223ec0a3ffc2424982da">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>t <span class="ot">&lt;-</span> (<span class="fu">min</span>(df_mean<span class="sc">$</span>sample_mean) <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">print</span>(t)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h2>標本平均の<span class="math inline">t</span>値</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>t <span class="ot">&lt;-</span> (<span class="fu">min</span>(df_mean<span class="sc">$</span>sample_mean) <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb9-2"><a></a><span class="fu">print</span>(t)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.814472</code></pre>
+<pre><code>[1] -2.666919</code></pre>
 </div>
 </div>
-<p>自由度99の<span class="math inline">\(t\)</span>分布の下で，となる確率は求めると，</p>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-10_642c4e72912b48636f30ffd2526d356c">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">pt</span>(t, <span class="at">df =</span> n<span class="dv">-1</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>自由度99の<span class="math inline">t</span>分布の下で，となる確率は求めると，</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">pt</span>(t, <span class="at">df =</span> n<span class="dv">-1</span>)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.002947437</code></pre>
+<pre><code>[1] 0.00447149</code></pre>
 </div>
 </div>
 <p>となり，この確率は非常に小さい値となる。</p>
 </section>
 <section id="例" class="slide level2">
 <h2>例</h2>
-<p>100個の標本から計算された標本平均は母平均62からかなり離れた値となる。 それぞれの標本平均から計算された<span class="math inline">\(t\)</span>値の分布を調べる。</p>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-11_90a2119decf55bbaf72b5ba6f1dde3de">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>df_mean <span class="ot">&lt;-</span> df_mean <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-3"><a href="#cb11-3"></a>    <span class="at">t_value =</span> (sample_mean <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n)),</span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="at">p_value =</span> <span class="fu">pt</span>(t_value, <span class="at">df =</span> n<span class="dv">-1</span>)</span>
-<span id="cb11-5"><a href="#cb11-5"></a>  )</span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(p_value), p_value), <span class="at">y =</span> p_value) <span class="sc">+</span> <span class="co"># グラフの設定</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">fill =</span> <span class="fu">ifelse</span>(df_mean<span class="sc">$</span>p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"red"</span>, <span class="st">"black"</span>)) <span class="sc">+</span> <span class="co">#</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># 有意水準0.05</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="fu">ylab</span>(<span class="st">"p値"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"p値の分布"</span>) <span class="co"># 軸の設定</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>100個の標本から計算された標本平均は母平均62からかなり離れた値となる。 それぞれの標本平均から計算された<span class="math inline">t</span>値の分布を調べる。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a>df_mean <span class="ot">&lt;-</span> df_mean <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-3"><a></a>    <span class="at">t_value =</span> (sample_mean <span class="sc">-</span> <span class="dv">62</span>) <span class="sc">/</span> (<span class="dv">5</span> <span class="sc">/</span> <span class="fu">sqrt</span>(n)),</span>
+<span id="cb13-4"><a></a>    <span class="at">p_value =</span> <span class="fu">pt</span>(t_value, <span class="at">df =</span> n<span class="dv">-1</span>)</span>
+<span id="cb13-5"><a></a>  )</span>
+<span id="cb13-6"><a></a><span class="fu">ggplot</span>(df_mean) <span class="sc">+</span></span>
+<span id="cb13-7"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(<span class="fu">seq_along</span>(p_value), p_value), <span class="at">y =</span> p_value) <span class="sc">+</span> <span class="co"># グラフの設定</span></span>
+<span id="cb13-8"><a></a>    <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>, <span class="at">fill =</span> <span class="fu">ifelse</span>(df_mean<span class="sc">$</span>p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"red"</span>, <span class="st">"black"</span>)) <span class="sc">+</span> <span class="co">#</span></span>
+<span id="cb13-9"><a></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># 有意水準0.05</span></span>
+<span id="cb13-10"><a></a>    <span class="fu">ylab</span>(<span class="st">"p値"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"標本ID"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"p値の分布"</span>) <span class="co"># 軸の設定</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
-<p>となり，<span class="math inline">\(t\)</span>値が生じる確率が5%未満となる標本がいくつかあることがわかった。</p>
+<!-- となり，$t$値が生じる確率が5%未満となる標本がいくつかあることがわかった。 -->
 </section>
-<section id="例-output" class="slide level2 output-location-slide"><h2>例</h2><div class="cell output-location-slide" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-11_90a2119decf55bbaf72b5ba6f1dde3de">
+<section id="例-output" class="slide level2 output-location-slide"><h2>例</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
-<p><img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-11-1.png" width="1344"></p>
+<div>
+<figure>
+<p><img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344"></p>
+</figure>
+</div>
 </div>
 </div></section><section id="統計的検定" class="slide level2">
 <h2>統計的検定</h2>
-<p>自分が集めた標本の1つから計算した標本平均、そして<span class="math inline">\(t\)</span>値が、帰無仮説が正しいと仮定した場合に、その標本平均がどのくらいの確率で生じるかを調べ、それが5%未満や1%未満であったならば、帰無仮説が正しいと考えるよりも、帰無仮説とは異なる母平均をもつ母集団から標本を集めたから、そのような標本平均が生じたと考えるほうが<strong>もっともらしい</strong>と考える。</p>
+<p>自分が集めた標本の1つから計算した標本平均、そして<span class="math inline">t</span>値が、帰無仮説が正しいと仮定した場合に、その標本平均がどのくらいの確率で生じるかを調べ、それが5%未満や1%未満であったならば、帰無仮説が正しいと考えるよりも、帰無仮説とは異なる母平均をもつ母集団から標本を集めたから、そのような標本平均が生じたと考えるほうが<strong>もっともらしい</strong>と考える。</p>
 <p>これが<strong>統計的仮説検定</strong>の考え方</p>
 </section></section>
 <section>
@@ -892,155 +926,154 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
 </section>
 <section id="つの過誤" class="slide level2">
 <h2>2つの過誤</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-12_4db82251db4edd9a5f9bad63890b0bac">
-<details>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># 正規分布の確率密度関数</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb12-4"><a href="#cb12-4"></a>}</span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co"># パラメータの設定</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a>mu2 <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="co"># 対立仮説の平均</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a>alpha <span class="ot">=</span> <span class="fl">0.025</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="co"># サンプルデータを生成</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
-<span id="cb12-15"><a href="#cb12-15"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
-<span id="cb12-16"><a href="#cb12-16"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
-<span id="cb12-17"><a href="#cb12-17"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
-<span id="cb12-18"><a href="#cb12-18"></a></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="co"># ggplotを使って描画</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb12-22"><a href="#cb12-22"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb12-23"><a href="#cb12-23"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb12-24"><a href="#cb12-24"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
-<span id="cb12-25"><a href="#cb12-25"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
-<span id="cb12-26"><a href="#cb12-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb12-27"><a href="#cb12-27"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
-<span id="cb12-28"><a href="#cb12-28"></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
-<span id="cb12-29"><a href="#cb12-29"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb12-30"><a href="#cb12-30"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
-<span id="cb12-31"><a href="#cb12-31"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-33"><a href="#cb12-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
-<span id="cb12-34"><a href="#cb12-34"></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
-<span id="cb12-35"><a href="#cb12-35"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
-<span id="cb12-36"><a href="#cb12-36"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
-<span id="cb12-37"><a href="#cb12-37"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb12-38"><a href="#cb12-38"></a></span>
-<span id="cb12-39"><a href="#cb12-39"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
-<span id="cb12-40"><a href="#cb12-40"></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
-<span id="cb12-41"><a href="#cb12-41"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
-<span id="cb12-42"><a href="#cb12-42"></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
-<span id="cb12-43"><a href="#cb12-43"></a></span>
-<span id="cb12-44"><a href="#cb12-44"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb12-45"><a href="#cb12-45"></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
-<span id="cb12-47"><a href="#cb12-47"></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
-<span id="cb12-48"><a href="#cb12-48"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-12-1.png" width="1344" class="r-stretch"></section>
-<section id="有意水準を小さくする" class="slide level2">
-<h2>有意水準を小さくする</h2>
-<p>帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤<span class="math inline">\(\alpha\)</span>を小さくする。</p>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-13_356115f0f646086c96f47c10b3bbed81">
-<details>
-<summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>alpha <span class="ot">=</span> <span class="fl">0.005</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co"># サンプルデータを生成</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
-<span id="cb13-5"><a href="#cb13-5"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
-<span id="cb13-6"><a href="#cb13-6"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
-<span id="cb13-7"><a href="#cb13-7"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
-<span id="cb13-8"><a href="#cb13-8"></a></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># ggplotを使って描画</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb13-13"><a href="#cb13-13"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb13-14"><a href="#cb13-14"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
-<span id="cb13-15"><a href="#cb13-15"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
-<span id="cb13-16"><a href="#cb13-16"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb13-17"><a href="#cb13-17"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
-<span id="cb13-18"><a href="#cb13-18"></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
-<span id="cb13-19"><a href="#cb13-19"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
-<span id="cb13-20"><a href="#cb13-20"></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
-<span id="cb13-21"><a href="#cb13-21"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb13-22"><a href="#cb13-22"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
-<span id="cb13-24"><a href="#cb13-24"></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
-<span id="cb13-25"><a href="#cb13-25"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
-<span id="cb13-26"><a href="#cb13-26"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
-<span id="cb13-27"><a href="#cb13-27"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb13-28"><a href="#cb13-28"></a></span>
-<span id="cb13-29"><a href="#cb13-29"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
-<span id="cb13-30"><a href="#cb13-30"></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
-<span id="cb13-31"><a href="#cb13-31"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
-<span id="cb13-32"><a href="#cb13-32"></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
-<span id="cb13-33"><a href="#cb13-33"></a></span>
-<span id="cb13-34"><a href="#cb13-34"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
-<span id="cb13-35"><a href="#cb13-35"></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
-<span id="cb13-36"><a href="#cb13-36"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
-<span id="cb13-37"><a href="#cb13-37"></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
-<span id="cb13-38"><a href="#cb13-38"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># 正規分布の確率密度関数</span></span>
+<span id="cb14-2"><a></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb14-3"><a></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb14-4"><a></a>}</span>
+<span id="cb14-5"><a></a></span>
+<span id="cb14-6"><a></a><span class="co"># パラメータの設定</span></span>
+<span id="cb14-7"><a></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
+<span id="cb14-8"><a></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
+<span id="cb14-9"><a></a>mu2 <span class="ot">&lt;-</span> <span class="fl">1.5</span> <span class="co"># 対立仮説の平均</span></span>
+<span id="cb14-10"><a></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
+<span id="cb14-11"><a></a>alpha <span class="ot">=</span> <span class="fl">0.025</span></span>
+<span id="cb14-12"><a></a></span>
+<span id="cb14-13"><a></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb14-14"><a></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb14-15"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb14-16"><a></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb14-17"><a></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb14-18"><a></a></span>
+<span id="cb14-19"><a></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb14-20"><a></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb14-21"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb14-22"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb14-23"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb14-24"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb14-25"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb14-26"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb14-27"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
+<span id="cb14-28"><a></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb14-29"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb14-30"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb14-31"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb14-32"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-33"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb14-34"><a></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
+<span id="cb14-35"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
+<span id="cb14-36"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb14-37"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb14-38"><a></a></span>
+<span id="cb14-39"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb14-40"><a></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb14-41"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb14-42"><a></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb14-43"><a></a></span>
+<span id="cb14-44"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb14-45"><a></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
+<span id="cb14-46"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb14-47"><a></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb14-48"><a></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
 <img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-13-1.png" width="1344" class="r-stretch"></section>
-<section id="片側検定の場合" class="slide level2">
-<h2>片側検定の場合</h2>
-<div class="cell" data-hash="prezemi_2023_07_presen_cache/revealjs/unnamed-chunk-14_137f44424b4cfe9a855c1669ce8c83d3">
-<details>
+<section id="有意水準を小さくする" class="slide level2">
+<h2>有意水準を小さくする</h2>
+<p>帰無仮説が正しいときに帰無仮説を棄却する確率である第1種の過誤<span class="math inline">\alpha</span>を小さくする。</p>
+<div class="cell">
+<details class="code-fold">
 <summary>Rコード</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># 正規分布の確率密度関数</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb14-4"><a href="#cb14-4"></a>}</span>
-<span id="cb14-5"><a href="#cb14-5"></a></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co"># パラメータの設定</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>mu2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># 対立仮説の平均</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># サンプルデータを生成</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
-<span id="cb14-14"><a href="#cb14-14"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
-<span id="cb14-15"><a href="#cb14-15"></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
-<span id="cb14-16"><a href="#cb14-16"></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
-<span id="cb14-17"><a href="#cb14-17"></a></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="co"># ggplotを使って描画</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb14-22"><a href="#cb14-22"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
-<span id="cb14-23"><a href="#cb14-23"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb14-24"><a href="#cb14-24"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
-<span id="cb14-25"><a href="#cb14-25"></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb14-26"><a href="#cb14-26"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-27"><a href="#cb14-27"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
-<span id="cb14-28"><a href="#cb14-28"></a>       <span class="at">title =</span> <span class="st">"Visualization of Type I and Type II Errors"</span>) <span class="sc">+</span></span>
-<span id="cb14-29"><a href="#cb14-29"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">3</span>,</span>
-<span id="cb14-30"><a href="#cb14-30"></a>           <span class="at">label =</span> <span class="st">"Type I Error"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb14-31"><a href="#cb14-31"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">3</span>,</span>
-<span id="cb14-32"><a href="#cb14-32"></a>           <span class="at">label =</span> <span class="st">"Type II Error"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
-<span id="cb14-33"><a href="#cb14-33"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
-<span id="cb14-34"><a href="#cb14-34"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
-<span id="cb14-35"><a href="#cb14-35"></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>alpha <span class="ot">=</span> <span class="fl">0.005</span></span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb15-4"><a></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb15-5"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb15-6"><a></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb15-7"><a></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb15-8"><a></a></span>
+<span id="cb15-9"><a></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb15-10"><a></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb15-11"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb15-12"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb15-13"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb15-14"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb15-15"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb15-16"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb15-17"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1)),</span>
+<span id="cb15-18"><a></a>  <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span>
+<span id="cb15-19"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_area</span>(</span>
+<span id="cb15-20"><a></a>  <span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(alpha, mu1, sd1) <span class="sc">&amp;</span> x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha, mu1, sd1)),</span>
+<span id="cb15-21"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-23"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb15-24"><a></a>       <span class="at">title =</span> <span class="st">"両側検定における第1種の過誤と第2種の過誤"</span>)</span>
+<span id="cb15-25"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">qnorm</span>(<span class="dv">1</span><span class="sc">-</span>alpha), <span class="at">linetype=</span><span class="st">"dotted"</span>)</span>
+<span id="cb15-26"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb15-27"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb15-28"><a></a></span>
+<span id="cb15-29"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb15-30"><a></a>           <span class="at">label =</span> <span class="st">"第1種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkblue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>) <span class="sc">+</span></span>
+<span id="cb15-31"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">-</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">6</span>,</span>
+<span id="cb15-32"><a></a>           <span class="at">label =</span> <span class="st">"第2種の過誤"</span>, <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb15-33"><a></a></span>
+<span id="cb15-34"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="dv">2</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1)<span class="sc">-</span><span class="fl">0.1</span>,</span>
+<span id="cb15-35"><a></a>                  <span class="at">label =</span> <span class="st">"帰無仮説下の分布"</span>, <span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span> ) <span class="sc">+</span></span>
+<span id="cb15-36"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">-</span> <span class="fl">0.1</span>,</span>
+<span id="cb15-37"><a></a>           <span class="at">label =</span> <span class="st">"真の分布"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">family =</span> <span class="st">"HiraKakuProN-W3"</span>)</span>
+<span id="cb15-38"><a></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 
 </div>
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344" class="r-stretch"></section>
+<section id="片側検定の場合" class="slide level2">
+<h2>片側検定の場合</h2>
+<div class="cell" data-cod_e-fold="true">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># 正規分布の確率密度関数</span></span>
+<span id="cb16-2"><a></a>dnorm_with_mean_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>) {</span>
+<span id="cb16-3"><a></a>  <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>pi<span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))<span class="sc">*</span><span class="fu">exp</span>(<span class="sc">-</span>((x <span class="sc">-</span> mean)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">2</span><span class="sc">*</span>sd<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb16-4"><a></a>}</span>
+<span id="cb16-5"><a></a></span>
+<span id="cb16-6"><a></a><span class="co"># パラメータの設定</span></span>
+<span id="cb16-7"><a></a>mu1 <span class="ot">&lt;-</span> <span class="dv">0</span>   <span class="co"># 帰無仮説の平均</span></span>
+<span id="cb16-8"><a></a>sd1 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 帰無仮説の標準偏差</span></span>
+<span id="cb16-9"><a></a>mu2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の平均</span></span>
+<span id="cb16-10"><a></a>sd2 <span class="ot">&lt;-</span> <span class="dv">1</span>   <span class="co"># 対立仮説の標準偏差</span></span>
+<span id="cb16-11"><a></a></span>
+<span id="cb16-12"><a></a><span class="co"># サンプルデータを生成</span></span>
+<span id="cb16-13"><a></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.01</span>)</span>
+<span id="cb16-14"><a></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x,</span>
+<span id="cb16-15"><a></a>                 <span class="at">dnorm1 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1),</span>
+<span id="cb16-16"><a></a>                 <span class="at">dnorm2 =</span> <span class="fu">dnorm_with_mean_sd</span>(x, <span class="at">mean =</span> mu2, <span class="at">sd =</span> sd2))</span>
+<span id="cb16-17"><a></a></span>
+<span id="cb16-18"><a></a><span class="co"># ggplotを使って描画</span></span>
+<span id="cb16-19"><a></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
+<span id="cb16-20"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb16-21"><a></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb16-22"><a></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&lt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
+<span id="cb16-23"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm1), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb16-24"><a></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> <span class="fu">subset</span>(df, x <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="fl">0.05</span>, <span class="at">mean =</span> mu1, <span class="at">sd =</span> sd1)),</span>
+<span id="cb16-25"><a></a>            <span class="fu">aes</span>(<span class="at">y =</span> dnorm2), <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb16-26"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-27"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Value"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb16-28"><a></a>       <span class="at">title =</span> <span class="st">"Visualization of Type I and Type II Errors"</span>) <span class="sc">+</span></span>
+<span id="cb16-29"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu1 <span class="sc">-</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm1) <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb16-30"><a></a>           <span class="at">label =</span> <span class="st">"Type I Error"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb16-31"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> mu2 <span class="sc">+</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">max</span>(df<span class="sc">$</span>dnorm2) <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb16-32"><a></a>           <span class="at">label =</span> <span class="st">"Type II Error"</span>, <span class="at">color =</span> <span class="st">"red"</span>)</span>
+<span id="cb16-33"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu1, <span class="at">color =</span> <span class="st">"darkblue"</span>)</span>
+<span id="cb16-34"><a></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu2, <span class="at">color =</span> <span class="st">"darkred"</span>)</span>
+<span id="cb16-35"><a></a><span class="fu">print</span>(g)</span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
-<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-14-1.png" width="1344" class="r-stretch"><div class="footer footer-default">
+</div>
 
+<img data-src="prezemi_2023_07_presen_files/figure-revealjs/unnamed-chunk-15-1.png" width="1344" class="r-stretch"><div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
 </div>
 </section></section>
     </div>
@@ -1060,7 +1093,6 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
   <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
   <script src="site_libs/revealjs/plugin/search/search.js"></script>
   <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="site_libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1070,7 +1102,6 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1229,27 +1260,9 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
         // Factor of the display size that should remain empty around the content
         margin: 0.1,
 
-        math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-          config: 'TeX-AMS_HTML-full',
-          tex2jax: {
-            inlineMath: [['\\(','\\)']],
-            displayMath: [['\\[','\\]']],
-            balanceBraces: true,
-            processEscapes: false,
-            processRefs: true,
-            processEnvironments: true,
-            preview: 'TeX',
-            skipTags: ['script','noscript','style','textarea','pre','code'],
-            ignoreClass: 'tex2jax_ignore',
-            processClass: 'tex2jax_process'
-          },
-        },
-
         // reveal.js plugins
         plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
-          RevealMath,
           RevealNotes,
           RevealSearch,
           RevealZoom
@@ -1326,18 +1339,7 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1369,11 +1371,50 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1383,8 +1424,17 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -1398,7 +1448,11 @@ t = \frac{\bar{x} - \mu}{SE} = \displaystyle \frac{\bar{x} - \mu}{\frac{u}{\sqrt
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
