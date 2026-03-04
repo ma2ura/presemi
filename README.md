@@ -6,3 +6,6 @@
 またプレゼン資料は`presemi_2023_**_presen.qmd`というファイルで作成してます。
 
 レポジトリ全体をダウンロードして，そのフォルダの中で各種ファイルをrenderすると，ウェブ資料やプレゼン資料が作成できます。
+
+ウェブサイトはこちら
+[https://ma2ura.github.io/presemi/](https://ma2ura.github.io/presemi/)
