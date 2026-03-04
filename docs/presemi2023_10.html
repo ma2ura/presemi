@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.54">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>presemi2023_10 – プレゼミ講義ノート</title>
+<title>10&nbsp; 回帰分析による統計的推定 – プレゼミ講義ノート</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,8 +18,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -60,23 +61,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<link href="./presemi2023_09.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e0400e284328382059829e6edf64fb62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -109,7 +115,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -123,125 +129,325 @@ const typesetMath = (el) => {
 window.Quarto = {
   typesetMath
 };
-</script>
+</script><link rel="stylesheet" href="mystyle.css">
+<meta name="twitter:title" content="10&nbsp; 回帰分析による統計的推定 – プレゼミ講義ノート">
+<meta name="twitter:image" content="https://so-ichi.com/presemi2023_10_files/figure-html/unnamed-chunk-3-1.png">
+<meta name="twitter:image-height" content="9600">
+<meta name="twitter:image-width" content="16800">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-fixed">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">プレゼミ講義ノート</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="サーチ"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="nav-item">
-    <span class="nav-link">
-<span class="menu-text">講義内容</span>
-    </span>
-  </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text"></span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">
-<li>
-    <a class="dropdown-item" href="./index.html">
- <span class="dropdown-text">はじめに</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_01.html">
- <span class="dropdown-text">第1回 講義ガイダンス</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_02.html">
- <span class="dropdown-text">第2回 実証研究</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_03.html">
- <span class="dropdown-text">第3回 Rの使い方</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_04.html">
- <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_05.html">
- <span class="dropdown-text">第5回 記述統計と可視化</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_06.html">
- <span class="dropdown-text">第6回 統計的推定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_07.html">
- <span class="dropdown-text">第7回 統計的仮説検定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_08.html">
- <span class="dropdown-text">第8回 変数間の関連性</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_09.html">
- <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
-  </li>  
-    </ul>
-</li>
-</ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/uribo/230827ism_ws"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text">GitHub</span></a>
-  </li>  
-</ul>
-</div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
-</div>
-      </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./presemi2023_10.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">プレゼミ講義ノート</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ma2ura/presemi/" title="ソースコード" class="quarto-navigation-tool px-1" aria-label="ソースコード"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="リーダーモードの切り替え">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="サーチ"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">プレゼミとは</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究、仮説、実証会計</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">目次</h2>
    
   <ul>
 <li>
-<a href="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-回帰分析による統計的推定" class="nav-link active" data-scroll-target="#%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A">回帰分析による統計的推定</a>
+<a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-単回帰による統計的推定" class="nav-link active" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A"><span class="header-section-number">10.1</span> 単回帰による統計的推定</a>
   <ul class="collapse">
-<li>
-<a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-単回帰による統計的推定" class="nav-link" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A">単回帰による統計的推定</a>
-  <ul class="collapse">
-<li><a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB" id="toc-単回帰モデル" class="nav-link" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB">単回帰モデル</a></li>
-  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A" id="toc-信頼区間と仮説検定" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A">信頼区間と仮説検定</a></li>
+<li><a href="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB" id="toc-単回帰モデル" class="nav-link" data-scroll-target="#%E5%8D%98%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><span class="header-section-number">10.1.1</span> 単回帰モデル</a></li>
+  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A" id="toc-信頼区間と仮説検定" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A"><span class="header-section-number">10.1.2</span> 信頼区間と仮説検定</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-重回帰分析による統計的推定" class="nav-link" data-scroll-target="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A">重回帰分析による統計的推定</a>
+<a href="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-重回帰分析による統計的推定" class="nav-link" data-scroll-target="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E5%88%86%E6%9E%90%E3%81%AB%E3%82%88%E3%82%8B%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A"><span class="header-section-number">10.2</span> 重回帰分析による統計的推定</a>
   <ul class="collapse">
-<li><a href="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB" id="toc-重回帰モデル" class="nav-link" data-scroll-target="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB">重回帰モデル</a></li>
-  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A-1" id="toc-信頼区間と仮説検定-1" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A-1">信頼区間と仮説検定</a></li>
+<li><a href="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB" id="toc-重回帰モデル" class="nav-link" data-scroll-target="#%E9%87%8D%E5%9B%9E%E5%B8%B0%E3%83%A2%E3%83%87%E3%83%AB"><span class="header-section-number">10.2.1</span> 重回帰モデル</a></li>
+  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A-1" id="toc-信頼区間と仮説検定-1" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%A8%E4%BB%AE%E8%AA%AC%E6%A4%9C%E5%AE%9A-1"><span class="header-section-number">10.2.2</span> 信頼区間と仮説検定</a></li>
   </ul>
 </li>
-  <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" id="toc-まとめ" class="nav-link" data-scroll-target="#%E3%81%BE%E3%81%A8%E3%82%81">まとめ</a></li>
-  </ul>
-</li>
+  <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" id="toc-まとめ" class="nav-link" data-scroll-target="#%E3%81%BE%E3%81%A8%E3%82%81"><span class="header-section-number">10.3</span> まとめ</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><section id="回帰分析による統計的推定" class="level1"><h1>回帰分析による統計的推定</h1>
-<section id="単回帰による統計的推定" class="level2"><h2 class="anchored" data-anchor-id="単回帰による統計的推定">単回帰による統計的推定</h2>
-<section id="単回帰モデル" class="level3"><h3 class="anchored" data-anchor-id="単回帰モデル">単回帰モデル</h3>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="単回帰による統計的推定" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="単回帰による統計的推定">
+<span class="header-section-number">10.1</span> 単回帰による統計的推定</h2>
+<section id="単回帰モデル" class="level3" data-number="10.1.1"><h3 data-number="10.1.1" class="anchored" data-anchor-id="単回帰モデル">
+<span class="header-section-number">10.1.1</span> 単回帰モデル</h3>
 <p>売上高と広告宣伝費の関係を考えるため、前章では散布図(scatter diagram)を使って、2変数の関係を見てみました。 <!---
  観察された売上高と広告宣伝費のデータを使って、
 ---> ここでは，売上高を広告宣伝費で説明するモデルを考えてみます。</p>
@@ -271,7 +477,7 @@ Y_i = \beta _0 + \beta_1 X_i + \varepsilon_i
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="presemi2023_10_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1344"></p>
+<figure class="figure"><p><img src="presemi2023_10_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="8400"></p>
 </figure>
 </div>
 </div>
@@ -281,9 +487,12 @@ Y_i = \beta _0 + \beta_1 X_i + \varepsilon_i
 <figure class="figure"><p><img src="img/fig_11_1.png" class="img-fluid figure-img" style="width:60.0%"></p>
 <figcaption>図11.1</figcaption></figure>
 </div>
-</section><section id="信頼区間と仮説検定" class="level3"><h3 class="anchored" data-anchor-id="信頼区間と仮説検定">信頼区間と仮説検定</h3>
-</section></section><section id="重回帰分析による統計的推定" class="level2"><h2 class="anchored" data-anchor-id="重回帰分析による統計的推定">重回帰分析による統計的推定</h2>
-<section id="重回帰モデル" class="level3"><h3 class="anchored" data-anchor-id="重回帰モデル">重回帰モデル</h3>
+</section><section id="信頼区間と仮説検定" class="level3" data-number="10.1.2"><h3 data-number="10.1.2" class="anchored" data-anchor-id="信頼区間と仮説検定">
+<span class="header-section-number">10.1.2</span> 信頼区間と仮説検定</h3>
+</section></section><section id="重回帰分析による統計的推定" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="重回帰分析による統計的推定">
+<span class="header-section-number">10.2</span> 重回帰分析による統計的推定</h2>
+<section id="重回帰モデル" class="level3" data-number="10.2.1"><h3 data-number="10.2.1" class="anchored" data-anchor-id="重回帰モデル">
+<span class="header-section-number">10.2.1</span> 重回帰モデル</h3>
 <p>重回帰でも単回帰でも統計的推定に変わりはありません。 重回帰モデルを以下のように表します。</p>
 <p><span class="math display">\[
 Y_i = \beta _0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ik} + \varepsilon_i
@@ -295,12 +504,12 @@ Y_i = \beta _0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ik} + \va
 \]</span></p>
 <p>ではこの回帰モデルを推定するためのデータを読み込むため、<code>tidyverse</code>の<code>readr</code>パッケージの<code>read_csv()</code>関数を使って、作業ディレクトリの<code>data</code>フォルダの中に保存されている<code>adv_2023.csv</code>を読み込みます。</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/adv_2023.csv"</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/adv_2023.csv"</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>重回帰モデルを推定するには、基本関数の<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>を使います。 重回帰モデルの場合、複数の説明変数があるため<code>+</code>でつなげていきます。</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">売上高</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">研究開発費</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">広告宣伝費</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">売上高</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">研究開発費</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/lag.html">lag</a></span><span class="op">(</span><span class="va">広告宣伝費</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    (Intercept) lag(研究開発費) lag(広告宣伝費) 
    1.004955e+05    1.716521e+01    6.913074e+00 </code></pre>
@@ -310,14 +519,15 @@ Y_i = \beta _0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_p x_{ik} + \va
 <p><span class="math display">\[
 \text{売上高} = 0.00000 + 0.1716 \text{研究開発費}_{t-1} + 6.8131 \text{広告宣伝費}_{t-1}
 \]</span> であることが分かりました。</p>
-</section><section id="信頼区間と仮説検定-1" class="level3"><h3 class="anchored" data-anchor-id="信頼区間と仮説検定-1">信頼区間と仮説検定</h3>
+</section><section id="信頼区間と仮説検定-1" class="level3" data-number="10.2.2"><h3 data-number="10.2.2" class="anchored" data-anchor-id="信頼区間と仮説検定-1">
+<span class="header-section-number">10.2.2</span> 信頼区間と仮説検定</h3>
 <p>先ほどの回帰係数の推定結果は，1サンプルからの結果であり，サンプルの数を増やせば推定値の分布ができるのは，単回帰分析と同じなので， ここでも同じ方法で信頼区間を求めることが出来ます。 単回帰分析の場合，切片と回帰係数の2つが推定するパラメータなので，自由度が<span class="math inline">\(n-2\)</span>の<span class="math inline">\(t\)</span>分布を利用しました。 説明変数が<span class="math inline">\(k\)</span>個ある重回帰分析の推定で利用する<span class="math inline">\(t\)</span>分布の自由度は，<span class="math inline">\(n-k-1\)</span>になります。 <span class="math inline">\(100(1-\alpha)\)</span>％信頼区間は，</p>
 <p><span class="math display">\[
 b_m - t _{n-k-1, \frac{\alpha}{2}} SE(b_m) \leq \beta_m \leq b_m + t_{n-k-1, \frac{\alpha}{2}} SE(b_m)
 \]</span></p>
 <p>のように計算できます。 先ほど推定した重回帰分析の結果を再度確認してみます。</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -337,24 +547,25 @@ lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 862200 on 5171 degrees of freedom
-  (23266 個の観測値が欠損のため削除されました)
+  (23266 observations deleted due to missingness)
 Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
 F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <p>ここから信頼区間を計算するためには，サンプルサイズ<span class="math inline">\(n\)</span>と説明変数の数<span class="math inline">\(k\)</span>から自由度<span class="math inline">\(df = n - k -1\)</span>を求め， そのもとで特定の有意水準を設定して，関数<code><a href="https://rdrr.io/r/stats/TDist.html">qt()</a></code>を使って<span class="math inline">\(t\)</span>値を計算します。 先ほどの重回帰の例だと，サンプルサイズは28440，説明変数の数は2なので，有意水準5％の両側検定を行う場合の<span class="math inline">\(t\)</span>値は，</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># サンプルサイズ</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># サンプルサイズ</span></span>
 <span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="co"># 説明変数の数</span></span>
 <span><span class="va">freedom</span> <span class="op">&lt;-</span> <span class="va">n</span> <span class="op">-</span> <span class="fl">2</span> <span class="op">-</span> <span class="fl">1</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">0.025</span> <span class="co"># 両側5%なので片側2.5％</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">freedom</span> , lower.tail <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="va">p</span>, <span class="va">freedom</span> , lower.tail <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.960047</code></pre>
 </div>
 </div>
 <p>すると<span class="math inline">\(t\)</span>値は，1.96と計算できました。</p>
-<section id="仮説検定" class="level4"><h4 class="anchored" data-anchor-id="仮説検定">仮説検定</h4>
+<section id="仮説検定" class="level4" data-number="10.2.2.1"><h4 data-number="10.2.2.1" class="anchored" data-anchor-id="仮説検定">
+<span class="header-section-number">10.2.2.1</span> 仮説検定</h4>
 <p>重回帰分析で検証したい仮説は，<strong>説明変数が応答変数に影響を与えるか否か</strong>ですが，複数の説明変数があるため，仮説には2つのパターンがあります。 1つ目は，回帰係数のすべてがゼロである，という帰無仮説です。 構築した回帰モデルの説明変数の中に，応答変数に影響を与えるものが1つもない，という仮説です。 <span class="math display">\[
 \begin{aligned}
 H_0 : &amp;\beta _1 = \beta _2 = \cdots = \beta_k = 0\\
@@ -370,7 +581,8 @@ H_{02}: \beta _1 &amp;= 0, &amp; H_{a2} : \beta _1 \not = 0 \\
 H_{0k}: \beta _k &amp;= 0, &amp; H_{ak} : \beta _k \not = 0 \\
 \end{aligned}
 \]</span></p>
-</section><section id="つの仮説の検定" class="level4"><h4 class="anchored" data-anchor-id="つの仮説の検定">1つの仮説の検定</h4>
+</section><section id="つの仮説の検定" class="level4" data-number="10.2.2.2"><h4 data-number="10.2.2.2" class="anchored" data-anchor-id="つの仮説の検定">
+<span class="header-section-number">10.2.2.2</span> 1つの仮説の検定</h4>
 <p>すべての回帰係数がゼロかどうかを検定するためには，<strong>F分布</strong>という確率分布を用います。 F分布の確率密度関数の導出は難しいのでここでは省略します F分布の下で，自由度<span class="math inline">\(n - k -1\)</span>で説明変数の数が<span class="math inline">\(k\)</span>個であるときの検定統計量<span class="math inline">\(F_0\)</span>は，次のように計算できます。</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -379,7 +591,7 @@ F_0 = \frac{R^2}{1 - R^2} \frac{n - k - 1}{k} = \displaystyle \frac{\sum (\hat y
 \]</span></p>
 <p>ここで<span class="math inline">\(R^2\)</span>は決定係数です。 この検定統計量<span class="math inline">\(F_0\)</span>を用いたF検定の結果は，<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>関数で推定した結果の<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>関数で確認できます。</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -399,7 +611,7 @@ lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 862200 on 5171 degrees of freedom
-  (23266 個の観測値が欠損のため削除されました)
+  (23266 observations deleted due to missingness)
 Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
 F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
@@ -407,16 +619,17 @@ F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>結果の最後の行で<code>F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code>とあり，自由度2と5171のF分布で検定した結果，検定統計量<span class="math inline">\(F_0\)</span>は9460であり，p値はほぼゼロとなりました。 つまり，帰無仮説である「すべての回帰係数がゼロ」は棄却され，少なくとも一つの回帰係数はゼロではない，という対立仮説が採択されました。</p>
 <p>t分布と同様にF分布を用いた検定の臨界値は基本関数<code><a href="https://rdrr.io/r/stats/Fdist.html">qf()</a></code>で計算できます。 先ほどの例だと，サンプルサイズは28440，説明変数の数は2なので，有意水準5％の両側検定を行う場合の<span class="math inline">\(t\)</span>値は，</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">=</span> <span class="fl">0.05</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">=</span> <span class="fl">0.05</span></span>
 <span><span class="va">f1</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">5171</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="va">p</span>,<span class="va">f1</span>,<span class="va">f2</span>,lower.tail <span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">qf</a></span><span class="op">(</span><span class="va">p</span>,<span class="va">f1</span>,<span class="va">f2</span>,lower.tail <span class="op">=</span><span class="cn">F</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.997468</code></pre>
 </div>
 </div>
 <p>となり，2.9975という臨界値が得られた。 先ほどの推定結果からF値が9460と，臨界値を遙かに超える値であったため，帰無仮説は棄却された。</p>
-</section><section id="回帰係数の個別的検定" class="level4"><h4 class="anchored" data-anchor-id="回帰係数の個別的検定">回帰係数の個別的検定</h4>
+</section><section id="回帰係数の個別的検定" class="level4" data-number="10.2.2.3"><h4 data-number="10.2.2.3" class="anchored" data-anchor-id="回帰係数の個別的検定">
+<span class="header-section-number">10.2.2.3</span> 回帰係数の個別的検定</h4>
 <p>第2の仮説のパターンである個々の回帰係数の検定について考えてみましょう。 売上高を研究開発費と広告宣伝費で説明しようとした重回帰モデルだと，次の2つの仮説を検定することになります。</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -426,7 +639,7 @@ F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 \]</span></p>
 <p>回帰係数の個別的検定は，単回帰分析と同様にt検定を用います。 この分析結果も，<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>関数で確認できます。</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -446,7 +659,7 @@ lag(広告宣伝費) 6.913e+00  5.164e-01  13.386  &lt; 2e-16 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 862200 on 5171 degrees of freedom
-  (23266 個の観測値が欠損のため削除されました)
+  (23266 observations deleted due to missingness)
 Multiple R-squared:  0.7853,    Adjusted R-squared:  0.7853 
 F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
@@ -455,94 +668,30 @@ F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>このように複数の説明変数で応答変数を説明しようとする重回帰分析だと，2種類の仮説検証を行うことになります。 気をつける点として，すべての回帰係数がゼロであるという帰無仮説を検証するF検定で，帰無仮説が棄却されたとしても，個別の回帰係数の検定で，すべての検定で帰無仮説を棄却できない，というケースも起こり得ます。 このような結果が出たときは，説明変数どうしの相関が強いときに生じやすいので注意しよう。</p>
 <p>重回帰分析の結果を論文などに掲載する場合には，ほぼ決まったフォーマットがあるため，それに従って結果をまとめることになります。 例えば，次のような表を作成することになります。</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://modelsummary.com">modelsummary</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://modelsummary.com">modelsummary</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://modelsummary.com/man/msummary.html">msummary</a></span><span class="op">(</span><span class="va">res</span>,</span>
 <span>  stars <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># p値の有意性を星で表示する</span></span>
 <span>  fmt <span class="op">=</span> <span class="st">'%.2f'</span>,</span>
 <span>  gof_omit <span class="op">=</span> <span class="st">"AIC|BIC|Log.Lik."</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">'html'</span></span>
-<span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
- 
-
-  
-    <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tinytable_vgvpcjjsjt79gha1iccu</title>
-<style>
-.table td.tinytable_css_tlt9f4zwfrbr1b5fei2w, .table th.tinytable_css_tlt9f4zwfrbr1b5fei2w {    border-bottom: solid 0.1em #d3d8dc; }
-.table td.tinytable_css_lnefi7uf8at9xjd5h17a, .table th.tinytable_css_lnefi7uf8at9xjd5h17a {    text-align: left; }
-.table td.tinytable_css_k6m79g55rvyrj04aj196, .table th.tinytable_css_k6m79g55rvyrj04aj196 {    text-align: center; }
-.table td.tinytable_css_zmxn3smaw2wtx1jdo6yu, .table th.tinytable_css_zmxn3smaw2wtx1jdo6yu {    border-bottom: solid 0.05em black; }
-    </style>
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
-    </script><div class="container">
-      <table class="table table-borderless" id="tinytable_vgvpcjjsjt79gha1iccu" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-<thead><tr>
-<th scope="col"> </th>
-                <th scope="col">(1)</th>
-              </tr></thead>
-<tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
-<tbody>
-<tr>
-<td>(Intercept)    </td>
-                  <td>100495.49***</td>
-                </tr>
-<tr>
-<td>               </td>
-                  <td>(12569.41)  </td>
-                </tr>
-<tr>
-<td>lag(研究開発費)</td>
-                  <td>17.17***    </td>
-                </tr>
-<tr>
-<td>               </td>
-                  <td>(0.26)      </td>
-                </tr>
-<tr>
-<td>lag(広告宣伝費)</td>
-                  <td>6.91***     </td>
-                </tr>
-<tr>
-<td>               </td>
-                  <td>(0.52)      </td>
-                </tr>
-<tr>
-<td>Num.Obs.       </td>
-                  <td>5174        </td>
-                </tr>
-<tr>
-<td>R2             </td>
-                  <td>0.785       </td>
-                </tr>
-<tr>
-<td>R2 Adj.        </td>
-                  <td>0.785       </td>
-                </tr>
-<tr>
-<td>RMSE           </td>
-                  <td>861991.65   </td>
-                </tr>
-</tbody>
-</table>
-</div>
+<!-- preamble start -->
 
     <script>
-      function styleCell_tinytable_h1bc5fyzqqym2u1m28tu(i, j, css_id) {
-        var table = document.getElementById("tinytable_vgvpcjjsjt79gha1iccu");
-        table.rows[i].cells[j].classList.add(css_id);
+
+      function styleCell_aop6ompvjn8md5q0pgsp(i, j, css_id) {
+          var table = document.getElementById("tinytable_aop6ompvjn8md5q0pgsp");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_vgvpcjjsjt79gha1iccu');
+        var table = document.getElementById('tinytable_aop6ompvjn8md5q0pgsp');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -550,8 +699,8 @@ F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_h1bc5fyzqqym2u1m28tu(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_vgvpcjjsjt79gha1iccu");
+      function spanCell_aop6ompvjn8md5q0pgsp(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_aop6ompvjn8md5q0pgsp");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -577,37 +726,94 @@ F-statistic:  9460 on 2 and 5171 DF,  p-value: &lt; 2.2e-16</code></pre>
         targetCell.rowSpan = rowspan;
         targetCell.colSpan = colspan;
       }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 10, j: 1 },  ], css_id: 'tinytable_css_vbiqvqt3nr25zt9ozo3e',}, 
+          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_waz9nrhgj8a74s59p8a5',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 },  ], css_id: 'tinytable_css_tlt9f4zwfrbr1b5fei2w',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_vgvpcjjsjt79gha1iccu',}, 
+          { positions: [ { i: 10, j: 0 },  ], css_id: 'tinytable_css_t8zxlrswibxkgbtyto2h',}, 
+          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_h1bc5fyzqqym2u1m28tu',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 },  ], css_id: 'tinytable_css_7okhu56gr6jhsgw11cn2',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_qk6pj5tusgjyow139w4o',}, 
+          ];
 
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(0, 0, 'tinytable_css_tlt9f4zwfrbr1b5fei2w') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(0, 1, 'tinytable_css_tlt9f4zwfrbr1b5fei2w') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(0, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(1, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(2, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(3, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(4, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(5, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(6, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(7, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(8, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(9, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(10, 0, 'tinytable_css_lnefi7uf8at9xjd5h17a') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(0, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(1, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(2, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(3, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(4, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(5, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(6, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(7, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(8, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(9, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(10, 1, 'tinytable_css_k6m79g55rvyrj04aj196') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(6, 0, 'tinytable_css_zmxn3smaw2wtx1jdo6yu') })
-window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u1m28tu(6, 1, 'tinytable_css_zmxn3smaw2wtx1jdo6yu') })
-    </script>
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_aop6ompvjn8md5q0pgsp(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script><style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_vbiqvqt3nr25zt9ozo3e, .table th.tinytable_css_vbiqvqt3nr25zt9ozo3e { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_waz9nrhgj8a74s59p8a5, .table th.tinytable_css_waz9nrhgj8a74s59p8a5 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_tlt9f4zwfrbr1b5fei2w, .table th.tinytable_css_tlt9f4zwfrbr1b5fei2w { text-align: center; }
+      .table td.tinytable_css_vgvpcjjsjt79gha1iccu, .table th.tinytable_css_vgvpcjjsjt79gha1iccu { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_t8zxlrswibxkgbtyto2h, .table th.tinytable_css_t8zxlrswibxkgbtyto2h { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_h1bc5fyzqqym2u1m28tu, .table th.tinytable_css_h1bc5fyzqqym2u1m28tu { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_7okhu56gr6jhsgw11cn2, .table th.tinytable_css_7okhu56gr6jhsgw11cn2 { text-align: left; }
+      .table td.tinytable_css_qk6pj5tusgjyow139w4o, .table th.tinytable_css_qk6pj5tusgjyow139w4o { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+<div class="container">
+      <table class="table table-borderless" id="tinytable_aop6ompvjn8md5q0pgsp" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+<thead><tr>
+<th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr></thead>
+<tfoot><tr><td colspan="2">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+<tbody>
+<tr>
+<td>(Intercept)</td>
+                  <td>100495.49***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(12569.41)</td>
+                </tr>
+<tr>
+<td>lag(研究開発費)</td>
+                  <td>17.17***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(0.26)</td>
+                </tr>
+<tr>
+<td>lag(広告宣伝費)</td>
+                  <td>6.91***</td>
+                </tr>
+<tr>
+<td></td>
+                  <td>(0.52)</td>
+                </tr>
+<tr>
+<td>Num.Obs.</td>
+                  <td>5174</td>
+                </tr>
+<tr>
+<td>R2</td>
+                  <td>0.785</td>
+                </tr>
+<tr>
+<td>R2 Adj.</td>
+                  <td>0.785</td>
+                </tr>
+<tr>
+<td>RMSE</td>
+                  <td>861991.65</td>
+                </tr>
+</tbody>
+</table>
+</div>
+<!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
-</section></section></section><section id="まとめ" class="level2"><h2 class="anchored" data-anchor-id="まとめ">まとめ</h2>
+</section></section></section><section id="まとめ" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="まとめ">
+<span class="header-section-number">10.3</span> まとめ</h2>
 <ul>
 <li>観測値とモデルとの差を表す確率変数である誤差項を含んだ確率的回帰モデルを考えます。
 <ul>
@@ -624,386 +830,259 @@ window.addEventListener('load', function () { styleCell_tinytable_h1bc5fyzqqym2u
 </ul>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
-    }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-      }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
-        }
-      });
-    }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "コピーしました");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "コピーしました");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "コピーしました");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "コピーしました");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-          // default icon
-          link.classList.add("external");
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // default icon
+            link.classList.add("external");
         }
       }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1011,189 +1090,172 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./presemi2023_09.html" class="pagination-link" aria-label="回帰分析の基礎">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
-<p>Copyright 2023, Soichi Matsuura</p>
+<p>Copyright 2026, Soichi Matsuura</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;
@@ -1201,7 +1263,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ma2ura">
+    <a class="nav-link active" href="https://github.com/ma2ura/presemi/" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>

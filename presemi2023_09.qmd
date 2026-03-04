@@ -2,8 +2,12 @@
 
 ```{r}
 #| echo: FALSE
-library(tidyverse)
-library(ggthemes)
+pacman::p_load(
+  tidyverse, # データ整形
+  ggthemes, # ggplotのテーマ
+  modelsummary, # モデルの結果をまとめる
+  rgl # 3Dグラフのパッケージ
+)
 mystyle <- list (#  ggplotのテーマ
   theme_few(), # ggthemesパッケージ
   theme(
@@ -62,7 +66,9 @@ glimpse(df)
 `ggplot()`関数を使って散布図を作成するには、`geom_point()`を使います。
 
 ```{r}
-g <- ggplot(df) + aes(x = log_広告宣伝費, y = log_売上高) + geom_point() + mystyle
+g <- ggplot(df) +
+  aes(x = log_広告宣伝費, y = log_売上高) +
+  geom_point() + mystyle
 print(g)
 ```
 
@@ -80,7 +86,11 @@ cor(df$log_広告宣伝費, df$log_売上高)
 `geom_smooth()`関数は引数がたくさんありますが、ここでは`method = "lm"`として、最小二乗法により推定された回帰直線を追加し、`se = FALSE`とすることで、回帰直線の周りの標準誤差を表す青い帯を消し、`color = "red"`とすることで赤色の線を引いています。
 
 ```{r}
-g <- g + geom_smooth(method = "lm", se = FALSE, color = "red") +
+g <- g + geom_smooth(
+  formula = y ~ x,
+  method = "lm",
+  se = FALSE,
+  color = "red") +
     xlab("広告宣伝費の対数") +
     ylab("売上高の対数") + mystyle
 print(g)

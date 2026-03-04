@@ -55,9 +55,9 @@ Excelの場合は、インターネット上のデータを直接取り込むこ
 :::{.callout-important}
 ## Rの場合
 
-`R`でcsvファイルを読み込む最もシンプルな方法は、基本関数`read.csv()`を用いて、ファイル名やファイルを参照するURLを直接指定することです。
+`R`でcsvファイルを読み込む最もシンプルな方法は、`readr`パッケージの`read_._csv()`を用いて、ファイル名やファイルを参照するURLを直接指定することです。
 ```{r}
-df <- read.csv("https://so-ichi.com/kesho_2023.csv")
+df <- readr::read_csv("data/kesho_2023.csv")
 ```
 :::
 

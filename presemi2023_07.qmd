@@ -18,11 +18,13 @@
 # 文字化け防止のおまじない、R 4.1.0以降
 knitr::opts_chunk$set(dev = "ragg_png")
 
-library(tidyverse) # とりあえずこれ
-library(ggthemes) # ggplot2のテーマ
-library(knitr)
-library(kableExtra)
-library(gghighlight)
+pacman::p_load(
+  tidyverse, # データ分析のためのパッケージ群
+  ggthemes, # ggplot2のテーマ
+  knitr, # kable()関数など
+  kableExtra, # kable()関数で作成した表を装飾するためのパッケージ
+  gghighlight # ggplot2で特定のデータを強調するためのパッケージ
+)
 
 # テーマを設定
 theme_set(theme_few(base_size = 12))

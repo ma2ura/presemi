@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>プレゼミ講義ノート – presemi2023_06</title>
+<title>6&nbsp; 統計的推定 – プレゼミ講義ノート</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -60,24 +61,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<link href="./presemi2023_07.html" rel="next">
+<link href="./presemi2023_05.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e0400e284328382059829e6edf64fb62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 20,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "一致なし",
     "search-matching-documents-text": "一致した文書",
@@ -86,130 +99,353 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "追加の検索結果",
     "search-more-matches-text": "追加の検索結果",
     "search-clear-button-title": "消去",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "取消",
     "search-submit-button-title": "検索",
     "search-label": "サーチ"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="mystyle.css">
+<meta name="twitter:title" content="6&nbsp; 統計的推定 – プレゼミ講義ノート">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://so-ichi.com/presemi2023_06_files/figure-html/unnamed-chunk-2-1.png">
+<meta name="twitter:image-height" content="9600">
+<meta name="twitter:image-width" content="16800">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-fixed">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">プレゼミ講義ノート</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="サーチ"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="dropdown-header">
- <span class="menu-text">講義内容</span>
-</li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text"></span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">
-<li>
-    <a class="dropdown-item" href="./index.html" rel="" target="">
- <span class="dropdown-text">はじめに</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_01.html" rel="" target="">
- <span class="dropdown-text">第1回 講義ガイダンス</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_02.html" rel="" target="">
- <span class="dropdown-text">第2回 実証研究</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_03.html" rel="" target="">
- <span class="dropdown-text">第3回 Rの使い方</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
- <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
- <span class="dropdown-text">第5回 記述統計と可視化</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
- <span class="dropdown-text">第6回 統計的推定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
- <span class="dropdown-text">第7回 統計的仮説検定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
- <span class="dropdown-text">第8回 変数間の関連性</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
- <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
-  </li>  
-    </ul>
-</li>
-</ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/uribo/230827ism_ws" rel="" target=""><i class="bi bi-github" role="img">
-</i> 
- <span class="menu-text">GitHub</span></a>
-  </li>  
-</ul>
-<div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
-</div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./presemi2023_06.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">プレゼミ講義ノート</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ma2ura/presemi/" title="ソースコード" class="quarto-navigation-tool px-1" aria-label="ソースコード"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="リーダーモードの切り替え">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="サーチ"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">プレゼミとは</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究、仮説、実証会計</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_06.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">目次</h2>
    
   <ul>
-<li>
-<a href="#%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A" id="toc-統計的推定" class="nav-link active" data-scroll-target="#%E7%B5%B1%E8%A8%88%E7%9A%84%E6%8E%A8%E5%AE%9A">統計的推定</a>
-  <ul class="collapse">
-<li><a href="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC" id="toc-母集団と標本" class="nav-link" data-scroll-target="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC">母集団と標本</a></li>
+<li><a href="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC" id="toc-母集団と標本" class="nav-link active" data-scroll-target="#%E6%AF%8D%E9%9B%86%E5%9B%A3%E3%81%A8%E6%A8%99%E6%9C%AC"><span class="header-section-number">6.1</span> 母集団と標本</a></li>
   <li>
-<a href="#%E6%A8%99%E6%9C%AC%E5%88%86%E5%B8%83" id="toc-標本分布" class="nav-link" data-scroll-target="#%E6%A8%99%E6%9C%AC%E5%88%86%E5%B8%83">標本分布</a>
+<a href="#%E6%A8%99%E6%9C%AC%E5%88%86%E5%B8%83" id="toc-標本分布" class="nav-link" data-scroll-target="#%E6%A8%99%E6%9C%AC%E5%88%86%E5%B8%83"><span class="header-section-number">6.2</span> 標本分布</a>
   <ul class="collapse">
 <li><a href="#%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F" id="toc-不偏推定量" class="nav-link" data-scroll-target="#%E4%B8%8D%E5%81%8F%E6%8E%A8%E5%AE%9A%E9%87%8F">不偏推定量</a></li>
   <li><a href="#%E4%B8%80%E8%87%B4%E6%8E%A8%E5%AE%9A%E9%87%8F" id="toc-一致推定量" class="nav-link" data-scroll-target="#%E4%B8%80%E8%87%B4%E6%8E%A8%E5%AE%9A%E9%87%8F">一致推定量</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E6%8E%A8%E5%AE%9A%E3%81%A8%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93" id="toc-母平均の推定と信頼区間" class="nav-link" data-scroll-target="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E6%8E%A8%E5%AE%9A%E3%81%A8%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93">母平均の推定と信頼区間 <!-- 7.3 ---></a>
+<a href="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E6%8E%A8%E5%AE%9A%E3%81%A8%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93" id="toc-母平均の推定と信頼区間" class="nav-link" data-scroll-target="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E6%8E%A8%E5%AE%9A%E3%81%A8%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93"><span class="header-section-number">6.3</span> 母平均の推定と信頼区間 <!-- 7.3 ---></a>
   <ul class="collapse">
-<li><a href="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93" id="toc-母平均の信頼区間" class="nav-link" data-scroll-target="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93">母平均の信頼区間 <!-- 7.3.1 ---></a></li>
-  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%AE%E8%A7%A3%E9%87%88" id="toc-信頼区間の解釈" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%AE%E8%A7%A3%E9%87%88">信頼区間の解釈</a></li>
-  </ul>
-</li>
+<li><a href="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93" id="toc-母平均の信頼区間" class="nav-link" data-scroll-target="#%E6%AF%8D%E5%B9%B3%E5%9D%87%E3%81%AE%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93"><span class="header-section-number">6.3.1</span> 母平均の信頼区間 <!-- 7.3.1 ---></a></li>
+  <li><a href="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%AE%E8%A7%A3%E9%87%88" id="toc-信頼区間の解釈" class="nav-link" data-scroll-target="#%E4%BF%A1%E9%A0%BC%E5%8C%BA%E9%96%93%E3%81%AE%E8%A7%A3%E9%87%88"><span class="header-section-number">6.3.2</span> 信頼区間の解釈</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><section id="統計的推定" class="level1"><h1>統計的推定</h1>
-<p>第6回講義の<strong>到達目標</strong>は、</p>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>第6回講義の<strong>到達目標</strong>は、</p>
 <ul>
 <li>母集団と標本の違いを理解する。</li>
 <li>不偏推定量と一致推定量を理解し，説明することができる。</li>
@@ -227,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-用語の意味
+<span class="screen-reader-only">重要</span>用語の意味
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -243,7 +479,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
-<section id="母集団と標本" class="level2"><h2 class="anchored" data-anchor-id="母集団と標本">母集団と標本</h2>
+<section id="母集団と標本" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="母集団と標本">
+<span class="header-section-number">6.1</span> 母集団と標本</h2>
 <!--
 リサーチ・クエスチョンで定めた研究対象となるすべての個体の集合を**母集団**(population)といいます。
 時間や費用の面で、母集団全体を調査・分析することは不可能です。
@@ -256,7 +493,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>標本の特徴を調べることで，観察できない母集団の<strong>母数</strong>(parameter)を推定することを，<strong>統計的推定</strong>(statistical estimation)とよびます。 統計的推定には，標本から計算される<strong>統計量</strong>(statistic)を用います。 母数の推定のために利用される統計量を<strong>推定量</strong>(estimator)といいます。</p>
 <p><strong>母数は定数</strong>ですが，標本が変われば値が変わるので<strong>推定量は確率変数</strong>です。 1つの標本から計算された1つの標本平均は，たまたま今手元にある標本から計算された1つの平均値にすぎず，別の標本を集めて再度標本平均を計算すれば，異なる値になることが予想されます。</p>
 <p>また母数を推定するために用いられる統計量と一般的な数式記号は以下の通りです。</p>
-<table class="table">
+<table class="caption-top table">
 <thead><tr class="header">
 <th style="text-align: center;">母数</th>
 <th style="text-align: center;">記号</th>
@@ -292,38 +529,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>標本から母数を推定するためには，適切な方法で標本を集めなければなりません。 1限の講義に出席している学生にアンケートをとっても，学生全体の推定には適切とはいえない標本があつまるでしょう。</p>
 <p>母集団から標本を選ぶ標本抽出方法として代表的なものが，<strong>単純無作為抽出</strong>(simple randome sampling)です。 単純無作為抽出で選ばれた標本は、母集団の偏りのない標本といえます。 たとえば，平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算してみます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-1_afb37a7ede903bac99ee5d78b3811964">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># 標本抽出</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 標本平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 標本平均</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.960697</code></pre>
+<pre><code>[1] 9.980336</code></pre>
 </div>
 </div>
-<p>平均値は9.9606967となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">\(10\)</span>と標本平均9.9606967の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
+<p>平均値は9.9803359となり，母平均10とほぼ同じ値になりましたが、ぴったり10ではありませんよね。 この母平均<span class="math inline">\(10\)</span>と標本平均9.9803359の差を<strong>誤差</strong>といい、母集団と標本のズレを意味します。</p>
 <p>平均10，標準偏差1の正規分布からランダムに100個のデータを抽出して標本を作り，その平均値を計算する，という試行(trial)を10000回繰り返します。 すると標本サイズ100の標本が10000個できるので、その各標本ごとに標本平均を計算して、10000個の標本平均を得ます。 その10000個の標本平均をヒストグラムで表示してたものが、以下のグラフとなります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-2_9069e3cbbd1e9b158f700460454020a5">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">100</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">trial</span> <span class="op">=</span> <span class="fl">10000</span> <span class="co"># 標本数</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="co"># 結果を入れる空の変数</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">trial</span><span class="op">)</span> <span class="op">{</span> <span class="co"># 以下の処理をtrial回繰り返す</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># 標本抽出</span></span>
 <span>  <span class="va">result</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 標本平均</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 基本関数histでヒストグラム作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 基本関数histでヒストグラム作成</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>この図をみると、キレイな左右対称の釣り鐘型の分布になっていることが分かります。 この10000個の平均値の平均は，</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-3_9a36ab2c6532a91101cd575262d96c1f">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.00174</code></pre>
+<pre><code>[1] 10.00149</code></pre>
 </div>
 </div>
 <p>とほぼ10と等しくなります。 このように，標本数を増やしていくと，標本平均の平均値は母平均に近づく，という法則を<strong>大数の法則</strong>(law of large numbers)といいます。 統計学における極めて重要な概念です。</p>
-</section><section id="標本分布" class="level2"><h2 class="anchored" data-anchor-id="標本分布">標本分布</h2>
+</section><section id="標本分布" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="標本分布">
+<span class="header-section-number">6.2</span> 標本分布</h2>
 <p>関心の対象となる母集団から同じサイズの標本を取り出すにしても，その組み合わせは1つではありません。</p>
 <p>たとえば，プレゼミのメンバー25名から5名の標本を選ぶなら，その組み合わせは，</p>
 <p><span class="math display">\[
@@ -343,23 +584,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \text{標本分散} &amp;= \frac 1n \sum_{i=1}^n \left (x_i - \bar{x} \right )^2
 \end{aligned}
 \]</span> 標本平均と標本分散を計算する関数を作ります。 関数の作り方については，また後で勉強する予定ですので，ここでは関数の使い方だけを覚えておいてください。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-4_3c98068461cccc53601c8c3570c1fea3">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">meanp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">meanp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 合計をデータの個数で割る</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">varp</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu">meanp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 分散の計算式</span></span>
-<span><span class="op">}</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">}</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>これで平均と分散を計算する関数ができました。 これを使って，標本平均と標本分散を計算してみましょう。 まず5のサイズをもつ母集団から標本サイズ3の標本を10通り作成します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-5_2d060838b77f7169468be84d83b30b05">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">9</span><span class="op">)</span></span>
-<span><span class="fu">meanp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母平均 5.6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">4</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">9</span><span class="op">)</span></span>
+<span><span class="fu">meanp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母平均 5.6</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.6</code></pre>
 </div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># 3つのデータを取り出す組み合わせ</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># 3つのデータを取り出す組み合わせ</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
 [1,]    2    2    2    2    2    2    4    4    4     6
@@ -368,22 +609,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>これですべての組み合わせを作り出せましたので，それぞれの標本から標本平均と標本分散を計算します。 各列に，先ほど作った<code>meanp()</code>関数を<code>apply</code>関数で適用し，10の標本平均を作り，<code>sample_mean</code>という変数に代入し，その平均を計算します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-6_8e941e2bc51735cb40f8612c53982362">
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">meanp</span><span class="op">)</span></span>
-<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_mean</span><span class="op">)</span> <span class="co"># 標本平均の平均は5.6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">meanp</span><span class="op">)</span></span>
+<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_mean</span><span class="op">)</span> <span class="co"># 標本平均の平均は5.6</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.6</code></pre>
 </div>
 </div>
 <p>標本平均の平均5.6が母平均5.6に一致したので，標本平均は不偏推定量であることが分かります。</p>
 <p>次に分散を計算してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-7_e0004c0408f6b8ca660d6cce3a407370">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">varp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">varp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.84</code></pre>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">varp</span><span class="op">)</span></span>
-<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_var</span><span class="op">)</span> <span class="co">#</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sample_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">varp</span><span class="op">)</span></span>
+<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_var</span><span class="op">)</span> <span class="co">#</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4.866667</code></pre>
 </div>
@@ -392,14 +633,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 \text{標本不偏分散} = \frac{1}{n-1} \sum_{i=1}^n \left (x_i - \bar{x} \right )^2
 \]</span></p>
 <p>Rの基本関数である<code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>は標本分散ではなく標本不偏分散を計算するので，これを使って先ほどの計算を再現してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-8_51bf42b4dd8fb9feaa6464c85379859c">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 母分散 5.84</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.3</code></pre>
 </div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># 3つのデータを取り出す組み合わせ</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">x</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># 3つのデータを取り出す組み合わせ</span></span>
 <span><span class="va">sample_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">res</span>, <span class="fl">2</span>, <span class="va">var</span><span class="op">)</span></span>
-<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_var</span><span class="op">)</span> <span class="co"># 標本平均の平均は5.6</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">meanp</span><span class="op">(</span><span class="va">sample_var</span><span class="op">)</span> <span class="co"># 標本平均の平均は5.6</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.3</code></pre>
 </div>
@@ -416,50 +657,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 </ul>
 <p>という母数をもつ正規分布に従っている，としましょう。 グラフにする前に，必要なパッケージの読み出しと，グラフのスタイルを設定します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-9_b25a8cea76ec08204ba55c83457338f9">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jrnold.github.io/ggthemes/">ggthemes</a></span><span class="op">)</span></span>
 <span><span class="va">mystyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span> <span class="op">(</span><span class="co">#  ggplotのテーマ</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_few.html">theme_few</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># ggthemesパッケージ</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/theme_few.html">theme_few</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># ggthemesパッケージ</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
 <span>    text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span></span>
 <span>      size<span class="op">=</span><span class="fl">16</span>,  <span class="co">#  フォントサイズ</span></span>
 <span>      family <span class="op">=</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># ヒラギノフォント</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>グラフにすると次のようになります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-10_be88b7e05721f655c256f6e48d211ec7">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>,<span class="fl">77</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>X <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">47</span>,<span class="fl">77</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span></span>
 <span>  fun <span class="op">=</span> <span class="va">dnorm</span>,</span>
 <span>  args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">62</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>ここから，標本サイズ10の標本を取り出し，標本平均を計算する，という試行を1000回繰り返し，1000個の標本平均を作りましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-11_b447b9fc6c2ce97ac160877252bcbf08">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">10</span> <span class="co"># 標本サイズ</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">n</span> <span class="op">=</span> <span class="fl">10</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">trial</span> <span class="op">=</span> <span class="fl">1000</span> <span class="co"># 試行回数</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span> <span class="co"># 結果を入れる空の箱</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">trial</span><span class="op">)</span> <span class="op">{</span> <span class="co"># 以下をtrial回繰り返す</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">62</span>, <span class="fl">5</span><span class="op">)</span> <span class="co"># 標本を生成</span></span>
 <span>  <span class="va">result</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># 標本平均を計算</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 標本平均の平均</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="co"># 標本平均の平均</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 62.03523</code></pre>
+<pre><code>[1] 62.0391</code></pre>
 </div>
 </div>
-<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.0352337となりますが，これは母平均62に近い値になっています。</p>
+<p>ヒストグラムの中心が母平均の62に近づいていることが分かります。 標本平均の平均は62.039101となりますが，これは母平均62に近い値になっています。</p>
 <p>グラフで確認すると，</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-12_79a0ad6c549d3dce175f2ad709e67fb7">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span> <span class="co"># 軸の設定</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span> <span class="co"># ヒストグラム</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">..density..</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">60</span>, <span class="co"># y軸を密度に</span></span>
@@ -467,22 +711,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_function.html">stat_function</a></span><span class="op">(</span>fun<span class="op">=</span><span class="va">dnorm</span>, args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fl">62</span>, sd <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>　<span class="co"># 母集団の分布</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">62</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="co"># 母平均の縦線</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">47</span>,<span class="fl">77</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span> <span class="co"># x軸の範囲を指定</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>と母平均と標本平均のヒストグラムの中心が一致していることが分かります。 ただ，母分散と比べて標本分散が非常に小さいことが一目瞭然です。</p>
 <p>標本サイズを先ほどの100倍の1000として，同じ試行を1000回繰り返してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-13_ac4c7410068cc42fb39e8334353d7eb5">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>どんどん標本サイズを増やして，100000として，同じ試行を1000回繰り返してみましょう。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-14_1adec91c9994d08d6931bb6f7c8362ef">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>このように，標本平均の分散は，標本サイズが大きくなるにつれて，どんどん小さくなっていくことが分かります。 たとえば30から150の間の値をとり，母平均62，母分散25の正規分布にしたがう母集団から標本を採ったとしましょう。 母集団が30から150の値をとるのに対して，標本サイズが大きいとき，標本平均が30とか150の値をとることはあり得ません。</p>
@@ -494,10 +747,12 @@ SD(\bar x) = \frac{\sigma}{\sqrt{n}}
 <!--
 標本サイズが大きくなるにつれて，標本平均の分散が小さくなっていく性質を**漸近的不偏性**(asymptotic unbiasedness)といい，この特徴を一致性といいます。
 -->
-</section></section><section id="母平均の推定と信頼区間" class="level2"><h2 class="anchored" data-anchor-id="母平均の推定と信頼区間">母平均の推定と信頼区間 <!-- 7.3 --->
+</section></section><section id="母平均の推定と信頼区間" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="母平均の推定と信頼区間">
+<span class="header-section-number">6.3</span> 母平均の推定と信頼区間 <!-- 7.3 --->
 </h2>
 <p>標本から得た統計量をつかって母数である母平均を予想したいとき，手元にある1つの標本から計算した標本平均は，どの程度の精度をもつでしょうか？</p>
-<section id="母平均の信頼区間" class="level3"><h3 class="anchored" data-anchor-id="母平均の信頼区間">母平均の信頼区間 <!-- 7.3.1 --->
+<section id="母平均の信頼区間" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="母平均の信頼区間">
+<span class="header-section-number">6.3.1</span> 母平均の信頼区間 <!-- 7.3.1 --->
 </h3>
 <p><strong>信頼区間</strong>(confidence interval)は，非常に難解な概念です。 まず確認として，母数である母平均は観察できない数値ですが，確率変数ではなく定数です。 この母平均が計算した信頼区間に含まれるか，含まれないか，のどちらかしかありません。 信頼区間の正しい解釈は，<strong>母集団から標本を取ってきて、その標本平均から95%信頼区間を求める、という作業を100回やったときに、95回はその区間の中に母平均が含まれる</strong>，というものです。 この信頼区間の計算をしてみます。</p>
 <section id="標本平均の標準偏差を推定する-標準誤差" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="標本平均の標準偏差を推定する-標準誤差">標本平均の標準偏差を推定する– 標準誤差</h4>
@@ -505,7 +760,8 @@ SD(\bar x) = \frac{\sigma}{\sqrt{n}}
 <p><span class="math display">\[
 SD(\bar x) = \frac{\sigma }{\sqrt{n}}
 \]</span></p>
-<p>と定義されます。 ここで<span class="math inline">\(n\)</span>は標本サイズなのですぐ分かりますが，$<span class="math inline">\(は母標準偏差なので未知です。 そこでまず\)</span>$の推定のために，不偏標準偏差</p>
+<p>と定義されます。 ここで<span class="math inline">\(n\)</span>は標本サイズなのですぐ分かりますが，$<span class="math inline">\(は母標準偏差なので未知です。
+そこでまず\)</span>$の推定のために，不偏標準偏差</p>
 <p><span class="math display">\[
 u = \sqrt{\frac{1}{n-1} \sum_{i=1}^n \left (x_i - \bar{x} \right )^2}
 \]</span></p>
@@ -515,8 +771,8 @@ SE = \frac{u}{\sqrt{n}}
 <p>この標準誤差を標本平均の標準誤差の代わりに使います。</p>
 </section><section id="t分布" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="t分布">t分布</h4>
 <p>さて，とうとう統計学の真骨頂であるt分布の登場です。 <span class="math inline">\(t\)</span>分布(t-distribution)は，母集団が正規分布にしたがうとき，標本平均の分布が従う確率分布です。 絵で描くとこんな感じです。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-15_76b5d6c1089bc262fb0a8a70634c74cc">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">4</span>, <span class="fl">4</span>, length.out <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">df5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -531,15 +787,18 @@ SE = \frac{u}{\sqrt{n}}
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, color <span class="op">=</span> <span class="va">freedom</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"自由度が異なるt分布のプロット"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"t値"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"確率密度"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"自由度が異なるt分布のプロット"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"t値"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"確率密度"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>標本平均<span class="math inline">\(\bar x\)</span>から母平均を引いて，それを標準誤差<span class="math inline">\(SE\)</span>で割った値を<strong>t値</strong>(t-value)といい，この<span class="math inline">\(t\)</span>値は<span class="math inline">\(t\)</span>分布にしたがうことが知られていますが，ここでは詳細に触れません。</p>
 <p>自由度99の<span class="math inline">\(t\)</span>分布の場合，95%の確率で<span class="math inline">\(t\)</span>値は-1.98から1.98の間に入ります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-16_9aa488ccd16fb2c8b2a0e6ba6dd89d4b">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 自由度を設定</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 自由度を設定</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fl">99</span></span>
 <span></span>
 <span><span class="co"># データを生成</span></span>
@@ -570,9 +829,12 @@ SE = \frac{u}{\sqrt{n}}
 <span>  y <span class="op">=</span> <span class="fl">0.1</span>, yend <span class="op">=</span> <span class="fl">0.07</span>, color <span class="op">=</span> <span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><span class="math inline">\(t\)</span>分布は確率分布ですので，面積は1となります。 青い領域が95％の確率で<span class="math inline">\(t\)</span>値が入る範囲です。 ということは両側の白い領域は，片方が2.5％と面積となっています。 これを次のように書きます。</p>
@@ -580,12 +842,12 @@ SE = \frac{u}{\sqrt{n}}
 [ -t _{100-1, 0.025}, \ t_{100-1, 0.025}]
 \]</span></p>
 <p><span class="math inline">\(t\)</span>分布表を使って，自由度99のときの<span class="math inline">\(t\)</span>値を調べると，<span class="math inline">\(t_{100-1, 0.025} = 1.98\)</span>となります。 Rだと<code><a href="https://rdrr.io/r/stats/TDist.html">qt()</a></code>関数を使って計算できます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-17_0398624ef979a9fdc7fecb67a45e5614">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.025</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>,digits <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.025</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>,digits <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.98</code></pre>
 </div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.975</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>,digits <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">qt</a></span><span class="op">(</span><span class="fl">0.975</span>, df <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>,digits <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.98</code></pre>
 </div>
@@ -601,11 +863,12 @@ t = \frac{\bar x - \mu}{SE}
 -t _{n-1, 0.025} \times SE \leq \bar{x} - \mu \leq  t_{n-1, 0.025}\times SE
 \]</span></p>
 <p>この区間を95％信頼区間といいます。</p>
-</section></section><section id="信頼区間の解釈" class="level3"><h3 class="anchored" data-anchor-id="信頼区間の解釈">信頼区間の解釈</h3>
+</section></section><section id="信頼区間の解釈" class="level3" data-number="6.3.2"><h3 data-number="6.3.2" class="anchored" data-anchor-id="信頼区間の解釈">
+<span class="header-section-number">6.3.2</span> 信頼区間の解釈</h3>
 <p>信頼区間とは、観察できない真の値である母数が存在し、その母集団から標本を抽出し、標本平均を計算するということを繰り返したときに、95%の標本平均の信頼区間の中に真の値である母平均が入っている、ということです。</p>
 <p>先の例を使って、信頼区間を表現してみます。 いま、<strong>母集団が平均62，標準偏差5の正規分布にしたがう</strong>とします。 この母集団から<strong>標本サイズ50</strong>の標本を<strong>100個抽出</strong>して，標本平均と標本標準偏差を計算します。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-18_8945c8071340c03da44380a2811d6c6c">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trial</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># 標本数</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">trial</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="co"># 標本数</span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="co"># 標本サイズ</span></span>
 <span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fl">62</span> <span class="co"># 母平均</span></span>
 <span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="co"># 母標準偏差</span></span>
@@ -662,181 +925,103 @@ t = \frac{\bar x - \mu}{SE}
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="va">p</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">62</span>, color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span>　<span class="co"># 母平均を赤い線で表す</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span> <span class="co"># グラフを並べるためのパッケージ</span></span>
-<span><span class="va">p</span> <span class="op">/</span> <span class="va">g_ci</span> <span class="co"># グラフを縦に並べる</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">p</span> <span class="op">/</span> <span class="va">g_ci</span> <span class="co"># グラフを縦に並べる</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>本当は未知である母平均62，母標準偏差5の母集団から標本を100個取り出し，100個の標本平均と95%信頼区間を計算し，グラフにしています。 この100個の標本から計算した95％信頼区間に母平均62が含まれているかどうかを確認すると，7つの95％信頼区間に母平均が含まれていないことが分かります。<span class="math inline">\(7/100\)</span>の割合で信頼区間に母平均が含まれていないので，信頼水準は<span class="math inline">\(1-7/100=0.93\)</span>となります。</p>
 <p>信頼区間を50%にするとどうなるでしょうか？ こうなります。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-19_48113194ddd6d66e54a0e6e576f1fd68">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>信頼区間が短くなり，母平均を含まない50%信頼区間が増えました。</p>
 <p>標本サイズを大きくすればどうでしょうか。 先ほどまでは標本サイズ50の標本でしたが、標本サイズを500にして、95%信頼区間を計算してみます。</p>
-<div class="cell" data-hash="presemi2023_06_cache/html/unnamed-chunk-20_823aa811934a6cf4b66d7c1504b553ba">
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="presemi2023_06_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_06_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>標本サイズ<span class="math inline">\(n\)</span>が大きくなると、信頼区間の上限と下限を計算するさいの<span class="math inline">\(\sqrt{n}\)</span>が大きくなるため、信頼区間が短くなっていることがわかります。</p>
 
 
-</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "コピーしました");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "コピーしました");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -844,218 +1029,370 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "コピーしました");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "コピーしました");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // default icon
-          link.classList.add("external");
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-});
-</script>
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./presemi2023_05.html" class="pagination-link" aria-label="記述統計とデータの可視化・視覚化">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./presemi2023_07.html" class="pagination-link" aria-label="統計的仮説検定">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Soichi Matsuura</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2026, Soichi Matsuura</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ma2ura">
+    <a class="nav-link active" href="https://github.com/ma2ura/presemi/" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>

@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.8.26">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>プレゼミ講義ノート – presemi2023_05</title>
+<title>5&nbsp; 記述統計とデータの可視化・視覚化 – プレゼミ講義ノート</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,7 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -60,24 +61,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<link href="./presemi2023_06.html" rel="next">
+<link href="./presemi2023_04.html" rel="prev">
+<link href="./img/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e0400e284328382059829e6edf64fb62.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-7343c7e837b5f632e481c8a67249f67a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 20,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "一致なし",
     "search-matching-documents-text": "一致した文書",
@@ -86,131 +99,356 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "追加の検索結果",
     "search-more-matches-text": "追加の検索結果",
     "search-clear-button-title": "消去",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "取消",
     "search-submit-button-title": "検索",
     "search-label": "サーチ"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+}</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><link rel="stylesheet" href="mystyle.css">
+<meta name="twitter:title" content="5&nbsp; 記述統計とデータの可視化・視覚化 – プレゼミ講義ノート">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://so-ichi.com/img/R_Visu_01.jpg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-fixed">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg navbar-dark "><div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">プレゼミ講義ノート</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="サーチ"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="ナビゲーションを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-<li class="dropdown-header">
- <span class="menu-text">講義内容</span>
-</li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text"></span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-">
-<li>
-    <a class="dropdown-item" href="./index.html" rel="" target="">
- <span class="dropdown-text">はじめに</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_01.html" rel="" target="">
- <span class="dropdown-text">第1回 講義ガイダンス</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_02.html" rel="" target="">
- <span class="dropdown-text">第2回 実証研究</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_03.html" rel="" target="">
- <span class="dropdown-text">第3回 Rの使い方</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_04.html" rel="" target="">
- <span class="dropdown-text">第4回 Rによるデータ操作</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_05.html" rel="" target="">
- <span class="dropdown-text">第5回 記述統計と可視化</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_06.html" rel="" target="">
- <span class="dropdown-text">第6回 統計的推定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_07.html" rel="" target="">
- <span class="dropdown-text">第7回 統計的仮説検定</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_08.html" rel="" target="">
- <span class="dropdown-text">第8回 変数間の関連性</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./presemi2023_09.html" rel="" target="">
- <span class="dropdown-text">第9回 回帰分析の基礎</span></a>
-  </li>  
-    </ul>
-</li>
-</ul>
-<ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://github.com/uribo/230827ism_ws" rel="" target=""><i class="bi bi-github" role="img">
-</i> 
- <span class="menu-text">GitHub</span></a>
-  </li>  
-</ul>
-<div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
-</div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./presemi2023_05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="サイドバーを切り替える" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="サーチ" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">プレゼミ講義ノート</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ma2ura/presemi/" title="ソースコード" class="quarto-navigation-tool px-1" aria-label="ソースコード"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="ダークモードの切り替え"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="リーダーモードの切り替え">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="サーチ"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">はじめに</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">プレゼミとは</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">研究、仮説、実証会計</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rの使い方</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_05.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">統計的仮説検定</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">変数間の関連性</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_09.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">回帰分析の基礎</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presemi2023_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">回帰分析による統計的推定</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">目次</h2>
    
   <ul>
 <li>
-<a href="#%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96" id="toc-記述統計とデータの可視化視覚化" class="nav-link active" data-scroll-target="#%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96">記述統計とデータの可視化・視覚化</a>
+<a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88" id="toc-変数の種類と記述統計" class="nav-link active" data-scroll-target="#%E5%A4%89%E6%95%B0%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88"><span class="header-section-number">5.1</span> 変数の種類と記述統計</a>
   <ul class="collapse">
-<li>
-<a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88" id="toc-変数の種類と記述統計" class="nav-link" data-scroll-target="#%E5%A4%89%E6%95%B0%E3%81%AE%E7%A8%AE%E9%A1%9E%E3%81%A8%E8%A8%98%E8%BF%B0%E7%B5%B1%E8%A8%88">変数の種類と記述統計</a>
-  <ul class="collapse">
-<li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%A8%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0" id="toc-カテゴリー変数と量的変数" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%A8%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0">カテゴリー変数と量的変数</a></li>
+<li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%A8%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0" id="toc-カテゴリー変数と量的変数" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%A8%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0"><span class="header-section-number">5.1.1</span> カテゴリー変数と量的変数</a></li>
   <li><a href="#%E7%B7%B4%E7%BF%92%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF" id="toc-練習用データの読み込み" class="nav-link" data-scroll-target="#%E7%B7%B4%E7%BF%92%E7%94%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF">練習用データの読み込み</a></li>
-  <li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E7%A2%BA%E8%AA%8D" id="toc-基本的な統計量の確認" class="nav-link" data-scroll-target="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E7%A2%BA%E8%AA%8D">基本的な統計量の確認</a></li>
-  <li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E5%86%85%E5%AE%B9%E7%A2%BA%E8%AA%8D" id="toc-カテゴリ変数の内容確認" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E5%86%85%E5%AE%B9%E7%A2%BA%E8%AA%8D">カテゴリ変数の内容確認</a></li>
-  <li><a href="#%E3%81%A4%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%AE%E9%96%A2%E4%BF%82%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%8B" id="toc-つのカテゴリー変数の関係を確かめる" class="nav-link" data-scroll-target="#%E3%81%A4%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%AE%E9%96%A2%E4%BF%82%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%8B">2つのカテゴリー変数の関係を確かめる</a></li>
-  <li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%88%A5%E3%81%AB%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0%E3%81%AE%E5%80%A4%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B" id="toc-カテゴリー別に量的変数の値を調べる" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%88%A5%E3%81%AB%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0%E3%81%AE%E5%80%A4%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B">カテゴリー別に量的変数の値を調べる</a></li>
+  <li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E7%A2%BA%E8%AA%8D" id="toc-基本的な統計量の確認" class="nav-link" data-scroll-target="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E7%B5%B1%E8%A8%88%E9%87%8F%E3%81%AE%E7%A2%BA%E8%AA%8D"><span class="header-section-number">5.1.2</span> 基本的な統計量の確認</a></li>
+  <li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E5%86%85%E5%AE%B9%E7%A2%BA%E8%AA%8D" id="toc-カテゴリ変数の内容確認" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%A4%89%E6%95%B0%E3%81%AE%E5%86%85%E5%AE%B9%E7%A2%BA%E8%AA%8D"><span class="header-section-number">5.1.3</span> カテゴリ変数の内容確認</a></li>
+  <li><a href="#%E3%81%A4%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%AE%E9%96%A2%E4%BF%82%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%8B" id="toc-つのカテゴリー変数の関係を確かめる" class="nav-link" data-scroll-target="#%E3%81%A4%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%A4%89%E6%95%B0%E3%81%AE%E9%96%A2%E4%BF%82%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%8B"><span class="header-section-number">5.1.4</span> 2つのカテゴリー変数の関係を確かめる</a></li>
+  <li><a href="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%88%A5%E3%81%AB%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0%E3%81%AE%E5%80%A4%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B" id="toc-カテゴリー別に量的変数の値を調べる" class="nav-link" data-scroll-target="#%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%83%BC%E5%88%A5%E3%81%AB%E9%87%8F%E7%9A%84%E5%A4%89%E6%95%B0%E3%81%AE%E5%80%A4%E3%82%92%E8%AA%BF%E3%81%B9%E3%82%8B"><span class="header-section-number">5.1.5</span> カテゴリー別に量的変数の値を調べる</a></li>
   </ul>
 </li>
   <li>
-<a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96" id="toc-変数の可視化視覚化" class="nav-link" data-scroll-target="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96">変数の可視化・視覚化</a>
+<a href="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96" id="toc-変数の可視化視覚化" class="nav-link" data-scroll-target="#%E5%A4%89%E6%95%B0%E3%81%AE%E5%8F%AF%E8%A6%96%E5%8C%96%E8%A6%96%E8%A6%9A%E5%8C%96"><span class="header-section-number">5.2</span> 変数の可視化・視覚化</a>
   <ul class="collapse">
-<li><a href="#ggplot%E9%96%A2%E6%95%B0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%A8%E5%A4%89%E6%95%B0%E3%81%AE%E7%89%B9%E5%BE%B4%E6%8A%8A%E6%8F%A1" id="toc-ggplot関数の基本的な使い方と変数の特徴把握" class="nav-link" data-scroll-target="#ggplot%E9%96%A2%E6%95%B0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%A8%E5%A4%89%E6%95%B0%E3%81%AE%E7%89%B9%E5%BE%B4%E6%8A%8A%E6%8F%A1"><code>ggplot()</code>関数の基本的な使い方と変数の特徴把握</a></li>
-  <li><a href="#%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0" id="toc-ヒストグラム" class="nav-link" data-scroll-target="#%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0">ヒストグラム</a></li>
-  <li><a href="#%E7%AE%B1%E3%81%B2%E3%81%92%E5%9B%B3%E3%81%A8%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AA%E3%83%B3%E3%83%97%E3%83%AD%E3%83%83%E3%83%88" id="toc-箱ひげ図とバイオリンプロット" class="nav-link" data-scroll-target="#%E7%AE%B1%E3%81%B2%E3%81%92%E5%9B%B3%E3%81%A8%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AA%E3%83%B3%E3%83%97%E3%83%AD%E3%83%83%E3%83%88">箱ひげ図とバイオリンプロット</a></li>
-  <li><a href="#%E5%9B%B3%E3%81%AE%E4%BF%9D%E5%AD%98" id="toc-図の保存" class="nav-link" data-scroll-target="#%E5%9B%B3%E3%81%AE%E4%BF%9D%E5%AD%98">図の保存</a></li>
-  </ul>
-</li>
+<li><a href="#ggplot%E9%96%A2%E6%95%B0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%A8%E5%A4%89%E6%95%B0%E3%81%AE%E7%89%B9%E5%BE%B4%E6%8A%8A%E6%8F%A1" id="toc-ggplot関数の基本的な使い方と変数の特徴把握" class="nav-link" data-scroll-target="#ggplot%E9%96%A2%E6%95%B0%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9%E3%81%A8%E5%A4%89%E6%95%B0%E3%81%AE%E7%89%B9%E5%BE%B4%E6%8A%8A%E6%8F%A1"><span class="header-section-number">5.2.1</span> <code>ggplot()</code>関数の基本的な使い方と変数の特徴把握</a></li>
+  <li><a href="#%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0" id="toc-ヒストグラム" class="nav-link" data-scroll-target="#%E3%83%92%E3%82%B9%E3%83%88%E3%82%B0%E3%83%A9%E3%83%A0"><span class="header-section-number">5.2.2</span> ヒストグラム</a></li>
+  <li><a href="#%E7%AE%B1%E3%81%B2%E3%81%92%E5%9B%B3%E3%81%A8%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AA%E3%83%B3%E3%83%97%E3%83%AD%E3%83%83%E3%83%88" id="toc-箱ひげ図とバイオリンプロット" class="nav-link" data-scroll-target="#%E7%AE%B1%E3%81%B2%E3%81%92%E5%9B%B3%E3%81%A8%E3%83%90%E3%82%A4%E3%82%AA%E3%83%AA%E3%83%B3%E3%83%97%E3%83%AD%E3%83%83%E3%83%88"><span class="header-section-number">5.2.3</span> 箱ひげ図とバイオリンプロット</a></li>
+  <li><a href="#%E5%9B%B3%E3%81%AE%E4%BF%9D%E5%AD%98" id="toc-図の保存" class="nav-link" data-scroll-target="#%E5%9B%B3%E3%81%AE%E4%BF%9D%E5%AD%98"><span class="header-section-number">5.2.4</span> 図の保存</a></li>
   </ul>
 </li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><section id="記述統計とデータの可視化視覚化" class="level1"><h1>記述統計とデータの可視化・視覚化</h1>
-<p>第5回講義の<strong>到達目標</strong>は、</p>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">記述統計とデータの可視化・視覚化</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>第5回講義の<strong>到達目標</strong>は、</p>
 <ul>
 <li>適切なデータの型を選択し，データを読み込むことができる。</li>
 <li>カテゴリー変数を用いて表を作る事が出来る。</li>
@@ -230,69 +468,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>ここではRの得意とする<strong>データの可視化</strong>(data visualization)について学びます。 いままで利用してきた<code>tidyverse</code>にはグラフ作成のためのパッケージとして<code>ggplot2</code>があります。 本章では，<code>ggplot2</code>の使い方を学習し，読者にもデータの特徴を伝えやすく，シンプルで，美しいグラフの作成を目指します。</p>
 <p>ビッグデータを容易に扱えるようになった昨今において、データの可視化スキルの重要性は高まってきており、以下のような書籍が出版されています。いずれも非常に良い書籍ですので、興味のある方は読んでみてください。</p>
-<div class="quarto-layout-panel">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="img/R_Visu_01.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">データ分析のためのデータ可視化入門</figcaption></figure>
+<figcaption>データ分析のためのデータ可視化入門</figcaption></figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="img/R_Visu_02.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Rでできるビジュアル統計学</figcaption></figure>
+<figcaption>Rでできるビジュアル統計学</figcaption></figure>
 </div>
 </div>
-<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="img/R_Visu_03.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Rによるインタラクティブなデータビジュアライゼーション</figcaption></figure>
+<figcaption>Rによるインタラクティブなデータビジュアライゼーション</figcaption></figure>
 </div>
 </div>
 </div>
 </div>
 <p>1冊目はアメリカで絶賛された可視化本が翻訳されたものです。ソースコードとともに、データの可視化の基本や実例を学べます。 2冊目は、統計学を可視化という視点で学習する本です。 3冊目は前の2冊とは若干毛色が異なっており、<code>Shiny</code>というPosit社が開発したパッケージを使って、インタラクティブなグラフを作成する方法を学べます。</p>
 <p><code>ggplot2</code>を使うために<code>tidyverse</code>と<code>ggthemes</code>と<code>patchwork</code>を読み込みます。まだインストールできていなければ，始めにインストールしておいてください。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-1_fb46007ef85cdb416452de382ad5dc2e">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("tidyverse") # first time only</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># install.packages("tidyverse") # first time only</span></span>
 <span><span class="co"># install.packages("ggthemes")</span></span>
-<span><span class="co"># install.packages("patchwork")</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># install.packages("patchwork")</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-2_4a200615738b37fe49a17601a260366d">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># とりあえずこれ</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jrnold/ggthemes">ggthemes</a></span><span class="op">)</span> <span class="co"># ggplotのテーマ拡張</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># とりあえずこれ</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jrnold.github.io/ggthemes/">ggthemes</a></span><span class="op">)</span> <span class="co"># ggplotのテーマ拡張</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span> <span class="co"># ggplotの図を並べる</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">fontregisterer</span><span class="op">)</span> <span class="co"># 日本語フォントの登録</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">fontregisterer</span><span class="op">)</span> <span class="co"># 日本語フォントの登録</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>また、Macだとggplot2で作図したグラフで日本語が表示されないことがあります。 そのため、グラフのスタイルを事前に設定しておいて、文字化けを回避します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-3_ac12a5cd72f61587ae27313238362022">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mystyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span> <span class="op">(</span> <span class="co"># mystyleとして設定を保存</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggthemes/man/theme_few.html">theme_few</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># ggthemesのテーマ</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mystyle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span> <span class="op">(</span> <span class="co"># mystyleとして設定を保存</span></span>
+<span>  <span class="fu"><a href="http://jrnold.github.io/ggthemes/reference/theme_few.html">theme_few</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># ggthemesのテーマ</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span></span>
 <span>    text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span></span>
 <span>      size<span class="op">=</span><span class="fl">16</span>,  <span class="co">#  フォントサイズ</span></span>
 <span>     family <span class="op">=</span> <span class="st">"HiraKakuProN-W3"</span> <span class="co"># ヒラギノフォント</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="変数の種類と記述統計" class="level2"><h2 class="anchored" data-anchor-id="変数の種類と記述統計">変数の種類と記述統計</h2>
+<section id="変数の種類と記述統計" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="変数の種類と記述統計">
+<span class="header-section-number">5.1</span> 変数の種類と記述統計</h2>
 <p>データには「<strong>カテゴリ変数</strong>」(category variable)と「<strong>量的変数</strong>」(quantitative variable)あるいは「<strong>連続変数</strong>」(continuous variable)があり，それぞれに対して適切なグラフの種類があります。</p>
-<section id="カテゴリー変数と量的変数" class="level3"><h3 class="anchored" data-anchor-id="カテゴリー変数と量的変数">カテゴリー変数と量的変数</h3>
+<section id="カテゴリー変数と量的変数" class="level3" data-number="5.1.1"><h3 data-number="5.1.1" class="anchored" data-anchor-id="カテゴリー変数と量的変数">
+<span class="header-section-number">5.1.1</span> カテゴリー変数と量的変数</h3>
 <p><strong>カテゴリー変数</strong>(category variable)とは、観測値が属するカテゴリーを表す変数です。 たとえば、日経産業中分類の「水産」は35、鉱業は37，建設は41ですが、これらの数値は足したり引いたりすることに意味はありません。</p>
 <p><strong>量的変数</strong>(quantitative variable)とは、観測値が数値で表される変数です。 たとえば、売上高や株価は金額で表されるため、足したり引いたり、平均や分散を計算することに意味があります。</p>
 <p>したがって、手元にあるデータベースの各変数がカテゴリー変数か量的変数かを把握することは極めて重要です。 Rでは自動で両者を区別したりはしてくれないので、データを読み込んだ後に変数の種類を確認し、自分で指定します。</p>
 </section><section id="練習用データの読み込み" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="練習用データの読み込み">練習用データの読み込み</h3>
 <p>ここでは、教科書とは違う、企業の財務データを使いながら、データの可視化を学びます。 財務データが収録された<code>csv</code>ファイルを，tidyverseの<code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>関数を使って読み込みます。 <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>関数の引数として，ファイルの場所とファイル名を直接パスあるいは相対パスを指定します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-4_ecf2932a38590abbd6dc758f9716953d">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/RD_2022.csv"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># データの概要</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/RD_2022.csv"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># データの概要</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 57,823
 Columns: 23
 $ 会社コード                     &lt;chr&gt; "0000001", "0000001", "0000001", "00000…
-$ 企業名                         &lt;chr&gt; "極洋", "極洋", "極洋", "極洋", "極洋",…
+$ 企業名                         &lt;chr&gt; "極洋", "極洋", "極洋", "極洋", "極洋", "極洋", "極洋…
 $ 決算期                         &lt;chr&gt; "1999/03", "2000/03", "2001/03", "2002/…
 $ 決算種別                       &lt;dbl&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…
 $ 連結基準                       &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
@@ -317,10 +557,11 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p><code>23</code>個の変数があり、データの個数は<code>57,823</code>となっています。 以下ではこのデータを使って、データの可視化を学びます。</p>
-</section><section id="基本的な統計量の確認" class="level3"><h3 class="anchored" data-anchor-id="基本的な統計量の確認">基本的な統計量の確認</h3>
+</section><section id="基本的な統計量の確認" class="level3" data-number="5.1.2"><h3 data-number="5.1.2" class="anchored" data-anchor-id="基本的な統計量の確認">
+<span class="header-section-number">5.1.2</span> 基本的な統計量の確認</h3>
 <p>はじめに<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>で基本的な統計量を確認します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-5_9389f384862fda83148d7f43dc46900d">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  会社コード           企業名             決算期             決算種別 
  Length:57823       Length:57823       Length:57823       Min.   :10  
@@ -358,7 +599,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
  Min.   : -21709   Min.   :-1139009.0   Min.   :-1708029              
  1st Qu.:    159   1st Qu.:    -134.5   1st Qu.:     163              
  Median :    586   Median :      -7.0   Median :     823              
- Mean   :   4827   Mean   :    -114.7   Mean   :    7707              
+ Mean   :   4827   Mean   :    -114.7   Mean   :    7706              
  3rd Qu.:   2170   3rd Qu.:      91.0   3rd Qu.:    3372              
  Max.   :1190782   Max.   : 1097414.0   Max.   : 4987962              
  NA's   :391       NA's   :3736         NA's   :29                    
@@ -413,44 +654,45 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> : 最大値を計算する</li>
 </ul>
 <p>では、売上高の平均を計算してみましょう。 データフレーム<code>df</code>の売上高にアクセスするには、<code>df$売上高</code>のように、<code>$</code>を使って変数名を指定します。 Excelでいうと，<code>df</code>がシート名，<code>売上高</code>が列名に相当します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-6_46fe831c0d2eaf3bb6b0b136487e858f">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p><code>NA</code>が帰ってきましたね。 実は、この<code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>関数は、引数となるベクトル変数の中に欠損値<code>NA</code>があると、<code>NA</code>を返します。 欠損値を意味する<code>NA</code>は，その観測値が存在しないことを表します。 このような場合、<code>NA</code>を除外して平均を計算する必要があるので、<code>na.rm = TRUE</code>という引数を追加します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-7_4140ba83087814b939f43d722ca93510">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 237440.1</code></pre>
 </div>
 </div>
 <p>これで、売上高の平均が2.3744011^{5}となりました。</p>
 <p>同じように、</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-8_f8b7b4349a1a84389f748b23e9516c2e">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 中央値</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 中央値</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 38209</code></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 標準偏差</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 標準偏差</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 938244.4</code></pre>
 </div>
 </div>
 <p>とすることで、中央値と標準偏差が求められます。</p>
-</section><section id="カテゴリ変数の内容確認" class="level3"><h3 class="anchored" data-anchor-id="カテゴリ変数の内容確認">カテゴリ変数の内容確認</h3>
+</section><section id="カテゴリ変数の内容確認" class="level3" data-number="5.1.3"><h3 data-number="5.1.3" class="anchored" data-anchor-id="カテゴリ変数の内容確認">
+<span class="header-section-number">5.1.3</span> カテゴリ変数の内容確認</h3>
 <p>カテゴリー変数について見ていきましょう。 ここでは日経業種コードを例にとります。 日経業種コードは6ケタの数字ですが、最初の1ケタが大分類、次の2ケタ目が中分類、最後の3ケタ目が小分類を表します。つまり<code>1 + 32 + 344</code>のような構造になっています。 実証会計研究では、産業中分類をよく使うので、ここでは中分類を抽出してみましょう。 またしても<code><a href="https://rdrr.io/r/base/substr.html">substr()</a></code>関数を使って、2〜3ケタ目を抽出し、<code>中分類</code>という変数に格納します。 ついでに，<code>決算期</code>のデータが<code>YYYY/MM</code>という形式になっているので，最初の4桁を抽出して，<code>年度</code>という変数に格納します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-9_0bcf55be3a57d2e2919c2dd869ab13bc">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    中分類 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">日経業種コード</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, <span class="co">#2〜3ケタ目を抽出</span></span>
 <span>    年度 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="va">決算期</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="co"># 最初の4桁を抽出</span></span>
-<span>    <span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>    <span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>この中分類の内容を確認するには、<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>関数を使います。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-10_6a51136e699951b066192a0d879c2f70">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span> <span class="co"># 中分類の表</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span> <span class="co"># 中分類の表</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    01    03    05    07    09    11    13    15    17    19    21    23    25 
@@ -462,25 +704,25 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>このように、中分類ごとの企業数が計算されました。 このカテゴリー変数の型を<code><a href="https://rdrr.io/r/base/class.html">class()</a></code>関数で確認します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-11_51a523f61b1993c70b81d5e5759bf0d1">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span> <span class="co"># 中分類の型</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span> <span class="co"># 中分類の型</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <p><code>character</code>つまり文字列となっています。これをファクター型に変えて、カテゴリー変数であることを明示します。<code><a href="https://rdrr.io/r/base/factor.html">as.factor()</a></code>関数を使うと、ファクター型に変換できますが，産業コードだけだとどの産業なのか分かりづらいままです。 そこで、<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>関数を使って、カテゴリー変数の内容を指定します。 ついでに，上場コードや連結基準もファクター型に変換しておきます。</p>
 <p>まずどんな中分類があるのかを確認します。 ある変数にどんなカテゴリーがあるのかを確認するには、<code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code>関数を使います。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-12_71d29652986ce60cee3193b26851d982">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chu_level</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span><span class="op">)</span> <span class="co"># 中分類のカテゴリーを抽出</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chu_level</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">中分類</span><span class="op">)</span><span class="op">)</span> <span class="co"># 中分類のカテゴリーを抽出</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>この中分類コードに対応する産業名称を指定するには，<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>関数の引数として，<code>levels =</code>と<code>labels =</code>を指定します。 以下では，<code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>と組み合わせて，<code>中分類</code>をファクター型に変換します。</p>
 <p>産業名称をベクトルとして収納しておきます。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-13_3da610fdf905eb9e971ea929c821149c">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chu_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span>  <span class="st">"食品"</span>,<span class="st">"繊維"</span>,<span class="st">"パルプ・紙"</span>,<span class="st">"化学工業"</span>,<span class="st">"医薬品"</span>,<span class="st">"石油"</span>,<span class="st">"ゴム"</span>,<span class="st">"窯業"</span>,<span class="st">"鉄鉱業"</span>,<span class="st">"非金属及び金属製品"</span>,<span class="st">"機械"</span>,<span class="st">"電気機器"</span>,<span class="st">"造船"</span>,<span class="st">"自動車・自動車部品"</span>,<span class="st">"その他輸送用機器"</span>,<span class="st">"精密機器"</span>,<span class="st">"その他製造業"</span>,<span class="st">"水産"</span>,<span class="st">"鉱業"</span>,<span class="st">"建設"</span>,<span class="st">"商社"</span>,<span class="st">"小売業"</span>,<span class="st">"その他金融業"</span>,<span class="st">"不動産"</span>,<span class="st">"鉄道・バス"</span>,<span class="st">"陸運"</span>,<span class="st">"海運"</span>,<span class="st">"空輸"</span>,<span class="st">"倉庫・運輸関連"</span>,<span class="st">"通信"</span>,<span class="st">"電力"</span>,<span class="st">"ガス"</span>,<span class="st">"サービス業"</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">chu_name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"食品"</span>,<span class="st">"繊維"</span>,<span class="st">"パルプ・紙"</span>,<span class="st">"化学工業"</span>,<span class="st">"医薬品"</span>,<span class="st">"石油"</span>,<span class="st">"ゴム"</span>,<span class="st">"窯業"</span>,<span class="st">"鉄鉱業"</span>,<span class="st">"非金属及び金属製品"</span>,<span class="st">"機械"</span>,<span class="st">"電気機器"</span>,<span class="st">"造船"</span>,<span class="st">"自動車・自動車部品"</span>,<span class="st">"その他輸送用機器"</span>,<span class="st">"精密機器"</span>,<span class="st">"その他製造業"</span>,<span class="st">"水産"</span>,<span class="st">"鉱業"</span>,<span class="st">"建設"</span>,<span class="st">"商社"</span>,<span class="st">"小売業"</span>,<span class="st">"その他金融業"</span>,<span class="st">"不動産"</span>,<span class="st">"鉄道・バス"</span>,<span class="st">"陸運"</span>,<span class="st">"海運"</span>,<span class="st">"空輸"</span>,<span class="st">"倉庫・運輸関連"</span>,<span class="st">"通信"</span>,<span class="st">"電力"</span>,<span class="st">"ガス"</span>,<span class="st">"サービス業"</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-14_04583a9b4fa7f36218ea3628940e6b6f">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">中分類</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    中分類 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span> <span class="co"># 中分類をファクター型に変換</span></span>
@@ -495,11 +737,11 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <span>      <span class="va">連結基準</span>,</span>
 <span>      levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">0</span><span class="op">)</span>,</span>
 <span>      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"日本基準"</span>,<span class="st">"米国基準"</span>,<span class="st">"IFRS"</span>,<span class="st">"単独"</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>      <span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>カテゴリー変数がファクター型に変換されたので，再度<code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>関数を使って，概要統計量を確認してみましょう。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-15_16095d9673581cf2b51188d225f38b17">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  会社コード           企業名             決算期             決算種別 
  Length:57823       Length:57823       Length:57823       Min.   :10  
@@ -537,7 +779,7 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
  Min.   : -21709   Min.   :-1139009.0   Min.   :-1708029              
  1st Qu.:    159   1st Qu.:    -134.5   1st Qu.:     163              
  Median :    586   Median :      -7.0   Median :     823              
- Mean   :   4827   Mean   :    -114.7   Mean   :    7707              
+ Mean   :   4827   Mean   :    -114.7   Mean   :    7706              
  3rd Qu.:   2170   3rd Qu.:      91.0   3rd Qu.:    3372              
  Max.   :1190782   Max.   : 1097414.0   Max.   : 4987962              
  NA's   :391       NA's   :3736         NA's   :29                    
@@ -560,10 +802,11 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>カテゴリー変数はカテゴリーの種類と個数が表示されています。</p>
-</section><section id="つのカテゴリー変数の関係を確かめる" class="level3"><h3 class="anchored" data-anchor-id="つのカテゴリー変数の関係を確かめる">2つのカテゴリー変数の関係を確かめる</h3>
+</section><section id="つのカテゴリー変数の関係を確かめる" class="level3" data-number="5.1.4"><h3 data-number="5.1.4" class="anchored" data-anchor-id="つのカテゴリー変数の関係を確かめる">
+<span class="header-section-number">5.1.4</span> 2つのカテゴリー変数の関係を確かめる</h3>
 <p>2つの変数から表を作成する方法について学びます。 典型的な表として，2変数のクロス集計表があります。 例えば，連結基準，つまり企業が採用している会計基準の種類と，上場コード，つまり企業が上場している市場の種類，の2変数について，それぞれのカテゴリーごとの企業数を計算することができます。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-16_dce41bbfa83d8ff87e5f1496ba706f61">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">連結基準</span>, <span class="va">df</span><span class="op">$</span><span class="va">上場コード</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">連結基準</span>, <span class="va">df</span><span class="op">$</span><span class="va">上場コード</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          
              1部   2部 マザーズ
@@ -574,10 +817,10 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>圧倒的に，日本基準で上場している企業が多いことがわかります。 2020年度のデータだけを抽出して，同じようにクロス集計表を作成してみましょう。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-17_bfe5a35f99efdd3cb38e81634beee0a9">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">年度</span> <span class="op">==</span> <span class="fl">2020</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          上場コード
 連結基準  1部  2部 マザーズ
@@ -595,19 +838,20 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <li>式</li>
 </ol>
 <p>例えば，先の表を作る場合を考えてみましょう。 普通に書くと</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-18_986ed9ed06a743aaccc6372646464ee7">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">連結基準</span>, <span class="va">df</span><span class="op">$</span><span class="va">上場コード</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">連結基準</span>, <span class="va">df</span><span class="op">$</span><span class="va">上場コード</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>とかきましたが，何度も<code>df$</code>を書くことが面倒なので，<code><a href="https://rdrr.io/r/base/with.html">with()</a></code>関数を使って</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-19_18a848db42384eaf6c3b0df32d273e3b">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>と，第1引数に<code>df</code>を指定すれば，第2引数の式の中で<code>df$</code>を書く必要がなくなります。したがって，パイプ演算子を使って，</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-20_a1da468e9c7849bd96e3cc9586cfc9a2">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">連結基準</span>, <span class="va">上場コード</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>と処理をつなげることができます。 便利ですね。</p>
-</section><section id="カテゴリー別に量的変数の値を調べる" class="level3"><h3 class="anchored" data-anchor-id="カテゴリー別に量的変数の値を調べる">カテゴリー別に量的変数の値を調べる</h3>
+</section><section id="カテゴリー別に量的変数の値を調べる" class="level3" data-number="5.1.5"><h3 data-number="5.1.5" class="anchored" data-anchor-id="カテゴリー別に量的変数の値を調べる">
+<span class="header-section-number">5.1.5</span> カテゴリー別に量的変数の値を調べる</h3>
 <p>次は，量的変数をカテゴリーごとに分析したいときがあります。 たとえば，産業別や年度別に売上高の平均値を知りたい，ということが何度もあります。 任意のグループごとに処理を繰り返したいときは，<code>dplyr</code>パッケージの<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>関数を使います。 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>関数は，第1引数にグループ化したい変数を指定します。</p>
 <p>そして<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>関数と同時に使うことで，グループごとの統計量を計算するために便利なのが<code>dplyr</code>パッケージの<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>関数です。 <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>関数は，次のような引数をとり，各種統計量を計算してくれます。</p>
 <ul>
@@ -623,17 +867,17 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <code><a href="https://dplyr.tidyverse.org/reference/context.html">n()</a></code> : グループごとの観測値の個数</li>
 </ul>
 <p>例えば，上場場所ごとに売上高の平均値を計算するには，次のようにします。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-21_4a4e728fdb93e028809393a906a005de">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">上場コード</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 上場場ごとに</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
 <span>    企業数 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="co">#</span></span>
 <span>    平均売上高 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">売上高</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 平均</span></span>
 <span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># グループ化解除</span></span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 表を作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 表を作成</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">上場コード</th>
 <th style="text-align: right;">企業数</th>
@@ -661,8 +905,8 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 <p>結果を見れば分かるとおり，<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>で上場場所ごとにグループ化し，<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>で企業数と平均売上高を計算しているので，上場場所，企業数，平均売上高の3変数が3つの観測値をもつ<span class="math inline">\(3 \times 3\)</span>の表が作成されています。 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>と<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>を組み合わせると，結果としてグループ数に応じた統計量を計算した結果となり，元のデータよりも小さなデータフレームとなって返ってきます。</p>
 <p>ついでに，産業別の売上高合計，利益平均値，利益中央値，利益の標準偏差を計算してみましょう。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-22_e8e598f673b313a0a1af2af88e798580">
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">中分類</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 産業中分類ごとに</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
 <span>    企業数 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># n()で要素数</span></span>
@@ -673,9 +917,9 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">売上合計</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 売上合計で降順に並び替え</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># グループ化解除</span></span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 表を作成</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>booktabs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># 表を作成</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 26%">
 <col style="width: 9%">
@@ -962,8 +1206,8 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>次のグラフ作成のためのデータを作成するため，年度別ごとに，ROEの平均値を計算し，その結果を<code>df_year</code>という変数に代入します。 ROEは，ある年度の<code>親会社に帰属する当期純利益</code>を期首株主資本で割った値です。 株主資本は，資本金と資本剰余金，利益剰余金，自己株式の合計で計算しますが，欠損値になっている会社もあるので，<code><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na()</a></code>関数を使って欠損値にはゼロを代入します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-23_c997c35507a545143864d3fbd80d3a9c">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>資本剰余金 <span class="op">=</span> <span class="fl">0</span>, 利益剰余金 <span class="op">=</span> <span class="fl">0</span>, 自己株式 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 欠損値をゼロに置き換え</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">企業名</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 会社ごとに</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span> <span class="co"># 新変数作成</span></span>
@@ -980,13 +1224,13 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span> <span class="co"># 統計量を計算</span></span>
 <span>    平均ROE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ROE</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># グループ化解除</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># グループ化解除</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>これで，年度ごと，上場場所ごとに，平均ROEを計算したデータフレーム<code>df_year</code>ができました。</p>
 <p>ここで注意しなければならない点として，<code>group_by(企業名)</code>とした上で，<code><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag()</a></code>関数を使っている点です。 <code><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag()</a></code>関数は，引数として指定した変数の値の1つ前の値に変換します。 したがって，<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>を使わないと次のような結果になります。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-24_ae611d53d9105271fa23ccf025bb6568">
+<div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 27%">
 <col style="width: 6%">
@@ -1049,9 +1293,9 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </div>
 </div>
 <p>ここで問題になっているのが，日清製粉グループ本社の1999年のROEが計算されている点である。 ROEは分子に親会社株主に帰属する当期純利益，分母に<strong>期首</strong>株主資本，つまりは前期末の株主資本を使います。 したがって，1999年のROEを計算するためには，1998年の株主資本を使う必要がありますが，データは1999年からしか存在しないので欠損値にならないといけないのに，計算されてしまっています。 つまり，一つ上のニップンの2022年の株主資本のデータを使っているのです。 そこで，<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>により企業ごとにグループ化して，<code><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag()</a></code>関数を使って，一つ前の観測値を使うようにし，1999年のROEは欠損値になるようにします。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-25_e6e351366824e0befc4f1ba012e0c98a">
+<div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">企業名</th>
 <th style="text-align: left;">年度</th>
@@ -1099,10 +1343,11 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </table>
 </div>
 </div>
-</section></section><section id="変数の可視化視覚化" class="level2"><h2 class="anchored" data-anchor-id="変数の可視化視覚化">変数の可視化・視覚化</h2>
+</section></section><section id="変数の可視化視覚化" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="変数の可視化視覚化">
+<span class="header-section-number">5.2</span> 変数の可視化・視覚化</h2>
 <p>カテゴリー変数のファクター化，<code><a href="https://rdrr.io/r/base/with.html">with()</a></code>関数と<code><a href="https://rdrr.io/r/base/table.html">table()</a></code>関数を使ったクロス集計表の作成，<code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>関数と<code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>関数を使ったグループごとの統計量の計算について学んだので，これらの結果を使ってグラフを作ることで，読者に伝わるデータの可視化を行いたいと思います。 キレイなグラフを比較的簡単に作ることができる<code>ggplot2</code>パッケージを使います。</p>
-<section id="ggplot関数の基本的な使い方と変数の特徴把握" class="level3"><h3 class="anchored" data-anchor-id="ggplot関数の基本的な使い方と変数の特徴把握">
-<code>ggplot()</code>関数の基本的な使い方と変数の特徴把握</h3>
+<section id="ggplot関数の基本的な使い方と変数の特徴把握" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="ggplot関数の基本的な使い方と変数の特徴把握">
+<span class="header-section-number">5.2.1</span> <code>ggplot()</code>関数の基本的な使い方と変数の特徴把握</h3>
 <p><code>ggplot2</code>パッケージの<code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>関数は，次のような引数をとります。</p>
 <ul>
 <li>
@@ -1115,24 +1360,33 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 </ul>
 <p>最初の注意点として，<code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>関数は，第1引数<code>data =</code>で<code>tibble</code>か<code>data.frame</code>を指定する必要があります。 データの型に気をつけましょう。</p>
 <p>では，年度ごとに平均ROEを示した折れ線グラフを作図していきます。 まず土台となるデータフレームを指定します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-26_0c13b54384302ef5787bc7bb10ff5726">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>土台ができましたが，まだ何も表示されていません。 次に，グラフの構成要素を指定するために，<code>mapping = aes()</code>で，軸を指定します。 今回は，横軸に年度，縦軸に平均ROEを指定します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-27_292ad0135c0b75b4b7922c41e0601294">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>縦軸と横軸が表示されました。 軸のラベルが文字化けしているので，最初に作成しておいたスタイル<code>mystyle</code>を適用します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-28_41065895cf06506fd8aa5e7b3180f9bf">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>次に，グラフを作成するために，<code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>関数を使います。 <code>ggplot</code>関数では，次のような<code>geom_***()</code>関数を使って，グラフの種類を指定します。</p>
@@ -1155,79 +1409,103 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> : 平滑化曲線</li>
 </ul>
 <p>ここでは横軸が<code>年度</code>という文字列，縦軸が<code>平均ROE</code>という量的変数となるグラフを作るので，<code><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar()</a></code>を使います。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-29_b1df8a1528148e6b16ea0026073acbcf">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度</span>, y <span class="op">=</span> <span class="va">平均ROE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>横軸が順序に意味のある変数であれば，<code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>で折れ線グラフを作るほうが良いでしょう。 この場合，<code>年度</code>は文字列ですが，本来は順序に意味のあるカテゴリー変数ですので，<code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>関数を使って，ファクター型に変換します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-30_c71c90b36d9f55456e0d2b0597daf8ba">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_year</span> <span class="op">&lt;-</span> <span class="va">df_year</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_year</span> <span class="op">&lt;-</span> <span class="va">df_year</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>年度f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">年度</span>,</span>
 <span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1999</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span>,</span>
-<span>  ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>横軸が順序付きのファクターの<code>年度f</code>となったので，<code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code>を使って折れ線グラフを作成します。 ここで，オプションとして，<code>group = 1</code>を指定して，データ全体が1つのグループであることを明示します。 横軸がファクター型であるときは，<code>group = 1</code>をつける，というおまじないを覚えておきましょう。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-31_c053348f8abe43fdf569d2f2b9c0286c">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度f</span>, y <span class="op">=</span> <span class="va">平均ROE</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"年度"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"平均ROE"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_year</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">年度f</span>, y <span class="op">=</span> <span class="va">平均ROE</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"年度"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"平均ROE"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>上のコードは，必要な引数を省略せずに書きましたが，省略できるものを省略しつつ， すべての要素を<span class="math inline">\(+\)</span>でつなぐよりも，レイヤーごとに代入していくほうが，コードが読みやすくなります。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-32_bfc7624fca90f45ae160ec0ba78396c5">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_year</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">年度f</span>, <span class="va">平均ROE</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># 基本要素</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df_year</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">年度f</span>, <span class="va">平均ROE</span>, group <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># 基本要素</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># 折れ線グラフと散布図</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"年度"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"平均ROE"</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span> <span class="co"># 見た目の調整</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
 </div>
 </div>
-</section><section id="ヒストグラム" class="level3"><h3 class="anchored" data-anchor-id="ヒストグラム">ヒストグラム</h3>
+</div>
+</section><section id="ヒストグラム" class="level3" data-number="5.2.2"><h3 data-number="5.2.2" class="anchored" data-anchor-id="ヒストグラム">
+<span class="header-section-number">5.2.2</span> ヒストグラム</h3>
 <p>次に，前年度のROEのヒストグラムを作成してみましょう。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-33_8c002fee5e8e8ea90c099f4aa6c0ed36">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">ROE</span><span class="op">)</span> <span class="op">+</span> <span class="co"># 1変数 ROE を指定</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"skyblue"</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># ヒストグラム</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span> <span class="co"># x軸の範囲とスタイルを指定</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
 </div>
 </div>
-</section><section id="箱ひげ図とバイオリンプロット" class="level3"><h3 class="anchored" data-anchor-id="箱ひげ図とバイオリンプロット">箱ひげ図とバイオリンプロット</h3>
+</div>
+</section><section id="箱ひげ図とバイオリンプロット" class="level3" data-number="5.2.3"><h3 data-number="5.2.3" class="anchored" data-anchor-id="箱ひげ図とバイオリンプロット">
+<span class="header-section-number">5.2.3</span> 箱ひげ図とバイオリンプロット</h3>
 <p>次に，上場場所別ROEの分布を箱ひげ図とバイオリンプロットで比較してみましょう。 箱ひげ図は，<code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code>を使います。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-34_f94ba7d58f7c573f6a21e4132e2a8681">
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">上場コード</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ROE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">上場コード</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ROE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>ROEのばらつきが大きく，極端にROEが大きかったり小さかったりする異常値のせいで，箱ひげ図がうまく描写されていません。 そこで異常値を除外するため，ROEの範囲を<span class="math inline">\([-0.5,0.5]\)</span>に限定してみましょう。 先ほど箱ひげ図を作成するために作ったオブジェクト<code>g</code>に<code><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim()</a></code>を追加して，Y軸の範囲を指定します。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-35_e27339d8c2ac14611dce96e80aa7bccd">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>,<span class="fl">.5</span><span class="op">)</span> <span class="co"># y軸の範囲を指定</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>,<span class="fl">.5</span><span class="op">)</span> <span class="co"># y軸の範囲を指定</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>箱ひげ図の箱の下辺は第1四分位(Q1)で，上辺は第3四分位(Q3)です。 真ん中の太い横棒は中央値です。 箱から出ているひげはデータの四分位範囲を超えた値の範囲ですが，黒丸は外れ値を表しています。</p>
 <p>次に，バイオリンプロットを作成します。 バイオリンプロットもほぼ箱ひげ図と同じですが，<code><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin()</a></code>を使います。</p>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-36_6cd2c77568999927e90f8352f936c1da">
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">上場コード</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ROE</span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">上場コード</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">ROE</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">.5</span>,<span class="fl">.5</span><span class="op">)</span> <span class="op">+</span> <span class="va">mystyle</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<p><img src="presemi2023_05_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="1344"></p>
+<div>
+<figure class="figure"><p><img src="presemi2023_05_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="8400"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>箱ひげ図やバイオリンプロットから，東証1部と東証2部の上場企業のROEは中央値に差があるものの，分布の形は似ていますが，マザーズの企業は，ROEの分布が大きく異なることがわかります。</p>
-</section><section id="図の保存" class="level3"><h3 class="anchored" data-anchor-id="図の保存">図の保存</h3>
+</section><section id="図の保存" class="level3" data-number="5.2.4"><h3 data-number="5.2.4" class="anchored" data-anchor-id="図の保存">
+<span class="header-section-number">5.2.4</span> 図の保存</h3>
 <p>最後に，作成した図を保存するには，<code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>関数を使います。 <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>関数は，次のような引数をとります。</p>
 <ul>
 <li>
@@ -1260,167 +1538,80 @@ $ 現金及び現金同等物の期末残高   &lt;dbl&gt; NA, 4865, 3729, 4097,
 <li>
 <code>antialias =</code> : アンチエイリアス</li>
 </ul>
-<div class="cell" data-hash="presemi2023_05_cache/html/unnamed-chunk-37_57eda27ce24df7729380972f8498f07d">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/quartz.html">quartz</a></span><span class="op">(</span><span class="st">"violin_plot.pdf"</span>, width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">6</span>, pointsize <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/grDevices/quartz.html">quartz</a></span><span class="op">(</span><span class="st">"violin_plot.pdf"</span>, width <span class="op">=</span> <span class="fl">10</span>, height <span class="op">=</span> <span class="fl">6</span>, pointsize <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="コピー" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="コピー" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>これで作業ディレクトリに<code>violin_plot.pdf</code>が保存されました。</p>
 
 
-</section></section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+</section></section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
-    }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
-    }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
-      }
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
         }
       }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
       return false;
     }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  let localAlternateSentinel = 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "コピーしました");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "コピーしました");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -1428,218 +1619,370 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "コピーしました");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "コピーしました");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/so-ichi\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
       });
     }
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // default icon
-          link.classList.add("external");
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-});
-</script>
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./presemi2023_04.html" class="pagination-link" aria-label="Rによるデータ操作">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Rによるデータ操作</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./presemi2023_06.html" class="pagination-link" aria-label="統計的推定">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">統計的推定</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Soichi Matsuura</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2026, Soichi Matsuura</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/ma2ura">
+    <a class="nav-link active" href="https://github.com/ma2ura/presemi/" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
