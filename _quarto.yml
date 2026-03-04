@@ -1,57 +1,65 @@
 project:
-  type: website
+  type: book
   output-dir: docs
 
 lang: ja
 
-website:
+book:
   title: "プレゼミ講義ノート"
-  navbar:
-    left:
-      - text: "講義内容"
-      - menu:
-        - text: "はじめに"
-          file: index.qmd
-        - text: "第1回 講義ガイダンス"
-          file: presemi2023_01.qmd
-        - text: "第2回 実証研究"
-          file: presemi2023_02.qmd
-        - text: "第3回 Rの使い方"
-          file: presemi2023_03.qmd
-        - text: "第4回 Rによるデータ操作"
-          file: presemi2023_04.qmd
-        - text: "第5回 記述統計と可視化"
-          file: presemi2023_05.qmd
-        - text: "第6回 統計的推定"
-          file: presemi2023_06.qmd
-        - text: "第7回 統計的仮説検定"
-          file: presemi2023_07.qmd
-        - text: "第8回 変数間の関連性"
-          file: presemi2023_08.qmd
-        - text: "第9回 回帰分析の基礎"
-          file: presemi2023_09.qmd
+  reader-mode: true
+  author:
+    - name: "Soichi Matsuura"
+    - affiliation: Ritsumeikan University
+    - email: matsuura@fc.ritsumei.ac.jp
+  favicon: img/favicon.ico
+
+  site-url: https://so-ichi.com
+  repo-url: https://github.com/ma2ura/presemi/
+  repo-branch: main
+  twitter-card: true
+
+  chapters:
+    - index.qmd
+    - presemi2023_01.qmd
+    - presemi2023_02.qmd
+    - presemi2023_03.qmd
+    - presemi2023_04.qmd
+    - presemi2023_05.qmd
+    - presemi2023_06.qmd
+    - presemi2023_07.qmd
+    - presemi2023_08.qmd
+    - presemi2023_09.qmd
+    - presemi2023_10.qmd
+    # - presemi2023_11.qmd
+
 
   page-navigation: true
-
+  back-to-top-navigation: true
   page-footer:
     border: true
-    left: "Copyright 2023, Soichi Matsuura"
+    background: "#a10000"
+    left: "Copyright 2026, Soichi Matsuura"
     right:
       - icon: github
-        href: https://github.com/ma2ura
+        href: https://github.com/ma2ura/presemi/
       - icon: twitter
         href: https://twitter.com/matsuura_rits
         aria-label: Twitter
 
-  favicon: favicon.ico
-
-
 format:
+  epub:
+    title: プレゼミ講義ノート
+    subtitle: 2023年度秋学期
+    date: "2023年8月16日改訂"
+    author: 松浦総一
+    toc: true
+    html-math-method: katex
+
   html:
     theme:
       light:
        - cerulean
-       - theme.scss
+      #  - theme.scss
       dark: darkly
     toc: true
     code-copy: true
@@ -62,14 +70,13 @@ format:
     grid:
       sidebar-width: 200px
       body-width: 1200px
-
+    css:
+      - "mystyle.css"
 execute:
-  message : false
+  message: false
   warning: false
   fig-width: 14
   fig-height: 8
-  freeze: auto
-  cache: refresh
 
 # knitr:
 #   opts_chunk:
@@ -77,4 +84,7 @@ execute:
 monofontoptions:
   - Scale = .6
 
-
+knitr:
+  opts_chunk:
+    dev: "ragg_png"
+    dpi: 600
