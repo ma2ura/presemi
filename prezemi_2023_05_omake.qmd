@@ -1,0 +1,334 @@
+---
+title: |
+  <b>プレゼミ2023</b> </br>
+  <span style="color: #282A36; ">第5回 【おまけ】収益データを可視化</span>
+author: "Soichi Matsuura"
+format:
+  revealjs:
+    theme: ["default", "dracula.scss"]
+    transition: convex
+    slide-number: true
+    chalkboard: true
+    df_print: paged
+# highlight-style: "dracula"
+highlight-style: github
+execute:
+  echo: true
+  warning: false
+---
+
+## おまけの分析事例
+
+必要なパッケージを読み込む。
+いつもの`tidyverse`とグラフの見た目を変える`ggthemes`とキレイな表を作る`knitr`と`kableExtra`を読み込む。
+
+```{r setup}
+library(tidyverse) # データ操作全般
+library(ggthemes) # グラフのスタイル拡張
+library(knitr) # 表を作る
+library(kableExtra) # 表を作る
+```
+
+## 作業ディレクトリの場所
+
+まずは作業ディレクトリの場所にファイルがあることを確認しましょう。
+いまRが使っている作業ディレクトリの場所は`getwd()`で確認できます。
+
+```{r getwd}
+getwd()
+```
+
+## データの読み込み
+
+ここでは、作業ディレクトリの中に`data`というフォルダがあり、
+その中に`otomasa04.csv`を保存してある、という前提で話を進めます。
+
+```{r read_csv}
+df <- read_csv("data/otomasa_04.csv")
+```
+
+これで財務データが入ったデータフレーム`df`ができました。
+
+
+## グラフのスタイルを保存
+
+`mystyle`というオブジェクトに保存しておく。
+`list`で設定をまとめる。
+
+```{r mystyle}
+mystyle <- list( # mystyleとして設定を保存
+  theme_economist(), # ggthemesが必要
+  theme(text = element_text(
+    size = 18,  #  フォントサイズ
+    family = "HiraKakuProN-W3" # mac用フォント
+    )))
+```
+
+windowsの人は family = "HiraKakuProN-W3" は消してください。
+
+## データの確認
+
+データの中身を確認するなら、おなじみの`glimpse()`を使う。
+
+```{r glimpse}
+glimpse(df)
+```
+
+## カテゴリー変数
+
+データフレーム`df`の中には、文字列(character)として、
+
+- 日経会社コード
+- 企業名称
+- 決算期
+
+が入っているので、適切な型に変換する。
+
+## ファクター型に変換
+
+文字列をファクター型に変換するには`as.factor()`を使う。
+決算期から年度データを取り出すために`substr()`を使う。
+`substr()`は文字列の一部を取り出す関数である。
+
+```{r factor}
+df <- df |>
+    mutate( # 変数の型をファクター型に変換
+        日経会社コード = as.factor(日経会社コード),
+        企業名称 = as.factor(企業名称),
+        年度 = factor(substr(決算期, 1, 4), ordered = TRUE)
+    )
+```
+
+## 欠損値の処理
+
+オリジナルの財務データの値が欠損値の場合、それは財務諸表上に個別項目で載せられないほど額が小さいことを意味する。
+そこで、欠損値にゼロを代入する。
+
+```{r na}
+df[is.na(df)] <- 0
+```
+
+`is.na()`は欠損値を`TRUE`、欠損値でない値を`FALSE`として返す関数で、TRUEにゼロを代入している。
+
+## 異常な観測値の処理
+
+決算期を変更した会社を除外するため，決算月数が12の会社のみを抽出する。
+ついでに売上高が1億円未満の企業や販管費がゼロの会社も除外する。
+
+```{r unusual}
+df <- df |>
+    filter(
+        決算月数 == 12, # 決算月数が12の会社 
+        売上高 >= 100, # 売上高1億以上
+        販売費及び一般管理費 > 0) # 販管費が0超
+```
+
+## 変な企業を除外
+
+なぜか同じ年度に2つデータがある会社があるので、除外する。
+
+```{r unusual2}
+df <- df |>
+  group_by(年度, 企業名称) |> # 年度と企業ごとに
+  mutate(N = n()) |> # なぜか同じ年度に2コ以上データがある会社があるのでカウント
+  filter(N != 2) |> # 重複データを削除
+  select(-N) # 上で作ったけどもういらないのでNを削除
+```
+
+これで整然データ(tidy data)が完成した(はず)。
+
+
+## 売上高のヒストグラム
+
+簡単にチェックするだけなら基本関数`hist()`
+
+```{r hist}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+hist(df$売上高)
+```
+
+
+## 売上高のヒストグラム
+
+キレイなグラフを作るなら`ggplot2`
+
+```{r geom_hist_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+df |>
+    ggplot() + aes(x = 売上高/1000000) + # 売上高を100万で割って単位を兆
+    geom_histogram() + # ヒストグラム
+    xlab("売上高（兆円）") + ylab("度数") + # x軸のラベル
+    mystyle # 上で作ったスタイルを適用
+```
+
+## 分布の計上を確認
+
+分布が左に固まっており、ばらつきが分からないので、分位点を確認
+
+```{r fivenum}
+fivenum(df$売上高)
+mean(df$売上高)
+```
+
+::: {.columns}
+::: {.column width="50%"}
+- 最小 1億円
+- Q1 135億3750万円,
+- Q3 941億6700万円
+- 最大 37兆1542億9800万円
+:::
+::: {.column width="50%"}
+- 中央値 278億8450万円
+- 平均 1879億8710万円
+:::
+:::
+
+## 異常値の影響
+
+売上高の最大値が大きすぎる。
+売上高の分布を正規分布に近づけるために対数を取る。
+
+```{r hist_log_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+hist(log(df$売上高))
+```
+
+## 対数をとって散布図を書く
+
+`ggplot2`パッケージの`geom_point()`を使って、売上高と販売費及び一般管理費の散布図を書いてみる。
+
+```{r geom_point_sales_sga}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+df |>
+  filter(販売費及び一般管理費 > 0) |>
+  ggplot() + aes(x = log(売上高), y = log(販売費及び一般管理費)) +
+  geom_point() + # ヒストグラム
+  xlab("売上高の対数") + ylab("販管費の対数") + # x軸のラベル
+  mystyle # 上で作ったスタイルを適用
+```
+
+
+## 年度別の売上高平均を計算
+
+
+```{r geom_line_year_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+
+# 年度別の売上高平均を計算
+df_year_sale <- df |>
+    group_by(年度) |>
+    summarise(
+      売上高平均 = mean(売上高) # 平均売上高を計算
+    )
+# 折れ線グラフ
+df_year_sale |>
+# 年度がファクターなので、group = 1として1つのグループにまとめる
+  ggplot() + aes(x = 年度, y = 売上高平均 / 100, group = 1) +
+  geom_line() + geom_point() +# ヒストグラム
+  ylim(0, 3000) + mystyle # 軸の範囲とスタイルを適用
+```
+
+
+
+
+##  年度別の売上高平均棒グラフ
+
+横軸が年度なので，棒グラフもOK
+
+```{r geom_bar_year_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+
+df_year_sale |>
+  # 売上高平均を100で割って単位を億に
+  ggplot() + aes(x = 年度, y = 売上高平均 / 100) +
+  geom_col() +# ヒストグラム
+  ylim(0, 3000) + mystyle # Y軸の範囲とスタイル
+```
+
+## グラフの読み取り
+
+
+- なんか2023年度の売上が以上に増加している
+- 2023年度に売上高が急増した企業があるのかもしれない
+- 2023年度売上高ランク上位10社の2022年度と2023年度の売上高を比較しなきゃ
+
+
+
+## 年度別の売上高平均を計算
+
+```{r table_year_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+
+df |>
+  select(年度, 企業名称, 売上高) |> # 必要な変数を選択
+  mutate(売上高 = round(売上高 / 100)) |> # 売上高を100で割って単位を億円に
+  filter(年度 %in% c("2022", "2023")) |> # 2022年と2023年のデータのみを抽出
+  pivot_wider(names_from = 年度, values_from = 売上高, names_prefix = "年度") |># 年度を横軸に
+  mutate(# 売上の増加額と増加率を計算
+    差額 = 年度2023 - 年度2022, # 変化額
+    変化率 = round(差額 / 年度2022, digits = 2) # 変化率
+    ) |> 
+  arrange(desc(年度2023)) |> # 2023年度の売上高で降順に並び替え
+  head(10) |> # 上位10社のみを抽出
+  kable( booktabs = TRUE) |> 
+  kable_styling(font_size = 20)  # 作表
+```
+
+## 特殊な3時点比較
+
+リーマンショック2009年、コロナ禍2021年、2023年の売上高を比較する
+
+```{r table_3years_sales}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+df |>
+  select(年度, 企業名称, 売上高) |> # 必要な変数を選択
+  mutate(売上高 = round(売上高 / 100)) |> # 売上高を100で割って単位を億円に
+  filter(年度 %in% c("2009", "2021", "2023")) |> # 2000年と2010年と2023年のデータのみを抽出
+  pivot_wider(names_from = 年度, values_from = 売上高,  names_prefix = "年度") |># 年度を横軸に
+  mutate(# 売上の増加額と増加率を計算
+    差額 = 年度2023 - 年度2021, # 変化額
+    変化率 = round(差額 / 年度2021, digits = 2) # 変化率
+    ) |> 
+  arrange(desc(年度2023)) |> # 2023年度の売上高で降順に並び替え
+  head(10) |> # 上位10社のみを抽出
+  kable( booktabs = TRUE) |> 
+  kable_styling(font_size = 20)  # 作表
+```
+
+## 10兆円売上高企業
+
+2023年度の売上高が10兆円以上の会社の売上高の推移をみてみる。
+まず2023年度の売上高が10兆円以上の企業名を抽出する。
+
+```{r 10trillion_sales_name}
+#| code-fold: true
+#| code-summary: "Rコードはここ"
+df_name <- df |>
+  filter(売上高 >= 10^7 & 年度 == 2023)
+name <- df_name$企業名称
+# 作図
+g <- df |>
+  filter(企業名称 %in% name) |> # 企業名がnameに含まれるものを抽出
+  ggplot() + aes(x = 年度, y = 売上高 / 10^6, group = 企業名称, color = 企業名称) + # 企業ごとに色分け
+  geom_line() + geom_point() + # 折れ線グラフと散布図を組み合わせる
+  xlab("年度") + ylab("売上高(兆円)") + mystyle + # スタイルを適用
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 16)) # x軸のラベルを90度回転
+print(g) # 出力
+```
+
+## 動くグラフ
+
+```{r plotly}
+# install.packages("plotly")
+library(plotly)
+ggplotly(g)
+```
+
