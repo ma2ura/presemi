@@ -7,16 +7,6 @@ lang: ja
 website:
   title: "プレゼミ講義ノート"
   navbar:
-    right:
-      - href: index.qmd
-        text: Home
-      # - href: about.qmd
-      #   text: About
-      # - href: license.qmd
-      #   text: License
-      - icon: github
-        href: https://github.com/uribo/230827ism_ws
-        text: GitHub
     left:
       - text: "講義内容"
       - menu:
@@ -40,16 +30,11 @@ website:
           file: presemi2023_08.qmd
         - text: "第9回 回帰分析の基礎"
           file: presemi2023_09.qmd
-      # - text: "第10回 回帰分析の統計的推定"
-      #   file: presemi2023_10.qmd
-      # - text: "第11回 ロジスティック回帰分析"
-      #   file: presemi2023_11.qmd
 
   page-navigation: true
 
   page-footer:
     border: true
-    # background: "#a10000"
     left: "Copyright 2023, Soichi Matsuura"
     right:
       - icon: github
@@ -58,19 +43,10 @@ website:
         href: https://twitter.com/matsuura_rits
         aria-label: Twitter
 
-
-  # cover-image: "img/rits_logo.png"
   favicon: favicon.ico
 
 
 format:
-  # epub:
-  #   title: プレゼミ講義ノート
-  #   subtitle: 2023年度秋学期
-  #   date: "2023年8月16日改訂"
-  #   author: 松浦総一
-  #   toc: true
-  #   html-math-method: katex
   html:
     theme:
       light:
@@ -86,24 +62,6 @@ format:
     grid:
       sidebar-width: 200px
       body-width: 1200px
-
-  # pdf:
-  #   pdf-engine: lualatex
-  #   toc: true
-  #   number-sections: true
-  #   colorlinks: true
-  #   include-in-header:
-  #     - text: |
-  #         \usepackage{luatexja}
-  #         \usepackage{float}
-  #         \usepackage{xcolor}
-  #         \usepackage{tabularx}
-  #         \usepackage{amsmath}
-  #         \usepackage{engrec}
-  #         \usepackage{fontspec}
-
-
-# code-block-bg: "#F6F6F6"
 
 execute:
   message : false
